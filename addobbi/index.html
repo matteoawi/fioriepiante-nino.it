@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>Galleria Addobbi — Fiori e Piante di Nino</title>
-  <meta name="description" content="Scegli il tuo addobbo preferito e chiedi a Nino qualcosa di simile su WhatsApp." />
+  <meta name="description" content="Scegli i tuoi addobbi preferiti e chiedi a Nino qualcosa di simile su WhatsApp." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -68,12 +68,12 @@
     /* --- GRIGLIA --- */
     .grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr); /* Mobile: 2 col */
+      grid-template-columns: repeat(2, 1fr);
       gap: 12px;
       margin-top: 20px;
     }
     @media (min-width: 768px) {
-      .grid { grid-template-columns: repeat(4, 1fr); gap: 20px; } /* Desktop: 4 col */
+      .grid { grid-template-columns: repeat(4, 1fr); gap: 20px; }
     }
 
     .tile {
@@ -209,6 +209,7 @@
 </head>
 
 <body>
+
   <header class="header">
     <div class="container nav-row">
       <a href="../" class="brand">
@@ -222,7 +223,7 @@
   <main>
     <section class="hero">
       <div class="container">
-        <h1>Galleria Addobbi ✨</h1>
+        <h1>Galleria Addobbi 🎀</h1>
         <p class="sub">Tocca una foto per ingrandirla e mandarla a Nino.</p>
 
         <div id="grid" class="grid"></div>
@@ -267,12 +268,10 @@
 
   <script>
     // --- CONFIGURAZIONE ---
-    const TOTAL = 6;
+    const TOTAL = 6;           // addobbi-1.jpg ... addobbi-6.jpg
     const PER_PAGE = 12;
     const PHONE = "393394324010";
-
-    // Cartella immagini (come nel tuo repo: /addobbi/addobbi-1.jpg ... addobbi-6.jpg)
-    const PATH = "./addobbi/";
+    const PATH = "./";
 
     let count = 0;
     const grid = document.getElementById("grid");
@@ -286,7 +285,7 @@
     const lbClose = document.getElementById("lbClose");
 
     // Genera URL assoluto
-    const getAbsUrl = (filename) => new URL(PATH + filename, window.location.href).href;
+    const getAbsUrl = (filename) => new URL(filename, window.location.href).href;
 
     // --- CARICAMENTO FOTO ---
     function loadNext() {
@@ -298,18 +297,16 @@
       }
 
       for (let i = count + 1; i <= nextBatch; i++) {
-        const file = `addobbi-${i}.jpg`;
+        const file = `addobbi-${i}.jpg`;  // ✅ aggiornato
 
         const div = document.createElement("div");
         div.className = "tile loading";
 
         const img = document.createElement("img");
         img.dataset.src = PATH + file;
-        img.alt = "Addobbo floreale";
+        img.alt = "Addobbo / Allestimento";
 
-        // Lazy loading manuale
         observer.observe(img);
-
         div.addEventListener("click", () => openLb(file));
 
         div.appendChild(img);
@@ -335,8 +332,11 @@
     // --- LIGHTBOX LOGIC ---
     function openLb(filename) {
       const absUrl = getAbsUrl(filename);
-
-      const msg = `Ciao Nino! 👋\n\nSarei interessato a qualcosa di simile a questa foto che ho visto sul sito:\n${absUrl}\n\nMi fai sapere? Grazie!`;
+      const msg =
+        `Ciao Nino! 👋\n\n` +
+        `Sarei interessato a qualcosa di simile a questa foto che ho visto sul sito:\n` +
+        `${absUrl}\n\n` +
+        `Mi fai sapere? Grazie!`;
 
       lbImg.src = PATH + filename;
       lbBtn.href = `https://wa.me/${PHONE}?text=${encodeURIComponent(msg)}`;
@@ -354,4 +354,10 @@
 
     lbClose.addEventListener("click", closeLb);
     lb.addEventListener("click", (e) => { if (e.target === lb) closeLb(); });
-    document.addEventListen
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeLb(); });
+
+    loadMoreBtn.addEventListener("click", loadNext);
+    loadNext();
+  </script>
+</body>
+</html>
