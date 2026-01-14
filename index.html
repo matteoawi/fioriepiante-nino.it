@@ -6,6 +6,20 @@
   <title>🌸 Fiori e Piante di Nino — Roma</title>
   <meta name="description" content="Fiori per ogni occasione. Consegne a Roma! Ordina su WhatsApp, JustEat, Deliveroo oppure sul nuovo e-commerce." />
 
+
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#ff2e8f" />
+  <meta property="og:locale" content="it_IT" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="🌸 Fiori e Piante di Nino — Roma" />
+  <meta property="og:description" content="Fiori per ogni occasione. Consegne a Roma! Ordina su WhatsApp, JustEat, Deliveroo oppure sul nuovo e-commerce." />
+  <meta property="og:image" content="https://fiori-italia.it/cdn/shop/files/BouquetXXXLEsplosioneCromatica_Oltre100Steli.png?v=1764853567&width=1200" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%2064%2064%22%3E%3Ccircle%20cx=%2232%22%20cy=%2232%22%20r=%2230%22%20fill=%22%23fff7fb%22/%3E%3Cg%20fill=%22%23ff2e8f%22%3E%3Cpath%20d=%22M32%2014c6%200%2010%204%2010%2010s-4%2010-10%2010-10-4-10-10%204-10%2010-10Z%22%20opacity=%22.25%22/%3E%3Cpath%20d=%22M32%2016c4.8%200%208%203.2%208%208s-3.2%208-8%208-8-3.2-8-8%203.2-8%208-8Z%22/%3E%3C/g%3E%3Cg%20fill=%22%23ff67b2%22%3E%3Cpath%20d=%22M18%2028c4%200%207%203%207%207s-3%207-7%207-7-3-7-7%203-7%207-7Z%22/%3E%3Cpath%20d=%22M46%2028c4%200%207%203%207%207s-3%207-7%207-7-3-7-7%203-7%207-7Z%22/%3E%3C/g%3E%3Cg%20fill=%22%23ffd1e6%22%3E%3Cpath%20d=%22M32%2038c5%200%209%204%209%209s-4%209-9%209-9-4-9-9%204-9%209-9Z%22/%3E%3C/g%3E%3Ccircle%20cx=%2232%22%20cy=%2230%22%20r=%224%22%20fill=%22%23ffffff%22/%3E%3C/svg%3E">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%2064%2064%22%3E%3Ccircle%20cx=%2232%22%20cy=%2232%22%20r=%2230%22%20fill=%22%23fff7fb%22/%3E%3Cg%20fill=%22%23ff2e8f%22%3E%3Cpath%20d=%22M32%2014c6%200%2010%204%2010%2010s-4%2010-10%2010-10-4-10-10%204-10%2010-10Z%22%20opacity=%22.25%22/%3E%3Cpath%20d=%22M32%2016c4.8%200%208%203.2%208%208s-3.2%208-8%208-8-3.2-8-8%203.2-8%208-8Z%22/%3E%3C/g%3E%3Cg%20fill=%22%23ff67b2%22%3E%3Cpath%20d=%22M18%2028c4%200%207%203%207%207s-3%207-7%207-7-3-7-7%203-7%207-7Z%22/%3E%3Cpath%20d=%22M46%2028c4%200%207%203%207%207s-3%207-7%207-7-3-7-7%203-7%207-7Z%22/%3E%3C/g%3E%3Cg%20fill=%22%23ffd1e6%22%3E%3Cpath%20d=%22M32%2038c5%200%209%204%209%209s-4%209-9%209-9-4-9-9%204-9%209-9Z%22/%3E%3C/g%3E%3Ccircle%20cx=%2232%22%20cy=%2230%22%20r=%224%22%20fill=%22%23ffffff%22/%3E%3C/svg%3E">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
@@ -191,6 +205,37 @@
     .navlinks a:hover{
       background: rgba(255,46,143,.10);
       transform: translateY(-1px);
+    }
+
+
+    /* Menu icons + active */
+    .navlinks a{
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+    }
+    .navlinks .menuIcon{
+      width: 16px; height: 16px;
+      display:block;
+    }
+    .navlinks a.active{
+      background: rgba(255,46,143,.14);
+    }
+
+    .drawer a.drawerLink .drawerLeft{
+      display:inline-flex;
+      align-items:center;
+      gap: 10px;
+      min-width: 0;
+    }
+    .drawer a.drawerLink .menuIcon{
+      width: 18px; height: 18px;
+      display:block;
+      flex: 0 0 auto;
+    }
+    .drawer a.drawerLink.active{
+      background: rgba(255,46,143,.12);
+      border-color: rgba(255,46,143,.22);
     }
 
     .navactions{ display:flex; align-items:center; gap:10px; flex: 0 0 auto; }
@@ -454,6 +499,7 @@
       height: min(340px, 42vh);
       display:block;
       border: 0;
+      object-fit: cover;
     }
 
     /* Sections */
@@ -829,11 +875,11 @@
         </a>
 
         <nav class="navlinks" aria-label="Sezioni">
-          <a href="#galleria">Galleria</a>
-          <a href="#come-ordinare">Come ordinare</a>
-          <a href="#pagamenti">Pagamento</a>
-          <a href="#sedi">Sedi</a>
-          <a href="#contatti">Contatti</a>
+          <a href="#galleria"><svg class="menuIcon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7a2 2 0 0 1 2-2h3l2 2h5a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>Galleria</a>
+          <a href="#come-ordinare"><svg class="menuIcon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M3 6h1M3 12h1M3 18h1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Come ordinare</a>
+          <a class="active" href="#pagamenti"><svg class="menuIcon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 7.5A2.5 2.5 0 0 1 5.5 5h13A2.5 2.5 0 0 1 21 7.5v9A2.5 2.5 0 0 1 18.5 19h-13A2.5 2.5 0 0 1 3 16.5v-9Z" stroke="currentColor" stroke-width="2"/><path d="M3 9h18" stroke="currentColor" stroke-width="2"/><path d="M7 15h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Pagamento</a>
+          <a href="#sedi"><svg class="menuIcon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 22s7-4.5 7-12a7 7 0 1 0-14 0c0 7.5 7 12 7 12Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 11.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" stroke="currentColor" stroke-width="2"/></svg>Sedi</a>
+          <a href="#contatti"><svg class="menuIcon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.8 19.8 0 0 1 3.11 5.18 2 2 0 0 1 5.1 3h3a2 2 0 0 1 2 1.72c.12.86.32 1.7.59 2.5a2 2 0 0 1-.45 2.11L9.09 10.91a16 16 0 0 0 4 4l1.58-1.15a2 2 0 0 1 2.11-.45c.8.27 1.64.47 2.5.59A2 2 0 0 1 22 16.92Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Contatti</a>
         </nav>
 
         <div class="navactions">
@@ -857,11 +903,11 @@
     <div class="backdrop" data-close></div>
     <div class="panel" role="dialog" aria-label="Menu">
       <div class="inner">
-        <a class="drawerLink" href="#galleria" data-close>Galleria <span>→</span></a>
-        <a class="drawerLink" href="#come-ordinare" data-close>Come ordinare <span>→</span></a>
-        <a class="drawerLink" href="#pagamenti" data-close>Pagamento <span>→</span></a>
-        <a class="drawerLink" href="#sedi" data-close>Sedi <span>→</span></a>
-        <a class="drawerLink" href="#contatti" data-close>Contatti <span>→</span></a>
+        <a class="drawerLink" href="#galleria" data-close><span class="drawerLeft"><svg class="menuIcon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7a2 2 0 0 1 2-2h3l2 2h5a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>Galleria</span> <span>→</span></a>
+        <a class="drawerLink" href="#come-ordinare" data-close><span class="drawerLeft"><svg class="menuIcon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M3 6h1M3 12h1M3 18h1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Come ordinare</span> <span>→</span></a>
+        <a class="drawerLink active" href="#pagamenti" data-close><span class="drawerLeft"><svg class="menuIcon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 7.5A2.5 2.5 0 0 1 5.5 5h13A2.5 2.5 0 0 1 21 7.5v9A2.5 2.5 0 0 1 18.5 19h-13A2.5 2.5 0 0 1 3 16.5v-9Z" stroke="currentColor" stroke-width="2"/><path d="M3 9h18" stroke="currentColor" stroke-width="2"/><path d="M7 15h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Pagamento</span> <span>→</span></a>
+        <a class="drawerLink" href="#sedi" data-close><span class="drawerLeft"><svg class="menuIcon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 22s7-4.5 7-12a7 7 0 1 0-14 0c0 7.5 7 12 7 12Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 11.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" stroke="currentColor" stroke-width="2"/></svg>Sedi</span> <span>→</span></a>
+        <a class="drawerLink" href="#contatti" data-close><span class="drawerLeft"><svg class="menuIcon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.8 19.8 0 0 1 3.11 5.18 2 2 0 0 1 5.1 3h3a2 2 0 0 1 2 1.72c.12.86.32 1.7.59 2.5a2 2 0 0 1-.45 2.11L9.09 10.91a16 16 0 0 0 4 4l1.58-1.15a2 2 0 0 1 2.11-.45c.8.27 1.64.47 2.5.59A2 2 0 0 1 22 16.92Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Contatti</span> <span>→</span></a>
 
         <div class="drawerGroup">
           <div class="drawerTitle">Ordina subito</div>
@@ -886,12 +932,6 @@
           </a>
         </div>
 
-        <div class="drawerGroup">
-          <div class="drawerTitle">Pagamenti</div>
-          <a class="btn brand cards" href="#pagamenti" data-close style="width:100%; justify-content:center;">
-            Vai ai pagamenti
-          </a>
-        </div>
       </div>
     </div>
   </div>
@@ -995,31 +1035,6 @@
 
                 <div style="margin-top:20px; display:flex; flex-direction: column; gap:10px;">
                   <a class="btn primary" href="https://fiori-italia.it/" target="_blank" rel="noopener nofollow" style="justify-content: center;">Vai su fiori-italia.it ↗</a>
-
-                  <!-- Pagamenti “brand” rapidi -->
-                  <div class="payBrandRow" style="justify-content:center;">
-                    <a class="btn brand paypal" href="https://www.paypal.com/paypalme/NinoFiori" target="_blank" rel="noopener nofollow">
-                      <svg class="svgLogo" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                        <path d="M7 19H5.2a1 1 0 0 1-1-1.2l2-12A1 1 0 0 1 7.2 5H14a5 5 0 0 1 0 10H10l-.6 4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-                      </svg>
-                      PayPal
-                    </a>
-                    <a class="btn postepay" href="#pagamenti">
-                      <svg class="svgLogo" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                        <path d="M3 7.5A2.5 2.5 0 0 1 5.5 5h13A2.5 2.5 0 0 1 21 7.5v9A2.5 2.5 0 0 1 18.5 19h-13A2.5 2.5 0 0 1 3 16.5v-9Z" stroke="currentColor" stroke-width="2"/>
-                        <path d="M3 9h18" stroke="currentColor" stroke-width="2"/>
-                      </svg>
-                      Postepay
-                    </a>
-                    <a class="btn brand cards" href="#pagamenti">
-                      <svg class="svgLogo" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                        <path d="M3 7.5A2.5 2.5 0 0 1 5.5 5h13A2.5 2.5 0 0 1 21 7.5v9A2.5 2.5 0 0 1 18.5 19h-13A2.5 2.5 0 0 1 3 16.5v-9Z" stroke="currentColor" stroke-width="2"/>
-                        <path d="M3 9h18" stroke="currentColor" stroke-width="2"/>
-                        <path d="M7 15h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                      </svg>
-                      Carte
-                    </a>
-                  </div>
                 </div>
 
               </div>
@@ -1102,11 +1117,6 @@
           <div class="step">
             <img class="stepImg" src="./immagini-home/step2.png" alt="Step 2" />
             <h4><span class="stepN">2.</span> Cosa ti serve?</h4>
-            <div class="stepCtaRow">
-              <a class="btn brand whatsapp" href="https://wa.me/message/JDH7MM6C6VC7J1" target="_blank" rel="noopener nofollow">
-                <img class="logo" src="./immagini-home/logo-whatsapp.png" alt="WhatsApp" /> Scrivi ora
-              </a>
-            </div>
             <p style="margin-top:10px;">Dicci occasione, budget e indirizzo di consegna a Roma.</p>
           </div>
 
@@ -1114,9 +1124,7 @@
             <img class="stepImg" src="./immagini-home/step3.png" alt="Step 3" />
             <h4><span class="stepN">3.</span> Conferma e pagamento</h4>
             <div class="stepCtaRow">
-              <a class="btn brand whatsapp" href="https://wa.me/message/JDH7MM6C6VC7J1" target="_blank" rel="noopener nofollow">
-                <img class="logo" src="./immagini-home/logo-whatsapp.png" alt="WhatsApp" /> Conferma su WhatsApp
-              </a>
+              <a class="btn soft" href="#pagamenti">💳 Metodi di pagamento</a>
             </div>
             <p style="margin-top:10px;">Confermiamo tutto in chat e poi paghi con il metodo che preferisci.</p>
           </div>
@@ -1137,22 +1145,12 @@
           <div class="step">
             <img class="stepImg" src="./immagini-home/step4.png" alt="Step 4" />
             <h4><span class="stepN">4.</span> Foto prima di partire</h4>
-            <div class="stepCtaRow">
-              <a class="btn brand whatsapp" href="https://wa.me/message/JDH7MM6C6VC7J1" target="_blank" rel="noopener nofollow">
-                <img class="logo" src="./immagini-home/logo-whatsapp.png" alt="WhatsApp" /> Chiedi l’anteprima
-              </a>
-            </div>
             <p style="margin-top:10px;">Ti mandiamo una foto su WhatsApp così vedi cosa stiamo consegnando.</p>
           </div>
 
           <div class="step">
             <img class="stepImg" src="./immagini-home/step5.png" alt="Step 5" />
             <h4><span class="stepN">5.</span> Consegna effettuata</h4>
-            <div class="stepCtaRow">
-              <a class="btn brand whatsapp" href="https://wa.me/message/JDH7MM6C6VC7J1" target="_blank" rel="noopener nofollow">
-                <img class="logo" src="./immagini-home/logo-whatsapp.png" alt="WhatsApp" /> Scrivici ora
-              </a>
-            </div>
             <p style="margin-top:10px;">Ti avvisiamo appena i fiori sono arrivati a destinazione.</p>
           </div>
         </div>
@@ -1239,15 +1237,16 @@
             <h4>🏛️ Bonifico Online ISTANTANEO</h4>
             <p>Per velocizzare l'ordine, usa il bonifico istantaneo.</p>
             <div class="infoBox">
-              <div>
-                Intestato a: <strong id="bonificoNome">AWAD MELAD</strong><br>
-                IBAN:<br>
-                <span class="bigNumber" id="bonificoIban">IT98 Y360 8105 1382 5123 3451 236</span>
-              </div>
+              <div style="display:flex; flex-direction:column; gap:10px;">
+                <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+                  <span>Intestato a: <strong id="bonificoNome">AWAD MELAD</strong></span>
+                  <button class="copyBtn" type="button" data-copy="#bonificoNome">📋 Copia</button>
+                </div>
 
-              <div class="copyRow">
-                <button class="copyBtn" type="button" data-copy="#bonificoNome">📋 Copia nome</button>
-                <button class="copyBtn" type="button" data-copy="#bonificoIban">📋 Copia IBAN</button>
+                <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+                  <span>IBAN: <span class="bigNumber" id="bonificoIban" style="display:inline-block; margin:0;">IT98 Y360 8105 1382 5123 3451 236</span></span>
+                  <button class="copyBtn" type="button" data-copy="#bonificoIban" data-copy-nospace>📋 Copia</button>
+                </div>
               </div>
             </div>
 
@@ -1557,7 +1556,8 @@
         const el = sel ? document.querySelector(sel) : null;
         if(!el) return;
 
-        const text = (el.textContent || '').trim();
+        let text = (el.textContent || '').trim();
+        if(btn.hasAttribute('data-copy-nospace')) text = text.replace(/\s+/g, '');
         const ok = await copyText(text);
 
         const prev = btn.textContent;
