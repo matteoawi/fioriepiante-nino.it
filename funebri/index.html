@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>Galleria Onoranze Funebri — Fiori e Piante di Nino</title>
+  <meta name="description" content="Scegli un esempio e chiedi a Nino qualcosa di simile su WhatsApp." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #ff2e8f;
+      --bg: #fff7fb;
+      --ink: #1a1220;
+      --wa-color: #25D366;
+      --radius: 16px;
+    }
+
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+    body {
+      margin: 0;
+      font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      padding-bottom: 100px; /* Spazio per floating button */
+    }
+
+    /* --- HEADER --- */
+    .header {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      padding: 12px 0;
+    }
+    .container {
+      width: min(1100px, 100% - 32px);
+      margin-inline: auto;
+    }
+    .nav-row {
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .brand {
+      display: flex; align-items: center; gap: 10px;
+      font-weight: 800; font-size: 18px;
+      text-decoration: none; color: var(--ink);
+    }
+    .brand img { width: 32px; height: 32px; object-fit: contain; }
+
+    .btn-small {
+      font-size: 14px; font-weight: 700;
+      padding: 8px 16px; border-radius: 50px;
+      background: #f0f0f0; color: var(--ink);
+      text-decoration: none; transition: 0.2s;
+    }
+    .btn-small:hover { background: #e0e0e0; }
+
+    /* --- HERO --- */
+    .hero { padding: 30px 0 20px; text-align: center; }
+    h1 { margin: 0 0 8px; font-size: 28px; letter-spacing: -0.5px; }
+    p.sub { margin: 0 auto; color: #666; font-size: 15px; max-width: 520px; line-height: 1.5; }
+
+    /* --- GRIGLIA --- */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr); /* Mobile: 2 col */
+      gap: 12px;
+      margin-top: 20px;
+    }
+    @media (min-width: 768px) {
+      .grid { grid-template-columns: repeat(4, 1fr); gap: 20px; } /* Desktop: 4 col */
+    }
+
+    .tile {
+      aspect-ratio: 1 / 1;
+      background: #fff;
+      border-radius: var(--radius);
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      transition: transform 0.2s;
+    }
+    .tile:active { transform: scale(0.98); }
+
+    /* Skeleton loading animation */
+    .tile.loading::before {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(90deg, #f0f0f0 25%, #f8f8f8 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+    }
+    @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+    .tile img {
+      width: 100%; height: 100%; object-fit: cover;
+      display: block; opacity: 0; transition: opacity 0.3s;
+    }
+    .tile.loaded img { opacity: 1; }
+    .tile.loaded::before { display: none; }
+
+    .tile::after {
+      content: "🔍";
+      position: absolute; bottom: 8px; right: 8px;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(4px);
+      width: 32px; height: 32px; border-radius: 50%;
+      display: grid; place-items: center; font-size: 14px;
+      opacity: 0.9;
+    }
+
+    /* --- LOAD MORE --- */
+    .pager { margin: 40px 0; text-align: center; }
+    .btn-load {
+      background: var(--ink); color: #fff; border: none;
+      padding: 14px 28px; border-radius: 50px;
+      font-size: 16px; font-weight: 700; cursor: pointer;
+    }
+
+    /* --- LIGHTBOX FIX --- */
+    .lb {
+      position: fixed; inset: 0; z-index: 2000;
+      background: rgba(0,0,0,0.92);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      backdrop-filter: blur(5px);
+    }
+    .lb.active { display: flex; }
+
+    .lb-panel {
+      background: #fff;
+      width: 100%; max-width: 550px;
+      max-height: 90vh;
+      border-radius: 24px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+      display: flex;
+      flex-direction: column;
+      animation: pop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    @keyframes pop { from {transform: scale(0.95); opacity: 0;} to {transform: scale(1); opacity: 1;} }
+
+    .lb-close {
+      position: absolute; top: 12px; right: 12px; z-index: 10;
+      background: rgba(255,255,255,0.9); border: none;
+      width: 36px; height: 36px; border-radius: 50%;
+      font-size: 24px; line-height: 1; cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .lb-img-wrap {
+      background: #f4f4f4;
+      flex: 1;
+      display: flex; justify-content: center; align-items: center;
+      overflow: hidden;
+      min-height: 200px;
+    }
+    .lb-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .lb-body {
+      padding: 24px;
+      text-align: center;
+      background: #fff;
+      flex-shrink: 0;
+    }
+    .lb-title { margin: 0 0 16px; font-size: 19px; font-weight: 800; line-height: 1.3; }
+
+    .btn-wa {
+      display: flex; align-items: center; justify-content: center; gap: 12px;
+      width: 100%; padding: 16px;
+      background: var(--wa-color); color: #fff;
+      border-radius: 16px; text-decoration: none;
+      font-weight: 800; font-size: 16px;
+      box-shadow: 0 8px 20px rgba(37, 211, 102, 0.25);
+      transition: transform 0.2s;
+    }
+    .btn-wa:active { transform: scale(0.98); }
+    .btn-wa img { width: 26px; height: 26px; object-fit: contain; }
+
+    .lb-links { margin-top: 16px; }
+    .link-soft { font-size: 14px; color: #666; font-weight: 600; text-decoration: underline; }
+
+    /* --- FLOATING CTA --- */
+    .float-wa {
+      position: fixed; bottom: 20px; right: 20px; z-index: 100;
+      background: var(--wa-color); color: #fff;
+      width: 56px; height: 56px; border-radius: 50%;
+      display: grid; place-items: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      transition: transform 0.2s;
+    }
+    .float-wa:hover { transform: scale(1.1); }
+    .float-wa img { width: 32px; height: 32px; object-fit: contain; }
+  </style>
+</head>
+
+<body>
+  <header class="header">
+    <div class="container nav-row">
+      <a href="../" class="brand">
+        <img src="../immagini-home/fiori%20e%20piante%20di%20nino%20logo%20nero.png" alt="Logo">
+        Fiori e piante di Nino
+      </a>
+      <a href="../" class="btn-small">← Torna alla Home</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <h1>Onoranze Funebri 🕊️</h1>
+        <p class="sub">Tocca una foto per ingrandirla e mandarla a Nino su WhatsApp.</p>
+
+        <div id="grid" class="grid"></div>
+
+        <div class="pager">
+          <button id="loadMore" class="btn-load">Vedi altre foto ↓</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <a href="https://wa.me/393394324010" class="float-wa" aria-label="Scrivici su WhatsApp">
+    <img src="https://raw.githubusercontent.com/matteoawi/fioriepiante-nino.it/main/immagini-home/logo-whatsapp.png" alt="WA">
+  </a>
+
+  <div id="lb" class="lb">
+    <div class="lb-panel">
+      <button class="lb-close" id="lbClose">×</button>
+
+      <div class="lb-img-wrap">
+        <img id="lbImg" src="" alt="Dettaglio">
+      </div>
+
+      <div class="lb-body">
+        <h3 class="lb-title">Saresti interessato a qualcosa di simile?</h3>
+
+        <a id="lbBtn" href="#" class="btn-wa">
+          <img src="https://raw.githubusercontent.com/matteoawi/fioriepiante-nino.it/main/immagini-home/logo-whatsapp.png" alt="WhatsApp">
+          Contatta Nino e mandagli questo esempio
+        </a>
+
+        <div class="lb-links">
+          <a id="lbOpen" href="#" target="_blank" class="link-soft">Apri foto intera ↗</a>
+        </div>
+
+        <p style="font-size:13px; color:#888; margin-top:15px; line-height:1.4;">
+          Premendo il tasto si aprirà WhatsApp con il <b>link della foto già inserito</b>.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // --- CONFIGURAZIONE ---
+    const TOTAL = 40;
+    const PER_PAGE = 12;
+    const PHONE = "393394324010";
+
+    // Cartella immagini (come nel tuo repo: /funebri/funebri-1.jpg ... funebri-40.jpg)
+    const PATH = "./funebri/";
+
+    let count = 0;
+    const grid = document.getElementById("grid");
+    const loadMoreBtn = document.getElementById("loadMore");
+
+    // Lightbox elements
+    const lb = document.getElementById("lb");
+    const lbImg = document.getElementById("lbImg");
+    const lbBtn = document.getElementById("lbBtn");
+    const lbOpen = document.getElementById("lbOpen");
+    const lbClose = document.getElementById("lbClose");
+
+    // Genera URL assoluto (con PATH incluso)
+    const getAbsUrl = (filename) => new URL(PATH + filename, window.location.href).href;
+
+    // --- CARICAMENTO FOTO ---
+    function loadNext() {
+      const nextBatch = Math.min(count + PER_PAGE, TOTAL);
+
+      if (count >= TOTAL) {
+        loadMoreBtn.style.display = "none";
+        return;
+      }
+
+      for (let i = count + 1; i <= nextBatch; i++) {
+        const file = `funebri-${i}.jpg`;
+
+        const div = document.createElement("div");
+        div.className = "tile loading";
+
+        const img = document.createElement("img");
+        img.dataset.src = PATH + file;
+        img.alt = "Composizione funebre";
+
+        observer.observe(img);
+        div.addEventListener("click", () => openLb(file));
+
+        div.appendChild(img);
+        grid.appendChild(div);
+      }
+
+      count = nextBatch;
+      if (count >= TOTAL) loadMoreBtn.style.display = "none";
+    }
+
+    // --- LAZY LOADER ---
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          img.src = img.dataset.src;
+          img.onload = () => img.parentElement.classList.add("loaded");
+          obs.unobserve(img);
+        }
+      });
+    }, { rootMargin: "200px" });
+
+    // --- LIGHTBOX LOGIC ---
+    function openLb(filename) {
+      const absUrl = getAbsUrl(filename);
+
+      const msg = `Ciao Nino! 👋\n\nSarei interessato a qualcosa di simile a questa foto che ho visto sul sito:\n${absUrl}\n\nMi fai sapere? Grazie!`;
+
+      lbImg.src = PATH + filename;
+      lbBtn.href = `https://wa.me/${PHONE}?text=${encodeURIComponent(msg)}`;
+      lbOpen.href = PATH + filename;
+
+      lb.classList.add("active");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeLb() {
+      lb.classList.remove("active");
+      document.body.style.overflow = "";
+      setTimeout(() => lbImg.src = "", 200);
+    }
+
+    lbClose.addEventListener("click", closeLb);
+    lb.addEventListener("click", (e) => { if (e.target === lb) closeLb(); });
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeLb(); });
+
+    // Avvia
+    loadMoreBtn.addEventListener("click", loadNext);
+    loadNext();
+  </script>
+</body>
+</html>
