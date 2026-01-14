@@ -418,7 +418,7 @@
     }
     .heroOverlay{
       position:absolute; inset:0;
-      background: linear-gradient(180deg, rgba(255,255,255,0.20) 0%, rgba(255,255,255,.88) 54%);
+      background: linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,.45) 55%);
     }
     .heroContent{
       position:relative;
@@ -470,6 +470,12 @@
       font-weight: 700;
       line-height: 1.55;
     }
+
+    /* Hero readability: overlay più leggero, testo sempre leggibile */
+    .heroMain h1,
+    .heroMain .lead{
+      text-shadow: 0 10px 26px rgba(26,18,32,.22);
+    }
     .ctaRow{ display:flex; gap: 12px; flex-wrap:wrap; margin-top: 24px; justify-content: center; }
 
     .miniRow{
@@ -486,6 +492,21 @@
       background: rgba(255,255,255,.75);
       border: 1px solid rgba(255,46,143,.14);
       box-shadow: var(--shadow-2);
+    }
+
+    /* Hero: pulsanti mini (Come pagare / Chiama) più grandi */
+    .miniRow a.miniBtn{
+      padding: 12px 14px;
+      font-size: 15px;
+      font-weight: 900;
+    }
+    .miniRow a.miniBtnPay{ }
+    .miniRow a.miniBtnCall{ }
+    @media (max-width: 560px){
+      .miniRow a.miniBtn{
+        width: 100%;
+        justify-content: center;
+      }
     }
 
     /* Side cards */
@@ -547,9 +568,16 @@
 
     /* Mobile: galleria "a bottoni" quadrati */
     @media (max-width: 560px){
-      .galleryGrid{ gap: 10px; }
-      .gcard{ aspect-ratio: 1 / 1; min-height: unset; min-width: 0; }
-      .gcard .content{ padding: 14px; }
+      .galleryGrid{
+        grid-template-columns: 1fr;   /* 3 card in colonna */
+        gap: 12px;
+      }
+      .gcard{
+        aspect-ratio: auto;
+        min-height: 220px;
+        min-width: 0;
+      }
+      .gcard .content{ padding: 16px; }
     }
     /* (richiesto) 2x2 anche da mobile: niente 1 colonna */
 
@@ -570,7 +598,7 @@
       position:absolute; inset:0;
       background:
         radial-gradient(900px 320px at 15% 0%, rgba(255,46,143,.18), transparent 60%),
-        linear-gradient(180deg, rgba(255,255,255,.28), rgba(255,255,255,.92));
+        linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.55));
     }
     .gcard .content{
       position:absolute; inset:0;
@@ -878,6 +906,26 @@
       flex-wrap: wrap;
       margin-top: 10px;
     }
+
+    /* Modal sedi (JustEat/Deliveroo): bottoni uguali e chiari */
+    .pmodal .row .btn.primary,
+    .pmodal .row .btn.soft{
+      flex: 1 1 220px;
+      justify-content: center;
+      padding: 14px 16px;
+      border-radius: 18px;
+      font-size: 16px;
+      font-weight: 1000;
+      color: var(--ink);
+      background: rgba(255,255,255,.92);
+      border: 1px solid rgba(255,46,143,.22);
+      box-shadow: var(--shadow-2);
+    }
+    .pmodal .row .btn.primary:hover,
+    .pmodal .row .btn.soft:hover{
+      background: rgba(255,255,255,.98);
+      transform: translateY(-1px);
+    }
     .pmodal .closeBtn{
       width: 40px; height: 40px;
       border-radius: 14px;
@@ -1059,8 +1107,8 @@
                 </div>
 
                 <div class="miniRow">
-                  <a href="#pagamenti">💳 Come Pagare</a>
-                  <a href="tel:+393394324010">📞 +39 339 432 4010</a>
+                  <a class="miniBtn miniBtnPay" href="#pagamenti">💳 Come Pagare</a>
+                  <a class="miniBtn miniBtnCall" href="tel:+393394324010">📞 Chiama Nino (+39 339 432 4010)</a>
                 </div>
               </div>
 
@@ -1617,3 +1665,4 @@
   </script>
 </body>
 </html>
+
