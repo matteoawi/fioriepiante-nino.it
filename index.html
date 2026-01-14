@@ -43,8 +43,8 @@
       --deliveroo: #00CCBC;
       --justeat: #FF8000;
       --paypal: #003087;
-      --postepay: #FFCC00;
-      --postepay-ink: #0B3A75;
+      --postepay: #FFCC00;   /* base */
+      --postepay-ink: #0B3A75; /* testo */
       --cards: #111827;
     }
 
@@ -77,7 +77,7 @@
       position:fixed; inset:0;
       pointer-events:none; z-index:-1;
       filter: blur(48px); opacity:.90;
-      overflow: hidden;
+      overflow: hidden; /* evita che “sporga” su X */
     }
     .blob{
       position:absolute; width: 520px; height: 520px; border-radius: 999px;
@@ -127,14 +127,14 @@
     }
     .nav .row{
       display:flex; align-items:center; justify-content:space-between; gap:14px;
-      min-width: 0;
+      min-width: 0; /* FIX overflow */
     }
 
     .brand{
       display:flex; align-items:center; gap:12px;
       font-weight: 800;
       letter-spacing: -.2px;
-      min-width: 0;
+      min-width: 0; /* FIX overflow */
       flex: 1 1 auto;
     }
     .brandLogo{
@@ -153,7 +153,7 @@
     .brandText{
       display:flex;
       flex-direction: column;
-      justify-content:center;
+      justify-content:center; /* logo + testo più “centrati” */
       min-width: 0;
     }
     .brandText .titleLine{
@@ -207,13 +207,30 @@
     }
     .iconbtn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.88); }
 
+    /* brand icon buttons in top bar */
+    .brandIcon{
+      width: 44px; height: 44px;
+      border-radius: 16px;
+      display:grid; place-items:center;
+      border: none;
+      color: white;
+      box-shadow: var(--shadow-2);
+      transition: transform .2s var(--ease), filter .2s var(--ease);
+      flex: 0 0 auto;
+    }
+    .brandIcon:hover{ transform: translateY(-1px); filter: brightness(1.03); }
+    .brandIcon img{ width: 22px; height: 22px; object-fit: contain; display:block; }
+    .brandIcon.deliveroo{ background: var(--deliveroo); }
+    .brandIcon.justeat{ background: var(--justeat); }
+    .brandIcon.whatsapp{ background: var(--whatsapp); }
+
     .hamburger{ display:none; }
     @media (max-width: 980px){
       .navlinks{ display:none; }
       .hamburger{ display:grid; }
     }
     @media (max-width: 420px){
-      .brandText{ max-width: 54vw; }
+      .brandText{ max-width: 52vw; }
     }
 
     /* Drawer */
@@ -223,20 +240,19 @@
     .drawer .panel{
       position:absolute; right: 14px; top: 74px;
       width: min(420px, calc(100% - 28px));
-      max-height: calc(100vh - 88px);   /* sempre nel viewport */
-      overflow: hidden;
       border-radius: var(--radius-xl);
+      overflow:hidden;
       background: rgba(255,255,255,.92);
       border: 1px solid rgba(255,46,143,.18);
       box-shadow: var(--shadow);
       backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
+      max-height: calc(100vh - 88px); /* viewport-safe */
       display:flex;
       flex-direction:column;
     }
     .drawer .inner{
       padding: 14px;
-      overflow:auto;                 /* scorribile se serve */
+      overflow:auto; /* viewport-safe */
       -webkit-overflow-scrolling: touch;
     }
     .drawer a.drawerLink{
@@ -276,7 +292,6 @@
       transition: transform .2s var(--ease), box-shadow .2s var(--ease), background .2s var(--ease);
       user-select:none;
       text-align: center;
-      cursor:pointer;
     }
     .btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.92); }
     .btn.primary{
@@ -336,15 +351,13 @@
       box-shadow: var(--shadow);
       border: 1px solid rgba(255,46,143,.16);
       background:
-        radial-gradient(900px 520px at 15% 12%, rgba(255,46,143,.10), transparent 60%),
-        linear-gradient(180deg, rgba(255,255,255,.38), rgba(255,255,255,.92) 60%),
+        radial-gradient(900px 520px at 15% 12%, rgba(255,46,143,.18), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,.45), rgba(255,255,255,.88) 80%),
         url("https://fiori-italia.it/cdn/shop/files/BouquetXXXLEsplosioneCromatica_Oltre100Steli.png?v=1764853567&width=3840") center center/cover no-repeat;
-      background-blend-mode: normal;
     }
     .heroOverlay{
       position:absolute; inset:0;
-      /* più visibile l'immagine: overlay più leggero */
-      background: linear-gradient(180deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.90) 52%);
+      background: linear-gradient(180deg, rgba(255,255,255,0.20) 0%, rgba(255,255,255,.88) 54%);
     }
     .heroContent{
       position:relative;
@@ -360,7 +373,7 @@
     .heroLogoBig {
       width: 160px;
       height: auto;
-      margin: 10px auto 18px;
+      margin: 10px auto 18px; /* centrato meglio nella card */
       display: block;
       filter: drop-shadow(0 10px 20px rgba(255,46,143,0.15));
     }
@@ -436,13 +449,11 @@
       border: 1px solid rgba(255,46,143,.14);
       background: #fff;
     }
-    .videoBox video{
+    .videoBox iframe, .videoBox video{
       width: 100%;
-      height: min(340px, 42vh); /* dinamica, non “verticale intera” */
+      height: min(340px, 42vh);
       display:block;
       border: 0;
-      object-fit: cover;         /* bello “cinematic” */
-      background: #000;
     }
 
     /* Sections */
@@ -465,16 +476,13 @@
       font-size: 17px;
     }
 
-    /* Gallery cards — sempre 2x2 anche mobile */
+    /* Gallery cards */
     .galleryGrid{
       display:grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 16px;
     }
-    @media (max-width: 420px){
-      .container{ width: calc(100% - 24px); }
-      .galleryGrid{ gap: 12px; }
-    }
+    /* (richiesto) 2x2 anche da mobile: niente 1 colonna */
 
     .gcard{
       position:relative;
@@ -482,12 +490,9 @@
       overflow:hidden;
       border: 1px solid rgba(255,46,143,.16);
       box-shadow: var(--shadow);
-      min-height: 220px;
+      min-height: 260px;
       background: #fff;
       display: block;
-    }
-    @media (max-width: 520px){
-      .gcard{ min-height: 180px; }
     }
     .gcard .bg{ position:absolute; inset:0; background-size: cover; background-position:center; transform: scale(1.04); transition: transform 0.4s var(--ease); }
     .gcard:hover .bg { transform: scale(1.1); }
@@ -499,7 +504,7 @@
     }
     .gcard .content{
       position:absolute; inset:0;
-      padding: 18px;
+      padding: 24px;
       display:flex; flex-direction:column; justify-content:space-between;
       gap: 12px;
     }
@@ -512,13 +517,22 @@
       border: 1px solid rgba(255,46,143,.18);
       font-weight: 800;
       color: var(--ink);
-      font-size: 13px;
     }
     .gtitle{
-      font-size: 20px;
+      font-size: 24px;
       font-weight: 900;
       letter-spacing: -.5px;
       color: var(--ink);
+    }
+
+    /* Contacts grid (mobile 1 colonna) */
+    .contactsGrid{
+      display:grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    @media (max-width: 900px){
+      .contactsGrid{ grid-template-columns: 1fr; }
     }
 
     /* Steps */
@@ -528,6 +542,7 @@
       gap: 16px;
     }
     @media (max-width: 980px){ .stepsGrid{ grid-template-columns: 1fr; } }
+
     .stepsGrid.two{ grid-template-columns: repeat(2, 1fr); }
     @media (max-width: 980px){ .stepsGrid.two{ grid-template-columns: 1fr; } }
 
@@ -545,53 +560,44 @@
     /* Screenshot steps: altezza “intera” */
     .stepImg{
       width: 100%;
-      height: 80vh;
+      height: 80vh;           /* desktop */
       margin-top: 16px;
       border-radius: 18px;
-      object-fit: contain;
+      object-fit: contain;    /* IMPORTANT: screenshot non “tagliato” */
       border: 1px solid rgba(255,46,143,.14);
       background: rgba(255,255,255,.92);
       display:block;
     }
     @media (max-width: 980px){
-      .stepImg{ height: 60vh; }
+      .stepImg{ height: 60vh; } /* mobile */
     }
 
-    .stepTitleRow{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      margin: 10px 0 8px;
-    }
-    .stepNumSmall{
-      width: 34px; height: 34px;
-      border-radius: 14px;
-      display:grid; place-items:center;
-      font-weight: 900;
-      color: white;
-      background: linear-gradient(135deg, var(--pink), var(--pink-2));
-      box-shadow: 0 12px 22px rgba(255,46,143,.16);
-      flex: 0 0 auto;
-    }
     .step h4{
-      margin: 0;
+      margin: 16px 0 8px;
       font-size: 18px;
       letter-spacing: -.2px;
       color: var(--ink);
       font-weight: 900;
+      display:flex;
+      align-items:baseline;
+      gap: 10px;
+      flex-wrap:wrap;
+    }
+    .stepN{
+      font-weight: 1000;
+      color: var(--pink);
     }
     .step p{
-      margin: 0;
+      margin:0;
       color: var(--ink-2);
       font-weight: 700;
       line-height: 1.55;
     }
-
-    /* solo bottone whatsapp sotto al titolo */
-    .stepWhatsRow{
-      margin-top: 12px;
+    .stepCtaRow{
+      margin-top: 10px;
       display:flex;
-      justify-content:flex-start;
+      gap: 10px;
+      flex-wrap: wrap;
     }
 
     /* “Cosa succede dopo?” divider */
@@ -633,8 +639,8 @@
       box-shadow: var(--shadow);
     }
     .payCard h3{ margin:0 0 16px; font-size: 20px; font-weight: 900; color: var(--pink); }
-    .payCard h4{ margin: 24px 0 8px; font-size: 17px; font-weight: 900; color: var(--ink); display: flex; align-items: center; gap: 8px;}
-    .payCard p{ margin:0 0 14px; color: var(--muted); font-weight: 700; line-height: 1.6; }
+    .payCard h4{ margin: 24px 0 8px; font-size: 17px; font-weight: 800; color: var(--ink); display: flex; align-items: center; gap: 8px;}
+    .payCard p{ margin:0 0 14px; color: var(--muted); font-weight: 600; line-height: 1.6; }
 
     .payBrandRow{
       display:flex;
@@ -650,35 +656,50 @@
       border-radius: 16px;
       margin-top: 10px;
     }
-    .infoBox strong { color: var(--ink); font-weight: 900; font-size: 1.05em; }
-    .bigNumber { font-size: 18px; color: var(--pink); font-weight: 900; display: block; margin: 6px 0 10px;}
+    .infoBox strong { color: var(--ink); font-weight: 800; font-size: 1.1em; }
+    .bigNumber { font-size: 18px; color: var(--pink); font-weight: 900; display: block; margin: 4px 0; }
+    .bigNumberLink{ font-size: 18px; color: var(--pink); font-weight: 900; display: inline-block; margin: 4px 0; }
 
     .copyRow{
       display:flex;
-      gap:10px;
-      flex-wrap:wrap;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items:center;
       margin-top: 10px;
     }
-    .btn.small{
+    .copyBtn{
+      appearance:none;
+      border: 1px solid rgba(255,46,143,.18);
+      background: rgba(255,255,255,.78);
+      border-radius: 999px;
       padding: 10px 12px;
-      border-radius: 14px;
-      font-weight: 900;
+      font-weight: 800;
+      box-shadow: var(--shadow-2);
+      cursor:pointer;
+      transition: transform .2s var(--ease), background .2s var(--ease);
+      user-select:none;
     }
+    .copyBtn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.95); }
 
-    /* payment logos (myPOS) */
-    .payLogos{
-      margin-top: 12px;
+    .payCircuits{
+      width: 100%;
+      border-radius: 16px;
+      border: 1px solid rgba(255,46,143,.14);
+      background: rgba(255,255,255,.92);
+      padding: 10px;
+      margin-top: 10px;
+      box-shadow: var(--shadow-2);
       display:flex;
-      flex-wrap:wrap;
-      gap:10px;
       align-items:center;
+      justify-content:center;
+      min-height: 64px;
     }
-    .payLogo{
-      height: 22px;
-      width: auto;
+    .payCircuits img{
+      width: 100%;
+      max-width: 420px;
+      height: 44px;
       object-fit: contain;
-      filter: drop-shadow(0 10px 14px rgba(26,18,32,.08));
-      opacity:.98;
+      display:block;
     }
 
     /* Locations */
@@ -698,13 +719,13 @@
       flex-direction:column;
       gap: 10px;
     }
-    .loc .top{ display:flex; align-items:flex-start; justify-content:space-between; gap:12px; }
+    .loc .top{ display:flex; align-items:flex-start; justify-content:space-between; gap:10px; }
     .loc .addr{ font-weight: 900; color: var(--ink); line-height: 1.25; font-size: 17px; }
     .loc .zone{ color: var(--muted); font-weight: 800; margin-top: 4px; }
 
-    .locIcon{
-      width: 54px; height: 54px;
-      border-radius: 18px;
+    .locThumbLink{
+      width: 52px; height: 52px;
+      border-radius: 16px;
       overflow:hidden;
       border: 1px solid rgba(255,46,143,.18);
       background: rgba(255,255,255,.92);
@@ -713,70 +734,9 @@
       place-items:center;
       flex: 0 0 auto;
     }
-    .locIcon svg{ width: 34px; height: 34px; display:block; }
-
-    /* Modal (choose sede) */
-    .modal{
-      position: fixed;
-      inset: 0;
-      display: none;
-      z-index: 400;
-    }
-    .modal.open{ display:block; }
-    .modal .backdrop{
-      position:absolute; inset:0;
-      background: rgba(20,12,26,.35);
-      backdrop-filter: blur(6px);
-    }
-    .modal .sheet{
-      position:absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      width: min(520px, calc(100% - 28px));
-      max-height: calc(100vh - 28px);
-      overflow: hidden;
-      border-radius: var(--radius-xl);
-      background: rgba(255,255,255,.92);
-      border: 1px solid rgba(255,46,143,.18);
-      box-shadow: var(--shadow);
-      display:flex;
-      flex-direction:column;
-    }
-    .modal .sheetInner{
-      padding: 16px;
-      overflow:auto;
-      -webkit-overflow-scrolling: touch;
-    }
-    .modalTitle{
-      font-weight: 950;
-      letter-spacing: -.3px;
-      margin: 0 0 6px;
-      font-size: 18px;
-    }
-    .modalSub{
-      margin: 0 0 12px;
-      color: var(--muted);
-      font-weight: 750;
-      line-height: 1.4;
-    }
-    .modalRow{ display:flex; gap:10px; flex-wrap:wrap; }
-    .modalClose{
-      width: 44px; height: 44px;
-      border-radius: 16px;
-      border: 1px solid rgba(255,46,143,.16);
-      background: rgba(255,255,255,.80);
-      display:grid; place-items:center;
-      box-shadow: var(--shadow-2);
-      cursor:pointer;
-      margin-left: auto;
-    }
-    .modalHeader{
-      padding: 14px 16px;
-      border-bottom: 1px solid rgba(255,46,143,.14);
-      display:flex;
-      align-items:center;
-      gap: 10px;
+    .locThumbLink svg{
+      width: 46px; height: 46px;
+      display:block;
     }
 
     footer{
@@ -790,6 +750,61 @@
       color: var(--muted);
       font-weight: 700;
     }
+
+    /* Platform modal */
+    .pmodal{ position: fixed; inset:0; z-index: 300; display:none; }
+    .pmodal.open{ display:block; }
+    .pmodal .backdrop{ position:absolute; inset:0; background: rgba(20,12,26,.35); }
+    .pmodal .panel{
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: min(520px, calc(100% - 28px));
+      border-radius: var(--radius-xl);
+      background: rgba(255,255,255,.94);
+      border: 1px solid rgba(255,46,143,.18);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+      overflow:hidden;
+    }
+    .pmodal .inner{
+      padding: 18px;
+    }
+    .pmodal .title{
+      font-weight: 1000;
+      letter-spacing: -.2px;
+      margin: 0 0 8px;
+      color: var(--ink);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 10px;
+    }
+    .pmodal .sub{
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-weight: 700;
+      line-height: 1.5;
+    }
+    .pmodal .row{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+    .pmodal .closeBtn{
+      width: 40px; height: 40px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,46,143,.16);
+      background: rgba(255,255,255,.70);
+      display:grid; place-items:center;
+      box-shadow: var(--shadow-2);
+      cursor:pointer;
+      transition: transform .2s var(--ease), background .2s var(--ease);
+      flex: 0 0 auto;
+    }
+    .pmodal .closeBtn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.95); }
   </style>
 </head>
 
@@ -838,7 +853,6 @@
     </div>
   </header>
 
-  <!-- Drawer -->
   <div class="drawer" id="drawer" aria-hidden="true">
     <div class="backdrop" data-close></div>
     <div class="panel" role="dialog" aria-label="Menu">
@@ -850,9 +864,8 @@
         <a class="drawerLink" href="#contatti" data-close>Contatti <span>→</span></a>
 
         <div class="drawerGroup">
-          <div class="drawerTitle">Metodi di acquisto</div>
+          <div class="drawerTitle">Ordina subito</div>
 
-          <!-- ecommerce PRIMO -->
           <a class="btn primary" href="https://fiori-italia.it/" target="_blank" rel="noopener nofollow" style="width:100%; justify-content:center;">
             🛒 Vai all’e-commerce
           </a>
@@ -862,54 +875,42 @@
             WhatsApp
           </a>
 
-          <!-- Deliveroo PRIMA di JustEat -->
-          <button class="btn brand deliveroo" type="button" data-open-delivery="deliveroo" style="width:100%; justify-content:center; margin-top:10px;">
+          <a class="btn brand deliveroo js-platform" href="#" data-platform="deliveroo" style="width:100%; justify-content:center; margin-top:10px;">
             <img class="logo" src="./immagini-home/Logo-deliveroo-.jpg" alt="Deliveroo" />
             Deliveroo
-          </button>
+          </a>
 
-          <button class="btn brand justeat" type="button" data-open-delivery="justeat" style="width:100%; justify-content:center; margin-top:10px;">
+          <a class="btn brand justeat js-platform" href="#" data-platform="justeat" style="width:100%; justify-content:center; margin-top:10px;">
             <img class="logo" src="./immagini-home/logo-justeat.png" alt="JustEat" />
             JustEat
-          </button>
+          </a>
         </div>
 
         <div class="drawerGroup">
           <div class="drawerTitle">Pagamenti</div>
-
-          <!-- UNICO bottone che porta alla sezione pagamenti -->
-          <a class="btn" href="#pagamenti" data-close style="width:100%; justify-content:center;">
-            Vai ai metodi di pagamento →
+          <a class="btn brand cards" href="#pagamenti" data-close style="width:100%; justify-content:center;">
+            Vai ai pagamenti
           </a>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Modal scelta sede -->
-  <div class="modal" id="deliveryModal" aria-hidden="true">
-    <div class="backdrop" data-modal-close></div>
-    <div class="sheet" role="dialog" aria-label="Scegli la sede">
-      <div class="modalHeader">
-        <div>
-          <div class="modalTitle" id="deliveryTitle">Scegli la sede</div>
-          <div class="modalSub" id="deliverySub">Seleziona Parioli o Trieste.</div>
+  <!-- Platform chooser modal -->
+  <div class="pmodal" id="platformModal" aria-hidden="true">
+    <div class="backdrop" data-pclose></div>
+    <div class="panel" role="dialog" aria-label="Seleziona la sede">
+      <div class="inner">
+        <div class="title">
+          <span id="platformTitle">Seleziona la sede</span>
+          <button class="closeBtn" type="button" data-pclose aria-label="Chiudi">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
         </div>
-        <button class="modalClose" type="button" data-modal-close aria-label="Chiudi">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-        </button>
-      </div>
-      <div class="sheetInner">
-        <div class="modalRow">
-          <a class="btn brand deliveroo" id="btnParioli" href="#" target="_blank" rel="noopener nofollow" style="flex:1; justify-content:center;">
-            Parioli
-          </a>
-          <a class="btn brand deliveroo" id="btnTrieste" href="#" target="_blank" rel="noopener nofollow" style="flex:1; justify-content:center;">
-            Trieste
-          </a>
-        </div>
+        <p class="sub" id="platformSub">Dove vuoi ordinare?</p>
+        <div class="row" id="platformLinks"></div>
       </div>
     </div>
   </div>
@@ -936,8 +937,7 @@
                 </p>
 
                 <div class="ctaRow">
-                  <!-- ecommerce PRIMO -->
-                  <a class="btn primary" href="https://fiori-italia.it/" target="_blank" rel="noopener nofollow">
+                  <a class="btn soft" href="https://fiori-italia.it/" target="_blank" rel="noopener nofollow">
                     🛒 Vai all’e-commerce
                   </a>
 
@@ -946,16 +946,15 @@
                     Ordina su WhatsApp
                   </a>
 
-                  <!-- Deliveroo prima di JustEat, con scelta sede -->
-                  <button class="btn brand deliveroo" type="button" data-open-delivery="deliveroo">
+                  <a class="btn brand deliveroo js-platform" href="#" data-platform="deliveroo">
                     <img class="logo" src="./immagini-home/Logo-deliveroo-.jpg" alt="Logo Deliveroo" />
                     Deliveroo
-                  </button>
+                  </a>
 
-                  <button class="btn brand justeat" type="button" data-open-delivery="justeat">
+                  <a class="btn brand justeat js-platform" href="#" data-platform="justeat">
                     <img class="logo" src="./immagini-home/logo-justeat.png" alt="Logo JustEat" />
                     JustEat
-                  </button>
+                  </a>
                 </div>
 
                 <div class="miniRow">
@@ -980,25 +979,49 @@
                   scegli il prodotto, inserisci indirizzo e note, paga in sicurezza e noi pensiamo alla consegna 💗
                 </p>
 
-                <!-- VIDEO (solo bellezza, loop, no audio, senza scritta) -->
+                <!-- VIDEO (card interna) -->
                 <div class="innerCard">
-                  <div class="videoBox" aria-label="Video decorativo">
-                    <video autoplay muted loop playsinline preload="metadata">
-                      <source src="https://fiori-italia.it/cdn/shop/videos/c/vp/ff6e872bcd3a4521a9fdd5c43bb3a385/ff6e872bcd3a4521a9fdd5c43bb3a385.HD-1080p-7.2Mbps-59228556.mp4?v=0" type="video/mp4">
-                    </video>
+                  <div class="videoBox">
+                    <video
+                      src="https://fiori-italia.it/cdn/shop/videos/c/vp/ff6e872bcd3a4521a9fdd5c43bb3a385/ff6e872bcd3a4521a9fdd5c43bb3a385.HD-1080p-7.2Mbps-59228556.mp4?v=0"
+                      autoplay
+                      loop
+                      muted
+                      playsinline
+                      preload="metadata"
+                    ></video>
                   </div>
                 </div>
 
                 <div style="margin-top:20px; display:flex; flex-direction: column; gap:10px;">
-                  <a class="btn primary" href="https://fiori-italia.it/" target="_blank" rel="noopener nofollow" style="justify-content: center;">
-                    Vai su fiori-italia.it ↗
-                  </a>
+                  <a class="btn primary" href="https://fiori-italia.it/" target="_blank" rel="noopener nofollow" style="justify-content: center;">Vai su fiori-italia.it ↗</a>
 
-                  <!-- UNICO bottone pagamenti che manda all'ancoraggio -->
-                  <a class="btn" href="#pagamenti" style="justify-content:center;">
-                    Vai ai metodi di pagamento →
-                  </a>
+                  <!-- Pagamenti “brand” rapidi -->
+                  <div class="payBrandRow" style="justify-content:center;">
+                    <a class="btn brand paypal" href="https://www.paypal.com/paypalme/NinoFiori" target="_blank" rel="noopener nofollow">
+                      <svg class="svgLogo" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="M7 19H5.2a1 1 0 0 1-1-1.2l2-12A1 1 0 0 1 7.2 5H14a5 5 0 0 1 0 10H10l-.6 4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                      </svg>
+                      PayPal
+                    </a>
+                    <a class="btn postepay" href="#pagamenti">
+                      <svg class="svgLogo" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="M3 7.5A2.5 2.5 0 0 1 5.5 5h13A2.5 2.5 0 0 1 21 7.5v9A2.5 2.5 0 0 1 18.5 19h-13A2.5 2.5 0 0 1 3 16.5v-9Z" stroke="currentColor" stroke-width="2"/>
+                        <path d="M3 9h18" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                      Postepay
+                    </a>
+                    <a class="btn brand cards" href="#pagamenti">
+                      <svg class="svgLogo" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="M3 7.5A2.5 2.5 0 0 1 5.5 5h13A2.5 2.5 0 0 1 21 7.5v9A2.5 2.5 0 0 1 18.5 19h-13A2.5 2.5 0 0 1 3 16.5v-9Z" stroke="currentColor" stroke-width="2"/>
+                        <path d="M3 9h18" stroke="currentColor" stroke-width="2"/>
+                        <path d="M7 15h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                      </svg>
+                      Carte
+                    </a>
+                  </div>
                 </div>
+
               </div>
             </div>
           </aside>
@@ -1021,7 +1044,7 @@
             <div class="overlay"></div>
             <div class="content">
               <div class="gtag">💐 Apri /fiori</div>
-              <div class="gtitle">Fiori</div>
+              <div class="gtitle">Fiori freschi</div>
             </div>
           </a>
 
@@ -1030,7 +1053,7 @@
             <div class="overlay"></div>
             <div class="content">
               <div class="gtag">🪴 Apri /piante</div>
-              <div class="gtitle">Piante</div>
+              <div class="gtitle">Piante / Composizioni</div>
             </div>
           </a>
 
@@ -1039,7 +1062,7 @@
             <div class="overlay"></div>
             <div class="content">
               <div class="gtag">🕊️ Apri /funebri</div>
-              <div class="gtitle">Funebri</div>
+              <div class="gtitle">Composizioni funebri</div>
             </div>
           </a>
 
@@ -1048,7 +1071,7 @@
             <div class="overlay"></div>
             <div class="content">
               <div class="gtag">✨ Apri /installazioni</div>
-              <div class="gtitle">Addobbi</div>
+              <div class="gtitle">Addobbi e Allestimenti</div>
             </div>
           </a>
         </div>
@@ -1067,44 +1090,35 @@
         <div class="stepsGrid">
           <div class="step">
             <img class="stepImg" src="./immagini-home/step1.png" alt="Step 1" />
-            <div class="stepTitleRow">
-              <div class="stepNumSmall">1</div>
-              <h4>Dove ordinare?</h4>
-            </div>
-            <div class="stepWhatsRow">
+            <h4><span class="stepN">1.</span> Dove ordinare?</h4>
+            <div class="stepCtaRow">
               <a class="btn brand whatsapp" href="https://wa.me/message/JDH7MM6C6VC7J1" target="_blank" rel="noopener nofollow">
-                <img class="logo" src="./immagini-home/logo-whatsapp.png" alt="WhatsApp" />
-                WhatsApp
+                <img class="logo" src="./immagini-home/logo-whatsapp.png" alt="WhatsApp" /> WhatsApp
               </a>
             </div>
+            <p style="margin-top:10px;">Usa WhatsApp per inviarci foto, budget e dettagli.</p>
           </div>
 
           <div class="step">
             <img class="stepImg" src="./immagini-home/step2.png" alt="Step 2" />
-            <div class="stepTitleRow">
-              <div class="stepNumSmall">2</div>
-              <h4>Cosa ti serve?</h4>
-            </div>
-            <div class="stepWhatsRow">
+            <h4><span class="stepN">2.</span> Cosa ti serve?</h4>
+            <div class="stepCtaRow">
               <a class="btn brand whatsapp" href="https://wa.me/message/JDH7MM6C6VC7J1" target="_blank" rel="noopener nofollow">
-                <img class="logo" src="./immagini-home/logo-whatsapp.png" alt="WhatsApp" />
-                WhatsApp
+                <img class="logo" src="./immagini-home/logo-whatsapp.png" alt="WhatsApp" /> Scrivi ora
               </a>
             </div>
+            <p style="margin-top:10px;">Dicci occasione, budget e indirizzo di consegna a Roma.</p>
           </div>
 
           <div class="step">
             <img class="stepImg" src="./immagini-home/step3.png" alt="Step 3" />
-            <div class="stepTitleRow">
-              <div class="stepNumSmall">3</div>
-              <h4>Pagamento</h4>
-            </div>
-            <div class="stepWhatsRow">
+            <h4><span class="stepN">3.</span> Conferma e pagamento</h4>
+            <div class="stepCtaRow">
               <a class="btn brand whatsapp" href="https://wa.me/message/JDH7MM6C6VC7J1" target="_blank" rel="noopener nofollow">
-                <img class="logo" src="./immagini-home/logo-whatsapp.png" alt="WhatsApp" />
-                WhatsApp
+                <img class="logo" src="./immagini-home/logo-whatsapp.png" alt="WhatsApp" /> Conferma su WhatsApp
               </a>
             </div>
+            <p style="margin-top:10px;">Confermiamo tutto in chat e poi paghi con il metodo che preferisci.</p>
           </div>
         </div>
 
@@ -1122,30 +1136,24 @@
         <div class="stepsGrid two" style="margin-top:14px;">
           <div class="step">
             <img class="stepImg" src="./immagini-home/step4.png" alt="Step 4" />
-            <div class="stepTitleRow">
-              <div class="stepNumSmall">4</div>
-              <h4>Foto prima di partire</h4>
-            </div>
-            <div class="stepWhatsRow">
+            <h4><span class="stepN">4.</span> Foto prima di partire</h4>
+            <div class="stepCtaRow">
               <a class="btn brand whatsapp" href="https://wa.me/message/JDH7MM6C6VC7J1" target="_blank" rel="noopener nofollow">
-                <img class="logo" src="./immagini-home/logo-whatsapp.png" alt="WhatsApp" />
-                WhatsApp
+                <img class="logo" src="./immagini-home/logo-whatsapp.png" alt="WhatsApp" /> Chiedi l’anteprima
               </a>
             </div>
+            <p style="margin-top:10px;">Ti mandiamo una foto su WhatsApp così vedi cosa stiamo consegnando.</p>
           </div>
 
           <div class="step">
             <img class="stepImg" src="./immagini-home/step5.png" alt="Step 5" />
-            <div class="stepTitleRow">
-              <div class="stepNumSmall">5</div>
-              <h4>Consegna effettuata</h4>
-            </div>
-            <div class="stepWhatsRow">
+            <h4><span class="stepN">5.</span> Consegna effettuata</h4>
+            <div class="stepCtaRow">
               <a class="btn brand whatsapp" href="https://wa.me/message/JDH7MM6C6VC7J1" target="_blank" rel="noopener nofollow">
-                <img class="logo" src="./immagini-home/logo-whatsapp.png" alt="WhatsApp" />
-                WhatsApp
+                <img class="logo" src="./immagini-home/logo-whatsapp.png" alt="WhatsApp" /> Scrivici ora
               </a>
             </div>
+            <p style="margin-top:10px;">Ti avvisiamo appena i fiori sono arrivati a destinazione.</p>
           </div>
         </div>
       </div>
@@ -1162,12 +1170,36 @@
 
         <div class="payGrid">
           <div class="payCard">
-            <h3>📱 Pagamenti digitali</h3>
+            <h3>📱 Metodi Digitali Veloci</h3>
+
+            <div class="payBrandRow">
+              <a class="btn brand paypal" href="https://www.paypal.com/paypalme/NinoFiori" target="_blank" rel="noopener nofollow">
+                <svg class="svgLogo" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M7 19H5.2a1 1 0 0 1-1-1.2l2-12A1 1 0 0 1 7.2 5H14a5 5 0 0 1 0 10H10l-.6 4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                </svg>
+                PayPal
+              </a>
+              <a class="btn brand cards" href="https://mypos.com/@fioriepiantenino" target="_blank" rel="noopener nofollow">
+                <svg class="svgLogo" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M3 7.5A2.5 2.5 0 0 1 5.5 5h13A2.5 2.5 0 0 1 21 7.5v9A2.5 2.5 0 0 1 18.5 19h-13A2.5 2.5 0 0 1 3 16.5v-9Z" stroke="currentColor" stroke-width="2"/>
+                  <path d="M3 9h18" stroke="currentColor" stroke-width="2"/>
+                  <path d="M7 15h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                Carte / Apple Pay / Google Pay
+              </a>
+            </div>
 
             <h4>🅿️ PayPal</h4>
-            <p>Pagamento sicuro con PayPal.</p>
+            <p>PayPal è un metodo sicuro per pagare con carta di debito, credito o prepagata.</p>
             <div class="infoBox">
-              <a class="btn brand paypal" href="https://www.paypal.com/paypalme/NinoFiori" target="_blank" rel="noopener nofollow" style="width:100%; justify-content:center;">
+              <strong>Come funziona?</strong>
+              <ol>
+                <li>Clicca il pulsante qui sotto.</li>
+                <li>Accedi con il tuo account PayPal.</li>
+                <li>Clicca su <b>"INVIA"</b>.</li>
+                <li>Inserisci l'importo concordato e conferma.</li>
+              </ol>
+              <a class="btn brand paypal" href="https://www.paypal.com/paypalme/NinoFiori" target="_blank" style="width:100%; margin-top:10px; justify-content:center;">
                 <svg class="svgLogo" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                   <path d="M7 19H5.2a1 1 0 0 1-1-1.2l2-12A1 1 0 0 1 7.2 5H14a5 5 0 0 1 0 10H10l-.6 4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
                 </svg>
@@ -1176,9 +1208,21 @@
             </div>
 
             <h4>💳 Carta di Credito / Apple Pay / Google Pay</h4>
-            <p>Pagamento tramite link sicuro (MyPos).</p>
+            <p>Pagamento tramite link sicuro (MyPos o Satispay).</p>
             <div class="infoBox">
-              <a class="btn brand cards" href="https://mypos.com/@fioriepiantenino" target="_blank" rel="noopener nofollow" style="width:100%; justify-content:center;">
+              <strong>Come funziona?</strong>
+              <ol>
+                <li>Clicca il pulsante qui sotto.</li>
+                <li>Inserisci l'importo concordato.</li>
+                <li>Segui le istruzioni a schermo.</li>
+              </ol>
+
+              <!-- Placeholder circuiti MyPos -->
+              <div class="payCircuits" aria-label="Circuiti carte accettati">
+                <img src="./immagini-home/circuiti-mypos.png" alt="Circuiti accettati (placeholder)" />
+              </div>
+
+              <a class="btn brand cards" href="https://mypos.com/@fioriepiantenino" target="_blank" style="width:100%; margin-top:10px; justify-content:center;">
                 <svg class="svgLogo" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                   <path d="M3 7.5A2.5 2.5 0 0 1 5.5 5h13A2.5 2.5 0 0 1 21 7.5v9A2.5 2.5 0 0 1 18.5 19h-13A2.5 2.5 0 0 1 3 16.5v-9Z" stroke="currentColor" stroke-width="2"/>
                   <path d="M3 9h18" stroke="currentColor" stroke-width="2"/>
@@ -1186,22 +1230,6 @@
                 </svg>
                 Paga con carta →
               </a>
-
-              <!-- LOGHI circuiti myPOS (metti i file in ./immagini-home/payments/) -->
-              <div class="payLogos" aria-label="Circuiti accettati">
-                <img class="payLogo" src="./immagini-home/payments/visa.png" alt="Visa">
-                <img class="payLogo" src="./immagini-home/payments/mastercard.png" alt="Mastercard">
-                <img class="payLogo" src="./immagini-home/payments/maestro.png" alt="Maestro">
-                <img class="payLogo" src="./immagini-home/payments/amex.png" alt="American Express">
-                <img class="payLogo" src="./immagini-home/payments/applepay.png" alt="Apple Pay">
-                <img class="payLogo" src="./immagini-home/payments/googlepay.png" alt="Google Pay">
-                <img class="payLogo" src="./immagini-home/payments/unionpay.png" alt="UnionPay">
-                <img class="payLogo" src="./immagini-home/payments/jcb.png" alt="JCB">
-              </div>
-
-              <div style="margin-top:10px; color: var(--muted); font-weight: 700; font-size: 13px;">
-                (Se manca qualche logo, basta aggiungere il file nella cartella <b>./immagini-home/payments/</b>)
-              </div>
             </div>
           </div>
 
@@ -1212,35 +1240,36 @@
             <p>Per velocizzare l'ordine, usa il bonifico istantaneo.</p>
             <div class="infoBox">
               <div>
-                Intestato a: <strong id="ibanNameText">AWAD MELAD</strong>
-              </div>
-              <div style="margin-top:8px;">
-                IBAN:
-                <span class="bigNumber" id="ibanText">IT98 Y360 8105 1382 5123 3451 236</span>
+                Intestato a: <strong id="bonificoNome">AWAD MELAD</strong><br>
+                IBAN:<br>
+                <span class="bigNumber" id="bonificoIban">IT98 Y360 8105 1382 5123 3451 236</span>
               </div>
 
               <div class="copyRow">
-                <button class="btn small" type="button" data-copy="#ibanNameText">Copia nome</button>
-                <button class="btn small" type="button" data-copy="#ibanText">Copia IBAN</button>
+                <button class="copyBtn" type="button" data-copy="#bonificoNome">📋 Copia nome</button>
+                <button class="copyBtn" type="button" data-copy="#bonificoIban">📋 Copia IBAN</button>
               </div>
             </div>
 
             <h4>📭 Postepay P2P</h4>
             <p>Hai l'app Postepay? Paga inviando denaro a un contatto.</p>
             <div class="infoBox">
-              <div style="font-weight:900; margin-bottom:10px;">Numero Postepay (cliccabile):</div>
-              <a class="btn postepay" href="tel:+393394324010" style="width:100%; justify-content:center;">
-                <svg class="svgLogo" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path d="M3 7.5A2.5 2.5 0 0 1 5.5 5h13A2.5 2.5 0 0 1 21 7.5v9A2.5 2.5 0 0 1 18.5 19h-13A2.5 2.5 0 0 1 3 16.5v-9Z" stroke="currentColor" stroke-width="2"/>
-                  <path d="M3 9h18" stroke="currentColor" stroke-width="2"/>
-                </svg>
-                +39 339 432 4010
-              </a>
-
-              <ol style="margin-top:12px;">
-                <li>Salva il numero in rubrica.</li>
-                <li>Apri l’App Postepay e clicca su <b>P2P</b>.</li>
-                <li>Seleziona il contatto e invia l’importo.</li>
+              <div class="payBrandRow" style="margin-top:0;">
+                <a class="btn postepay" href="tel:+393394324010" style="text-decoration:none;">
+                  <svg class="svgLogo" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M3 7.5A2.5 2.5 0 0 1 5.5 5h13A2.5 2.5 0 0 1 21 7.5v9A2.5 2.5 0 0 1 18.5 19h-13A2.5 2.5 0 0 1 3 16.5v-9Z" stroke="currentColor" stroke-width="2"/>
+                    <path d="M3 9h18" stroke="currentColor" stroke-width="2"/>
+                  </svg>
+                  Postepay P2P
+                </a>
+              </div>
+              <ol>
+                <li>
+                  Salva questo numero in rubrica: <br>
+                  <a class="bigNumberLink" href="tel:+393394324010">+39 339 432 4010</a>
+                </li>
+                <li>Apri l'App Postepay e clicca su <b>P2P</b>.</li>
+                <li>Seleziona il numero appena salvato e invia l'importo.</li>
               </ol>
             </div>
 
@@ -1271,18 +1300,20 @@
                 <div class="zone">Zona Trieste</div>
               </div>
 
-              <div class="locIcon" aria-hidden="true">
+              <span class="locThumbLink" aria-hidden="true" title="Negozio di fiori">
                 <!-- SVG negozio di fiori -->
                 <svg viewBox="0 0 64 64" fill="none">
-                  <path d="M10 26h44v30a4 4 0 0 1-4 4H14a4 4 0 0 1-4-4V26Z" stroke="rgba(255,46,143,.95)" stroke-width="3" />
-                  <path d="M14 26c0-8 6-14 18-14s18 6 18 14" stroke="rgba(255,46,143,.95)" stroke-width="3" stroke-linecap="round"/>
-                  <path d="M20 44h24" stroke="rgba(26,18,32,.65)" stroke-width="3" stroke-linecap="round"/>
-                  <path d="M32 30v22" stroke="rgba(26,18,32,.35)" stroke-width="3" stroke-linecap="round"/>
-                  <path d="M18 36c6-10 22-10 28 0" stroke="rgba(255,103,178,.85)" stroke-width="3" stroke-linecap="round"/>
-                  <path d="M24 20c0-4 3-7 8-7s8 3 8 7" stroke="rgba(255,103,178,.85)" stroke-width="3" stroke-linecap="round"/>
-                  <path d="M28 18c0-2 2-4 4-4s4 2 4 4" stroke="rgba(255,46,143,.6)" stroke-width="3" stroke-linecap="round"/>
+                  <path d="M10 26h44v28a6 6 0 0 1-6 6H16a6 6 0 0 1-6-6V26Z" stroke="rgba(255,46,143,.9)" stroke-width="2"/>
+                  <path d="M14 26V16a6 6 0 0 1 6-6h24a6 6 0 0 1 6 6v10" stroke="rgba(255,46,143,.9)" stroke-width="2"/>
+                  <path d="M10 26h44" stroke="rgba(255,46,143,.9)" stroke-width="3" stroke-linecap="round"/>
+                  <path d="M18 26c2.5-4 7-4 9.5 0 2.5-4 7-4 9.5 0 2.5-4 7-4 9.5 0" stroke="rgba(255,103,178,.9)" stroke-width="3" stroke-linecap="round"/>
+                  <path d="M24 54V36h16v18" stroke="rgba(255,46,143,.9)" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M32 34c-2.6 0-4.5-2-4.5-4.2 0-2.8 2.4-4.8 4.5-3.2 2.1-1.6 4.5.4 4.5 3.2C36.5 32 34.6 34 32 34Z" fill="rgba(255,46,143,.25)" stroke="rgba(255,46,143,.9)" stroke-width="2"/>
+                  <path d="M32 34v8" stroke="rgba(255,46,143,.9)" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M30 38c-2.6 0-4.6 1.8-4.6 4 2.6 0 4.6-1.8 4.6-4Z" fill="rgba(255,103,178,.25)" stroke="rgba(255,103,178,.9)" stroke-width="2" stroke-linejoin="round"/>
+                  <path d="M34 38c2.6 0 4.6 1.8 4.6 4-2.6 0-4.6-1.8-4.6-4Z" fill="rgba(255,103,178,.25)" stroke="rgba(255,103,178,.9)" stroke-width="2" stroke-linejoin="round"/>
                 </svg>
-              </div>
+              </span>
             </div>
             <a class="btn" href="https://maps.app.goo.gl/3Nrreo1iZU4GfKc77" target="_blank" rel="noopener nofollow">Indicazioni ↗</a>
           </div>
@@ -1293,18 +1324,19 @@
                 <div class="addr">Piazza<br/>Santiago del Cile</div>
                 <div class="zone">Zona Parioli</div>
               </div>
-
-              <div class="locIcon" aria-hidden="true">
+              <span class="locThumbLink" aria-hidden="true" title="Negozio di fiori">
                 <svg viewBox="0 0 64 64" fill="none">
-                  <path d="M10 26h44v30a4 4 0 0 1-4 4H14a4 4 0 0 1-4-4V26Z" stroke="rgba(255,46,143,.95)" stroke-width="3" />
-                  <path d="M14 26c0-8 6-14 18-14s18 6 18 14" stroke="rgba(255,46,143,.95)" stroke-width="3" stroke-linecap="round"/>
-                  <path d="M20 44h24" stroke="rgba(26,18,32,.65)" stroke-width="3" stroke-linecap="round"/>
-                  <path d="M32 30v22" stroke="rgba(26,18,32,.35)" stroke-width="3" stroke-linecap="round"/>
-                  <path d="M18 36c6-10 22-10 28 0" stroke="rgba(255,103,178,.85)" stroke-width="3" stroke-linecap="round"/>
-                  <path d="M24 20c0-4 3-7 8-7s8 3 8 7" stroke="rgba(255,103,178,.85)" stroke-width="3" stroke-linecap="round"/>
-                  <path d="M28 18c0-2 2-4 4-4s4 2 4 4" stroke="rgba(255,46,143,.6)" stroke-width="3" stroke-linecap="round"/>
+                  <path d="M10 26h44v28a6 6 0 0 1-6 6H16a6 6 0 0 1-6-6V26Z" stroke="rgba(255,46,143,.9)" stroke-width="2"/>
+                  <path d="M14 26V16a6 6 0 0 1 6-6h24a6 6 0 0 1 6 6v10" stroke="rgba(255,46,143,.9)" stroke-width="2"/>
+                  <path d="M10 26h44" stroke="rgba(255,46,143,.9)" stroke-width="3" stroke-linecap="round"/>
+                  <path d="M18 26c2.5-4 7-4 9.5 0 2.5-4 7-4 9.5 0 2.5-4 7-4 9.5 0" stroke="rgba(255,103,178,.9)" stroke-width="3" stroke-linecap="round"/>
+                  <path d="M24 54V36h16v18" stroke="rgba(255,46,143,.9)" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M32 34c-2.6 0-4.5-2-4.5-4.2 0-2.8 2.4-4.8 4.5-3.2 2.1-1.6 4.5.4 4.5 3.2C36.5 32 34.6 34 32 34Z" fill="rgba(255,46,143,.25)" stroke="rgba(255,46,143,.9)" stroke-width="2"/>
+                  <path d="M32 34v8" stroke="rgba(255,46,143,.9)" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M30 38c-2.6 0-4.6 1.8-4.6 4 2.6 0 4.6-1.8 4.6-4Z" fill="rgba(255,103,178,.25)" stroke="rgba(255,103,178,.9)" stroke-width="2" stroke-linejoin="round"/>
+                  <path d="M34 38c2.6 0 4.6 1.8 4.6 4-2.6 0-4.6-1.8-4.6-4Z" fill="rgba(255,103,178,.25)" stroke="rgba(255,103,178,.9)" stroke-width="2" stroke-linejoin="round"/>
                 </svg>
-              </div>
+              </span>
             </div>
             <a class="btn" href="https://maps.app.goo.gl/mMeSqHSYEeXbsx6a9" target="_blank" rel="noopener nofollow">Indicazioni ↗</a>
           </div>
@@ -1315,18 +1347,19 @@
                 <div class="addr">Viale Maresciallo<br/>Pilsudski 138</div>
                 <div class="zone">Zona Parioli</div>
               </div>
-
-              <div class="locIcon" aria-hidden="true">
+              <span class="locThumbLink" aria-hidden="true" title="Negozio di fiori">
                 <svg viewBox="0 0 64 64" fill="none">
-                  <path d="M10 26h44v30a4 4 0 0 1-4 4H14a4 4 0 0 1-4-4V26Z" stroke="rgba(255,46,143,.95)" stroke-width="3" />
-                  <path d="M14 26c0-8 6-14 18-14s18 6 18 14" stroke="rgba(255,46,143,.95)" stroke-width="3" stroke-linecap="round"/>
-                  <path d="M20 44h24" stroke="rgba(26,18,32,.65)" stroke-width="3" stroke-linecap="round"/>
-                  <path d="M32 30v22" stroke="rgba(26,18,32,.35)" stroke-width="3" stroke-linecap="round"/>
-                  <path d="M18 36c6-10 22-10 28 0" stroke="rgba(255,103,178,.85)" stroke-width="3" stroke-linecap="round"/>
-                  <path d="M24 20c0-4 3-7 8-7s8 3 8 7" stroke="rgba(255,103,178,.85)" stroke-width="3" stroke-linecap="round"/>
-                  <path d="M28 18c0-2 2-4 4-4s4 2 4 4" stroke="rgba(255,46,143,.6)" stroke-width="3" stroke-linecap="round"/>
+                  <path d="M10 26h44v28a6 6 0 0 1-6 6H16a6 6 0 0 1-6-6V26Z" stroke="rgba(255,46,143,.9)" stroke-width="2"/>
+                  <path d="M14 26V16a6 6 0 0 1 6-6h24a6 6 0 0 1 6 6v10" stroke="rgba(255,46,143,.9)" stroke-width="2"/>
+                  <path d="M10 26h44" stroke="rgba(255,46,143,.9)" stroke-width="3" stroke-linecap="round"/>
+                  <path d="M18 26c2.5-4 7-4 9.5 0 2.5-4 7-4 9.5 0 2.5-4 7-4 9.5 0" stroke="rgba(255,103,178,.9)" stroke-width="3" stroke-linecap="round"/>
+                  <path d="M24 54V36h16v18" stroke="rgba(255,46,143,.9)" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M32 34c-2.6 0-4.5-2-4.5-4.2 0-2.8 2.4-4.8 4.5-3.2 2.1-1.6 4.5.4 4.5 3.2C36.5 32 34.6 34 32 34Z" fill="rgba(255,46,143,.25)" stroke="rgba(255,46,143,.9)" stroke-width="2"/>
+                  <path d="M32 34v8" stroke="rgba(255,46,143,.9)" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M30 38c-2.6 0-4.6 1.8-4.6 4 2.6 0 4.6-1.8 4.6-4Z" fill="rgba(255,103,178,.25)" stroke="rgba(255,103,178,.9)" stroke-width="2" stroke-linejoin="round"/>
+                  <path d="M34 38c2.6 0 4.6 1.8 4.6 4-2.6 0-4.6-1.8-4.6-4Z" fill="rgba(255,103,178,.25)" stroke="rgba(255,103,178,.9)" stroke-width="2" stroke-linejoin="round"/>
                 </svg>
-              </div>
+              </span>
             </div>
             <a class="btn" href="https://maps.app.goo.gl/gL9RTUafrTYkaxkHA" target="_blank" rel="noopener nofollow">Indicazioni ↗</a>
           </div>
@@ -1343,7 +1376,7 @@
           </div>
         </div>
 
-        <div class="galleryGrid">
+        <div class="contactsGrid">
           <div class="card" style="padding:24px;">
             <h3 style="margin:0 0 8px;">📞 Telefono</h3>
             <p style="margin:0; color: var(--muted); font-weight:700;">Per info e ordini rapidi.</p>
@@ -1367,15 +1400,14 @@
             <h3 style="margin:0 0 8px;">🍽️ JustEat / Deliveroo</h3>
             <p style="margin:0; color: var(--muted); font-weight:700;">Se vuoi “ordine e via”, in stile delivery.</p>
             <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
-              <!-- Deliveroo prima -->
-              <button class="btn brand deliveroo" type="button" data-open-delivery="deliveroo">
+              <a class="btn brand deliveroo js-platform" href="#" data-platform="deliveroo">
                 <img class="logo" src="./immagini-home/Logo-deliveroo-.jpg" alt="Logo Deliveroo" />
                 Deliveroo
-              </button>
-              <button class="btn brand justeat" type="button" data-open-delivery="justeat">
+              </a>
+              <a class="btn brand justeat js-platform" href="#" data-platform="justeat">
                 <img class="logo" src="./immagini-home/logo-justeat.png" alt="Logo JustEat" />
                 JustEat
-              </button>
+              </a>
             </div>
           </div>
 
@@ -1408,7 +1440,7 @@
   </main>
 
   <script>
-    // Drawer
+    // Mobile drawer
     const drawer = document.getElementById('drawer');
     const menuBtn = document.getElementById('menuBtn');
 
@@ -1433,108 +1465,105 @@
       if(e.key === 'Escape' && drawer.classList.contains('open')) closeDrawer();
     });
 
-    // Copy to clipboard (nome / iban)
-    function getNodeText(sel){
-      const el = document.querySelector(sel);
-      if(!el) return '';
-      return (el.textContent || '').trim();
-    }
-    async function copyText(text){
-      try{
-        const cleaned = text.replace(/\s+/g,' ').trim();
-        await navigator.clipboard.writeText(cleaned);
-        return true;
-      }catch(err){
-        // fallback
-        const ta = document.createElement('textarea');
-        ta.value = text;
-        document.body.appendChild(ta);
-        ta.select();
-        const ok = document.execCommand('copy');
-        ta.remove();
-        return ok;
-      }
-    }
-    document.addEventListener('click', async (e) => {
-      const btn = e.target.closest('[data-copy]');
-      if(!btn) return;
-      const sel = btn.getAttribute('data-copy');
-      const txt = getNodeText(sel);
-      if(!txt) return;
-      const ok = await copyText(txt);
-      const prev = btn.textContent;
-      btn.textContent = ok ? 'Copiato ✅' : 'Errore';
-      setTimeout(()=>btn.textContent = prev, 1200);
-    });
+    // Platform chooser (JustEat / Deliveroo): scegli sede Parioli o Trieste
+    const platformModal = document.getElementById('platformModal');
+    const platformTitle = document.getElementById('platformTitle');
+    const platformSub = document.getElementById('platformSub');
+    const platformLinks = document.getElementById('platformLinks');
 
-    // Modal scelta sede per Deliveroo/JustEat
-    const deliveryModal = document.getElementById('deliveryModal');
-    const btnParioli = document.getElementById('btnParioli');
-    const btnTrieste = document.getElementById('btnTrieste');
-    const deliveryTitle = document.getElementById('deliveryTitle');
-    const deliverySub = document.getElementById('deliverySub');
-
-    const links = {
+    const PLATFORM_DATA = {
       deliveroo: {
-        brandClass: 'deliveroo',
+        label: 'Deliveroo',
         parioli: 'https://deliveroo.it/it/menu/roma/roma-flaminio/piante-e-fiori-di-nino-piazza-santiago-del-cile',
         trieste: 'https://deliveroo.it/en/menu/Roma/roma-nomentano/piante-e-fiori-di-nino-via-chiana'
       },
       justeat: {
-        brandClass: 'justeat',
+        label: 'JustEat',
         parioli: 'https://www.justeat.it/restaurants-piante-e-fiori-di-nino---piazza-santiago-del-cile',
         trieste: 'https://www.justeat.it/restaurants-piante-e-fiori-di-nino-via-chiana-roma'
       }
     };
 
-    function openDeliveryModal(kind){
-      const cfg = links[kind];
-      if(!cfg) return;
+    function openPlatformModal(platformKey){
+      const data = PLATFORM_DATA[platformKey];
+      if(!data) return;
 
-      // colori bottoni in modal coerenti col brand scelto
-      btnParioli.classList.remove('deliveroo','justeat');
-      btnTrieste.classList.remove('deliveroo','justeat');
-      btnParioli.classList.add(cfg.brandClass);
-      btnTrieste.classList.add(cfg.brandClass);
+      platformTitle.textContent = `Seleziona la sede — ${data.label}`;
+      platformSub.textContent = 'Dove vuoi ordinare?';
 
-      btnParioli.href = cfg.parioli;
-      btnTrieste.href = cfg.trieste;
+      platformLinks.innerHTML = `
+        <a class="btn primary" href="${data.parioli}" target="_blank" rel="noopener nofollow">📍 Sede Parioli</a>
+        <a class="btn soft" href="${data.trieste}" target="_blank" rel="noopener nofollow">📍 Sede Trieste</a>
+      `;
 
-      const name = kind === 'deliveroo' ? 'Deliveroo' : 'JustEat';
-      deliveryTitle.textContent = `Scegli la sede su ${name}`;
-      deliverySub.textContent = 'Parioli o Trieste?';
-
-      deliveryModal.classList.add('open');
-      deliveryModal.setAttribute('aria-hidden', 'false');
-      // chiudi drawer se aperto
-      if(drawer.classList.contains('open')) closeDrawer();
-      document.body.style.overflow = 'hidden';
+      platformModal.classList.add('open');
+      platformModal.setAttribute('aria-hidden', 'false');
     }
 
-    function closeDeliveryModal(){
-      deliveryModal.classList.remove('open');
-      deliveryModal.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
+    function closePlatformModal(){
+      platformModal.classList.remove('open');
+      platformModal.setAttribute('aria-hidden', 'true');
     }
 
-    document.addEventListener('click', (e) => {
+    document.querySelectorAll('.js-platform').forEach((el) => {
+      el.addEventListener('click', (e) => {
+        e.preventDefault();
+        const platformKey = el.getAttribute('data-platform');
+        openPlatformModal(platformKey);
+
+        // se viene dal drawer, chiudo anche il drawer
+        if(drawer?.classList.contains('open')) closeDrawer();
+      });
+    });
+
+    platformModal?.addEventListener('click', (e) => {
       const t = e.target;
-
-      // open modal
-      const trigger = t.closest('[data-open-delivery]');
-      if(trigger){
-        openDeliveryModal(trigger.getAttribute('data-open-delivery'));
-        return;
-      }
-
-      // close modal
-      if(t.matches('[data-modal-close]') || t.closest('[data-modal-close]')){
-        closeDeliveryModal();
+      if(t && (t.matches('[data-pclose]') || t.closest('[data-pclose]'))){
+        closePlatformModal();
       }
     });
 
     window.addEventListener('keydown', (e) => {
-      if(e.key === 'Escape' && deliveryModal.classList.contains('open')) closeDeliveryModal();
+      if(e.key === 'Escape' && platformModal.classList.contains('open')) closePlatformModal();
+    });
+
+    // Copy buttons (bonifico)
+    async function copyText(text){
+      try{
+        await navigator.clipboard.writeText(text);
+        return true;
+      }catch(err){
+        try{
+          const ta = document.createElement('textarea');
+          ta.value = text;
+          ta.style.position = 'fixed';
+          ta.style.left = '-9999px';
+          ta.style.top = '0';
+          document.body.appendChild(ta);
+          ta.focus();
+          ta.select();
+          const ok = document.execCommand('copy');
+          document.body.removeChild(ta);
+          return ok;
+        }catch(e){
+          return false;
+        }
+      }
+    }
+
+    document.querySelectorAll('[data-copy]').forEach((btn) => {
+      btn.addEventListener('click', async () => {
+        const sel = btn.getAttribute('data-copy');
+        const el = sel ? document.querySelector(sel) : null;
+        if(!el) return;
+
+        const text = (el.textContent || '').trim();
+        const ok = await copyText(text);
+
+        const prev = btn.textContent;
+        btn.textContent = ok ? '✅ Copiato!' : '❌ Non copiato';
+        setTimeout(() => { btn.textContent = prev; }, 1200);
+      });
     });
   </script>
 </body>
