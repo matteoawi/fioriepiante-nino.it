@@ -1,1 +1,483 @@
 
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>Galleria Fiori — Fiori e Piante di Nino</title>
+  <meta name="description" content="Scegli i tuoi fiori preferiti e ordinali su WhatsApp." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* --- COLORI UFFICIALI --- */
+    :root {
+      --brand-whatsapp: #25D366;
+      --brand-whatsapp-dark: #1da851;
+      --brand-justeat: #FF8000;
+      --brand-deliveroo: #00CCBC;
+      --brand-main: #e91e63; /* Rosa scuro per il sito */
+      
+      --text-dark: #222222;
+      --text-gray: #666666;
+      --bg-light: #f9f9f9;
+      --white: #ffffff;
+      
+      --radius: 12px;
+      --shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    /* --- BASE --- */
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-dark);
+      padding-bottom: 80px; /* Spazio per il pulsante galleggiante */
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    /* --- LAYOUT --- */
+    .container {
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* --- HEADER (Navigazione) --- */
+    .navbar {
+      background: var(--white);
+      padding: 15px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      border-bottom: 1px solid #eee;
+    }
+    .nav-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .back-btn {
+      font-weight: 600;
+      color: var(--text-gray);
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 8px 12px;
+      background: #f0f0f0;
+      border-radius: 8px;
+    }
+    .site-title {
+      font-weight: 800;
+      font-size: 18px;
+      color: var(--text-dark);
+    }
+    @media(max-width: 500px){
+      .site-title { display: none; } /* Su mobile nascondiamo il titolo per spazio */
+    }
+
+    /* --- HERO SECTION --- */
+    .hero {
+      text-align: center;
+      padding: 40px 0 30px;
+      background: var(--white);
+      margin-bottom: 20px;
+      border-bottom: 1px solid #eee;
+    }
+    h1 {
+      margin: 0 0 10px;
+      font-size: 32px;
+      letter-spacing: -1px;
+    }
+    p.subtitle {
+      font-size: 18px;
+      color: var(--text-gray);
+      line-height: 1.5;
+      max-width: 600px;
+      margin: 0 auto 25px;
+    }
+
+    /* --- PULSANTI DELIVERY (Specifici) --- */
+    .delivery-buttons {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+    .btn-srv {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 20px;
+      border-radius: 50px; /* A pillola */
+      color: white;
+      font-weight: 700;
+      font-size: 16px;
+      transition: transform 0.2s;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    .btn-srv:active { transform: scale(0.96); }
+    .btn-srv img { height: 24px; width: auto; filter: brightness(0) invert(1); } /* Icone bianche */
+
+    .justeat { background-color: var(--brand-justeat); }
+    .deliveroo { background-color: var(--brand-deliveroo); }
+
+    /* --- GRIGLIA FOTO --- */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 15px;
+      padding-bottom: 30px;
+    }
+    @media(min-width: 768px) {
+      .grid { grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    }
+
+    /* La singola mattonella */
+    .card {
+      background: var(--white);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      cursor: pointer;
+      position: relative;
+      aspect-ratio: 1 / 1; /* Quadrata */
+      transition: transform 0.2s;
+    }
+    .card:hover { transform: translateY(-3px); }
+    
+    .card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    
+    /* Etichetta sopra la foto */
+    .card-label {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(255,255,255,0.9);
+      padding: 10px;
+      text-align: center;
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--text-dark);
+    }
+
+    /* --- BOTTONE CARICA ALTRI --- */
+    .load-more-container {
+      text-align: center;
+      margin: 20px 0 50px;
+    }
+    .btn-load {
+      background: white;
+      border: 2px solid var(--text-dark);
+      color: var(--text-dark);
+      padding: 15px 40px;
+      font-size: 18px;
+      font-weight: 700;
+      border-radius: 50px;
+      cursor: pointer;
+      display: inline-block;
+    }
+    .btn-load:hover { background: #f0f0f0; }
+
+    /* --- LIGHTBOX (La finestra che si apre) --- */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      z-index: 2000;
+      display: none; /* Nascosto di base */
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      backdrop-filter: blur(5px);
+    }
+    .lightbox.active { display: flex; }
+
+    .lb-content {
+      background: white;
+      width: 100%;
+      max-width: 500px;
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+      animation: popUp 0.3s ease-out;
+    }
+
+    @keyframes popUp {
+      from { transform: scale(0.9); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .lb-header {
+      padding: 15px;
+      text-align: right;
+      position: absolute;
+      top: 0; right: 0;
+      z-index: 10;
+    }
+    .btn-close {
+      background: rgba(255,255,255,0.9);
+      border: none;
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      font-size: 24px;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      color: #333;
+    }
+
+    .lb-image-container {
+      background: #f0f0f0;
+      width: 100%;
+      /* Altezza massima per non uscire dallo schermo su cell piccoli */
+      max-height: 60vh; 
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .lb-image-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain; /* Mostra tutta la foto senza tagliare */
+      max-height: 60vh;
+    }
+
+    .lb-body {
+      padding: 25px 20px;
+    }
+    .lb-title {
+      font-size: 20px;
+      font-weight: 800;
+      margin-bottom: 10px;
+      color: var(--text-dark);
+    }
+    .lb-text {
+      font-size: 16px;
+      color: var(--text-gray);
+      margin-bottom: 25px;
+    }
+
+    /* Bottone WhatsApp Gigante nel Lightbox */
+    .btn-wa-big {
+      background: var(--brand-whatsapp);
+      color: white;
+      width: 100%;
+      padding: 18px;
+      border-radius: 16px;
+      font-size: 18px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
+    }
+    .btn-wa-big:hover { background: var(--brand-whatsapp-dark); }
+    .btn-wa-big img { width: 28px; height: 28px; filter: brightness(0) invert(1); }
+
+    /* --- FLOATING BUTTON (Fisso in basso a destra) --- */
+    .float-wa {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--brand-whatsapp);
+      color: white;
+      padding: 15px 25px;
+      border-radius: 50px;
+      font-weight: 700;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      z-index: 90;
+      transition: transform 0.2s;
+    }
+    .float-wa:hover { transform: scale(1.05); }
+    .float-wa img { width: 24px; height: 24px; filter: brightness(0) invert(1); }
+
+  </style>
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="container nav-content">
+      <a href="../" class="back-btn">
+        <span>←</span> Indietro
+      </a>
+      <div class="site-title">Fiori e Piante di Nino</div>
+      <div style="width:80px"></div> 
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <h1>Galleria Fiori 💐</h1>
+        <p class="subtitle">
+          Tocca una foto per ingrandirla.<br>
+          Ti piace? Clicca il tasto verde e ordina subito.
+        </p>
+
+        <div class="delivery-buttons">
+          <a href="https://www.justeat.it/restaurants-piante-e-fiori-di-nino---piazza-santiago-del-cile/menu" target="_blank" class="btn-srv justeat">
+            JustEat
+          </a>
+          <a href="https://deliveroo.it/it/menu/roma/roma-flaminio/piante-e-fiori-di-nino-piazza-santiago-del-cile" target="_blank" class="btn-srv deliveroo">
+            Deliveroo
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <div class="container">
+      <div id="gallery-grid" class="grid"></div>
+
+      <div class="load-more-container">
+        <button id="loadMoreBtn" class="btn-load">Mostra altri fiori ↓</button>
+      </div>
+    </div>
+  </main>
+
+  <a href="https://wa.me/393394324010" class="float-wa">
+    <img src="../immagini-home/logo-whatsapp.png" alt="">
+    Scrivici
+  </a>
+
+  <div id="lightbox" class="lightbox">
+    <div class="lb-content">
+      <div class="lb-header">
+        <button class="btn-close" onclick="closeLightbox()">×</button>
+      </div>
+      
+      <div class="lb-image-container">
+        <img id="lb-img" src="" alt="Dettaglio fiore">
+      </div>
+
+      <div class="lb-body">
+        <div class="lb-title" id="lb-filename">Fiori 1</div>
+        <p class="lb-text">Ti piace questa composizione? Premi sotto per chiederla su WhatsApp.</p>
+        
+        <a id="lb-wa-btn" href="#" class="btn-wa-big">
+          <img src="../immagini-home/logo-whatsapp.png" alt="">
+          Ordina questa foto
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // --- CONFIGURAZIONE ---
+    const TOTAL_IMAGES = 62; // Quante foto hai (da fiori-1.jpg a fiori-62.jpg)
+    const BATCH_SIZE = 12;   // Quante foto caricare per volta (Paginazione)
+    const FOLDER_PREFIX = "./"; // Cartella corrente
+    const WHATSAPP_NUM = "393394324010"; // Tuo numero (senza +)
+
+    let currentCount = 0;
+    const grid = document.getElementById('gallery-grid');
+    const loadMoreBtn = document.getElementById('loadMoreBtn');
+    const lightbox = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lb-img');
+    const lbFilename = document.getElementById('lb-filename');
+    const lbWaBtn = document.getElementById('lb-wa-btn');
+
+    // Funzione che genera le "carte" delle foto
+    function loadNextBatch() {
+      const start = currentCount + 1;
+      const end = Math.min(start + BATCH_SIZE - 1, TOTAL_IMAGES);
+
+      if(start > TOTAL_IMAGES) {
+        loadMoreBtn.style.display = 'none';
+        return;
+      }
+
+      for (let i = start; i <= end; i++) {
+        const fileName = `fiori-${i}.jpg`;
+        const col = document.createElement('div');
+        col.className = 'card';
+        
+        // Creiamo la struttura della card
+        col.innerHTML = `
+          <img src="${FOLDER_PREFIX}${fileName}" alt="Fiori ${i}" loading="lazy">
+          <div class="card-label">Tocca per info</div>
+        `;
+        
+        // Al click apriamo la lightbox
+        col.onclick = () => openLightbox(fileName);
+        
+        grid.appendChild(col);
+      }
+
+      currentCount = end;
+
+      // Se abbiamo finito le foto, nascondiamo il bottone "Carica Altri"
+      if (currentCount >= TOTAL_IMAGES) {
+        loadMoreBtn.style.display = 'none';
+      }
+    }
+
+    // Funzione che apre la lightbox
+    function openLightbox(fileName) {
+      // 1. Imposta immagine
+      lbImg.src = FOLDER_PREFIX + fileName;
+      
+      // 2. Imposta Titolo
+      // Rimuoviamo l'estensione .jpg per renderlo più pulito visivamente
+      const niceName = fileName.replace('.jpg', '').replace(/-/g, ' ').toUpperCase(); 
+      lbFilename.innerText = niceName;
+
+      // 3. Prepara il link WhatsApp
+      // Usiamo una codifica semplice. Quando cliccano, si apre WhatsApp col testo già scritto.
+      const text = `Ciao Nino! 👋 Mi piace la foto "${fileName}" che ho visto sul sito. È disponibile?`;
+      const waLink = `https://wa.me/${WHATSAPP_NUM}?text=${encodeURIComponent(text)}`;
+      
+      lbWaBtn.href = waLink;
+
+      // 4. Mostra
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden'; // Blocca lo scroll della pagina sotto
+    }
+
+    // Funzione per chiudere la lightbox
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = ''; // Riattiva lo scroll
+      setTimeout(() => { lbImg.src = ""; }, 300); // Pulisce img per risparmiare memoria
+    }
+
+    // Chiudi cliccando fuori dal box bianco
+    lightbox.addEventListener('click', (e) => {
+      if(e.target === lightbox) closeLightbox();
+    });
+
+    // Avvia il caricamento delle prime foto
+    loadNextBatch();
+
+    // Collega il bottone "Carica Altri"
+    loadMoreBtn.addEventListener('click', loadNextBatch);
+
+  </script>
+</body>
+</html>
