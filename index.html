@@ -412,13 +412,11 @@
       box-shadow: var(--shadow-card);
       border: 1px solid rgba(255,46,143,.16);
       background:
-        radial-gradient(900px 520px at 15% 12%, rgba(255,46,143,.18), transparent 60%),
-        linear-gradient(180deg, rgba(255,255,255,.45), rgba(255,255,255,.88) 80%),
         url("https://fiori-italia.it/cdn/shop/files/BouquetXXXLEsplosioneCromatica_Oltre100Steli.png?v=1764853567&width=3840") center center/cover no-repeat;
     }
     .heroOverlay{
       position:absolute; inset:0;
-      background: linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,.45) 55%);
+      background: linear-gradient(180deg, rgba(0,0,0,.18) 0%, rgba(0,0,0,.42) 70%);
     }
     .heroContent{
       position:relative;
@@ -471,27 +469,64 @@
       line-height: 1.55;
     }
 
-    /* Hero readability: overlay più leggero, testo sempre leggibile */
+    /* Hero readability: overlay scuro leggero + testo bianco */
     .heroMain h1,
     .heroMain .lead{
-      text-shadow: 0 10px 26px rgba(26,18,32,.22);
+      color: #fff;
+      text-shadow: 0 10px 26px rgba(0,0,0,.55);
+    }
+    .heroMain .pill{
+      color:#fff;
+      background: rgba(0,0,0,.22);
+      border: 1px solid rgba(255,255,255,.22);
+    }
+
+    /* Hero: btn soft leggibile su overlay scuro */
+    .heroMain .btn.soft{
+      background: linear-gradient(135deg, var(--pink), var(--pink-2))
+      border: 1px solid rgba(255,255,255,.26);
+      color: #fff;
+      text-shadow: 0 10px 26px rgba(0,0,0,.55);
+    }
+    .heroMain .btn.soft:hover{
+      background: linear-gradient(135deg, var(--pink-2), var(--pink));
     }
     .ctaRow{ display:flex; gap: 12px; flex-wrap:wrap; margin-top: 24px; justify-content: center; }
 
     .miniRow{
       display:flex; flex-wrap:wrap; gap: 10px;
       font-size: 13px;
-      color: var(--muted);
-      font-weight: 700;
+      color: rgba(255,255,255,.92);
+      font-weight: 800;
       margin-top: 12px;
       justify-content: center;
+      text-shadow: 0 10px 26px rgba(0,0,0,.55);
     }
     .miniRow a{
-      padding: 8px 10px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap: 10px;
+      padding: 10px 12px;
       border-radius: 999px;
-      background: rgba(255,255,255,.75);
-      border: 1px solid rgba(255,46,143,.14);
-      box-shadow: var(--shadow-2);
+      background: rgba(0,0,0,.22);
+      border: 1px solid rgba(255,255,255,.26);
+      color: #fff;
+      box-shadow: 0 12px 28px rgba(0,0,0,.18);
+      transition: transform .2s var(--ease), background .2s var(--ease), box-shadow .2s var(--ease);
+      text-shadow: 0 10px 26px rgba(0,0,0,.55);
+    }
+    .miniRow a:hover{
+      background: rgba(0,0,0,.30);
+      transform: translateY(-1px);
+      box-shadow: 0 16px 34px rgba(0,0,0,.22);
+    }
+    .miniRow a svg{
+      width: 18px;
+      height: 18px;
+      display:block;
+      flex: 0 0 auto;
+      filter: drop-shadow(0 10px 18px rgba(0,0,0,.35));
     }
 
     /* Hero: pulsanti mini (Come pagare / Chiama) più grandi */
@@ -518,7 +553,6 @@
     /* video inner card */
     .innerCard{
       margin-top: 14px;
-      padding: 14px;
       border-radius: 22px;
       border: 1px solid rgba(255,46,143,.16);
       background: rgba(255,255,255,.75);
@@ -597,8 +631,7 @@
     .gcard .overlay{
       position:absolute; inset:0;
       background:
-        radial-gradient(900px 320px at 15% 0%, rgba(255,46,143,.18), transparent 60%),
-        linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.55));
+        linear-gradient(180deg, rgba(0,0,0,.12) 0%, rgba(0,0,0,.45) 78%);
     }
     .gcard .content{
       position:absolute; inset:0;
@@ -613,7 +646,8 @@
       line-height: 1.1;
       text-wrap: balance;
       overflow-wrap: anywhere;
-      color: var(--ink);
+      color: #fff;
+      text-shadow: 0 10px 22px rgba(0,0,0,.55);
     }
 
     /* Contacts grid (mobile 1 colonna) */
@@ -1107,8 +1141,8 @@
                 </div>
 
                 <div class="miniRow">
-                  <a class="miniBtn miniBtnPay" href="#pagamenti">💳 Come Pagare</a>
-                  <a class="miniBtn miniBtnCall" href="tel:+393394324010">📞 Chiama Nino (+39 339 432 4010)</a>
+                  <a class="miniBtn miniBtnPay" href="#pagamenti" aria-label="Come pagare"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 9h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M7 15h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>Come pagare</span></a>
+                  <a class="miniBtn miniBtnCall" href="tel:+393394324010" aria-label="Chiama Nino"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6.5 3.5l3 3c.6.6.6 1.6 0 2.2l-1.2 1.2c1.2 2.2 3.1 4.1 5.3 5.3l1.2-1.2c.6-.6 1.6-.6 2.2 0l3 3c.6.6.6 1.6 0 2.2l-1.4 1.4c-.6.6-1.5.9-2.3.8-8.2-1-14.7-7.5-15.7-15.7-.1-.8.2-1.7.8-2.3L4.3 3.5c.6-.6 1.6-.6 2.2 0z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Chiama Nino</span></a>
                 </div>
               </div>
 
