@@ -55,9 +55,11 @@
     }
 
     a{ color:inherit; text-decoration:none; }
+    ul, ol { margin: 0; padding-left: 20px; }
+    li { margin-bottom: 8px; line-height: 1.5; color: var(--ink-2); font-weight: 600; }
     .container{ width:min(var(--max), calc(100% - 40px)); margin-inline:auto; }
 
-    /* Soft blobs (rosa, non casino) */
+    /* Soft blobs (sfondo) */
     .blobs{ position:fixed; inset:0; pointer-events:none; z-index:-1; filter: blur(48px); opacity:.90; }
     .blob{ 
       position:absolute; width: 520px; height: 520px; border-radius: 999px;
@@ -84,7 +86,7 @@
       html{ scroll-behavior:auto; }
     }
 
-    /* Glass card (bianco pulito) */
+    /* Glass card */
     .card{
       background: rgba(255,255,255,.74);
       border: 1px solid var(--stroke);
@@ -212,6 +214,7 @@
       box-shadow: var(--shadow-2);
       transition: transform .2s var(--ease), box-shadow .2s var(--ease), background .2s var(--ease);
       user-select:none;
+      text-align: center;
     }
     .btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.92); }
     .btn.primary{
@@ -244,28 +247,38 @@
       border-radius: var(--radius-xl);
       overflow:hidden;
       position:relative;
-      min-height: 560px;
+      min-height: 580px;
       box-shadow: var(--shadow);
       border: 1px solid rgba(255,46,143,.16);
+      /* Hero image aggiornata */
       background: 
         radial-gradient(900px 520px at 15% 12%, rgba(255,46,143,.18), transparent 60%),
-        radial-gradient(900px 520px at 88% 15%, rgba(255,103,178,.14), transparent 62%),
-        linear-gradient(180deg, rgba(255,255,255,.75), rgba(255,255,255,.92)),
-        url("https://fioriepiante-nino.it/_assets/images/103905e843316bcb63f7c56bb3b134c1.jpg") center/cover no-repeat;
+        linear-gradient(180deg, rgba(255,255,255,.65), rgba(255,255,255,.95) 80%),
+        url("https://fiori-italia.it/cdn/shop/files/BouquetXXXLEsplosioneCromatica_Oltre100Steli.png?v=1764853567&width=3840") center center/cover no-repeat;
     }
     .heroOverlay{
       position:absolute; inset:0;
-      background: 
-        linear-gradient(180deg, rgba(255,255,255,.52), rgba(255,255,255,.90));
+      /* Gradiente per leggibilità */
+      background: linear-gradient(180deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.95) 50%);
     }
     .heroContent{
       position:relative; 
       height:100%;
-      padding: 26px;
+      padding: 32px;
       display:flex; 
       flex-direction:column; 
       justify-content:space-between;
       gap: 18px;
+      text-align: center;
+      align-items: center;
+    }
+    /* Logo Hero Grande */
+    .heroLogoBig {
+      width: 160px;
+      height: auto;
+      margin-bottom: 20px;
+      display: block;
+      filter: drop-shadow(0 10px 20px rgba(255,46,143,0.15));
     }
 
     .pill{
@@ -287,19 +300,19 @@
 
     h1{
       margin: 8px 0 0;
-      font-size: clamp(36px, 4vw, 56px);
+      font-size: clamp(32px, 4vw, 52px);
       letter-spacing: -1px;
-      line-height: 1.03;
+      line-height: 1.05;
     }
     .lead{
-      margin: 10px 0 0;
-      font-size: clamp(15px, 1.5vw, 18px);
+      margin: 14px 0 0;
+      font-size: clamp(16px, 1.5vw, 19px);
       color: var(--ink-2);
-      max-width: 66ch;
+      max-width: 50ch;
       font-weight: 700;
       line-height: 1.55;
     }
-    .ctaRow{ display:flex; gap: 12px; flex-wrap:wrap; margin-top: 16px; }
+    .ctaRow{ display:flex; gap: 12px; flex-wrap:wrap; margin-top: 24px; justify-content: center; }
     
     .miniRow{
       display:flex; flex-wrap:wrap; gap: 10px; 
@@ -307,6 +320,7 @@
       color: var(--muted);
       font-weight: 700;
       margin-top: 12px;
+      justify-content: center;
     }
     .miniRow a{
       padding: 8px 10px;
@@ -318,34 +332,35 @@
 
     /* Side cards */
     .side{ display:flex; flex-direction:column; gap: 16px; }
-    .side .card{ padding: 18px; }
-    .side h3{ margin:0 0 8px; font-size: 18px; letter-spacing:-.2px; }
-    .side p{ margin:0; color: var(--muted); font-weight: 700; line-height: 1.55; }
+    .side .card{ padding: 24px; height: 100%; display: flex; flex-direction: column; justify-content: center; }
+    .side h3{ margin:0 0 12px; font-size: 20px; letter-spacing:-.2px; font-weight: 800; }
+    .side p{ margin:0; color: var(--muted); font-weight: 700; line-height: 1.6; font-size: 16px; }
 
     /* Sections */
     section{ padding: 40px 0; }
     .sectionTitle{
       display:flex; align-items:flex-end; justify-content:space-between; 
-      gap: 16px; margin-bottom: 14px;
+      gap: 16px; margin-bottom: 24px;
     }
     .sectionTitle h2{
       margin:0; 
-      font-size: clamp(22px, 2.2vw, 30px);
+      font-size: clamp(26px, 2.5vw, 34px);
       letter-spacing: -.6px;
     }
     .sectionTitle p{
-      margin:0;
+      margin: 6px 0 0;
       color: var(--muted);
       max-width: 70ch;
       line-height:1.5;
       font-weight: 700;
+      font-size: 17px;
     }
 
     /* Gallery cards */
     .galleryGrid{
       display:grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
+      gap: 16px;
     }
     @media (max-width: 900px){ .galleryGrid{ grid-template-columns: 1fr; } }
 
@@ -355,10 +370,12 @@
       overflow:hidden;
       border: 1px solid rgba(255,46,143,.16);
       box-shadow: var(--shadow);
-      min-height: 230px;
+      min-height: 260px;
       background: #fff;
+      display: block;
     }
-    .gcard .bg{ position:absolute; inset:0; background-size: cover; background-position:center; transform: scale(1.04); }
+    .gcard .bg{ position:absolute; inset:0; background-size: cover; background-position:center; transform: scale(1.04); transition: transform 0.4s var(--ease); }
+    .gcard:hover .bg { transform: scale(1.1); }
     .gcard .overlay{
       position:absolute; inset:0;
       background: 
@@ -367,7 +384,7 @@
     }
     .gcard .content{
       position:absolute; inset:0;
-      padding: 18px;
+      padding: 24px;
       display:flex; flex-direction:column; justify-content:space-between;
       gap: 12px;
     }
@@ -382,7 +399,7 @@
       color: var(--ink);
     }
     .gtitle{
-      font-size: 22px; 
+      font-size: 24px; 
       font-weight: 900;
       letter-spacing: -.5px;
       color: var(--ink);
@@ -392,7 +409,7 @@
     .stepsGrid{
       display:grid; 
       grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
+      gap: 16px;
     }
     @media (max-width: 980px){ .stepsGrid{ grid-template-columns: 1fr; } }
 
@@ -400,7 +417,7 @@
     @media (max-width: 980px){ .stepsGrid.two{ grid-template-columns: 1fr; } }
 
     .step{
-      padding: 16px;
+      padding: 20px;
       border-radius: var(--radius-xl);
       border: 1px solid rgba(255,46,143,.16);
       box-shadow: var(--shadow);
@@ -420,18 +437,21 @@
       box-shadow: 0 14px 30px rgba(255,46,143,.18);
     }
     .stepLabel{ color: var(--muted); font-weight: 800; }
+    
+    /* Modifica immagini step: Grandezza intera adattata */
     .stepImg{
-      width:100%; 
-      height: 130px; 
-      margin-top: 12px;
+      width: 100%; 
+      height: auto; 
+      aspect-ratio: 16/9;
+      margin-top: 16px;
       border-radius: 18px;
       object-fit: cover;
       border: 1px solid rgba(255,46,143,.14);
       background: #fff;
     }
     .step h4{
-      margin: 12px 0 6px;
-      font-size: 16px;
+      margin: 16px 0 8px;
+      font-size: 18px;
       letter-spacing: -.2px;
       color: var(--ink);
       font-weight: 900;
@@ -446,7 +466,7 @@
     /* “Cosa succede dopo?” divider */
     .afterBox{
       margin-top: 16px;
-      padding: 16px;
+      padding: 20px;
       border-radius: var(--radius-xl);
       border: 1px solid rgba(255,46,143,.18);
       background: rgba(255,46,143,.08);
@@ -466,45 +486,45 @@
       font-weight: 700;
     }
 
-    /* Payments */
+    /* Payments - Boomer Proof Styling */
     .payGrid{
       display:grid; 
       grid-template-columns: 1fr 1fr;
-      gap: 14px;
+      gap: 16px;
     }
     @media (max-width: 980px){ .payGrid{ grid-template-columns: 1fr; } }
+    
     .payCard{
-      padding: 18px;
+      padding: 24px;
       border-radius: var(--radius-xl);
       border: 1px solid rgba(255,46,143,.16);
-      background: rgba(255,255,255,.78);
+      background: rgba(255,255,255,.85);
       box-shadow: var(--shadow);
     }
-    .payCard h3{ margin:0 0 10px; font-size: 18px; font-weight: 900; }
-    .payCard p{ margin:0 0 14px; color: var(--muted); font-weight: 700; line-height: 1.55; }
-    .payRow{ display:flex; gap:10px; flex-wrap:wrap; }
-    .kvs{
-      margin-top: 12px;
-      padding: 14px;
-      border-radius: 18px;
-      background: rgba(255,255,255,.86);
-      border: 1px solid rgba(255,46,143,.14);
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      font-size: 13px;
-      color: var(--ink);
-      overflow:auto;
-      line-height: 1.5;
+    .payCard h3{ margin:0 0 16px; font-size: 20px; font-weight: 900; color: var(--pink); }
+    .payCard h4{ margin: 24px 0 8px; font-size: 17px; font-weight: 800; color: var(--ink); display: flex; align-items: center; gap: 8px;}
+    .payCard p{ margin:0 0 14px; color: var(--muted); font-weight: 600; line-height: 1.6; }
+    
+    /* NO MONOSPACE: Stile box informazioni chiaro */
+    .infoBox {
+      background: #fff;
+      border: 1px solid rgba(255,46,143,.15);
+      padding: 16px;
+      border-radius: 16px;
+      margin-top: 10px;
     }
+    .infoBox strong { color: var(--ink); font-weight: 800; font-size: 1.1em; }
+    .bigNumber { font-size: 18px; color: var(--pink); font-weight: 900; display: block; margin: 4px 0;}
 
     /* Locations */
     .locGrid{
       display:grid; 
       grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
+      gap: 16px;
     }
     @media (max-width: 980px){ .locGrid{ grid-template-columns: 1fr; } }
     .loc{
-      padding: 18px;
+      padding: 22px;
       border-radius: var(--radius-xl);
       border: 1px solid rgba(255,46,143,.16);
       background: rgba(255,255,255,.78);
@@ -514,8 +534,8 @@
       gap: 10px;
     }
     .loc .top{ display:flex; align-items:flex-start; justify-content:space-between; gap:10px; }
-    .loc .addr{ font-weight: 900; color: var(--ink); line-height: 1.15; }
-    .loc .zone{ color: var(--muted); font-weight: 800; }
+    .loc .addr{ font-weight: 900; color: var(--ink); line-height: 1.25; font-size: 17px; }
+    .loc .zone{ color: var(--muted); font-weight: 800; margin-top: 4px; }
 
     footer{
       padding: 24px 0 42px;
@@ -596,16 +616,18 @@
           <div class="heroMain">
             <div class="heroOverlay" aria-hidden="true"></div>
             <div class="heroContent">
+              <div class="pill">
+                <span class="dot"></span>
+                <span><b>Consegne su Roma</b></span>
+              </div>
+
               <div>
-                <div class="pill">
-                  <span class="dot"></span>
-                  <span><b>Consegne a Roma</b> · Trieste / Parioli</span>
-                </div>
+                <img class="heroLogoBig" src="./immagini-home/fiori%20e%20piante%20di%20nino%20logo%20nero.png" alt="Logo Grande Nino" />
 
                 <h1>Fiori & Piante<br/>con stile rosa 🌸</h1>
                 <p class="lead">
-                  Bouquet, composizioni, piante, funebri e addobbi.
-                  Ordini in modo semplice: WhatsApp / JustEat / Deliveroo oppure acquisti diretto sul nuovo e-commerce.
+                  Dalla storica sede ai Parioli, portiamo colore in tutta Roma.
+                  Ordina composizioni uniche per ogni occasione.
                 </p>
 
                 <div class="ctaRow">
@@ -614,61 +636,34 @@
                     Ordina su WhatsApp
                   </a>
 
-                  <a class="btn" href="https://www.justeat.it/restaurants-piante-e-fiori-di-nino---piazza-santiago-del-cile/menu" 
-                     target="_blank" rel="noopener nofollow">
-                    <img class="logo" src="./immagini-home/logo-justeat.png" alt="Logo JustEat" />
-                    JustEat
-                  </a>
-
-                  <a class="btn" href="https://deliveroo.it/it/menu/roma/roma-flaminio/piante-e-fiori-di-nino-piazza-santiago-del-cile" 
-                     target="_blank" rel="noopener nofollow">
-                    <img class="logo" src="./immagini-home/Logo-deliveroo-.jpg" alt="Logo Deliveroo" />
-                    Deliveroo
-                  </a>
-
                   <a class="btn soft" href="https://fiori-italia.it/" target="_blank" rel="noopener nofollow">
                     🛒 Vai all’e-commerce
                   </a>
                 </div>
 
                 <div class="miniRow">
-                  <a href="#galleria">🖼️ Galleria</a>
-                  <a href="#come-ordinare">🧾 Come funziona</a>
-                  <a href="#pagamenti">💳 Pagamento</a>
+                  <a href="#pagamenti">💳 Come Pagare</a>
                   <a href="tel:+393394324010">📞 +39 339 432 4010</a>
                 </div>
               </div>
 
               <div class="miniRow">
-                <span>✨ Tip: vuoi un biglietto? Scrivi il testo e lo mettiamo noi.</span>
+                <span>✨ Bigliettino incluso su richiesta! Scrivi il testo e lo mettiamo noi.</span>
               </div>
             </div>
           </div>
 
           <aside class="side">
             <div class="card">
-              <div style="padding:18px;">
-                <h3 style="margin:0 0 8px;">🛒 Nuovo sito e-commerce</h3>
+              <div>
+                <h3 style="margin:0 0 12px;">🛒 Nuovo sito e-commerce</h3>
                 <p>
-                  Ora puoi <b>sfogliare il catalogo</b> e <b>acquistare direttamente online</b>:
+                  Vuoi vedere il catalogo completo con prezzi e foto?<br><br>
+                  Puoi <b>acquistare direttamente online</b>:
                   scegli il prodotto, inserisci indirizzo e note, paga in sicurezza e noi pensiamo alla consegna 💗
                 </p>
-                <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
-                  <a class="btn primary" href="https://fiori-italia.it/" target="_blank" rel="noopener nofollow">Vai su fiori-italia.it ↗</a>
-                  <a class="btn" href="#pagamenti">Vedi pagamento →</a>
-                </div>
-              </div>
-            </div>
-
-            <div class="card">
-              <div style="padding:18px;">
-                <h3 style="margin:0 0 8px;">Accessi rapidi</h3>
-                <p>Se hai già le pagine categoria (es. /fiori) puoi linkarle qui.</p>
-                <div style="margin-top:14px; display:grid; gap:10px;">
-                  <a class="btn" href="./fiori/">💐 /fiori</a>
-                  <a class="btn" href="./piante/">🪴 /piante</a>
-                  <a class="btn" href="./funebri/">🕊️ /funebri</a>
-                  <a class="btn" href="./installazioni/">✨ /installazioni</a>
+                <div style="margin-top:20px; display:flex; flex-direction: column; gap:10px;">
+                  <a class="btn primary" href="https://fiori-italia.it/" target="_blank" rel="noopener nofollow" style="justify-content: center;">Vai su fiori-italia.it ↗</a>
                 </div>
               </div>
             </div>
@@ -681,8 +676,8 @@
       <div class="container">
         <div class="sectionTitle">
           <div>
-            <h2>Galleria</h2>
-            <p>Le 4 macro-categorie principali.</p>
+            <h2>Cosa realizziamo</h2>
+            <p>Scegli la categoria che fa per te.</p>
           </div>
         </div>
 
@@ -701,7 +696,7 @@
             <div class="overlay"></div>
             <div class="content">
               <div class="gtag">💐 Apri /fiori</div>
-              <div class="gtitle">Fiori</div>
+              <div class="gtitle">Fiori freschi</div>
             </div>
           </a>
 
@@ -710,7 +705,7 @@
             <div class="overlay"></div>
             <div class="content">
               <div class="gtag">🕊️ Apri /funebri</div>
-              <div class="gtitle">Funebri</div>
+              <div class="gtitle">Composizioni funebri</div>
             </div>
           </a>
 
@@ -719,7 +714,7 @@
             <div class="overlay"></div>
             <div class="content">
               <div class="gtag">✨ Apri /installazioni</div>
-              <div class="gtitle">Installazioni e addobbi</div>
+              <div class="gtitle">Eventi e Allestimenti</div>
             </div>
           </a>
         </div>
@@ -731,14 +726,7 @@
         <div class="sectionTitle">
           <div>
             <h2>Come funziona</h2>
-            <p>I primi 3 step per ordinare in modo rapido.</p>
-          </div>
-          <div style="display:flex; gap:10px; flex-wrap:wrap;">
-            <a class="btn primary" href="https://wa.me/message/JDH7MM6C6VC7J1" target="_blank" rel="noopener nofollow">
-              <img class="logo" src="./immagini-home/logo-whatsapp.png" alt="Logo WhatsApp" />
-              WhatsApp ↗
-            </a>
-            <a class="btn" href="https://fiori-italia.it/" target="_blank" rel="noopener nofollow">🛒 E-commerce ↗</a>
+            <p>Semplice e veloce.</p>
           </div>
         </div>
 
@@ -749,8 +737,8 @@
               <div class="stepLabel">Contatto</div>
             </div>
             <img class="stepImg" src="./immagini-home/step1.png" alt="Step 1" />
-            <h4>Scrivici o scegli una piattaforma</h4>
-            <p>WhatsApp / JustEat / Deliveroo oppure il nuovo e-commerce.</p>
+            <h4>Dove ordinare?</h4>
+            <p>Usa WhatsApp, JustEat, Deliveroo o il nostro sito.</p>
           </div>
 
           <div class="step">
@@ -759,8 +747,8 @@
               <div class="stepLabel">Dettagli</div>
             </div>
             <img class="stepImg" src="./immagini-home/step2.png" alt="Step 2" />
-            <h4>Dicci cosa vuoi</h4>
-            <p>Occasione, colori, budget, indirizzo e fascia oraria.</p>
+            <h4>Cosa ti serve?</h4>
+            <p>Dicci occasione, budget e indirizzo di consegna a Roma.</p>
           </div>
 
           <div class="step">
@@ -769,28 +757,27 @@
               <div class="stepLabel">Conferma</div>
             </div>
             <img class="stepImg" src="./immagini-home/step3.png" alt="Step 3" />
-            <h4>Conferma ordine e pagamento</h4>
-            <p>Confermiamo tutto e partiamo con la preparazione (biglietto incluso se vuoi).</p>
+            <h4>Pagamento facile</h4>
+            <p>Confermi l'ordine e paghi con un click (PayPal, Carta o Bonifico).</p>
           </div>
         </div>
 
         <div class="afterBox" aria-label="Cosa succede dopo">
           <div>
-            <b>Cosa succede dopo?</b>
-            <span>Quando l’ordine è confermato, ecco cosa facciamo noi.</span>
+            <b>E poi? Ci pensiamo noi!</b>
+            <span>Prepariamo i fiori freschi e partiamo per la consegna.</span>
           </div>
-          <a class="btn" href="#pagamenti">Hai dubbi sul pagamento? →</a>
         </div>
 
         <div class="stepsGrid two" style="margin-top:14px;">
           <div class="step">
             <div class="stepTop">
               <div class="num">4</div>
-              <div class="stepLabel">Preview</div>
+              <div class="stepLabel">Anteprima</div>
             </div>
             <img class="stepImg" src="./immagini-home/step4.png" alt="Step 4" />
-            <h4>Foto della composizione finale</h4>
-            <p>Prima della consegna ti mandiamo una foto: così sai esattamente cosa arriva.</p>
+            <h4>Foto prima di partire</h4>
+            <p>Ti mandiamo una foto su WhatsApp così vedi cosa stiamo consegnando.</p>
           </div>
 
           <div class="step">
@@ -799,8 +786,8 @@
               <div class="stepLabel">Consegna</div>
             </div>
             <img class="stepImg" src="./immagini-home/step5.png" alt="Step 5" />
-            <h4>Consegna + aggiornamento</h4>
-            <p>Consegniamo e ti aggiorniamo sullo stato. Effetto wow: completato ✅</p>
+            <h4>Consegna effettuata</h4>
+            <p>Ti avvisiamo appena i fiori sono arrivati a destinazione.</p>
           </div>
         </div>
       </div>
@@ -810,38 +797,67 @@
       <div class="container">
         <div class="sectionTitle">
           <div>
-            <h2>Pagamento</h2>
-            <p>Metodi chiari e veloci. Se serve, ti guidiamo in 10 secondi.</p>
+            <h2>Metodi di Pagamento</h2>
+            <p>Scegli quello più comodo per te. È tutto molto semplice.</p>
           </div>
         </div>
 
         <div class="payGrid">
           <div class="payCard">
-            <h3>Pagamento rapido</h3>
-            <p>Scegli il metodo più comodo e usa l’importo concordato in fase di ordine.</p>
-            <div class="payRow">
-              <a class="btn primary" href="https://www.paypal.com/paypalme/NinoFiori" target="_blank" rel="noopener nofollow">🅿️ PayPal ↗</a>
-              <a class="btn" href="https://mypos.com/@fioriepiantenino" target="_blank" rel="noopener nofollow">💳 Carta / Apple Pay / Google Pay / Satispay ↗</a>
-              <a class="btn" href="tel:+393394324010">📞 Se hai dubbi, chiama</a>
+            <h3>📱 Metodi Digitali Veloci</h3>
+            
+            <h4>🅿️ PayPal</h4>
+            <p>PayPal è un metodo sicuro per pagare con carta di debito, credito o prepagata.</p>
+            <div class="infoBox">
+              <strong>Come funziona?</strong>
+              <ol>
+                <li>Clicca il pulsante qui sotto.</li>
+                <li>Accedi con il tuo account PayPal.</li>
+                <li>Clicca su <b>"INVIA"</b>.</li>
+                <li>Inserisci l'importo concordato e conferma.</li>
+              </ol>
+              <a class="btn primary" href="https://www.paypal.com/paypalme/NinoFiori" target="_blank" style="width:100%; margin-top:10px;">VAI AL PULSANTE PAYPAL →</a>
             </div>
-            <div class="kvs">
-              <b>PayPal:</b> apri l’app → “INVIA” → inserisci importo concordato.<br/>
-              <b>Carta:</b> apri link → seleziona importo concordato → completa.
+
+            <h4>💳 Carta di Credito / Apple Pay / Google Pay</h4>
+            <p>Pagamento tramite link sicuro (MyPos o Satispay).</p>
+            <div class="infoBox">
+              <strong>Come funziona?</strong>
+              <ol>
+                <li>Clicca il pulsante qui sotto.</li>
+                <li>Inserisci l'importo concordato.</li>
+                <li>Segui le istruzioni a schermo.</li>
+              </ol>
+              <a class="btn" href="https://mypos.com/@fioriepiantenino" target="_blank" style="width:100%; margin-top:10px;">PAGA CON CARTA ORA →</a>
             </div>
           </div>
 
           <div class="payCard">
-            <h3>Bonifico / Postepay / Contanti</h3>
-            <p>Altri metodi disponibili, comodi se preferisci non usare link esterni.</p>
-            <div class="kvs">
-              <b>Bonifico ISTANTANEO</b><br/>
-              IBAN: <b>IT98Y3608105138251233451236</b><br/>
-              Destinatario: <b>AWAD MELAD</b><br/><br/>
-              <b>Postepay → Postepay</b><br/>
-              Salva il numero: <b>+39 3394324010</b> e dall’app usa P2P selezionando il numero come destinatario.<br/><br/>
-              <b>Contanti / POS</b><br/>
-              In contanti presso una delle sedi · Carte + NFC (smartphone) accettati.
+            <h3>🏦 Bonifico, Postepay e Contanti</h3>
+
+            <h4>🏛️ Bonifico Online ISTANTANEO</h4>
+            <p>Per velocizzare l'ordine, usa il bonifico istantaneo.</p>
+            <div class="infoBox">
+              Intestato a: <strong>AWAD MELAD</strong><br>
+              IBAN:<br>
+              <span class="bigNumber">IT98 Y360 8105 1382 5123 3451 236</span>
             </div>
+
+            <h4>📭 Postepay P2P</h4>
+            <p>Hai l'app Postepay? Paga inviando denaro a un contatto.</p>
+            <div class="infoBox">
+              <ol>
+                <li>Salva questo numero in rubrica: <br><span class="bigNumber">+39 339 432 4010</span></li>
+                <li>Apri l'App Postepay e clicca su <b>P2P</b>.</li>
+                <li>Seleziona il numero appena salvato e invia l'importo.</li>
+              </ol>
+            </div>
+
+            <h4>💶 Contanti o Negozio</h4>
+            <p>
+              Accettiamo <b>contanti</b> presso le nostre sedi.<br>
+              In negozio puoi pagare anche con <b>Bancomat, Carta di Credito</b> e smartphone (NFC).
+            </p>
           </div>
         </div>
       </div>
@@ -903,7 +919,7 @@
         </div>
 
         <div class="galleryGrid">
-          <div class="card" style="padding:18px;">
+          <div class="card" style="padding:24px;">
             <h3 style="margin:0 0 8px;">📞 Telefono</h3>
             <p style="margin:0; color: var(--muted); font-weight:700;">Per info e ordini rapidi.</p>
             <div style="margin-top:14px;">
@@ -911,19 +927,18 @@
             </div>
           </div>
 
-          <div class="card" style="padding:18px;">
+          <div class="card" style="padding:24px;">
             <h3 style="margin:0 0 8px;">💬 WhatsApp</h3>
-            <p style="margin:0; color: var(--muted); font-weight:700;">Il modo più comodo per personalizzare tutto.</p>
+            <p style="margin:0; color: var(--muted); font-weight:700;">Il modo più comodo per mandare foto e dettagli.</p>
             <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
               <a class="btn primary" href="https://wa.me/message/JDH7MM6C6VC7J1" target="_blank" rel="noopener nofollow">
                 <img class="logo" src="./immagini-home/logo-whatsapp.png" alt="Logo WhatsApp" />
-                Ordina su WhatsApp
+                Scrivici su WhatsApp
               </a>
-              <a class="btn soft" href="https://fiori-italia.it/" target="_blank" rel="noopener nofollow">🛒 Compra online</a>
             </div>
           </div>
 
-          <div class="card" style="padding:18px;">
+          <div class="card" style="padding:24px;">
             <h3 style="margin:0 0 8px;">🍽️ JustEat / Deliveroo</h3>
             <p style="margin:0; color: var(--muted); font-weight:700;">Se vuoi “ordine e via”, in stile delivery.</p>
             <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
@@ -938,7 +953,7 @@
             </div>
           </div>
 
-          <div class="card" style="padding:18px;">
+          <div class="card" style="padding:24px;">
             <h3 style="margin:0 0 8px;">🛒 E-commerce</h3>
             <p style="margin:0; color: var(--muted); font-weight:700;">
               Sfoglia, scegli e acquista online. Noi gestiamo preparazione e consegna.
