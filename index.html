@@ -12,19 +12,14 @@
 
   <style>
     :root{
-      /* Palette */
+      /* Palette: Rosa + Bianco */
       --pink: #ff2e8f;
       --pink-2: #ff67b2;
+      --pink-3: #ffd1e6;
+
       --bg: #fff7fb;
       --white: #ffffff;
-      
-      /* Brand Colors */
-      --brand-whatsapp: #25D366;
-      --brand-justeat: #F36D00;
-      --brand-deliveroo: #00CCBC;
-      --brand-paypal: #003087;
-      --brand-postepay: #FFD100; /* Testo scuro su questo */
-      
+
       /* Testi */
       --ink: #1a1220;
       --ink-2: #3b2a43;
@@ -32,239 +27,789 @@
 
       /* UI */
       --stroke: rgba(255, 46, 143, 0.18);
+      --stroke-2: rgba(255, 46, 143, 0.28);
       --shadow: 0 18px 60px rgba(26,18,32,.12);
       --shadow-2: 0 10px 30px rgba(26,18,32,.10);
+
       --radius-xl: 28px;
+      --radius-lg: 22px;
+      --radius-md: 16px;
+
+      --max: 1180px;
       --ease: cubic-bezier(.2,.9,.2,1);
+
+      /* Brand colors */
+      --whatsapp: #25D366;
+      --deliveroo: #00CCBC;
+      --justeat: #FF8000;
+      --paypal: #003087;
+      --postepay: #FFCC00;   /* base */
+      --postepay-ink: #0B3A75; /* testo */
+      --cards: #111827;
     }
 
     *{ box-sizing:border-box; }
-    
-    /* FIX MOBILE X-AXIS SCROLL */
-    html, body { 
-        height: 100%; 
-        width: 100%; 
-        overflow-x: hidden; 
-        margin: 0; 
-        padding: 0;
-    }
-    
+    html, body{ height:100%; width:100%; }
     html{ scroll-behavior:smooth; }
     body{
-      font-family: "Plus Jakarta Sans", sans-serif;
+      margin:0;
+      font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
       color: var(--ink);
-      background: 
+      background:
         radial-gradient(1200px 680px at 15% 10%, rgba(255,46,143,.18), transparent 60%),
         radial-gradient(900px 520px at 85% 12%, rgba(255,103,178,.16), transparent 62%),
         radial-gradient(900px 620px at 55% 90%, rgba(255,209,230,.55), transparent 62%),
         linear-gradient(180deg, #fff2f8, var(--bg));
+      overflow-x: hidden; /* FIX movimento asse X */
     }
+
+    /* extra safety anti-x-scroll */
+    .container, section, header, main, footer { max-width: 100%; overflow-x: clip; }
+    img, video, iframe { max-width: 100%; }
 
     a{ color:inherit; text-decoration:none; }
     ul, ol { margin: 0; padding-left: 20px; }
     li { margin-bottom: 8px; line-height: 1.5; color: var(--ink-2); font-weight: 600; }
-    .container{ width:min(1180px, calc(100% - 40px)); margin-inline:auto; }
+    .container{ width:min(var(--max), calc(100% - 40px)); margin-inline:auto; }
 
-    /* Blobs */
-    .blobs{ position:fixed; inset:0; pointer-events:none; z-index:-1; filter: blur(48px); opacity:.90; }
-    .blob{ 
+    /* Soft blobs (sfondo) */
+    .blobs{
+      position:fixed; inset:0;
+      pointer-events:none; z-index:-1;
+      filter: blur(48px); opacity:.90;
+      overflow: hidden; /* evita che “sporga” su X */
+    }
+    .blob{
       position:absolute; width: 520px; height: 520px; border-radius: 999px;
-      background: radial-gradient(circle at 30% 30%, rgba(255,46,143,.40), transparent 70%);
+      background: radial-gradient(circle at 30% 30%, rgba(255,46,143,.40), rgba(255,103,178,.18) 55%, transparent 70%);
+      animation: float 16s var(--ease) infinite;
+    }
+    .blob.b2{
+      width: 620px; height: 620px; right:-240px; top:80px;
+      background: radial-gradient(circle at 30% 30%, rgba(255,103,178,.35), rgba(255,209,230,.55) 55%, transparent 70%);
+      animation-duration: 18s; animation-delay: -5s;
+    }
+    .blob.b3{
+      width: 700px; height: 700px; left:-260px; bottom:-320px;
+      background: radial-gradient(circle at 30% 30%, rgba(255,209,230,.70), rgba(255,46,143,.15) 55%, transparent 70%);
+      animation-duration: 20s; animation-delay: -9s;
+    }
+    @keyframes float{
+      0%{ transform: translate(-30px, -20px) scale(1); }
+      50%{ transform: translate(30px, 20px) scale(1.06); }
+      100%{ transform: translate(-30px, -20px) scale(1); }
+    }
+    @media (prefers-reduced-motion: reduce){
+      .blob{ animation:none !important; }
+      html{ scroll-behavior:auto; }
+    }
+
+    /* Glass card */
+    .card{
+      background: rgba(255,255,255,.74);
+      border: 1px solid var(--stroke);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
 
     /* Nav */
     .nav{
-      position: sticky; top: 0; z-index: 100; padding: 12px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 12px 0;
       background: rgba(255,255,255,.72);
       border-bottom: 1px solid rgba(255,46,143,.14);
-      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
     }
-    .nav .row{ display:flex; align-items:center; justify-content:space-between; gap:14px; }
-    
-    .brand{ display:flex; align-items:center; gap:12px; font-weight: 800; letter-spacing: -.2px; }
+    .nav .row{
+      display:flex; align-items:center; justify-content:space-between; gap:14px;
+      min-width: 0; /* FIX overflow */
+    }
+
+    .brand{
+      display:flex; align-items:center; gap:12px;
+      font-weight: 800;
+      letter-spacing: -.2px;
+      min-width: 0; /* FIX overflow */
+      flex: 1 1 auto;
+    }
     .brandLogo{
-      width: 46px; height: 46px; border-radius: 16px; 
+      width: 46px; height: 46px;
+      border-radius: 16px;
       display:grid; place-items:center;
-      background: #fff; border: 1px solid rgba(255,46,143,.14);
+      background: linear-gradient(135deg, rgba(255,46,143,.14), rgba(255,209,230,.70));
+      border: 1px solid rgba(255,46,143,.14);
+      box-shadow: var(--shadow-2);
       overflow:hidden;
+      flex: 0 0 auto;
     }
-    .brandLogo img{ width: 36px; height: 36px; object-fit: contain; }
+    .brandLogo img{
+      width: 36px; height: 36px; object-fit: contain; display:block;
+    }
+    .brandText{
+      display:flex;
+      flex-direction: column;
+      justify-content:center; /* logo + testo più “centrati” */
+      min-width: 0;
+    }
+    .brandText .titleLine{
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .brand small{
+      display:block;
+      font-weight: 600;
+      color: var(--muted);
+      margin-top: 2px;
+      letter-spacing: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
 
     .navlinks{
-      display:flex; align-items:center; gap: 8px; padding: 6px;
-      border-radius: 999px; border: 1px solid rgba(255,46,143,.16);
+      display:flex; align-items:center; gap: 8px;
+      padding: 6px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,46,143,.16);
       background: rgba(255,255,255,.60);
+      flex: 0 0 auto;
     }
     .navlinks a{
-      padding: 10px 12px; border-radius: 999px; font-weight: 700; color: var(--ink-2);
-      transition: background .2s;
+      padding: 10px 12px;
+      border-radius: 999px;
+      font-weight: 700;
+      color: var(--ink-2);
+      transition: background .2s var(--ease), transform .2s var(--ease);
+      white-space: nowrap;
     }
-    .navlinks a:hover{ background: rgba(255,46,143,.10); }
+    .navlinks a:hover{
+      background: rgba(255,46,143,.10);
+      transform: translateY(-1px);
+    }
 
-    /* Drawer & Mobile Menu */
-    .hamburger{ display:none; background:white; border:1px solid var(--stroke); padding:10px; border-radius:12px; cursor:pointer;}
-    @media (max-width: 980px){ .navlinks{ display:none; } .hamburger{ display:block; } }
-    
+    .navactions{ display:flex; align-items:center; gap:10px; flex: 0 0 auto; }
+    .iconbtn{
+      width: 44px; height: 44px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,46,143,.16);
+      background: rgba(255,255,255,.65);
+      display:grid; place-items:center;
+      box-shadow: var(--shadow-2);
+      cursor:pointer;
+      transition: transform .2s var(--ease), background .2s var(--ease);
+      flex: 0 0 auto;
+    }
+    .iconbtn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.88); }
+
+    /* brand icon buttons in top bar */
+    .brandIcon{
+      width: 44px; height: 44px;
+      border-radius: 16px;
+      display:grid; place-items:center;
+      border: none;
+      color: white;
+      box-shadow: var(--shadow-2);
+      transition: transform .2s var(--ease), filter .2s var(--ease);
+      flex: 0 0 auto;
+    }
+    .brandIcon:hover{ transform: translateY(-1px); filter: brightness(1.03); }
+    .brandIcon img{ width: 22px; height: 22px; object-fit: contain; display:block; }
+    .brandIcon.deliveroo{ background: var(--deliveroo); }
+    .brandIcon.justeat{ background: var(--justeat); }
+    .brandIcon.whatsapp{ background: var(--whatsapp); }
+
+    .hamburger{ display:none; }
+    @media (max-width: 980px){
+      .navlinks{ display:none; }
+      .hamburger{ display:grid; }
+    }
+    @media (max-width: 420px){
+      .brandText{ max-width: 52vw; }
+    }
+
+    /* Drawer */
     .drawer{ position: fixed; inset:0; z-index:200; display:none; }
     .drawer.open{ display:block; }
     .drawer .backdrop{ position:absolute; inset:0; background: rgba(20,12,26,.25); }
     .drawer .panel{
-      position:absolute; right: 14px; top: 74px; width: min(300px, 90%);
-      border-radius: var(--radius-xl); background: #fff; padding: 14px;
+      position:absolute; right: 14px; top: 74px;
+      width: min(420px, calc(100% - 28px));
+      border-radius: var(--radius-xl);
+      overflow:hidden;
+      background: rgba(255,255,255,.92);
+      border: 1px solid rgba(255,46,143,.18);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
     }
-    .drawer a{ display:block; padding: 14px; font-weight: 800; border-bottom:1px solid #eee; }
+    .drawer .inner{ padding: 14px; }
+    .drawer a.drawerLink{
+      display:flex; align-items:center; justify-content:space-between;
+      padding: 14px 14px;
+      border-radius: 16px;
+      font-weight: 800;
+      color: var(--ink);
+      background: rgba(255,46,143,.06);
+      border: 1px solid rgba(255,46,143,.14);
+      margin-top: 10px;
+    }
+    .drawer a.drawerLink span{ color: var(--muted); font-weight: 700; }
 
-    /* BRAND BUTTONS */
+    .drawerGroup{
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px dashed rgba(255,46,143,.22);
+    }
+    .drawerTitle{
+      font-weight: 900;
+      letter-spacing: -.2px;
+      margin: 0 0 10px;
+      color: var(--ink);
+    }
+
+    /* Buttons */
     .btn{
       display:inline-flex; align-items:center; justify-content:center; gap:10px;
-      padding: 12px 18px; border-radius: 16px;
-      font-weight: 800; box-shadow: var(--shadow-2);
-      transition: transform .2s var(--ease), box-shadow .2s;
-      text-align: center; color: white; border: none;
-      cursor: pointer; text-decoration: none;
+      padding: 12px 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,46,143,.18);
+      background: rgba(255,255,255,.70);
+      color: var(--ink);
+      font-weight: 800;
+      box-shadow: var(--shadow-2);
+      transition: transform .2s var(--ease), box-shadow .2s var(--ease), background .2s var(--ease);
+      user-select:none;
+      text-align: center;
     }
-    .btn:hover{ transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,0,0,0.15); }
-    .btn img.btn-icon { width: 24px; height: 24px; object-fit: contain; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2)); }
-    
-    /* Specific Brand Colors */
-    .btn.whatsapp { background-color: var(--brand-whatsapp); }
-    .btn.justeat { background-color: var(--brand-justeat); }
-    .btn.deliveroo { background-color: var(--brand-deliveroo); }
-    .btn.paypal { background-color: var(--brand-paypal); }
-    .btn.postepay { background-color: var(--brand-postepay); color: #000; } /* Testo nero su giallo */
-    .btn.credit { background-color: var(--ink); color: white; }
-    .btn.primary { background: linear-gradient(135deg, var(--pink), var(--pink-2)); }
-    .btn.soft { background: white; color: var(--ink); border: 1px solid var(--stroke); }
+    .btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.92); }
+    .btn.primary{
+      border: none;
+      color: white;
+      background: linear-gradient(135deg, var(--pink), var(--pink-2));
+      box-shadow: 0 18px 54px rgba(255,46,143,.22);
+    }
+    .btn.primary:hover{ box-shadow: 0 22px 70px rgba(255,46,143,.26); }
+    .btn.soft{
+      background: rgba(255,46,143,.08);
+      border: 1px solid rgba(255,46,143,.20);
+    }
+
+    /* Brand buttons */
+    .btn.brand{
+      border: none;
+      color: #fff;
+    }
+    .btn.brand:hover{ filter: brightness(1.03); }
+    .btn.whatsapp{ background: var(--whatsapp); }
+    .btn.deliveroo{ background: var(--deliveroo); }
+    .btn.justeat{ background: var(--justeat); }
+    .btn.paypal{ background: var(--paypal); }
+    .btn.cards{ background: var(--cards); }
+    .btn.postepay{
+      background: var(--postepay);
+      color: var(--postepay-ink);
+      border: 1px solid rgba(0,0,0,.06);
+    }
+
+    .btn .logo{
+      width: 20px; height: 20px; object-fit: contain;
+      filter: drop-shadow(0 8px 14px rgba(26,18,32,.14));
+    }
+    .btn .svgLogo{
+      width: 20px; height: 20px;
+      display:block;
+      filter: drop-shadow(0 8px 14px rgba(26,18,32,.14));
+    }
 
     /* Hero */
-    .hero{ padding: 20px 0; }
-    .heroGrid{ display:grid; grid-template-columns: 1.25fr .95fr; gap: 16px; }
+    .hero{ padding: 26px 0 10px; }
+    .heroGrid{
+      display:grid;
+      grid-template-columns: 1.25fr .95fr;
+      gap: 16px;
+      align-items: stretch;
+    }
     @media (max-width: 980px){ .heroGrid{ grid-template-columns: 1fr; } }
 
     .heroMain{
-      border-radius: var(--radius-xl); overflow:hidden; position:relative; min-height: 620px;
-      box-shadow: var(--shadow); border: 1px solid rgba(255,46,143,.16);
-      /* Sfondo Hero */
-      background: 
-        linear-gradient(180deg, rgba(255,255,255,0.7), rgba(255,255,255,0.95)),
+      border-radius: var(--radius-xl);
+      overflow:hidden;
+      position:relative;
+      min-height: 580px;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255,46,143,.16);
+      background:
+        radial-gradient(900px 520px at 15% 12%, rgba(255,46,143,.18), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,.65), rgba(255,255,255,.95) 80%),
         url("https://fiori-italia.it/cdn/shop/files/BouquetXXXLEsplosioneCromatica_Oltre100Steli.png?v=1764853567&width=3840") center center/cover no-repeat;
     }
-    .heroContent{
-      padding: 32px; height: 100%;
-      display:flex; flex-direction:column; align-items:center; text-align:center; justify-content: center;
+    .heroOverlay{
+      position:absolute; inset:0;
+      background: linear-gradient(180deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.95) 50%);
     }
-    
-    /* Logo Hero Centrato */
+    .heroContent{
+      position:relative;
+      height:100%;
+      padding: 32px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      gap: 18px;
+      text-align: center;
+      align-items: center;
+    }
     .heroLogoBig {
-      width: 180px; height: auto; margin-bottom: 24px;
+      width: 160px;
+      height: auto;
+      margin: 10px auto 18px; /* centrato meglio nella card */
+      display: block;
       filter: drop-shadow(0 10px 20px rgba(255,46,143,0.15));
     }
 
-    h1{ margin: 0 0 16px; font-size: clamp(32px, 4vw, 52px); letter-spacing: -1px; line-height: 1.1; }
-    .lead{ margin: 0 0 24px; font-size: 18px; color: var(--ink-2); font-weight: 600; max-width: 50ch; }
-    
-    /* CTA Row Hero */
-    .ctaRow{ display:flex; gap: 10px; flex-wrap:wrap; justify-content: center; width: 100%; }
-    .ctaRow .btn { flex: 1 1 auto; min-width: 160px; } /* Bottoni flessibili */
-
-    /* Side & E-commerce Card */
-    .side{ display:flex; flex-direction:column; gap: 16px; height: 100%; }
-    .card{ background: rgba(255,255,255,.8); border-radius: var(--radius-xl); border: 1px solid var(--stroke); padding: 24px; backdrop-filter: blur(10px); }
-    
-    /* Video Box */
-    .videoBox {
-      width: 100%; border-radius: 16px; overflow: hidden; margin-top: 16px;
-      border: 1px solid rgba(0,0,0,0.1); box-shadow: var(--shadow-2); background: #000;
+    .pill{
+      display:inline-flex; align-items:center; gap:10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,46,143,.08);
+      border: 1px solid rgba(255,46,143,.18);
+      font-weight: 800;
+      color: var(--ink);
+      width: fit-content;
     }
-    .videoBox video { width: 100%; height: auto; display: block; }
+    .pill .dot{
+      width: 10px; height: 10px;
+      border-radius: 999px;
+      background: var(--pink);
+      box-shadow: 0 0 0 7px rgba(255,46,143,.14);
+    }
 
-    /* Gallery */
-    .galleryGrid{ display:grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
-    @media (max-width: 600px){ .galleryGrid{ grid-template-columns: 1fr; } }
-    
+    h1{
+      margin: 8px 0 0;
+      font-size: clamp(32px, 4vw, 52px);
+      letter-spacing: -1px;
+      line-height: 1.05;
+    }
+    .lead{
+      margin: 14px 0 0;
+      font-size: clamp(16px, 1.5vw, 19px);
+      color: var(--ink-2);
+      max-width: 50ch;
+      font-weight: 700;
+      line-height: 1.55;
+    }
+    .ctaRow{ display:flex; gap: 12px; flex-wrap:wrap; margin-top: 24px; justify-content: center; }
+
+    .miniRow{
+      display:flex; flex-wrap:wrap; gap: 10px;
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 700;
+      margin-top: 12px;
+      justify-content: center;
+    }
+    .miniRow a{
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.75);
+      border: 1px solid rgba(255,46,143,.14);
+      box-shadow: var(--shadow-2);
+    }
+
+    /* Side cards */
+    .side{ display:flex; flex-direction:column; gap: 16px; }
+    .side .card{ padding: 24px; height: 100%; display: flex; flex-direction: column; justify-content: center; }
+    .side h3{ margin:0 0 12px; font-size: 20px; letter-spacing:-.2px; font-weight: 800; }
+    .side p{ margin:0; color: var(--muted); font-weight: 700; line-height: 1.6; font-size: 16px; }
+
+    /* video inner card */
+    .innerCard{
+      margin-top: 14px;
+      padding: 14px;
+      border-radius: 22px;
+      border: 1px solid rgba(255,46,143,.16);
+      background: rgba(255,255,255,.75);
+      box-shadow: var(--shadow-2);
+    }
+    .videoBox{
+      width: 100%;
+      border-radius: 18px;
+      overflow:hidden;
+      border: 1px solid rgba(255,46,143,.14);
+      background: #fff;
+    }
+    .videoBox iframe, .videoBox video{
+      width: 100%;
+      height: min(340px, 42vh);
+      display:block;
+      border: 0;
+    }
+
+    /* Sections */
+    section{ padding: 40px 0; }
+    .sectionTitle{
+      display:flex; align-items:flex-end; justify-content:space-between;
+      gap: 16px; margin-bottom: 24px;
+    }
+    .sectionTitle h2{
+      margin:0;
+      font-size: clamp(26px, 2.5vw, 34px);
+      letter-spacing: -.6px;
+    }
+    .sectionTitle p{
+      margin: 6px 0 0;
+      color: var(--muted);
+      max-width: 70ch;
+      line-height:1.5;
+      font-weight: 700;
+      font-size: 17px;
+    }
+
+    /* Gallery cards */
+    .galleryGrid{
+      display:grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    @media (max-width: 900px){ .galleryGrid{ grid-template-columns: 1fr; } }
+
     .gcard{
-      position:relative; height: 260px; border-radius: var(--radius-xl); overflow:hidden;
-      box-shadow: var(--shadow); border: 1px solid var(--stroke); display:block;
+      position:relative;
+      border-radius: var(--radius-xl);
+      overflow:hidden;
+      border: 1px solid rgba(255,46,143,.16);
+      box-shadow: var(--shadow);
+      min-height: 260px;
+      background: #fff;
+      display: block;
     }
-    .gcard .bg{ position:absolute; inset:0; background-size: cover; background-position: center; transition: transform .4s; }
-    .gcard:hover .bg{ transform: scale(1.1); }
-    .gcard .content{ position:absolute; inset:0; background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.9)); padding: 20px; display:flex; flex-direction: column; justify-content: flex-end;}
-    .gtitle { font-size: 22px; font-weight: 900; }
+    .gcard .bg{ position:absolute; inset:0; background-size: cover; background-position:center; transform: scale(1.04); transition: transform 0.4s var(--ease); }
+    .gcard:hover .bg { transform: scale(1.1); }
+    .gcard .overlay{
+      position:absolute; inset:0;
+      background:
+        radial-gradient(900px 320px at 15% 0%, rgba(255,46,143,.18), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,.28), rgba(255,255,255,.92));
+    }
+    .gcard .content{
+      position:absolute; inset:0;
+      padding: 24px;
+      display:flex; flex-direction:column; justify-content:space-between;
+      gap: 12px;
+    }
+    .gtag{
+      display:inline-flex; align-items:center; gap:8px;
+      width: fit-content;
+      padding: 10px 12px;
+      border-radius: 999px;
+      background: rgba(255,46,143,.10);
+      border: 1px solid rgba(255,46,143,.18);
+      font-weight: 800;
+      color: var(--ink);
+    }
+    .gtitle{
+      font-size: 24px;
+      font-weight: 900;
+      letter-spacing: -.5px;
+      color: var(--ink);
+    }
 
-    /* Steps - Screenshot Full Height Fix */
-    .stepsGrid{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    /* Steps */
+    .stepsGrid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
     @media (max-width: 980px){ .stepsGrid{ grid-template-columns: 1fr; } }
 
+    .stepsGrid.two{ grid-template-columns: repeat(2, 1fr); }
+    @media (max-width: 980px){ .stepsGrid.two{ grid-template-columns: 1fr; } }
+
     .step{
-      padding: 20px; background: rgba(255,255,255,0.9); border-radius: var(--radius-xl);
-      border: 1px solid var(--stroke); box-shadow: var(--shadow);
-      display: flex; flex-direction: column;
+      padding: 20px;
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(255,46,143,.16);
+      box-shadow: var(--shadow);
+      background: rgba(255,255,255,.78);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      overflow:hidden;
     }
-    .stepTop{ display:flex; justify-content:space-between; align-items:center; margin-bottom: 12px; }
-    .num{ background: var(--pink); color: white; width: 32px; height: 32px; border-radius: 10px; display:grid; place-items:center; font-weight: 800; }
-    
-    /* Immagini Step: Altezza intera */
+    .stepTop{ display:flex; align-items:center; justify-content:space-between; gap:10px; }
+    .num{
+      width: 42px; height: 42px;
+      border-radius: 16px;
+      display:grid; place-items:center;
+      font-weight: 900;
+      color: white;
+      background: linear-gradient(135deg, var(--pink), var(--pink-2));
+      box-shadow: 0 14px 30px rgba(255,46,143,.18);
+      flex: 0 0 auto;
+    }
+    .stepLabel{ color: var(--muted); font-weight: 800; }
+
+    /* Screenshot steps: altezza “intera” */
     .stepImg{
       width: 100%;
-      height: auto;
-      /* Mobile: 60vh, Desktop: 80vh max - Object fit contain per vedere tutto */
-      max-height: 80vh; 
-      object-fit: contain; 
-      border-radius: 12px;
-      margin: 10px 0;
-      background: #f0f0f0; /* Sfondo neutro se l'immagine è stretta */
+      height: 80vh;           /* desktop */
+      margin-top: 16px;
+      border-radius: 18px;
+      object-fit: contain;    /* IMPORTANT: screenshot non “tagliato” */
+      border: 1px solid rgba(255,46,143,.14);
+      background: rgba(255,255,255,.92);
+      display:block;
     }
-    @media(max-width: 768px) {
-      .stepImg { max-height: 60vh; }
+    @media (max-width: 980px){
+      .stepImg{ height: 60vh; } /* mobile */
     }
 
-    .stepCta { margin-top: auto; padding-top: 10px; }
+    .step h4{
+      margin: 16px 0 8px;
+      font-size: 18px;
+      letter-spacing: -.2px;
+      color: var(--ink);
+      font-weight: 900;
+    }
+    .step p{
+      margin:0;
+      color: var(--ink-2);
+      font-weight: 700;
+      line-height: 1.55;
+    }
+    .stepCtaRow{
+      margin-top: 14px;
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    /* “Cosa succede dopo?” divider */
+    .afterBox{
+      margin-top: 16px;
+      padding: 20px;
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(255,46,143,.18);
+      background: rgba(255,46,143,.08);
+      box-shadow: var(--shadow-2);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+      flex-wrap:wrap;
+    }
+    .afterBox b{
+      font-size: 18px;
+      letter-spacing: -.2px;
+    }
+    .afterBox span{
+      color: var(--muted);
+      font-weight: 700;
+    }
 
     /* Payments */
-    .payGrid{ display:grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .payGrid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
     @media (max-width: 980px){ .payGrid{ grid-template-columns: 1fr; } }
-    .payCard { background: white; padding: 24px; border-radius: 24px; border: 1px solid var(--stroke); }
-    
+
+    .payCard{
+      padding: 24px;
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(255,46,143,.16);
+      background: rgba(255,255,255,.85);
+      box-shadow: var(--shadow);
+    }
+    .payCard h3{ margin:0 0 16px; font-size: 20px; font-weight: 900; color: var(--pink); }
+    .payCard h4{ margin: 24px 0 8px; font-size: 17px; font-weight: 800; color: var(--ink); display: flex; align-items: center; gap: 8px;}
+    .payCard p{ margin:0 0 14px; color: var(--muted); font-weight: 600; line-height: 1.6; }
+
+    .payBrandRow{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin: 8px 0 14px;
+    }
+
+    .infoBox {
+      background: #fff;
+      border: 1px solid rgba(255,46,143,.15);
+      padding: 16px;
+      border-radius: 16px;
+      margin-top: 10px;
+    }
+    .infoBox strong { color: var(--ink); font-weight: 800; font-size: 1.1em; }
+    .bigNumber { font-size: 18px; color: var(--pink); font-weight: 900; display: block; margin: 4px 0;}
+
     /* Locations */
-    .locGrid { display:grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-    @media (max-width: 768px){ .locGrid{ grid-template-columns: 1fr; } }
-    .loc { background: white; padding: 16px; border-radius: 24px; border: 1px solid var(--stroke); box-shadow: var(--shadow-2); text-align: center; }
-    .locImg { width: 80px; height: 80px; object-fit: contain; margin: 0 auto 10px; display: block; }
-    .addr { font-weight: 800; margin-bottom: 5px; }
+    .locGrid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    @media (max-width: 980px){ .locGrid{ grid-template-columns: 1fr; } }
+    .loc{
+      padding: 22px;
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(255,46,143,.16);
+      background: rgba(255,255,255,.78);
+      box-shadow: var(--shadow);
+      display:flex;
+      flex-direction:column;
+      gap: 10px;
+    }
+    .loc .top{ display:flex; align-items:flex-start; justify-content:space-between; gap:10px; }
+    .loc .addr{ font-weight: 900; color: var(--ink); line-height: 1.25; font-size: 17px; }
+    .loc .zone{ color: var(--muted); font-weight: 800; margin-top: 4px; }
 
-    footer{ padding: 40px 0; text-align: center; font-size: 14px; color: var(--muted); }
+    .locThumbLink{
+      width: 52px; height: 52px;
+      border-radius: 16px;
+      overflow:hidden;
+      border: 1px solid rgba(255,46,143,.18);
+      background: rgba(255,255,255,.92);
+      box-shadow: var(--shadow-2);
+      display:grid;
+      place-items:center;
+      flex: 0 0 auto;
+    }
+    .locThumbLink img{
+      width: 46px; height: 46px;
+      object-fit: contain;
+      display:block;
+    }
 
+    footer{
+      padding: 24px 0 42px;
+      border-top: 1px solid rgba(255,46,143,.14);
+      background: rgba(255,255,255,.70);
+      backdrop-filter: blur(10px);
+    }
+    footer .row{
+      display:flex; justify-content:space-between; gap: 14px; flex-wrap:wrap;
+      color: var(--muted);
+      font-weight: 700;
+    }
   </style>
 </head>
 
 <body>
-  <div class="blobs">
-    <div class="blob" style="left:-200px; top:-200px;"></div>
+  <div class="blobs" aria-hidden="true">
+    <div class="blob" style="left:-220px; top:-180px;"></div>
+    <div class="blob b2"></div>
+    <div class="blob b3"></div>
   </div>
 
   <header class="nav">
     <div class="container">
       <div class="row">
-        <a class="brand" href="#top">
-          <div class="brandLogo"><img src="./immagini-home/fiori%20e%20piante%20di%20nino%20logo%20nero.png" alt="Logo"></div>
-          <span>Fiori e Piante di Nino</span>
+        <a class="brand" href="#top" aria-label="Home">
+          <span class="brandLogo">
+            <img src="./immagini-home/fiori%20e%20piante%20di%20nino%20logo%20nero.png" alt="Fiori e Piante di Nino" />
+          </span>
+          <div class="brandText">
+            <span class="titleLine">Fiori e Piante di Nino</span>
+            <small>Roma · Consegne in tutta la città</small>
+          </div>
         </a>
-        <nav class="navlinks">
+
+        <nav class="navlinks" aria-label="Sezioni">
+          <a href="#galleria">Galleria</a>
           <a href="#come-ordinare">Come funziona</a>
           <a href="#pagamenti">Pagamento</a>
           <a href="#sedi">Sedi</a>
+          <a href="#contatti">Contatti</a>
         </nav>
-        <button class="hamburger" id="menuBtn">☰</button>
+
+        <div class="navactions">
+          <!-- Brand buttons "in alto" -->
+          <a class="brandIcon justeat" href="https://www.justeat.it/restaurants-piante-e-fiori-di-nino---piazza-santiago-del-cile/menu" target="_blank" rel="noopener nofollow" aria-label="Apri JustEat">
+            <img src="./immagini-home/logo-justeat.png" alt="JustEat" />
+          </a>
+          <a class="brandIcon deliveroo" href="https://deliveroo.it/it/menu/roma/roma-flaminio/piante-e-fiori-di-nino-piazza-santiago-del-cile" target="_blank" rel="noopener nofollow" aria-label="Apri Deliveroo">
+            <img src="./immagini-home/Logo-deliveroo-.jpg" alt="Deliveroo" />
+          </a>
+
+          <a class="iconbtn" href="tel:+393394324010" aria-label="Chiama">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.8 19.8 0 0 1 3.11 5.18 2 2 0 0 1 5.1 3h3a2 2 0 0 1 2 1.72c.12.86.32 1.7.59 2.5a2 2 0 0 1-.45 2.11L9.09 10.91a16 16 0 0 0 4 4l1.58-1.15a2 2 0 0 1 2.11-.45c.8.27 1.64.47 2.5.59A2 2 0 0 1 22 16.92Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+
+          <button class="iconbtn hamburger" id="menuBtn" type="button" aria-label="Apri menu">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
   </header>
 
-  <div class="drawer" id="drawer">
+  <div class="drawer" id="drawer" aria-hidden="true">
     <div class="backdrop" data-close></div>
-    <div class="panel">
-        <a href="#come-ordinare" data-close>Come funziona</a>
-        <a href="#pagamenti" data-close>Pagamenti</a>
-        <a href="#sedi" data-close>Sedi</a>
+    <div class="panel" role="dialog" aria-label="Menu">
+      <div class="inner">
+        <a class="drawerLink" href="#galleria" data-close>Galleria <span>→</span></a>
+        <a class="drawerLink" href="#come-ordinare" data-close>Come funziona <span>→</span></a>
+        <a class="drawerLink" href="#pagamenti" data-close>Pagamento <span>→</span></a>
+        <a class="drawerLink" href="#sedi" data-close>Sedi <span>→</span></a>
+        <a class="drawerLink" href="#contatti" data-close>Contatti <span>→</span></a>
+
+        <div class="drawerGroup">
+          <div class="drawerTitle">Ordina subito</div>
+          <a class="btn brand whatsapp" href="https://wa.me/message/JDH7MM6C6VC7J1" target="_blank" rel="noopener nofollow" style="width:100%; justify-content:center;">
+            <img class="logo" src="./immagini-home/logo-whatsapp.png" alt="WhatsApp" />
+            WhatsApp
+          </a>
+          <a class="btn brand justeat" href="https://www.justeat.it/restaurants-piante-e-fiori-di-nino---piazza-santiago-del-cile/menu" target="_blank" rel="noopener nofollow" style="width:100%; justify-content:center; margin-top:10px;">
+            <img class="logo" src="./immagini-home/logo-justeat.png" alt="JustEat" />
+            JustEat
+          </a>
+          <a class="btn brand deliveroo" href="https://deliveroo.it/it/menu/roma/roma-flaminio/piante-e-fiori-di-nino-piazza-santiago-del-cile" target="_blank" rel="noopener nofollow" style="width:100%; justify-content:center; margin-top:10px;">
+            <img class="logo" src="./immagini-home/Logo-deliveroo-.jpg" alt="Deliveroo" />
+            Deliveroo
+          </a>
+          <a class="btn primary" href="https://fiori-italia.it/" target="_blank" rel="noopener nofollow" style="width:100%; justify-content:center; margin-top:10px;">
+            🛒 E-commerce
+          </a>
+        </div>
+
+        <div class="drawerGroup">
+          <div class="drawerTitle">Pagamenti</div>
+
+          <a class="btn brand paypal" href="https://www.paypal.com/paypalme/NinoFiori" target="_blank" rel="noopener nofollow" style="width:100%; justify-content:center;">
+            <!-- SVG PayPal (fallback se non hai logo) -->
+            <svg class="svgLogo" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M7 19H5.2a1 1 0 0 1-1-1.2l2-12A1 1 0 0 1 7.2 5H14a5 5 0 0 1 0 10H10l-.6 4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+            </svg>
+            PayPal
+          </a>
+
+          <a class="btn postepay" href="#pagamenti" data-close style="width:100%; justify-content:center; margin-top:10px;">
+            <!-- SVG Postepay “card” -->
+            <svg class="svgLogo" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M3 7.5A2.5 2.5 0 0 1 5.5 5h13A2.5 2.5 0 0 1 21 7.5v9A2.5 2.5 0 0 1 18.5 19h-13A2.5 2.5 0 0 1 3 16.5v-9Z" stroke="currentColor" stroke-width="2"/>
+              <path d="M3 9h18" stroke="currentColor" stroke-width="2"/>
+            </svg>
+            Postepay
+          </a>
+
+          <a class="btn brand cards" href="#pagamenti" data-close style="width:100%; justify-content:center; margin-top:10px;">
+            <svg class="svgLogo" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M3 7.5A2.5 2.5 0 0 1 5.5 5h13A2.5 2.5 0 0 1 21 7.5v9A2.5 2.5 0 0 1 18.5 19h-13A2.5 2.5 0 0 1 3 16.5v-9Z" stroke="currentColor" stroke-width="2"/>
+              <path d="M3 9h18" stroke="currentColor" stroke-width="2"/>
+              <path d="M7 15h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            Carte / Apple Pay / Google Pay
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -272,193 +817,557 @@
     <section class="hero">
       <div class="container">
         <div class="heroGrid">
-          
           <div class="heroMain">
+            <div class="heroOverlay" aria-hidden="true"></div>
             <div class="heroContent">
-              <img class="heroLogoBig" src="./immagini-home/fiori%20e%20piante%20di%20nino%20logo%20nero.png" alt="Logo Nino Grande" />
+              <div class="pill">
+                <span class="dot"></span>
+                <span><b>Consegne su Roma</b></span>
+              </div>
 
-              <h1>Fiori & Piante<br>Consegna a domicilio a Roma!</h1>
-              <p class="lead">Bouquet unici e piante spettacolari.<br>Scegli la tua piattaforma preferita.</p>
+              <div>
+                <img class="heroLogoBig" src="./immagini-home/fiori%20e%20piante%20di%20nino%20logo%20nero.png" alt="Logo Grande Nino" />
 
-              <div class="ctaRow">
-                <a class="btn whatsapp" href="https://wa.me/message/JDH7MM6C6VC7J1" target="_blank">
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" class="btn-icon" alt="">
-                  WhatsApp
-                </a>
-                
-                <a class="btn justeat" href="https://www.justeat.it/restaurants-piante-e-fiori-di-nino---piazza-santiago-del-cile/menu" target="_blank">
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Just_Eat_Logo.png" class="btn-icon" style="filter: brightness(100); width: auto;" alt="">
-                  JustEat
-                </a>
-                
-                <a class="btn deliveroo" href="https://deliveroo.it/it/menu/roma/roma-flaminio/piante-e-fiori-di-nino-piazza-santiago-del-cile" target="_blank">
-                   <img src="https://upload.wikimedia.org/wikipedia/commons/c/c5/Deliveroo_logo.svg" class="btn-icon" style="filter: brightness(100);" alt="">
-                   Deliveroo
-                </a>
+                <h1>Fiori & Piante<br/>con stile rosa 🌸</h1>
+                <p class="lead">
+                  Dalla storica sede ai Parioli, portiamo colore in tutta Roma.
+                  Ordina composizioni uniche per ogni occasione.
+                </p>
+
+                <div class="ctaRow">
+                  <a class="btn brand whatsapp" href="https://wa.me/message/JDH7MM6C6VC7J1" target="_blank" rel="noopener nofollow">
+                    <img class="logo" src="./immagini-home/logo-whatsapp.png" alt="Logo WhatsApp" />
+                    Ordina su WhatsApp
+                  </a>
+
+                  <a class="btn brand justeat" href="https://www.justeat.it/restaurants-piante-e-fiori-di-nino---piazza-santiago-del-cile/menu" target="_blank" rel="noopener nofollow">
+                    <img class="logo" src="./immagini-home/logo-justeat.png" alt="Logo JustEat" />
+                    JustEat
+                  </a>
+
+                  <a class="btn brand deliveroo" href="https://deliveroo.it/it/menu/roma/roma-flaminio/piante-e-fiori-di-nino-piazza-santiago-del-cile" target="_blank" rel="noopener nofollow">
+                    <img class="logo" src="./immagini-home/Logo-deliveroo-.jpg" alt="Logo Deliveroo" />
+                    Deliveroo
+                  </a>
+
+                  <a class="btn soft" href="https://fiori-italia.it/" target="_blank" rel="noopener nofollow">
+                    🛒 Vai all’e-commerce
+                  </a>
+                </div>
+
+                <div class="miniRow">
+                  <a href="#pagamenti">💳 Come Pagare</a>
+                  <a href="tel:+393394324010">📞 +39 339 432 4010</a>
+                </div>
+              </div>
+
+              <div class="miniRow">
+                <span>✨ Bigliettino incluso su richiesta! Scrivi il testo e lo mettiamo noi.</span>
               </div>
             </div>
           </div>
 
           <aside class="side">
-            <div class="card" style="display:flex; flex-direction:column; justify-content:center; text-align:center;">
-              <h3 style="margin-top:0;">🛒 Acquista Online</h3>
-              <p>Preferisci il nuovo shop? Scegli, paga e ricevi.</p>
-              
-              <a class="btn primary" href="https://fiori-italia.it/" target="_blank">Vai all'E-commerce →</a>
+            <div class="card">
+              <div>
+                <h3 style="margin:0 0 12px;">🛒 Nuovo sito e-commerce</h3>
+                <p>
+                  Vuoi vedere il catalogo completo con prezzi e foto?<br><br>
+                  Puoi <b>acquistare direttamente online</b>:
+                  scegli il prodotto, inserisci indirizzo e note, paga in sicurezza e noi pensiamo alla consegna 💗
+                </p>
 
-              <div class="videoBox">
-                <video controls autoplay loop muted playsinline>
-                  <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-                  Il tuo browser non supporta il video.
-                </video>
+                <!-- VIDEO (card interna) -->
+                <div class="innerCard">
+                  <div style="font-weight:900; margin-bottom:10px;">🎥 Guarda come funziona</div>
+                  <div class="videoBox">
+                    <!-- Opzione A: YouTube/Vimeo embed (sostituisci VIDEO_URL con embed url) -->
+                    <iframe
+                      src="VIDEO_URL"
+                      title="Video Fiori e Piante di Nino"
+                      loading="lazy"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowfullscreen>
+                    </iframe>
+
+                    <!-- Opzione B: mp4 locale (se preferisci)
+                    <video controls playsinline>
+                      <source src="./immagini-home/video.mp4" type="video/mp4">
+                    </video>
+                    -->
+                  </div>
+                </div>
+
+                <div style="margin-top:20px; display:flex; flex-direction: column; gap:10px;">
+                  <a class="btn primary" href="https://fiori-italia.it/" target="_blank" rel="noopener nofollow" style="justify-content: center;">Vai su fiori-italia.it ↗</a>
+
+                  <!-- Pagamenti “brand” rapidi -->
+                  <div class="payBrandRow" style="justify-content:center;">
+                    <a class="btn brand paypal" href="https://www.paypal.com/paypalme/NinoFiori" target="_blank" rel="noopener nofollow">
+                      <svg class="svgLogo" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="M7 19H5.2a1 1 0 0 1-1-1.2l2-12A1 1 0 0 1 7.2 5H14a5 5 0 0 1 0 10H10l-.6 4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                      </svg>
+                      PayPal
+                    </a>
+                    <a class="btn postepay" href="#pagamenti">
+                      <svg class="svgLogo" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="M3 7.5A2.5 2.5 0 0 1 5.5 5h13A2.5 2.5 0 0 1 21 7.5v9A2.5 2.5 0 0 1 18.5 19h-13A2.5 2.5 0 0 1 3 16.5v-9Z" stroke="currentColor" stroke-width="2"/>
+                        <path d="M3 9h18" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                      Postepay
+                    </a>
+                    <a class="btn brand cards" href="#pagamenti">
+                      <svg class="svgLogo" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="M3 7.5A2.5 2.5 0 0 1 5.5 5h13A2.5 2.5 0 0 1 21 7.5v9A2.5 2.5 0 0 1 18.5 19h-13A2.5 2.5 0 0 1 3 16.5v-9Z" stroke="currentColor" stroke-width="2"/>
+                        <path d="M3 9h18" stroke="currentColor" stroke-width="2"/>
+                        <path d="M7 15h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                      </svg>
+                      Carte
+                    </a>
+                  </div>
+                </div>
+
               </div>
-              <small style="margin-top:10px; color:gray;">Guarda come prepariamo i tuoi ordini!</small>
             </div>
           </aside>
-
         </div>
       </div>
     </section>
 
     <section id="galleria">
       <div class="container">
-        <h2>Le nostre categorie</h2>
+        <div class="sectionTitle">
+          <div>
+            <h2>Cosa realizziamo</h2>
+            <p>Scegli la categoria che fa per te.</p>
+          </div>
+        </div>
+
         <div class="galleryGrid">
-            <a class="gcard" href="./piante/">
-                <div class="bg" style="background-image:url('https://fioriepiante-nino.it/_assets/images/103905e843316bcb63f7c56bb3b134c1.jpg');"></div>
-                <div class="content"><div class="gtitle">🪴 Piante</div></div>
-            </a>
-            <a class="gcard" href="./fiori/">
-                <div class="bg" style="background-image:url('https://images.unsplash.com/photo-1525310072745-f49212b5ac6d?w=800');"></div>
-                <div class="content"><div class="gtitle">💐 Fiori</div></div>
-            </a>
+          <a class="gcard" href="./piante/">
+            <div class="bg" style="background-image:url('https://fioriepiante-nino.it/_assets/images/103905e843316bcb63f7c56bb3b134c1.jpg');"></div>
+            <div class="overlay"></div>
+            <div class="content">
+              <div class="gtag">🪴 Apri /piante</div>
+              <div class="gtitle">Piante / Composizioni</div>
+            </div>
+          </a>
+
+          <a class="gcard" href="./fiori/">
+            <div class="bg" style="background-image:url('https://images.unsplash.com/photo-1525310072745-f49212b5ac6d?auto=format&fit=crop&w=1400&q=70');"></div>
+            <div class="overlay"></div>
+            <div class="content">
+              <div class="gtag">💐 Apri /fiori</div>
+              <div class="gtitle">Fiori freschi</div>
+            </div>
+          </a>
+
+          <a class="gcard" href="./funebri/">
+            <div class="bg" style="background-image:url('https://images.unsplash.com/photo-1526045478516-99145907023c?auto=format&fit=crop&w=1400&q=70');"></div>
+            <div class="overlay"></div>
+            <div class="content">
+              <div class="gtag">🕊️ Apri /funebri</div>
+              <div class="gtitle">Composizioni funebri</div>
+            </div>
+          </a>
+
+          <a class="gcard" href="./installazioni/">
+            <div class="bg" style="background-image:url('https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1400&q=70');"></div>
+            <div class="overlay"></div>
+            <div class="content">
+              <div class="gtag">✨ Apri /installazioni</div>
+              <div class="gtitle">Eventi e Allestimenti</div>
+            </div>
+          </a>
         </div>
       </div>
     </section>
 
     <section id="come-ordinare">
       <div class="container">
-        <h2>Come funziona</h2>
+        <div class="sectionTitle">
+          <div>
+            <h2>Come funziona</h2>
+            <p>Semplice e veloce.</p>
+          </div>
+        </div>
+
         <div class="stepsGrid">
-          
           <div class="step">
-            <div class="stepTop"><div class="num">1</div><b>Contatto</b></div>
-            <p>Scrivici su WhatsApp o scegli l'app che preferisci.</p>
-            <img class="stepImg" src="./immagini-home/step1.png" alt="Screenshot Step 1">
-            <div class="stepCta">
-                <a class="btn whatsapp" href="https://wa.me/message/JDH7MM6C6VC7J1" target="_blank" style="width:100%; font-size:14px;">Avvia WhatsApp</a>
+            <div class="stepTop">
+              <div class="num">1</div>
+              <div class="stepLabel">Contatto</div>
+            </div>
+            <img class="stepImg" src="./immagini-home/step1.png" alt="Step 1" />
+            <h4>Dove ordinare?</h4>
+            <p>Usa WhatsApp, JustEat, Deliveroo o il nostro sito.</p>
+            <div class="stepCtaRow">
+              <a class="btn brand whatsapp" href="https://wa.me/message/JDH7MM6C6VC7J1" target="_blank" rel="noopener nofollow">
+                <img class="logo" src="./immagini-home/logo-whatsapp.png" alt="WhatsApp" /> WhatsApp
+              </a>
+              <a class="btn brand justeat" href="https://www.justeat.it/restaurants-piante-e-fiori-di-nino---piazza-santiago-del-cile/menu" target="_blank" rel="noopener nofollow">
+                <img class="logo" src="./immagini-home/logo-justeat.png" alt="JustEat" /> JustEat
+              </a>
+              <a class="btn brand deliveroo" href="https://deliveroo.it/it/menu/roma/roma-flaminio/piante-e-fiori-di-nino-piazza-santiago-del-cile" target="_blank" rel="noopener nofollow">
+                <img class="logo" src="./immagini-home/Logo-deliveroo-.jpg" alt="Deliveroo" /> Deliveroo
+              </a>
             </div>
           </div>
 
           <div class="step">
-            <div class="stepTop"><div class="num">2</div><b>Dettagli</b></div>
-            <p>Definiamo insieme budget e fiori.</p>
-            <img class="stepImg" src="./immagini-home/step2.png" alt="Screenshot Step 2">
-            <div class="stepCta">
-                <a class="btn whatsapp" href="https://wa.me/message/JDH7MM6C6VC7J1" target="_blank" style="width:100%; font-size:14px;">Scrivici i dettagli</a>
+            <div class="stepTop">
+              <div class="num">2</div>
+              <div class="stepLabel">Dettagli</div>
+            </div>
+            <img class="stepImg" src="./immagini-home/step2.png" alt="Step 2" />
+            <h4>Cosa ti serve?</h4>
+            <p>Dicci occasione, budget e indirizzo di consegna a Roma.</p>
+            <div class="stepCtaRow">
+              <a class="btn brand whatsapp" href="https://wa.me/message/JDH7MM6C6VC7J1" target="_blank" rel="noopener nofollow">
+                <img class="logo" src="./immagini-home/logo-whatsapp.png" alt="WhatsApp" /> Scrivi ora
+              </a>
             </div>
           </div>
 
           <div class="step">
-            <div class="stepTop"><div class="num">3</div><b>Conferma</b></div>
-            <p>Conferma e pagamento rapido.</p>
-            <img class="stepImg" src="./immagini-home/step3.png" alt="Screenshot Step 3">
-            <div class="stepCta">
-                <a class="btn whatsapp" href="https://wa.me/message/JDH7MM6C6VC7J1" target="_blank" style="width:100%; font-size:14px;">Conferma ordine</a>
+            <div class="stepTop">
+              <div class="num">3</div>
+              <div class="stepLabel">Conferma</div>
+            </div>
+            <img class="stepImg" src="./immagini-home/step3.png" alt="Step 3" />
+            <h4>Pagamento facile</h4>
+            <p>Confermi l'ordine e paghi con un click (PayPal, Carta o Bonifico).</p>
+            <div class="stepCtaRow">
+              <a class="btn brand paypal" href="https://www.paypal.com/paypalme/NinoFiori" target="_blank" rel="noopener nofollow">
+                <svg class="svgLogo" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M7 19H5.2a1 1 0 0 1-1-1.2l2-12A1 1 0 0 1 7.2 5H14a5 5 0 0 1 0 10H10l-.6 4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                </svg>
+                PayPal
+              </a>
+              <a class="btn brand cards" href="https://mypos.com/@fioriepiantenino" target="_blank" rel="noopener nofollow">
+                <svg class="svgLogo" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M3 7.5A2.5 2.5 0 0 1 5.5 5h13A2.5 2.5 0 0 1 21 7.5v9A2.5 2.5 0 0 1 18.5 19h-13A2.5 2.5 0 0 1 3 16.5v-9Z" stroke="currentColor" stroke-width="2"/>
+                  <path d="M3 9h18" stroke="currentColor" stroke-width="2"/>
+                  <path d="M7 15h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                Carta
+              </a>
+              <a class="btn postepay" href="#pagamenti">
+                <svg class="svgLogo" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M3 7.5A2.5 2.5 0 0 1 5.5 5h13A2.5 2.5 0 0 1 21 7.5v9A2.5 2.5 0 0 1 18.5 19h-13A2.5 2.5 0 0 1 3 16.5v-9Z" stroke="currentColor" stroke-width="2"/>
+                  <path d="M3 9h18" stroke="currentColor" stroke-width="2"/>
+                </svg>
+                Postepay
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="afterBox" aria-label="Cosa succede dopo">
+          <div>
+            <b>E poi? Ci pensiamo noi!</b>
+            <span>Prepariamo i fiori freschi e partiamo per la consegna.</span>
+          </div>
+        </div>
+
+        <div class="stepsGrid two" style="margin-top:14px;">
+          <div class="step">
+            <div class="stepTop">
+              <div class="num">4</div>
+              <div class="stepLabel">Anteprima</div>
+            </div>
+            <img class="stepImg" src="./immagini-home/step4.png" alt="Step 4" />
+            <h4>Foto prima di partire</h4>
+            <p>Ti mandiamo una foto su WhatsApp così vedi cosa stiamo consegnando.</p>
+            <div class="stepCtaRow">
+              <a class="btn brand whatsapp" href="https://wa.me/message/JDH7MM6C6VC7J1" target="_blank" rel="noopener nofollow">
+                <img class="logo" src="./immagini-home/logo-whatsapp.png" alt="WhatsApp" /> Chiedi l’anteprima
+              </a>
             </div>
           </div>
 
+          <div class="step">
+            <div class="stepTop">
+              <div class="num">5</div>
+              <div class="stepLabel">Consegna</div>
+            </div>
+            <img class="stepImg" src="./immagini-home/step5.png" alt="Step 5" />
+            <h4>Consegna effettuata</h4>
+            <p>Ti avvisiamo appena i fiori sono arrivati a destinazione.</p>
+            <div class="stepCtaRow">
+              <a class="btn brand whatsapp" href="https://wa.me/message/JDH7MM6C6VC7J1" target="_blank" rel="noopener nofollow">
+                <img class="logo" src="./immagini-home/logo-whatsapp.png" alt="WhatsApp" /> Scrivici ora
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
     <section id="pagamenti">
       <div class="container">
-        <h2>Metodi di Pagamento</h2>
+        <div class="sectionTitle">
+          <div>
+            <h2>Metodi di Pagamento</h2>
+            <p>Scegli quello più comodo per te. È tutto molto semplice.</p>
+          </div>
+        </div>
+
         <div class="payGrid">
-            
-            <div class="payCard">
-                <h3>Pagamenti Digitali</h3>
-                <p>Clicca sul pulsante del tuo metodo preferito.</p>
-                <div style="display:flex; flex-direction:column; gap:10px;">
-                    
-                    <a class="btn paypal" href="https://www.paypal.com/paypalme/NinoFiori" target="_blank">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" class="btn-icon" style="width:60px;" alt="PayPal">
-                         Paga con PayPal
-                    </a>
+          <div class="payCard">
+            <h3>📱 Metodi Digitali Veloci</h3>
 
-                    <a class="btn credit" href="https://mypos.com/@fioriepiantenino" target="_blank">
-                        <span style="font-size:20px;">💳</span> Carta di Credito / Apple Pay
-                    </a>
-
-                </div>
+            <div class="payBrandRow">
+              <a class="btn brand paypal" href="https://www.paypal.com/paypalme/NinoFiori" target="_blank" rel="noopener nofollow">
+                <svg class="svgLogo" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M7 19H5.2a1 1 0 0 1-1-1.2l2-12A1 1 0 0 1 7.2 5H14a5 5 0 0 1 0 10H10l-.6 4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                </svg>
+                PayPal
+              </a>
+              <a class="btn brand cards" href="https://mypos.com/@fioriepiantenino" target="_blank" rel="noopener nofollow">
+                <svg class="svgLogo" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M3 7.5A2.5 2.5 0 0 1 5.5 5h13A2.5 2.5 0 0 1 21 7.5v9A2.5 2.5 0 0 1 18.5 19h-13A2.5 2.5 0 0 1 3 16.5v-9Z" stroke="currentColor" stroke-width="2"/>
+                  <path d="M3 9h18" stroke="currentColor" stroke-width="2"/>
+                  <path d="M7 15h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                Carte / Apple Pay / Google Pay
+              </a>
             </div>
 
-            <div class="payCard">
-                <h3>Altri Metodi</h3>
-                <div style="display:flex; flex-direction:column; gap:10px;">
-                    
-                    <button class="btn postepay" onclick="alert('Salva il numero +39 3394324010 e usa P2P dall\'App Postepay')">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Poste_Italiane_logo.svg/1200px-Poste_Italiane_logo.svg.png" class="btn-icon" style="width:auto;" alt="Poste">
-                        Ricarica Postepay P2P
-                    </button>
-                    
-                    <div style="background:#f4f4f4; padding:10px; border-radius:12px; margin-top:10px;">
-                        <small><b>Bonifico Istantaneo:</b><br>IBAN: IT98 Y360 ...<br>Dest: AWAD MELAD</small>
-                    </div>
-
-                </div>
+            <h4>🅿️ PayPal</h4>
+            <p>PayPal è un metodo sicuro per pagare con carta di debito, credito o prepagata.</p>
+            <div class="infoBox">
+              <strong>Come funziona?</strong>
+              <ol>
+                <li>Clicca il pulsante qui sotto.</li>
+                <li>Accedi con il tuo account PayPal.</li>
+                <li>Clicca su <b>"INVIA"</b>.</li>
+                <li>Inserisci l'importo concordato e conferma.</li>
+              </ol>
+              <a class="btn brand paypal" href="https://www.paypal.com/paypalme/NinoFiori" target="_blank" style="width:100%; margin-top:10px; justify-content:center;">
+                <svg class="svgLogo" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M7 19H5.2a1 1 0 0 1-1-1.2l2-12A1 1 0 0 1 7.2 5H14a5 5 0 0 1 0 10H10l-.6 4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                </svg>
+                Vai al PayPal →
+              </a>
             </div>
 
+            <h4>💳 Carta di Credito / Apple Pay / Google Pay</h4>
+            <p>Pagamento tramite link sicuro (MyPos o Satispay).</p>
+            <div class="infoBox">
+              <strong>Come funziona?</strong>
+              <ol>
+                <li>Clicca il pulsante qui sotto.</li>
+                <li>Inserisci l'importo concordato.</li>
+                <li>Segui le istruzioni a schermo.</li>
+              </ol>
+              <a class="btn brand cards" href="https://mypos.com/@fioriepiantenino" target="_blank" style="width:100%; margin-top:10px; justify-content:center;">
+                <svg class="svgLogo" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M3 7.5A2.5 2.5 0 0 1 5.5 5h13A2.5 2.5 0 0 1 21 7.5v9A2.5 2.5 0 0 1 18.5 19h-13A2.5 2.5 0 0 1 3 16.5v-9Z" stroke="currentColor" stroke-width="2"/>
+                  <path d="M3 9h18" stroke="currentColor" stroke-width="2"/>
+                  <path d="M7 15h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                Paga con carta →
+              </a>
+            </div>
+          </div>
+
+          <div class="payCard">
+            <h3>🏦 Bonifico, Postepay e Contanti</h3>
+
+            <h4>🏛️ Bonifico Online ISTANTANEO</h4>
+            <p>Per velocizzare l'ordine, usa il bonifico istantaneo.</p>
+            <div class="infoBox">
+              Intestato a: <strong>AWAD MELAD</strong><br>
+              IBAN:<br>
+              <span class="bigNumber">IT98 Y360 8105 1382 5123 3451 236</span>
+            </div>
+
+            <h4>📭 Postepay P2P</h4>
+            <p>Hai l'app Postepay? Paga inviando denaro a un contatto.</p>
+            <div class="infoBox">
+              <div class="payBrandRow" style="margin-top:0;">
+                <a class="btn postepay" href="tel:+393394324010" style="text-decoration:none;">
+                  <svg class="svgLogo" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M3 7.5A2.5 2.5 0 0 1 5.5 5h13A2.5 2.5 0 0 1 21 7.5v9A2.5 2.5 0 0 1 18.5 19h-13A2.5 2.5 0 0 1 3 16.5v-9Z" stroke="currentColor" stroke-width="2"/>
+                    <path d="M3 9h18" stroke="currentColor" stroke-width="2"/>
+                  </svg>
+                  Postepay P2P
+                </a>
+              </div>
+              <ol>
+                <li>Salva questo numero in rubrica: <br><span class="bigNumber">+39 339 432 4010</span></li>
+                <li>Apri l'App Postepay e clicca su <b>P2P</b>.</li>
+                <li>Seleziona il numero appena salvato e invia l'importo.</li>
+              </ol>
+            </div>
+
+            <h4>💶 Contanti o Negozio</h4>
+            <p>
+              Accettiamo <b>contanti</b> presso le nostre sedi.<br>
+              In negozio puoi pagare anche con <b>Bancomat, Carta di Credito</b> e smartphone (NFC).
+            </p>
+          </div>
         </div>
       </div>
     </section>
 
     <section id="sedi">
       <div class="container">
-        <h2>Vieni a trovarci</h2>
+        <div class="sectionTitle">
+          <div>
+            <h2>Vieni a trovarci</h2>
+            <p>Tre sedi a Roma. Clicca per indicazioni.</p>
+          </div>
+        </div>
+
         <div class="locGrid">
-            
-            <div class="loc">
-                <img class="locImg" src="https://image.shutterstock.com/image-vector/flower-shop-building-facade-store-260nw-1049923835.jpg" alt="Shop Icon"> 
-                <div class="addr">Via Chiana / Salaria</div>
-                <div style="color:var(--pink);">Zona Trieste</div>
-                <br>
-                <a class="btn soft" href="#">Indicazioni</a>
-            </div>
+          <div class="loc">
+            <div class="top">
+              <div>
+                <div class="addr">Via Chiana angolo<br/>Via Salaria</div>
+                <div class="zone">Zona Trieste</div>
+              </div>
 
-            <div class="loc">
-                <img class="locImg" src="https://image.shutterstock.com/image-vector/flower-shop-building-facade-store-260nw-1049923835.jpg" alt="Shop Icon">
-                <div class="addr">Piazza Santiago del Cile</div>
-                <div style="color:var(--pink);">Zona Parioli</div>
-                <br>
-                <a class="btn soft" href="#">Indicazioni</a>
+              <!-- Thumb piccola per sede (link al 123rf) -->
+              <a class="locThumbLink" href="https://www.123rf.com/photo_88620048_flower-shop-vector-illustration-on-a-white-background.html" target="_blank" rel="noopener nofollow" aria-label="Apri immagine (123RF)">
+                <!-- Metti qui un file locale che scarichi tu: ./immagini-home/sede-thumb.png -->
+                <img src="./immagini-home/sede-thumb.png" alt="Mini immagine sede" />
+              </a>
             </div>
+            <a class="btn" href="https://maps.app.goo.gl/3Nrreo1iZU4GfKc77" target="_blank" rel="noopener nofollow">Indicazioni ↗</a>
+          </div>
 
-            <div class="loc">
-                <img class="locImg" src="https://image.shutterstock.com/image-vector/flower-shop-building-facade-store-260nw-1049923835.jpg" alt="Shop Icon">
-                <div class="addr">Viale Maresciallo Pilsudski</div>
-                <div style="color:var(--pink);">Zona Parioli</div>
-                <br>
-                <a class="btn soft" href="#">Indicazioni</a>
+          <div class="loc">
+            <div class="top">
+              <div>
+                <div class="addr">Piazza<br/>Santiago del Cile</div>
+                <div class="zone">Zona Parioli</div>
+              </div>
+              <a class="locThumbLink" href="https://www.123rf.com/photo_88620048_flower-shop-vector-illustration-on-a-white-background.html" target="_blank" rel="noopener nofollow" aria-label="Apri immagine (123RF)">
+                <img src="./immagini-home/sede-thumb.png" alt="Mini immagine sede" />
+              </a>
             </div>
+            <a class="btn" href="https://maps.app.goo.gl/mMeSqHSYEeXbsx6a9" target="_blank" rel="noopener nofollow">Indicazioni ↗</a>
+          </div>
 
+          <div class="loc">
+            <div class="top">
+              <div>
+                <div class="addr">Viale Maresciallo<br/>Pilsudski 138</div>
+                <div class="zone">Zona Parioli</div>
+              </div>
+              <a class="locThumbLink" href="https://www.123rf.com/photo_88620048_flower-shop-vector-illustration-on-a-white-background.html" target="_blank" rel="noopener nofollow" aria-label="Apri immagine (123RF)">
+                <img src="./immagini-home/sede-thumb.png" alt="Mini immagine sede" />
+              </a>
+            </div>
+            <a class="btn" href="https://maps.app.goo.gl/gL9RTUafrTYkaxkHA" target="_blank" rel="noopener nofollow">Indicazioni ↗</a>
+          </div>
+        </div>
+
+        <div style="margin-top:10px; color: var(--muted); font-weight: 700; font-size: 13px;">
+          Nota: per usare la mini immagine 123RF, salva un thumbnail come <b>./immagini-home/sede-thumb.png</b> (così non rischi hotlink / blocchi).
+        </div>
+      </div>
+    </section>
+
+    <section id="contatti">
+      <div class="container">
+        <div class="sectionTitle">
+          <div>
+            <h2>Contatti</h2>
+            <p>Scegli il canale più veloce.</p>
+          </div>
+        </div>
+
+        <div class="galleryGrid">
+          <div class="card" style="padding:24px;">
+            <h3 style="margin:0 0 8px;">📞 Telefono</h3>
+            <p style="margin:0; color: var(--muted); font-weight:700;">Per info e ordini rapidi.</p>
+            <div style="margin-top:14px;">
+              <a class="btn" href="tel:+393394324010">+39 339 432 4010</a>
+            </div>
+          </div>
+
+          <div class="card" style="padding:24px;">
+            <h3 style="margin:0 0 8px;">💬 WhatsApp</h3>
+            <p style="margin:0; color: var(--muted); font-weight:700;">Il modo più comodo per mandare foto e dettagli.</p>
+            <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+              <a class="btn brand whatsapp" href="https://wa.me/message/JDH7MM6C6VC7J1" target="_blank" rel="noopener nofollow">
+                <img class="logo" src="./immagini-home/logo-whatsapp.png" alt="Logo WhatsApp" />
+                Scrivici su WhatsApp
+              </a>
+            </div>
+          </div>
+
+          <div class="card" style="padding:24px;">
+            <h3 style="margin:0 0 8px;">🍽️ JustEat / Deliveroo</h3>
+            <p style="margin:0; color: var(--muted); font-weight:700;">Se vuoi “ordine e via”, in stile delivery.</p>
+            <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+              <a class="btn brand justeat" href="https://www.justeat.it/restaurants-piante-e-fiori-di-nino---piazza-santiago-del-cile/menu" target="_blank" rel="noopener nofollow">
+                <img class="logo" src="./immagini-home/logo-justeat.png" alt="Logo JustEat" />
+                JustEat
+              </a>
+              <a class="btn brand deliveroo" href="https://deliveroo.it/it/menu/roma/roma-flaminio/piante-e-fiori-di-nino-piazza-santiago-del-cile" target="_blank" rel="noopener nofollow">
+                <img class="logo" src="./immagini-home/Logo-deliveroo-.jpg" alt="Logo Deliveroo" />
+                Deliveroo
+              </a>
+            </div>
+          </div>
+
+          <div class="card" style="padding:24px;">
+            <h3 style="margin:0 0 8px;">🛒 E-commerce</h3>
+            <p style="margin:0; color: var(--muted); font-weight:700;">
+              Sfoglia, scegli e acquista online. Noi gestiamo preparazione e consegna.
+            </p>
+            <div style="margin-top:14px;">
+              <a class="btn primary" href="https://fiori-italia.it/" target="_blank" rel="noopener nofollow">Vai su fiori-italia.it ↗</a>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
     <footer>
-        <p>© Fiori e Piante di Nino - Roma</p>
+      <div class="container">
+        <div class="row">
+          <div>
+            <b>🌸 Fiori e Piante di Nino — Roma</b><br/>
+            Consegne a Roma · Tel: <a href="tel:+393394324010">+39 339 432 4010</a>
+          </div>
+          <div>
+            <a class="btn" href="#top">Torna su ↑</a>
+          </div>
+        </div>
+      </div>
     </footer>
-
   </main>
 
   <script>
+    // Mobile drawer
     const drawer = document.getElementById('drawer');
     const menuBtn = document.getElementById('menuBtn');
-    function toggleDrawer(){ drawer.classList.toggle('open'); }
-    menuBtn.addEventListener('click', toggleDrawer);
-    drawer.addEventListener('click', (e) => { if(e.target.hasAttribute('data-close')) toggleDrawer(); });
+
+    function openDrawer(){
+      drawer.classList.add('open');
+      drawer.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeDrawer(){
+      drawer.classList.remove('open');
+      drawer.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+    menuBtn?.addEventListener('click', openDrawer);
+    drawer?.addEventListener('click', (e) => {
+      const t = e.target;
+      if(t && (t.matches('[data-close]') || t.matches('.backdrop'))){
+        closeDrawer();
+      }
+    });
+    window.addEventListener('keydown', (e) => {
+      if(e.key === 'Escape' && drawer.classList.contains('open')) closeDrawer();
+    });
   </script>
 </body>
 </html>
