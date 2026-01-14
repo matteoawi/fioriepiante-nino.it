@@ -13,7 +13,608 @@
 
   <style>
     :root{
-      /* Palette: Rosa + Bianco */
+      /* Palette: Rosa + Bianco */<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>💐 Fiori — Fiori e Piante di Nino</title>
+  <meta name="description" content="Galleria Fiori: scegli una foto e ordina su WhatsApp." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --pink:#ff2e8f; --pink2:#ff67b2; --pink3:#ffd1e6;
+      --bg:#fff7fb; --white:#fff;
+      --ink:#1a1220; --ink2:#3b2a43; --muted:#5a4764;
+      --stroke: rgba(255,46,143,.18);
+      --shadow: 0 18px 60px rgba(26,18,32,.12);
+      --shadow2: 0 10px 30px rgba(26,18,32,.10);
+      --rxl:28px; --rmd:16px; --max:1180px;
+      --ease:cubic-bezier(.2,.9,.2,1);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:"Plus Jakarta Sans", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      color:var(--ink);
+      background:
+        radial-gradient(1200px 680px at 15% 10%, rgba(255,46,143,.18), transparent 60%),
+        radial-gradient(900px 520px at 85% 12%, rgba(255,103,178,.16), transparent 62%),
+        radial-gradient(900px 620px at 55% 90%, rgba(255,209,230,.55), transparent 62%),
+        linear-gradient(180deg, #fff2f8, var(--bg));
+      overflow-x:hidden;
+    }
+    a{color:inherit;text-decoration:none}
+    .container{width:min(var(--max), calc(100% - 40px)); margin-inline:auto}
+
+    .nav{
+      position:sticky; top:0; z-index:100;
+      padding:12px 0;
+      background:rgba(255,255,255,.78);
+      border-bottom:1px solid rgba(255,46,143,.14);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+    .row{display:flex;align-items:center;justify-content:space-between;gap:14px}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:-.2px}
+    .brandLogo{
+      width:46px;height:46px;border-radius:16px;display:grid;place-items:center;
+      background:linear-gradient(135deg, rgba(255,46,143,.14), rgba(255,209,230,.70));
+      border:1px solid rgba(255,46,143,.14);
+      box-shadow:var(--shadow2);
+      overflow:hidden; flex:0 0 auto;
+    }
+    .brandLogo img{width:36px;height:36px;object-fit:contain;display:block}
+    .brand small{display:block;font-weight:600;color:var(--muted);margin-top:2px}
+
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:10px;
+      padding:12px 14px;border-radius:16px;
+      border:1px solid rgba(255,46,143,.18);
+      background:rgba(255,255,255,.72);
+      font-weight:800;
+      box-shadow:var(--shadow2);
+      transition:transform .2s var(--ease), background .2s var(--ease), box-shadow .2s var(--ease);
+      user-select:none;
+      white-space:nowrap;
+    }
+    .btn:hover{transform:translateY(-1px);background:rgba(255,255,255,.94);box-shadow:0 16px 40px rgba(26,18,32,.12)}
+    .btn.primary{
+      border:none;color:#fff;
+      background:linear-gradient(135deg,var(--pink),var(--pink2));
+      box-shadow:0 18px 54px rgba(255,46,143,.22);
+    }
+    .btn.primary:hover{box-shadow:0 22px 70px rgba(255,46,143,.26)}
+    .btn.soft{background:rgba(255,46,143,.08);border:1px solid rgba(255,46,143,.20)}
+    .btn .logo{width:18px;height:18px;object-fit:contain;filter: drop-shadow(0 8px 14px rgba(26,18,32,.14));}
+
+    section{padding: 22px 0 38px}
+    h1{margin:0;font-size:clamp(28px,3vw,40px);letter-spacing:-.8px}
+    .sub{margin:8px 0 0;color:var(--muted);font-weight:700;line-height:1.55;max-width:75ch}
+    .topbar{
+      margin-top:16px;
+      display:flex; gap:10px; flex-wrap:wrap;
+      align-items:center; justify-content:space-between;
+    }
+    .ctas{display:flex;gap:10px;flex-wrap:wrap}
+    .hint{margin-top:10px;color:var(--muted);font-weight:700;font-size:13px}
+
+    .grid{
+      margin-top:18px;
+      display:grid;
+      grid-template-columns:repeat(4, 1fr);
+      gap:14px;
+    }
+    @media (max-width: 920px){ .grid{grid-template-columns:repeat(2, 1fr);} }
+
+    .tile{
+      border-radius:var(--rxl);
+      overflow:hidden;
+      border:1px solid rgba(255,46,143,.16);
+      box-shadow:var(--shadow);
+      background:#fff;
+      position:relative;
+      aspect-ratio: 1 / 1;
+      cursor:pointer;
+    }
+
+    .skeleton{
+      position:absolute; inset:0;
+      background:
+        radial-gradient(900px 320px at 15% 0%, rgba(255,46,143,.14), transparent 60%),
+        linear-gradient(90deg,
+          rgba(255,255,255,.55) 0%,
+          rgba(255,209,230,.70) 40%,
+          rgba(255,255,255,.55) 80%
+        );
+      background-size: 100% 100%, 320% 100%;
+      animation: shimmer 1.15s linear infinite;
+    }
+    @keyframes shimmer{ 0%{background-position:0 0,0 0} 100%{background-position:0 0,320% 0} }
+
+    .tile img{
+      width:100%; height:100%;
+      object-fit:cover;
+      display:block;
+      transform: scale(1.02);
+      transition: transform .35s var(--ease), opacity .25s var(--ease);
+      opacity:0;
+    }
+    .tile.loaded img{opacity:1}
+    .tile:hover img{transform: scale(1.06)}
+
+    .cap{
+      position:absolute; left:12px; right:12px; bottom:12px;
+      padding:10px 12px;
+      border-radius:16px;
+      background: rgba(255,255,255,.84);
+      border:1px solid rgba(255,46,143,.14);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: var(--shadow2);
+      font-weight:800;
+      display:flex; justify-content:space-between; gap:10px; align-items:center;
+    }
+    .cap span{color:var(--muted);font-weight:700}
+
+    .pager{
+      margin-top: 18px;
+      display:flex; gap:10px; flex-wrap:wrap;
+      align-items:center; justify-content:center;
+    }
+    .status{
+      color: var(--muted);
+      font-weight: 800;
+      font-size: 13px;
+    }
+
+    /* Floating WhatsApp CTA */
+    .floatCta{ position:fixed; right:16px; bottom:16px; z-index:120; }
+    .fab{
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      padding: 14px 16px;
+      border-radius: 18px;
+      border:none;
+      background: linear-gradient(135deg, var(--pink), var(--pink2));
+      color:white; font-weight:900;
+      box-shadow: 0 22px 70px rgba(255,46,143,.26);
+      cursor:pointer;
+      transition: transform .2s var(--ease);
+    }
+    .fab:hover{ transform: translateY(-1px); }
+    .fab img{ width:20px; height:20px; object-fit:contain; filter: drop-shadow(0 8px 14px rgba(26,18,32,.16)); }
+
+    /* Lightbox */
+    .lb{ position:fixed; inset:0; display:none; z-index:200; }
+    .lb.open{display:block}
+    .lb .backdrop{ position:absolute; inset:0; background: rgba(20,12,26,.42); backdrop-filter: blur(6px); }
+    .lb .panel{
+      position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+      width:min(980px, calc(100% - 28px));
+      border-radius: var(--rxl);
+      overflow:hidden;
+      border: 1px solid rgba(255,46,143,.18);
+      background: rgba(255,255,255,.92);
+      box-shadow: var(--shadow);
+    }
+    .lb .inner{ display:grid; grid-template-columns: 1.4fr .9fr; }
+    @media (max-width:900px){ .lb .inner{ grid-template-columns: 1fr; } }
+    .lb .imgWrap{ position:relative; background: rgba(255,46,143,.06); min-height:360px; display:grid; place-items:center; }
+    .lb .imgWrap img{ width:100%; height:100%; max-height:76vh; object-fit:contain; background:#fff; display:block; }
+    .lb .side{ padding:18px; border-left:1px solid rgba(255,46,143,.14); }
+    @media (max-width:900px){ .lb .side{ border-left:none; border-top:1px solid rgba(255,46,143,.14); } }
+    .lb h2{ margin:0; font-size:20px; letter-spacing:-.4px; }
+    .lb p{ margin:8px 0 0; color:var(--muted); font-weight:700; line-height:1.55; }
+    .lb .actions{ margin-top:14px; display:flex; gap:10px; flex-wrap:wrap; }
+    .mono{
+      margin-top: 12px;
+      padding: 12px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,46,143,.14);
+      background: rgba(255,255,255,.85);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 12.5px;
+      color: var(--ink);
+      overflow:auto;
+      line-height: 1.45;
+    }
+    .xbtn{
+      position:absolute; right:10px; top:10px;
+      width:42px; height:42px; border-radius:16px;
+      border:1px solid rgba(255,46,143,.16);
+      background: rgba(255,255,255,.82);
+      box-shadow: var(--shadow2);
+      cursor:pointer;
+      display:grid; place-items:center;
+      transition: transform .2s var(--ease), background .2s var(--ease);
+      z-index: 5;
+    }
+    .xbtn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.95); }
+
+    footer{
+      padding: 24px 0 42px;
+      border-top:1px solid rgba(255,46,143,.14);
+      background:rgba(255,255,255,.72);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    footer .foot{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;color:var(--muted);font-weight:700}
+  </style>
+</head>
+
+<body>
+  <header class="nav">
+    <div class="container">
+      <div class="row">
+        <a class="brand" href="../#top" aria-label="Torna alla Home">
+          <span class="brandLogo">
+            <img src="../immagini-home/fiori%20e%20piante%20di%20nino%20logo%20nero.png" alt="Fiori e Piante di Nino" />
+          </span>
+          <div>
+            Fiori e Piante di Nino
+            <small>Galleria · Fiori</small>
+          </div>
+        </a>
+
+        <div class="ctas">
+          <a class="btn" href="../">← Torna alla Home</a>
+          <a class="btn primary" id="whatsAppTop" href="#" rel="noopener nofollow">
+            <img class="logo" src="../immagini-home/logo-whatsapp.png" alt="">
+            Ordina su WhatsApp
+          </a>
+          <a class="btn soft" href="https://fiori-italia.it/" target="_blank" rel="noopener nofollow">🛒 E-commerce</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <div class="container">
+        <h1>💐 Fiori</h1>
+        <p class="sub">
+          Carica leggero: mostriamo poche foto per volta (perfetto su mobile). Clicca una foto per aprirla e avere WhatsApp pronto.
+        </p>
+
+        <div class="topbar">
+          <div class="ctas">
+            <a class="btn" href="https://www.justeat.it/restaurants-piante-e-fiori-di-nino---piazza-santiago-del-cile/menu" target="_blank" rel="noopener nofollow">
+              <img class="logo" src="../immagini-home/logo-justeat.png" alt="">JustEat
+            </a>
+            <a class="btn" href="https://deliveroo.it/it/menu/roma/roma-flaminio/piante-e-fiori-di-nino-piazza-santiago-del-cile" target="_blank" rel="noopener nofollow">
+              <img class="logo" src="../immagini-home/Logo-deliveroo-.jpg" alt="">Deliveroo
+            </a>
+          </div>
+          <div class="ctas">
+            <a class="btn" href="../#galleria">← Torna alle categorie</a>
+            <a class="btn primary" id="whatsAppCta" href="#" rel="noopener nofollow">Scrivici ora</a>
+          </div>
+        </div>
+
+        <div class="hint">Le immagini si scaricano solo quando stanno per entrare in vista (max 4 insieme).</div>
+
+        <div class="grid" id="grid" aria-label="Galleria Fiori"></div>
+
+        <div class="pager">
+          <button class="btn primary" id="loadMore">Carica altre</button>
+          <span class="status" id="status"></span>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <div class="foot">
+          <div>🌸 Fiori e Piante di Nino — Roma · <a href="tel:+393394324010">+39 339 432 4010</a></div>
+          <div style="display:flex; gap:10px; flex-wrap:wrap">
+            <a class="btn" href="../">← Home</a>
+            <a class="btn primary" href="https://fiori-italia.it/" target="_blank" rel="noopener nofollow">🛒 Compra online</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <div class="floatCta">
+    <a class="fab" id="fabWhatsapp" href="#" rel="noopener nofollow" aria-label="Ordina su WhatsApp">
+      <img src="../immagini-home/logo-whatsapp.png" alt="">Ordina su WhatsApp
+    </a>
+  </div>
+
+  <!-- Lightbox -->
+  <div class="lb" id="lb" aria-hidden="true">
+    <div class="backdrop" id="lbBackdrop"></div>
+    <div class="panel" role="dialog" aria-label="Anteprima foto">
+      <button class="xbtn" id="lbClose" aria-label="Chiudi">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+
+      <div class="inner">
+        <div class="imgWrap">
+          <img id="lbImg" alt="Foto selezionata">
+        </div>
+        <div class="side">
+          <h2 id="lbTitle">Foto</h2>
+          <p>
+            Premi WhatsApp: apriamo la chat e ti copiamo il messaggio negli appunti (con link alla foto). Incolla e invia 💗
+          </p>
+
+          <div class="actions">
+            <a class="btn primary" id="lbWhatsApp" href="#" rel="noopener nofollow">
+              <img class="logo" src="../immagini-home/logo-whatsapp.png" alt="">
+              Chiedi questa foto
+            </a>
+            <button class="btn" id="lbCopyLink">Copia link foto</button>
+            <button class="btn soft" id="lbCopyMsg">Copia messaggio</button>
+            <a class="btn" id="lbOpenImg" href="#" target="_blank" rel="noopener nofollow">Apri foto ↗</a>
+          </div>
+
+          <div class="mono" id="lbBox"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ====== CONFIG ======
+    const WHATSAPP_TO = "https://wa.me/message/JDH7MM6C6VC7J1";
+    const TOTAL = 62;
+    const FILES = Array.from({length: TOTAL}, (_, i) => `fiori-${i+1}.jpg`);
+
+    // paginazione
+    const PAGE_SIZE_DESKTOP = 16;
+    const PAGE_SIZE_MOBILE = 12;
+    const PAGE_SIZE = window.matchMedia("(max-width: 920px)").matches ? PAGE_SIZE_MOBILE : PAGE_SIZE_DESKTOP;
+
+    // loader concurrency
+    const MAX_CONCURRENT = 4;
+
+    // ====== ELEMENTS ======
+    const grid = document.getElementById("grid");
+    const loadMoreBtn = document.getElementById("loadMore");
+    const statusEl = document.getElementById("status");
+
+    // ====== WhatsApp generic CTA ======
+    const genericText = [
+      "Ciao! 👋 Vorrei ordinare dei fiori 🌸",
+      "Mi dici disponibilità e prezzi?",
+      "",
+      "Budget:",
+      "Colore/i preferiti:",
+      "Indirizzo consegna:",
+      "Orario consegna:"
+    ].join("\\n");
+
+    async function copyToClipboard(text){
+      try { await navigator.clipboard.writeText(text); } catch(e) {}
+    }
+
+    function wireGenericCTA(id){
+      const el = document.getElementById(id);
+      if(!el) return;
+      el.href = WHATSAPP_TO;
+      el.addEventListener("click", async () => { await copyToClipboard(genericText); }, { once:true });
+      el.title = "Apri WhatsApp (testo copiato negli appunti)";
+    }
+    wireGenericCTA("whatsAppTop");
+    wireGenericCTA("whatsAppCta");
+    wireGenericCTA("fabWhatsapp");
+
+    // ====== Build tile (no src until scheduled) ======
+    function makeTile(fileName){
+      const tile = document.createElement("div");
+      tile.className = "tile";
+      tile.dataset.file = fileName;
+
+      const sk = document.createElement("div");
+      sk.className = "skeleton";
+
+      const img = document.createElement("img");
+      img.alt = fileName;
+      img.dataset.src = "./" + fileName; // immagini nella stessa cartella /fiori/
+      img.decoding = "async";
+      img.loading = "lazy";
+
+      const cap = document.createElement("div");
+      cap.className = "cap";
+      cap.innerHTML = `<div>${fileName}</div><span>clicca →</span>`;
+
+      tile.appendChild(sk);
+      tile.appendChild(img);
+      tile.appendChild(cap);
+
+      tile.addEventListener("click", () => openLightbox(fileName, img.dataset.src));
+      return tile;
+    }
+
+    // ====== Progressive loader: IO + queue + concurrency ======
+    const queue = [];
+    let active = 0;
+
+    function enqueue(img){
+      if (img.dataset.queued === "1" || img.dataset.loaded === "1") return;
+      img.dataset.queued = "1";
+      queue.push(img);
+      pump();
+    }
+
+    function pump(){
+      while(active < MAX_CONCURRENT && queue.length){
+        const img = queue.shift();
+        if(!img || img.dataset.loaded === "1") continue;
+        active++;
+        loadImg(img).finally(() => {
+          active--;
+          pump();
+        });
+      }
+    }
+
+    function loadImg(img){
+      return new Promise((resolve) => {
+        const src = img.dataset.src;
+        if(!src) return resolve();
+
+        img.addEventListener("load", () => {
+          img.dataset.loaded = "1";
+          const tile = img.closest(".tile");
+          tile?.classList.add("loaded");
+          const sk = tile?.querySelector(".skeleton");
+          if(sk) sk.style.display = "none";
+          resolve();
+        }, { once:true });
+
+        img.addEventListener("error", () => {
+          const tile = img.closest(".tile");
+          const cap = tile?.querySelector(".cap");
+          if(cap) cap.innerHTML = `<div>${tile.dataset.file}</div><span>errore</span>`;
+          const sk = tile?.querySelector(".skeleton");
+          if(sk) sk.style.display = "none";
+          img.style.opacity = "1";
+          img.style.objectFit = "contain";
+          img.style.background = "rgba(255,46,143,.06)";
+          resolve();
+        }, { once:true });
+
+        img.src = src; // ✅ qui parte davvero il download
+      });
+    }
+
+    let io = null;
+    function ensureObserver(){
+      if(io) return;
+      io = new IntersectionObserver((entries) => {
+        for(const e of entries){
+          if(e.isIntersecting){
+            const img = e.target.querySelector("img");
+            if(img) enqueue(img);
+            io.unobserve(e.target);
+          }
+        }
+      }, { root:null, rootMargin:"700px 0px", threshold:0.01 });
+    }
+
+    function observeNewTiles(tiles){
+      ensureObserver();
+      tiles.forEach(t => io.observe(t));
+    }
+
+    // ====== Pagination (“Carica altre”) ======
+    let rendered = 0;
+
+    function updateStatus(){
+      statusEl.textContent = `Mostrate: ${rendered}/${TOTAL}`;
+      if(rendered >= TOTAL){
+        loadMoreBtn.disabled = true;
+        loadMoreBtn.textContent = "Tutte caricate ✅";
+        loadMoreBtn.style.opacity = ".65";
+        loadMoreBtn.style.cursor = "not-allowed";
+      }
+    }
+
+    function renderNext(){
+      const next = FILES.slice(rendered, rendered + PAGE_SIZE);
+      const tiles = next.map(makeTile);
+      tiles.forEach(t => grid.appendChild(t));
+      observeNewTiles(tiles);
+      rendered += next.length;
+      updateStatus();
+    }
+
+    loadMoreBtn.addEventListener("click", renderNext);
+
+    // prima pagina subito
+    renderNext();
+
+    // ====== Lightbox ======
+    const lb = document.getElementById("lb");
+    const lbBackdrop = document.getElementById("lbBackdrop");
+    const lbClose = document.getElementById("lbClose");
+    const lbImg = document.getElementById("lbImg");
+    const lbTitle = document.getElementById("lbTitle");
+    const lbWhatsApp = document.getElementById("lbWhatsApp");
+    const lbCopyLink = document.getElementById("lbCopyLink");
+    const lbCopyMsg = document.getElementById("lbCopyMsg");
+    const lbOpenImg = document.getElementById("lbOpenImg");
+    const lbBox = document.getElementById("lbBox");
+
+    let currentMsg = "";
+    let currentUrl = "";
+
+    function absUrl(rel){
+      try{ return new URL(rel, window.location.href).href; } catch(e){ return rel; }
+    }
+
+    function buildMsg(fileName, photoUrl){
+      return [
+        "Ciao! 👋",
+        "Mi interessa questa foto dalla galleria Fiori:",
+        `• ${fileName}`,
+        "",
+        "Link diretto alla foto:",
+        photoUrl,
+        "",
+        "Budget:",
+        "Colore/i preferiti:",
+        "Indirizzo consegna:",
+        "Orario consegna:",
+        "",
+        "Grazie! 🌸"
+      ].join("\\n");
+    }
+
+    function openLightbox(fileName, relSrc){
+      const photoUrl = absUrl(relSrc || ("./" + fileName));
+      currentUrl = photoUrl;
+      currentMsg = buildMsg(fileName, photoUrl);
+
+      lbTitle.textContent = `Selezionata: ${fileName}`;
+      lbImg.src = photoUrl;
+      lbOpenImg.href = photoUrl;
+
+      lbWhatsApp.href = WHATSAPP_TO;
+      lbWhatsApp.onclick = async () => { await copyToClipboard(currentMsg); };
+
+      lbBox.textContent = `LINK FOTO:\\n${photoUrl}\\n\\nMESSAGGIO (premi “Copia messaggio” o WhatsApp):\\n${currentMsg}`;
+
+      lb.classList.add("open");
+      lb.setAttribute("aria-hidden","false");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeLightbox(){
+      lb.classList.remove("open");
+      lb.setAttribute("aria-hidden","true");
+      document.body.style.overflow = "";
+      lbImg.src = "";
+    }
+
+    lbBackdrop.addEventListener("click", closeLightbox);
+    lbClose.addEventListener("click", closeLightbox);
+    window.addEventListener("keydown", (e)=>{ if(e.key==="Escape") closeLightbox(); });
+
+    lbCopyLink.addEventListener("click", async ()=>{
+      await copyToClipboard(currentUrl);
+      lbCopyLink.textContent = "Copiato ✅";
+      setTimeout(()=> lbCopyLink.textContent="Copia link foto", 1200);
+    });
+
+    lbCopyMsg.addEventListener("click", async ()=>{
+      await copyToClipboard(currentMsg);
+      lbCopyMsg.textContent = "Copiato ✅";
+      setTimeout(()=> lbCopyMsg.textContent="Copia messaggio", 1200);
+    });
+  </script>
+</body>
+</html>
+
       --pink: #ff2e8f;
       --pink-2: #ff67b2;
       --pink-3: #ffd1e6;
@@ -1006,3 +1607,4 @@
   </script>
 </body>
 </html>
+
