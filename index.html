@@ -6,288 +6,260 @@
   <title>🌸 Fiori e Piante di Nino — Roma</title>
   <meta name="description" content="Fiori per ogni occasione. Consegne a Roma! Ordina su WhatsApp, JustEat, Deliveroo oppure sul nuovo e-commerce." />
 
-  <meta property="og:title" content="🌸 Fiori e Piante di Nino — Roma" />
-  <meta property="og:description" content="Bouquet, composizioni, piante, funebri e addobbi. Consegne a Roma." />
-  <meta property="og:image" content="https://fioriepiante-nino.it/_assets/images/103905e843316bcb63f7c56bb3b134c1.jpg" />
+  <!-- Font (pulito e moderno) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --bg0: 255 214 235;     /* rosa pastel */
-      --bg1: 225 255 240;     /* verde mint */
-      --fg: 35 18 32;
-      --muted: 90 66 84;
+      /* Palette: Rosa + Bianco */
+      --pink: #ff2e8f;
+      --pink-2: #ff67b2;
+      --pink-3: #ffd1e6;
 
-      --glass: 255 255 255;
-      --glassA: .55;
-      --glassB: .72;
+      --bg: #fff7fb;
+      --white: #ffffff;
 
-      --strokeA: 255 255 255 / .55;
-      --strokeB: 255 255 255 / .78;
+      /* Testi: super leggibili */
+      --ink: #1a1220;
+      --ink-2: #3b2a43;
+      --muted: #5a4764;
 
-      --shadow: 0 24px 90px rgba(20,10,18,.18);
-      --shadowSoft: 0 14px 44px rgba(20,10,18,.12);
-
-      --pink: 255 46 143;     /* principale */
-      --pink2: 255 130 196;   /* rosa chiaro */
-      --green: 50 210 140;    /* verde principale */
-      --green2: 140 255 205;  /* verde chiaro */
+      /* UI */
+      --stroke: rgba(255, 46, 143, 0.18);
+      --stroke-2: rgba(255, 46, 143, 0.28);
+      --shadow: 0 18px 60px rgba(26,18,32,.12);
+      --shadow-2: 0 10px 30px rgba(26,18,32,.10);
 
       --radius-xl: 28px;
       --radius-lg: 22px;
       --radius-md: 16px;
 
-      --blur: 16px;
-      --max: 1160px;
-
+      --max: 1180px;
       --ease: cubic-bezier(.2,.9,.2,1);
     }
 
     *{ box-sizing:border-box; }
     html, body{ height:100%; }
     html{ scroll-behavior:smooth; }
-
     body{
       margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      color: rgb(var(--fg));
+      font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      color: var(--ink);
       background:
-        radial-gradient(1200px 900px at 12% 10%, rgba(var(--pink), .22), transparent 56%),
-        radial-gradient(1000px 900px at 88% 14%, rgba(var(--green), .18), transparent 58%),
-        radial-gradient(1100px 900px at 60% 92%, rgba(var(--pink2), .18), transparent 60%),
-        radial-gradient(900px 800px at 35% 75%, rgba(var(--green2), .16), transparent 62%),
-        linear-gradient(180deg, rgb(var(--bg0)), rgb(var(--bg1)));
+        radial-gradient(1200px 680px at 15% 10%, rgba(255,46,143,.18), transparent 60%),
+        radial-gradient(900px 520px at 85% 12%, rgba(255,103,178,.16), transparent 62%),
+        radial-gradient(900px 620px at 55% 90%, rgba(255,209,230,.55), transparent 62%),
+        linear-gradient(180deg, #fff2f8, var(--bg));
       overflow-x:hidden;
     }
 
     a{ color:inherit; text-decoration:none; }
     .container{ width:min(var(--max), calc(100% - 40px)); margin-inline:auto; }
 
-    /* Ambient blobs */
-    .blobs{ position:fixed; inset:0; pointer-events:none; z-index:-1; filter: blur(44px) saturate(140%); opacity:.95; }
+    /* Soft blobs (rosa, non casino) */
+    .blobs{ position:fixed; inset:0; pointer-events:none; z-index:-1; filter: blur(48px); opacity:.90; }
     .blob{
-      position:absolute;
-      width: 520px; height: 520px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 30% 30%, rgba(var(--pink), .55), rgba(var(--green), .20) 56%, transparent 72%);
+      position:absolute; width: 520px; height: 520px; border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, rgba(255,46,143,.40), rgba(255,103,178,.18) 55%, transparent 70%);
       animation: float 16s var(--ease) infinite;
-      mix-blend-mode: multiply;
     }
     .blob.b2{
-      width: 600px; height: 600px;
-      left:auto; right:-170px; top:120px;
-      background: radial-gradient(circle at 30% 30%, rgba(var(--green), .50), rgba(var(--pink2), .22) 56%, transparent 74%);
-      animation-duration: 18s;
-      animation-delay: -6s;
+      width: 620px; height: 620px; right:-240px; top:80px;
+      background: radial-gradient(circle at 30% 30%, rgba(255,103,178,.35), rgba(255,209,230,.55) 55%, transparent 70%);
+      animation-duration: 18s; animation-delay: -5s;
     }
     .blob.b3{
-      width: 640px; height: 640px;
-      top:auto; bottom:-240px; left: 8%;
-      background: radial-gradient(circle at 30% 30%, rgba(var(--pink2), .48), rgba(var(--green2), .20) 56%, transparent 74%);
-      animation-duration: 20s;
-      animation-delay: -10s;
+      width: 700px; height: 700px; left:-260px; bottom:-320px;
+      background: radial-gradient(circle at 30% 30%, rgba(255,209,230,.70), rgba(255,46,143,.15) 55%, transparent 70%);
+      animation-duration: 20s; animation-delay: -9s;
     }
     @keyframes float{
-      0%{ transform: translate(-40px, -30px) scale(1); }
-      50%{ transform: translate(40px, 30px) scale(1.08); }
-      100%{ transform: translate(-40px, -30px) scale(1); }
+      0%{ transform: translate(-30px, -20px) scale(1); }
+      50%{ transform: translate(30px, 20px) scale(1.06); }
+      100%{ transform: translate(-30px, -20px) scale(1); }
     }
     @media (prefers-reduced-motion: reduce){
       .blob{ animation:none !important; }
-      *{ scroll-behavior:auto !important; }
+      html{ scroll-behavior:auto; }
     }
 
-    /* Glass */
-    .glass{
-      background: rgba(var(--glass), var(--glassA));
-      border: 1px solid rgba(var(--strokeA));
-      box-shadow: var(--shadowSoft);
-      backdrop-filter: blur(var(--blur));
-      -webkit-backdrop-filter: blur(var(--blur));
-    }
-    .glass.strong{
-      background: rgba(var(--glass), var(--glassB));
-      border-color: rgba(var(--strokeB));
+    /* Glass card (bianco pulito) */
+    .card{
+      background: rgba(255,255,255,.74);
+      border: 1px solid var(--stroke);
+      border-radius: var(--radius-xl);
       box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
 
     /* Nav */
     .nav{
-      position:sticky; top:0; z-index:50;
-      padding: 14px 0;
-      backdrop-filter: blur(calc(var(--blur) + 8px));
-      -webkit-backdrop-filter: blur(calc(var(--blur) + 8px));
-      border-bottom: 1px solid rgba(var(--strokeA));
-      background: rgba(255,255,255,.42);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 12px 0;
+      background: rgba(255,255,255,.72);
+      border-bottom: 1px solid rgba(255,46,143,.14);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
     }
-    .nav .row{ display:flex; align-items:center; justify-content:space-between; gap:14px; }
-
-    .brand{ display:flex; align-items:center; gap:12px; font-weight: 950; letter-spacing: .2px; }
-    .brand .logoWrap{
-      width: 44px; height: 44px;
-      border-radius: 14px;
+    .nav .row{
+      display:flex; align-items:center; justify-content:space-between; gap:14px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px;
+      font-weight: 800;
+      letter-spacing: -.2px;
+      min-width: 260px;
+    }
+    .brandLogo{
+      width: 46px; height: 46px;
+      border-radius: 16px;
       display:grid; place-items:center;
-      background: radial-gradient(circle at 30% 30%, rgba(var(--pink), .20), rgba(var(--green), .16));
-      border: 1px solid rgba(255,255,255,.62);
-      box-shadow: 0 16px 38px rgba(20,10,18,.10);
+      background: linear-gradient(135deg, rgba(255,46,143,.14), rgba(255,209,230,.70));
+      border: 1px solid rgba(255,46,143,.14);
+      box-shadow: var(--shadow-2);
       overflow:hidden;
+      flex: 0 0 auto;
     }
-    .brand img{
-      width: 34px; height: 34px;
-      object-fit: contain;
+    .brandLogo img{
+      width: 36px; height: 36px; object-fit: contain; display:block;
+    }
+    .brand small{
       display:block;
-      filter: drop-shadow(0 10px 16px rgba(20,10,18,.12));
+      font-weight: 600;
+      color: var(--muted);
+      margin-top: 2px;
+      letter-spacing: 0;
     }
-    .brand small{ display:block; font-weight:750; color: rgb(var(--muted)); margin-top:-2px; }
 
     .navlinks{
-      display:flex; align-items:center; gap: 10px;
-      padding: 8px;
+      display:flex; align-items:center; gap: 8px;
+      padding: 6px;
       border-radius: 999px;
-      border: 1px solid rgba(var(--strokeA));
-      background: rgba(255,255,255,.40);
+      border: 1px solid rgba(255,46,143,.16);
+      background: rgba(255,255,255,.60);
     }
     .navlinks a{
       padding: 10px 12px;
       border-radius: 999px;
-      font-weight: 850;
-      color: rgb(var(--muted));
-      transition: transform .2s var(--ease), background .2s var(--ease), color .2s var(--ease);
+      font-weight: 700;
+      color: var(--ink-2);
+      transition: background .2s var(--ease), transform .2s var(--ease);
+      white-space: nowrap;
     }
     .navlinks a:hover{
-      background: rgba(255,255,255,.55);
-      color: rgb(var(--fg));
+      background: rgba(255,46,143,.10);
       transform: translateY(-1px);
     }
 
     .navactions{ display:flex; align-items:center; gap:10px; }
     .iconbtn{
-      display:inline-flex; align-items:center; justify-content:center;
       width: 44px; height: 44px;
-      border-radius: 14px;
-      border: 1px solid rgba(var(--strokeA));
-      background: rgba(255,255,255,.45);
-      transition: transform .2s var(--ease), background .2s var(--ease);
+      border-radius: 16px;
+      border: 1px solid rgba(255,46,143,.16);
+      background: rgba(255,255,255,.65);
+      display:grid; place-items:center;
+      box-shadow: var(--shadow-2);
       cursor:pointer;
+      transition: transform .2s var(--ease), background .2s var(--ease);
     }
-    .iconbtn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.60); }
-
+    .iconbtn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.88); }
     .hamburger{ display:none; }
     @media (max-width: 980px){
       .navlinks{ display:none; }
-      .hamburger{ display:inline-flex; }
+      .hamburger{ display:grid; }
     }
 
     /* Drawer */
-    .drawer{ position: fixed; inset: 0; z-index: 80; display:none; }
+    .drawer{ position: fixed; inset:0; z-index:200; display:none; }
     .drawer.open{ display:block; }
-    .drawer .backdrop{ position:absolute; inset:0; background: rgba(25,10,20,.35); }
+    .drawer .backdrop{ position:absolute; inset:0; background: rgba(20,12,26,.25); }
     .drawer .panel{
-      position:absolute; right: 14px; top: 70px;
+      position:absolute; right: 14px; top: 74px;
       width: min(420px, calc(100% - 28px));
       border-radius: var(--radius-xl);
       overflow:hidden;
+      background: rgba(255,255,255,.92);
+      border: 1px solid rgba(255,46,143,.18);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
     }
-    .drawer .panel .inner{ padding: 14px; }
+    .drawer .inner{ padding: 14px; }
     .drawer a{
       display:flex; align-items:center; justify-content:space-between;
       padding: 14px 14px;
       border-radius: 16px;
-      font-weight: 900;
-      color: rgb(var(--fg));
-      background: rgba(255,255,255,.45);
-      border: 1px solid rgba(var(--strokeA));
+      font-weight: 800;
+      color: var(--ink);
+      background: rgba(255,46,143,.06);
+      border: 1px solid rgba(255,46,143,.14);
       margin-top: 10px;
     }
-    .drawer a span{ color: rgb(var(--muted)); font-weight:800; }
+    .drawer a span{ color: var(--muted); font-weight: 700; }
 
     /* Buttons */
     .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap: 10px;
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
       padding: 12px 14px;
       border-radius: 16px;
-      border: 1px solid rgba(var(--strokeA));
-      background: rgba(255,255,255,.45);
-      font-weight: 950;
-      letter-spacing: .2px;
-      transition: transform .2s var(--ease), background .2s var(--ease), border-color .2s var(--ease), box-shadow .2s var(--ease);
+      border: 1px solid rgba(255,46,143,.18);
+      background: rgba(255,255,255,.70);
+      color: var(--ink);
+      font-weight: 800;
+      box-shadow: var(--shadow-2);
+      transition: transform .2s var(--ease), box-shadow .2s var(--ease), background .2s var(--ease);
       user-select:none;
-      box-shadow: 0 14px 30px rgba(20,10,18,.10);
     }
-    .btn:hover{
-      transform: translateY(-1px);
-      background: rgba(255,255,255,.60);
-      border-color: rgba(var(--strokeB));
-      box-shadow: 0 18px 44px rgba(20,10,18,.14);
-    }
-    .btn.pink{
-      border:none;
+    .btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.92); }
+    .btn.primary{
+      border: none;
       color: white;
-      background: linear-gradient(135deg, rgba(var(--pink), .95), rgba(var(--pink2), .90));
-      box-shadow: 0 18px 54px rgba(255,46,143,.18);
+      background: linear-gradient(135deg, var(--pink), var(--pink-2));
+      box-shadow: 0 18px 54px rgba(255,46,143,.22);
     }
-    .btn.green{
-      border:none;
-      color: white;
-      background: linear-gradient(135deg, rgba(var(--green), .95), rgba(var(--green2), .90));
-      box-shadow: 0 18px 54px rgba(50,210,140,.16);
+    .btn.primary:hover{ box-shadow: 0 22px 70px rgba(255,46,143,.26); }
+    .btn.soft{
+      background: rgba(255,46,143,.08);
+      border: 1px solid rgba(255,46,143,.20);
     }
-
     .btn .logo{
-      width: 18px; height: 18px;
-      object-fit: contain;
-      filter: drop-shadow(0 10px 18px rgba(20,10,18,.18));
-    }
-
-    /* Sections */
-    section{ padding: 42px 0; }
-    .sectionTitle{
-      display:flex; align-items:flex-end; justify-content:space-between;
-      gap: 16px;
-      margin-bottom: 16px;
-    }
-    .sectionTitle h2{
-      margin:0;
-      font-size: clamp(22px, 2.3vw, 30px);
-      letter-spacing: -.6px;
-    }
-    .sectionTitle p{
-      margin:0;
-      color: rgb(var(--muted));
-      max-width: 62ch;
-      line-height:1.4;
-      font-weight: 750;
+      width: 18px; height: 18px; object-fit: contain;
+      filter: drop-shadow(0 8px 14px rgba(26,18,32,.14));
     }
 
     /* Hero */
-    .hero{ padding: 34px 0 18px; }
+    .hero{ padding: 26px 0 10px; }
     .heroGrid{
       display:grid;
       grid-template-columns: 1.25fr .95fr;
-      gap: 18px;
+      gap: 16px;
       align-items: stretch;
     }
     @media (max-width: 980px){ .heroGrid{ grid-template-columns: 1fr; } }
 
-    .heroCard{
+    .heroMain{
       border-radius: var(--radius-xl);
       overflow:hidden;
       position:relative;
       min-height: 560px;
       box-shadow: var(--shadow);
+      border: 1px solid rgba(255,46,143,.16);
+      background:
+        radial-gradient(900px 520px at 15% 12%, rgba(255,46,143,.18), transparent 60%),
+        radial-gradient(900px 520px at 88% 15%, rgba(255,103,178,.14), transparent 62%),
+        linear-gradient(180deg, rgba(255,255,255,.75), rgba(255,255,255,.92)),
+        url("https://fioriepiante-nino.it/_assets/images/103905e843316bcb63f7c56bb3b134c1.jpg") center/cover no-repeat;
     }
-    .heroCard .bg{
+    .heroOverlay{
       position:absolute; inset:0;
       background:
-        radial-gradient(850px 520px at 12% 12%, rgba(var(--pink), .24), transparent 60%),
-        radial-gradient(760px 520px at 88% 15%, rgba(var(--green), .20), transparent 58%),
-        linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.65)),
-        url("https://fioriepiante-nino.it/_assets/images/103905e843316bcb63f7c56bb3b134c1.jpg") center/cover no-repeat;
-      transform: scale(1.02);
+        linear-gradient(180deg, rgba(255,255,255,.52), rgba(255,255,255,.90));
     }
-    .heroCard .content{
+    .heroContent{
       position:relative;
       height:100%;
       padding: 26px;
@@ -298,103 +270,101 @@
     }
 
     .pill{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
+      display:inline-flex; align-items:center; gap:10px;
       padding: 10px 14px;
       border-radius: 999px;
+      background: rgba(255,46,143,.08);
+      border: 1px solid rgba(255,46,143,.18);
+      font-weight: 800;
+      color: var(--ink);
       width: fit-content;
-      background: rgba(255,255,255,.55);
-      border: 1px solid rgba(var(--strokeA));
-      font-weight: 950;
     }
     .pill .dot{
       width: 10px; height: 10px;
-      border-radius: 99px;
-      background: rgb(var(--pink));
-      box-shadow: 0 0 0 7px rgba(var(--pink), .16);
+      border-radius: 999px;
+      background: var(--pink);
+      box-shadow: 0 0 0 7px rgba(255,46,143,.14);
     }
 
     h1{
+      margin: 8px 0 0;
       font-size: clamp(36px, 4vw, 56px);
-      line-height: 1.02;
-      margin: 6px 0 0;
       letter-spacing: -1px;
+      line-height: 1.03;
     }
     .lead{
       margin: 10px 0 0;
       font-size: clamp(15px, 1.5vw, 18px);
-      color: rgba(35,18,32,.78);
-      max-width: 64ch;
-      font-weight: 800;
+      color: var(--ink-2);
+      max-width: 66ch;
+      font-weight: 700;
+      line-height: 1.55;
     }
-    .ctaRow{ display:flex; gap: 12px; flex-wrap:wrap; margin-top: 18px; }
+    .ctaRow{ display:flex; gap: 12px; flex-wrap:wrap; margin-top: 16px; }
 
-    .mini{
+    .miniRow{
+      display:flex; flex-wrap:wrap; gap: 10px;
       font-size: 13px;
-      color: rgba(35,18,32,.70);
-      display:flex; gap:12px; flex-wrap:wrap;
-      align-items:center;
-      font-weight: 800;
+      color: var(--muted);
+      font-weight: 700;
+      margin-top: 12px;
     }
-    .mini a{
-      display:inline-flex; gap:8px; align-items:center;
+    .miniRow a{
       padding: 8px 10px;
       border-radius: 999px;
-      background: rgba(255,255,255,.55);
-      border: 1px solid rgba(var(--strokeA));
+      background: rgba(255,255,255,.75);
+      border: 1px solid rgba(255,46,143,.14);
+      box-shadow: var(--shadow-2);
     }
 
     /* Side cards */
-    .side{ display:flex; flex-direction:column; gap: 18px; }
-    .card{
-      border-radius: var(--radius-xl);
-      padding: 18px;
-      box-shadow: var(--shadowSoft);
-    }
-    .card h3{ margin: 0 0 8px; font-size: 18px; letter-spacing: -.2px; font-weight: 999; }
-    .card p{ margin: 0; color: rgb(var(--muted)); line-height: 1.55; font-weight: 800; }
+    .side{ display:flex; flex-direction:column; gap: 16px; }
+    .side .card{ padding: 18px; }
+    .side h3{ margin:0 0 8px; font-size: 18px; letter-spacing:-.2px; }
+    .side p{ margin:0; color: var(--muted); font-weight: 700; line-height: 1.55; }
 
-    .ecom{ position:relative; overflow:hidden; }
-    .ecom::before{
-      content:"";
-      position:absolute; inset:-1px;
-      background:
-        radial-gradient(720px 240px at 20% 0%, rgba(var(--pink), .20), transparent 60%),
-        radial-gradient(620px 240px at 90% 20%, rgba(var(--green), .16), transparent 60%);
-      pointer-events:none;
-      opacity: .95;
+    /* Sections */
+    section{ padding: 40px 0; }
+    .sectionTitle{
+      display:flex; align-items:flex-end; justify-content:space-between;
+      gap: 16px; margin-bottom: 14px;
     }
-    .ecom > *{ position:relative; }
+    .sectionTitle h2{
+      margin:0;
+      font-size: clamp(22px, 2.2vw, 30px);
+      letter-spacing: -.6px;
+    }
+    .sectionTitle p{
+      margin:0;
+      color: var(--muted);
+      max-width: 70ch;
+      line-height:1.5;
+      font-weight: 700;
+    }
 
-    /* Gallery 2x2 */
+    /* Gallery cards */
     .galleryGrid{
       display:grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 14px;
     }
-    @media (max-width: 940px){ .galleryGrid{ grid-template-columns: 1fr; } }
+    @media (max-width: 900px){ .galleryGrid{ grid-template-columns: 1fr; } }
 
     .gcard{
+      position:relative;
       border-radius: var(--radius-xl);
       overflow:hidden;
-      position:relative;
-      min-height: 220px;
-      box-shadow: var(--shadowSoft);
+      border: 1px solid rgba(255,46,143,.16);
+      box-shadow: var(--shadow);
+      min-height: 230px;
+      background: #fff;
     }
-    .gcard .bg{
-      position:absolute; inset:0;
-      background-size: cover;
-      background-position:center;
-      transform: scale(1.05);
-      filter: saturate(1.05) contrast(1.02);
-    }
+    .gcard .bg{ position:absolute; inset:0; background-size: cover; background-position:center; transform: scale(1.04); }
     .gcard .overlay{
       position:absolute; inset:0;
       background:
-        radial-gradient(720px 260px at 15% 0%, rgba(var(--pink), .18), transparent 60%),
-        radial-gradient(620px 260px at 85% 10%, rgba(var(--green), .14), transparent 60%),
-        linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.55));
+        radial-gradient(900px 320px at 15% 0%, rgba(255,46,143,.18), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,.28), rgba(255,255,255,.92));
     }
     .gcard .content{
       position:absolute; inset:0;
@@ -402,85 +372,129 @@
       display:flex; flex-direction:column; justify-content:space-between;
       gap: 12px;
     }
-    .gtitle{ font-size: 22px; font-weight: 999; letter-spacing: -.5px; }
     .gtag{
       display:inline-flex; align-items:center; gap:8px;
       width: fit-content;
       padding: 10px 12px;
       border-radius: 999px;
-      background: rgba(255,255,255,.60);
-      border: 1px solid rgba(var(--strokeA));
-      font-weight: 950;
+      background: rgba(255,46,143,.10);
+      border: 1px solid rgba(255,46,143,.18);
+      font-weight: 800;
+      color: var(--ink);
+    }
+    .gtitle{
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: -.5px;
+      color: var(--ink);
     }
 
     /* Steps */
-    .gridSteps{
+    .stepsGrid{
       display:grid;
-      grid-template-columns: repeat(5, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 14px;
-      align-items:stretch;
     }
-    @media (max-width: 1060px){ .gridSteps{ grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 560px){ .gridSteps{ grid-template-columns: 1fr; } }
+    @media (max-width: 980px){ .stepsGrid{ grid-template-columns: 1fr; } }
+
+    .stepsGrid.two{ grid-template-columns: repeat(2, 1fr); }
+    @media (max-width: 980px){ .stepsGrid.two{ grid-template-columns: 1fr; } }
 
     .step{
-      border-radius: var(--radius-xl);
       padding: 16px;
-      position:relative;
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(255,46,143,.16);
+      box-shadow: var(--shadow);
+      background: rgba(255,255,255,.78);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       overflow:hidden;
-      box-shadow: var(--shadowSoft);
     }
-    .step::before{
-      content:"";
-      position:absolute; inset:-1px;
-      background:
-        radial-gradient(700px 200px at 10% 10%, rgba(var(--pink), .14), transparent 60%),
-        radial-gradient(700px 220px at 90% 20%, rgba(var(--green), .12), transparent 60%);
-      pointer-events:none;
-    }
-    .step > *{ position:relative; }
-    .badge{ display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom: 10px; }
+    .stepTop{ display:flex; align-items:center; justify-content:space-between; gap:10px; }
     .num{
-      width: 40px; height: 40px;
-      border-radius: 14px;
+      width: 42px; height: 42px;
+      border-radius: 16px;
       display:grid; place-items:center;
-      font-weight: 999;
-      background: rgba(255,255,255,.60);
-      border: 1px solid rgba(var(--strokeA));
+      font-weight: 900;
+      color: white;
+      background: linear-gradient(135deg, var(--pink), var(--pink-2));
+      box-shadow: 0 14px 30px rgba(255,46,143,.18);
     }
+    .stepLabel{ color: var(--muted); font-weight: 800; }
     .stepImg{
-      width: 100%;
-      height: 120px;
+      width:100%;
+      height: 130px;
+      margin-top: 12px;
       border-radius: 18px;
       object-fit: cover;
-      border: 1px solid rgba(var(--strokeA));
-      background: rgba(255,255,255,.45);
-      box-shadow: 0 14px 36px rgba(20,10,18,.12);
+      border: 1px solid rgba(255,46,143,.14);
+      background: #fff;
     }
-    .step h4{ margin: 12px 0 6px; font-size: 16px; letter-spacing:-.2px; font-weight: 999; }
-    .step p{ margin:0; color: rgb(var(--muted)); line-height:1.55; font-weight:800; }
+    .step h4{
+      margin: 12px 0 6px;
+      font-size: 16px;
+      letter-spacing: -.2px;
+      color: var(--ink);
+      font-weight: 900;
+    }
+    .step p{
+      margin:0;
+      color: var(--ink-2);
+      font-weight: 700;
+      line-height: 1.55;
+    }
+
+    /* “Cosa succede dopo?” divider */
+    .afterBox{
+      margin-top: 16px;
+      padding: 16px;
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(255,46,143,.18);
+      background: rgba(255,46,143,.08);
+      box-shadow: var(--shadow-2);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+      flex-wrap:wrap;
+    }
+    .afterBox b{
+      font-size: 18px;
+      letter-spacing: -.2px;
+    }
+    .afterBox span{
+      color: var(--muted);
+      font-weight: 700;
+    }
 
     /* Payments */
     .payGrid{
       display:grid;
       grid-template-columns: 1fr 1fr;
       gap: 14px;
-      align-items:stretch;
     }
-    @media (max-width: 940px){ .payGrid{ grid-template-columns: 1fr; } }
-    .payCard{ border-radius: var(--radius-xl); padding: 18px; box-shadow: var(--shadowSoft); }
-    .payCard h3{ margin:0 0 10px; font-size: 18px; letter-spacing:-.2px; font-weight: 999; }
-    .payCard .note{ color: rgb(var(--muted)); line-height:1.55; margin:0 0 14px; font-weight:800; }
+    @media (max-width: 980px){ .payGrid{ grid-template-columns: 1fr; } }
+    .payCard{
+      padding: 18px;
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(255,46,143,.16);
+      background: rgba(255,255,255,.78);
+      box-shadow: var(--shadow);
+    }
+    .payCard h3{ margin:0 0 10px; font-size: 18px; font-weight: 900; }
+    .payCard p{ margin:0 0 14px; color: var(--muted); font-weight: 700; line-height: 1.55; }
     .payRow{ display:flex; gap:10px; flex-wrap:wrap; }
     .kvs{
       margin-top: 12px;
       padding: 14px;
       border-radius: 18px;
-      background: rgba(255,255,255,.55);
-      border: 1px solid rgba(var(--strokeA));
+      background: rgba(255,255,255,.86);
+      border: 1px solid rgba(255,46,143,.14);
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
       font-size: 13px;
+      color: var(--ink);
       overflow:auto;
+      line-height: 1.5;
     }
 
     /* Locations */
@@ -489,31 +503,32 @@
       grid-template-columns: repeat(3, 1fr);
       gap: 14px;
     }
-    @media (max-width: 940px){ .locGrid{ grid-template-columns: 1fr; } }
+    @media (max-width: 980px){ .locGrid{ grid-template-columns: 1fr; } }
     .loc{
-      border-radius: var(--radius-xl);
       padding: 18px;
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(255,46,143,.16);
+      background: rgba(255,255,255,.78);
+      box-shadow: var(--shadow);
       display:flex;
       flex-direction:column;
       gap: 10px;
-      box-shadow: var(--shadowSoft);
     }
     .loc .top{ display:flex; align-items:flex-start; justify-content:space-between; gap:10px; }
-    .loc .addr{ font-weight: 999; font-size: 16px; letter-spacing: -.2px; line-height: 1.15; }
-    .loc .zone{ color: rgb(var(--muted)); font-weight: 900; }
+    .loc .addr{ font-weight: 900; color: var(--ink); line-height: 1.15; }
+    .loc .zone{ color: var(--muted); font-weight: 800; }
 
     footer{
       padding: 24px 0 42px;
-      border-top: 1px solid rgba(var(--strokeA));
-      background: rgba(255,255,255,.25);
-      margin-top: 18px;
+      border-top: 1px solid rgba(255,46,143,.14);
+      background: rgba(255,255,255,.70);
+      backdrop-filter: blur(10px);
     }
     footer .row{
       display:flex; justify-content:space-between; gap: 14px; flex-wrap:wrap;
-      color: rgb(var(--muted));
-      font-weight: 800;
+      color: var(--muted);
+      font-weight: 700;
     }
-    .fineprint{ color: rgb(var(--muted)); font-size: 13px; line-height:1.5; font-weight: 800; }
   </style>
 </head>
 
@@ -528,13 +543,9 @@
   <header class="nav">
     <div class="container">
       <div class="row">
-        <a class="brand" href="./" aria-label="Home">
-          <span class="logoWrap">
-            <!-- ✅ Consigliato: file nel repo -->
+        <a class="brand" href="#top" aria-label="Home">
+          <span class="brandLogo">
             <img src="./immagini-home/fiori%20e%20piante%20di%20nino%20logo%20nero.png" alt="Fiori e Piante di Nino" />
-            <!-- alternativa RAW (se preferisci): 
-            <img src="https://raw.githubusercontent.com/matteoawi/fioriepiante-nino.it/main/immagini-home/fiori%20e%20piante%20di%20nino%20logo%20nero.png" alt="Fiori e Piante di Nino" />
-            -->
           </span>
           <div>
             Fiori e Piante di Nino
@@ -542,7 +553,6 @@
           </div>
         </a>
 
-        <!-- ✅ ancoraggi richiesti -->
         <nav class="navlinks" aria-label="Sezioni">
           <a href="#galleria">Galleria</a>
           <a href="#come-ordinare">Come funziona</a>
@@ -568,17 +578,16 @@
     </div>
   </header>
 
-  <!-- Mobile drawer -->
+  <!-- Drawer Mobile -->
   <div class="drawer" id="drawer" aria-hidden="true">
     <div class="backdrop" data-close></div>
-    <div class="panel glass strong" role="dialog" aria-label="Menu">
+    <div class="panel" role="dialog" aria-label="Menu">
       <div class="inner">
         <a href="#galleria" data-close>Galleria <span>→</span></a>
         <a href="#come-ordinare" data-close>Come funziona <span>→</span></a>
         <a href="#pagamenti" data-close>Pagamento <span>→</span></a>
         <a href="#sedi" data-close>Sedi <span>→</span></a>
         <a href="#contatti" data-close>Contatti <span>→</span></a>
-        <a href="./fiori/" data-close>Vai a /fiori <span>↗</span></a>
       </div>
     </div>
   </div>
@@ -588,23 +597,23 @@
     <section class="hero">
       <div class="container">
         <div class="heroGrid">
-          <div class="heroCard glass">
-            <div class="bg" aria-hidden="true"></div>
-            <div class="content">
+          <div class="heroMain">
+            <div class="heroOverlay" aria-hidden="true"></div>
+            <div class="heroContent">
               <div>
                 <div class="pill">
                   <span class="dot"></span>
-                  <b>Consegne a Roma</b> · Trieste / Parioli
+                  <span><b>Consegne a Roma</b> · Trieste / Parioli</span>
                 </div>
 
-                <h1>Fiori & Piante<br/>super colorati 🌸🌿</h1>
+                <h1>Fiori & Piante<br/>con stile rosa 🌸</h1>
                 <p class="lead">
-                  Bouquet, composizioni, piante, funebri e addobbi: scegli la categoria e ordina
-                  in due minuti su WhatsApp, JustEat, Deliveroo… oppure compra direttamente sul nuovo e-commerce.
+                  Bouquet, composizioni, piante, funebri e addobbi.
+                  Ordini in modo semplice: WhatsApp / JustEat / Deliveroo oppure acquisti diretto sul nuovo e-commerce.
                 </p>
 
                 <div class="ctaRow">
-                  <a class="btn pink" href="https://wa.me/message/JDH7MM6C6VC7J1" target="_blank" rel="noopener nofollow">
+                  <a class="btn primary" href="https://wa.me/message/JDH7MM6C6VC7J1" target="_blank" rel="noopener nofollow">
                     <img class="logo" src="./immagini-home/logo-whatsapp.png" alt="Logo WhatsApp" />
                     Ordina su WhatsApp
                   </a>
@@ -621,48 +630,50 @@
                     Deliveroo
                   </a>
 
-                  <a class="btn green" href="https://fiori-italia.it/" target="_blank" rel="noopener nofollow">
+                  <a class="btn soft" href="https://fiori-italia.it/" target="_blank" rel="noopener nofollow">
                     🛒 Vai all’e-commerce
                   </a>
                 </div>
 
-                <div class="mini" style="margin-top:14px;">
-                  <a href="#galleria">🖼️ Vai alla galleria</a>
+                <div class="miniRow">
+                  <a href="#galleria">🖼️ Galleria</a>
                   <a href="#come-ordinare">🧾 Come funziona</a>
                   <a href="#pagamenti">💳 Pagamento</a>
                   <a href="tel:+393394324010">📞 +39 339 432 4010</a>
                 </div>
               </div>
 
-              <div class="mini">
-                <span>Tip: vuoi un biglietto? Scrivi il testo e lo mettiamo noi ✉️</span>
+              <div class="miniRow">
+                <span>✨ Tip: vuoi un biglietto? Scrivi il testo e lo mettiamo noi.</span>
               </div>
             </div>
           </div>
 
           <aside class="side">
-            <div class="card glass strong ecom">
-              <h3>🛒 Nuovo sito e-commerce!</h3>
-              <p>
-                Ora puoi <b>navigare il catalogo</b> e <b>acquistare direttamente online</b>:
-                scegli il prodotto, inserisci indirizzo e note, paga in sicurezza e noi pensiamo alla consegna 🌿💗
-              </p>
-              <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
-                <a class="btn green" href="https://fiori-italia.it/" target="_blank" rel="noopener nofollow">
-                  Vai su fiori-italia.it ↗
-                </a>
-                <a class="btn pink" href="#come-ordinare">Come funziona →</a>
+            <div class="card">
+              <div style="padding:18px;">
+                <h3 style="margin:0 0 8px;">🛒 Nuovo sito e-commerce</h3>
+                <p>
+                  Ora puoi <b>sfogliare il catalogo</b> e <b>acquistare direttamente online</b>:
+                  scegli il prodotto, inserisci indirizzo e note, paga in sicurezza e noi pensiamo alla consegna 💗
+                </p>
+                <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+                  <a class="btn primary" href="https://fiori-italia.it/" target="_blank" rel="noopener nofollow">Vai su fiori-italia.it ↗</a>
+                  <a class="btn" href="#pagamenti">Vedi pagamento →</a>
+                </div>
               </div>
             </div>
 
-            <div class="card glass">
-              <h3>URL puliti per le categorie</h3>
-              <p>Quando crei le pagine, questi link diventano: fioriepiante-nino.it/fiori ecc.</p>
-              <div style="margin-top:14px; display:grid; gap:10px;">
-                <a class="btn" href="./fiori/">💐 /fiori</a>
-                <a class="btn" href="./piante/">🪴 /piante</a>
-                <a class="btn" href="./funebri/">🕊️ /funebri</a>
-                <a class="btn" href="./installazioni/">✨ /installazioni</a>
+            <div class="card">
+              <div style="padding:18px;">
+                <h3 style="margin:0 0 8px;">Accessi rapidi</h3>
+                <p>Se hai già le pagine categoria (es. /fiori) puoi linkarle qui.</p>
+                <div style="margin-top:14px; display:grid; gap:10px;">
+                  <a class="btn" href="./fiori/">💐 /fiori</a>
+                  <a class="btn" href="./piante/">🪴 /piante</a>
+                  <a class="btn" href="./funebri/">🕊️ /funebri</a>
+                  <a class="btn" href="./installazioni/">✨ /installazioni</a>
+                </div>
               </div>
             </div>
           </aside>
@@ -676,12 +687,12 @@
         <div class="sectionTitle">
           <div>
             <h2>Galleria</h2>
-            <p>Le 4 macro-categorie principali (clicca per andare su /fiori, /piante, ecc.).</p>
+            <p>Le 4 macro-categorie principali.</p>
           </div>
         </div>
 
         <div class="galleryGrid">
-          <a class="gcard glass" href="./piante/">
+          <a class="gcard" href="./piante/">
             <div class="bg" style="background-image:url('https://fioriepiante-nino.it/_assets/images/103905e843316bcb63f7c56bb3b134c1.jpg');"></div>
             <div class="overlay"></div>
             <div class="content">
@@ -690,7 +701,7 @@
             </div>
           </a>
 
-          <a class="gcard glass" href="./fiori/">
+          <a class="gcard" href="./fiori/">
             <div class="bg" style="background-image:url('https://images.unsplash.com/photo-1525310072745-f49212b5ac6d?auto=format&fit=crop&w=1400&q=70');"></div>
             <div class="overlay"></div>
             <div class="content">
@@ -699,7 +710,7 @@
             </div>
           </a>
 
-          <a class="gcard glass" href="./funebri/">
+          <a class="gcard" href="./funebri/">
             <div class="bg" style="background-image:url('https://images.unsplash.com/photo-1526045478516-99145907023c?auto=format&fit=crop&w=1400&q=70');"></div>
             <div class="overlay"></div>
             <div class="content">
@@ -708,7 +719,7 @@
             </div>
           </a>
 
-          <a class="gcard glass" href="./installazioni/">
+          <a class="gcard" href="./installazioni/">
             <div class="bg" style="background-image:url('https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1400&q=70');"></div>
             <div class="overlay"></div>
             <div class="content">
@@ -726,44 +737,79 @@
         <div class="sectionTitle">
           <div>
             <h2>Come funziona</h2>
-            <p>5 step super chiari: contatto → dettagli → preparazione → foto → consegna ✅</p>
+            <p>I primi 3 step per ordinare in modo rapido.</p>
+          </div>
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <a class="btn primary" href="https://wa.me/message/JDH7MM6C6VC7J1" target="_blank" rel="noopener nofollow">
+              <img class="logo" src="./immagini-home/logo-whatsapp.png" alt="Logo WhatsApp" />
+              WhatsApp ↗
+            </a>
+            <a class="btn" href="https://fiori-italia.it/" target="_blank" rel="noopener nofollow">🛒 E-commerce ↗</a>
           </div>
         </div>
 
-        <div class="gridSteps">
-          <div class="step glass">
-            <div class="badge"><div class="num">1</div><span style="font-weight:950; color: rgb(var(--muted));">Contatto</span></div>
+        <!-- Step 1-3 -->
+        <div class="stepsGrid">
+          <div class="step">
+            <div class="stepTop">
+              <div class="num">1</div>
+              <div class="stepLabel">Contatto</div>
+            </div>
             <img class="stepImg" src="./immagini-home/step1.png" alt="Step 1" />
             <h4>Scrivici o scegli una piattaforma</h4>
-            <p>WhatsApp / JustEat / Deliveroo oppure vai sul nuovo e-commerce.</p>
+            <p>WhatsApp / JustEat / Deliveroo oppure il nuovo e-commerce.</p>
           </div>
 
-          <div class="step glass">
-            <div class="badge"><div class="num">2</div><span style="font-weight:950; color: rgb(var(--muted));">Dettagli</span></div>
+          <div class="step">
+            <div class="stepTop">
+              <div class="num">2</div>
+              <div class="stepLabel">Dettagli</div>
+            </div>
             <img class="stepImg" src="./immagini-home/step2.png" alt="Step 2" />
             <h4>Dicci cosa vuoi</h4>
-            <p>Occasione, colori, budget, indirizzo e fascia oraria di consegna.</p>
+            <p>Occasione, colori, budget, indirizzo e fascia oraria.</p>
           </div>
 
-          <div class="step glass">
-            <div class="badge"><div class="num">3</div><span style="font-weight:950; color: rgb(var(--muted));">Conferma</span></div>
+          <div class="step">
+            <div class="stepTop">
+              <div class="num">3</div>
+              <div class="stepLabel">Conferma</div>
+            </div>
             <img class="stepImg" src="./immagini-home/step3.png" alt="Step 3" />
             <h4>Conferma ordine e pagamento</h4>
-            <p>Confermiamo tutto e partiamo con la preparazione (puoi aggiungere un biglietto ✉️).</p>
+            <p>Confermiamo tutto e partiamo con la preparazione (biglietto incluso se vuoi).</p>
           </div>
+        </div>
 
-          <div class="step glass">
-            <div class="badge"><div class="num">4</div><span style="font-weight:950; color: rgb(var(--muted));">Preview</span></div>
+        <!-- ✅ Cosa succede dopo? -->
+        <div class="afterBox" aria-label="Cosa succede dopo">
+          <div>
+            <b>Cosa succede dopo?</b>
+            <span>Quando l’ordine è confermato, ecco cosa facciamo noi.</span>
+          </div>
+          <a class="btn" href="#pagamenti">Hai dubbi sul pagamento? →</a>
+        </div>
+
+        <!-- Step 4-5 -->
+        <div class="stepsGrid two" style="margin-top:14px;">
+          <div class="step">
+            <div class="stepTop">
+              <div class="num">4</div>
+              <div class="stepLabel">Preview</div>
+            </div>
             <img class="stepImg" src="./immagini-home/step4.png" alt="Step 4" />
             <h4>Foto della composizione finale</h4>
-            <p>Prima della consegna ti inviamo una foto: così sai esattamente cosa arriva 💗</p>
+            <p>Prima della consegna ti mandiamo una foto: così sai esattamente cosa arriva.</p>
           </div>
 
-          <div class="step glass">
-            <div class="badge"><div class="num">5</div><span style="font-weight:950; color: rgb(var(--muted));">Consegna</span></div>
+          <div class="step">
+            <div class="stepTop">
+              <div class="num">5</div>
+              <div class="stepLabel">Consegna</div>
+            </div>
             <img class="stepImg" src="./immagini-home/step5.png" alt="Step 5" />
             <h4>Consegna + aggiornamento</h4>
-            <p>Consegniamo e ti aggiorniamo sullo stato: missione “effetto wow” completata ✅</p>
+            <p>Consegniamo e ti aggiorniamo sullo stato. Effetto wow: completato ✅</p>
           </div>
         </div>
       </div>
@@ -775,17 +821,17 @@
         <div class="sectionTitle">
           <div>
             <h2>Pagamento</h2>
-            <p>PayPal, carta (Apple Pay/Google Pay/Satispay), bonifico istantaneo, Postepay, contanti in sede.</p>
+            <p>Metodi chiari e veloci. Se serve, ti guidiamo in 10 secondi.</p>
           </div>
         </div>
 
         <div class="payGrid">
-          <div class="payCard glass strong">
+          <div class="payCard">
             <h3>Pagamento rapido</h3>
-            <p class="note">Scegli il metodo più comodo e usa l’importo concordato in fase di ordine.</p>
+            <p>Scegli il metodo più comodo e usa l’importo concordato in fase di ordine.</p>
             <div class="payRow">
-              <a class="btn pink" href="https://www.paypal.com/paypalme/NinoFiori" target="_blank" rel="noopener nofollow">🅿️ PayPal ↗</a>
-              <a class="btn green" href="https://mypos.com/@fioriepiantenino" target="_blank" rel="noopener nofollow">💳 Carta / Apple Pay / Google Pay / Satispay ↗</a>
+              <a class="btn primary" href="https://www.paypal.com/paypalme/NinoFiori" target="_blank" rel="noopener nofollow">🅿️ PayPal ↗</a>
+              <a class="btn" href="https://mypos.com/@fioriepiantenino" target="_blank" rel="noopener nofollow">💳 Carta / Apple Pay / Google Pay / Satispay ↗</a>
               <a class="btn" href="tel:+393394324010">📞 Se hai dubbi, chiama</a>
             </div>
             <div class="kvs">
@@ -794,9 +840,9 @@
             </div>
           </div>
 
-          <div class="payCard glass">
+          <div class="payCard">
             <h3>Bonifico / Postepay / Contanti</h3>
-            <p class="note">Altri metodi disponibili, comodi se preferisci non usare link esterni.</p>
+            <p>Altri metodi disponibili, comodi se preferisci non usare link esterni.</p>
             <div class="kvs">
               <b>Bonifico ISTANTANEO</b><br/>
               IBAN: <b>IT98Y3608105138251233451236</b><br/>
@@ -817,40 +863,40 @@
         <div class="sectionTitle">
           <div>
             <h2>Vieni a trovarci</h2>
-            <p>Clicca su una sede per le indicazioni.</p>
+            <p>Tre sedi a Roma. Clicca per indicazioni.</p>
           </div>
         </div>
 
         <div class="locGrid">
-          <div class="loc glass strong">
+          <div class="loc">
             <div class="top">
               <div>
                 <div class="addr">Via Chiana angolo<br/>Via Salaria</div>
                 <div class="zone">Zona Trieste</div>
               </div>
-              <div class="num">📍</div>
+              <div class="num" style="width:42px;height:42px;">📍</div>
             </div>
             <a class="btn" href="https://maps.app.goo.gl/3Nrreo1iZU4GfKc77" target="_blank" rel="noopener nofollow">Indicazioni ↗</a>
           </div>
 
-          <div class="loc glass strong">
+          <div class="loc">
             <div class="top">
               <div>
                 <div class="addr">Piazza<br/>Santiago del Cile</div>
                 <div class="zone">Zona Parioli</div>
               </div>
-              <div class="num">📍</div>
+              <div class="num" style="width:42px;height:42px;">📍</div>
             </div>
             <a class="btn" href="https://maps.app.goo.gl/mMeSqHSYEeXbsx6a9" target="_blank" rel="noopener nofollow">Indicazioni ↗</a>
           </div>
 
-          <div class="loc glass strong">
+          <div class="loc">
             <div class="top">
               <div>
                 <div class="addr">Viale Maresciallo<br/>Pilsudski 138</div>
                 <div class="zone">Zona Parioli</div>
               </div>
-              <div class="num">📍</div>
+              <div class="num" style="width:42px;height:42px;">📍</div>
             </div>
             <a class="btn" href="https://maps.app.goo.gl/gL9RTUafrTYkaxkHA" target="_blank" rel="noopener nofollow">Indicazioni ↗</a>
           </div>
@@ -869,31 +915,29 @@
         </div>
 
         <div class="galleryGrid">
-          <div class="card glass strong">
-            <h3>📞 Telefono</h3>
-            <p>Per info e ordini rapidi.</p>
+          <div class="card" style="padding:18px;">
+            <h3 style="margin:0 0 8px;">📞 Telefono</h3>
+            <p style="margin:0; color: var(--muted); font-weight:700;">Per info e ordini rapidi.</p>
             <div style="margin-top:14px;">
               <a class="btn" href="tel:+393394324010">+39 339 432 4010</a>
             </div>
           </div>
 
-          <div class="card glass strong">
-            <h3>💬 WhatsApp</h3>
-            <p>Il modo più comodo per personalizzare tutto.</p>
+          <div class="card" style="padding:18px;">
+            <h3 style="margin:0 0 8px;">💬 WhatsApp</h3>
+            <p style="margin:0; color: var(--muted); font-weight:700;">Il modo più comodo per personalizzare tutto.</p>
             <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
-              <a class="btn pink" href="https://wa.me/message/JDH7MM6C6VC7J1" target="_blank" rel="noopener nofollow">
+              <a class="btn primary" href="https://wa.me/message/JDH7MM6C6VC7J1" target="_blank" rel="noopener nofollow">
                 <img class="logo" src="./immagini-home/logo-whatsapp.png" alt="Logo WhatsApp" />
                 Ordina su WhatsApp
               </a>
-              <a class="btn green" href="https://fiori-italia.it/" target="_blank" rel="noopener nofollow">
-                🛒 Compra online
-              </a>
+              <a class="btn soft" href="https://fiori-italia.it/" target="_blank" rel="noopener nofollow">🛒 Compra online</a>
             </div>
           </div>
 
-          <div class="card glass strong">
-            <h3>🍽️ JustEat / Deliveroo</h3>
-            <p>Se vuoi “ordine e via”, in stile delivery.</p>
+          <div class="card" style="padding:18px;">
+            <h3 style="margin:0 0 8px;">🍽️ JustEat / Deliveroo</h3>
+            <p style="margin:0; color: var(--muted); font-weight:700;">Se vuoi “ordine e via”, in stile delivery.</p>
             <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
               <a class="btn" href="https://www.justeat.it/restaurants-piante-e-fiori-di-nino---piazza-santiago-del-cile/menu" target="_blank" rel="noopener nofollow">
                 <img class="logo" src="./immagini-home/logo-justeat.png" alt="Logo JustEat" />
@@ -906,13 +950,13 @@
             </div>
           </div>
 
-          <div class="card glass ecom">
-            <h3>🛒 E-commerce (novità)</h3>
-            <p>Vuoi scegliere con calma? Sul nostro e-commerce puoi <b>sfogliare</b>, <b>selezionare</b> e <b>acquistare</b> direttamente online.</p>
+          <div class="card" style="padding:18px;">
+            <h3 style="margin:0 0 8px;">🛒 E-commerce</h3>
+            <p style="margin:0; color: var(--muted); font-weight:700;">
+              Sfoglia, scegli e acquista online. Noi gestiamo preparazione e consegna.
+            </p>
             <div style="margin-top:14px;">
-              <a class="btn green" href="https://fiori-italia.it/" target="_blank" rel="noopener nofollow">
-                Vai su fiori-italia.it ↗
-              </a>
+              <a class="btn primary" href="https://fiori-italia.it/" target="_blank" rel="noopener nofollow">Vai su fiori-italia.it ↗</a>
             </div>
           </div>
         </div>
@@ -922,11 +966,11 @@
     <footer>
       <div class="container">
         <div class="row">
-          <div class="fineprint">
+          <div>
             <b>🌸 Fiori e Piante di Nino — Roma</b><br/>
-            Consegne a Roma · Trieste / Parioli · Tel: <a href="tel:+393394324010">+39 339 432 4010</a>
+            Consegne a Roma · Tel: <a href="tel:+393394324010">+39 339 432 4010</a>
           </div>
-          <div class="fineprint">
+          <div>
             <a class="btn" href="#top">Torna su ↑</a>
           </div>
         </div>
@@ -949,7 +993,6 @@
       drawer.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
     }
-
     menuBtn?.addEventListener('click', openDrawer);
     drawer?.addEventListener('click', (e) => {
       const t = e.target;
@@ -957,7 +1000,6 @@
         closeDrawer();
       }
     });
-
     window.addEventListener('keydown', (e) => {
       if(e.key === 'Escape' && drawer.classList.contains('open')) closeDrawer();
     });
