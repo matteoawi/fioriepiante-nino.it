@@ -11,6 +11,39 @@
     gtag('js', new Date());
 
     gtag('config', 'AW-11013620028');
+
+    // Helper function to delay opening a URL until a gtag event is sent.
+    // It is wired to WhatsApp and phone links because they are quote/contact requests.
+    function gtagSendEvent(url, openedWindow) {
+      var callbackCalled = false;
+      var callback = function () {
+        if (callbackCalled) return;
+        callbackCalled = true;
+        if (typeof url === 'string') {
+          if (openedWindow && !openedWindow.closed) {
+            openedWindow.location = url;
+          } else {
+            window.location = url;
+          }
+        }
+      };
+      setTimeout(callback, 2100);
+      gtag('event', 'ads_conversion_Richiesta_preventivo_1', {
+        'event_callback': callback,
+        'event_timeout': 2000
+      });
+      return false;
+    }
+
+    document.addEventListener('click', function(event) {
+      var link = event.target.closest && event.target.closest('a[href^="https://wa.me/"], a[href^="tel:"]');
+      if (!link || !link.href) return;
+
+      event.preventDefault();
+      var openedWindow = link.target === '_blank' ? window.open('', '_blank') : null;
+      if (openedWindow) openedWindow.opener = null;
+      gtagSendEvent(link.href, openedWindow);
+    });
   </script>
   <title>🌸 Fiori e Piante di Nino — Roma</title>
   <meta name="description" content="Fiori per ogni occasione. Consegne a Roma! Ordina su WhatsApp, JustEat, Deliveroo oppure sul nuovo e-commerce." />
