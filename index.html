@@ -46,14 +46,14 @@
   </script>
 
   <title>🌸 Fiori e Piante di Nino — Roma | Consegne a Domicilio</title>
-  <meta name="description" content="Fiori freschi e composizioni per ogni occasione a Roma. Consegna rapida, ordini su WhatsApp, JustEat, Deliveroo o e-commerce. Si emette fattura elettronica." />
+  <meta name="description" content="Fiori freschi e composizioni per ogni occasione a Roma. Prodotti sincronizzati da fiori-italia.it. Consegna rapida, ordini su WhatsApp o e-commerce. Fattura elettronica disponibile." />
 
   <meta name="robots" content="index,follow" />
   <meta name="theme-color" content="#e0166d" />
   <meta property="og:locale" content="it_IT" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="🌸 Fiori e Piante di Nino — Roma" />
-  <meta property="og:description" content="Fiori freschi e piante a Roma. Consegna rapida a domicilio. Fatturazione elettronica per aziende e privati." />
+  <meta property="og:description" content="Fiori freschi e piante a Roma. Consegna rapida a domicilio. Catalogo in tempo reale da fiori-italia.it." />
   <meta property="og:image" content="https://fiori-italia.it/cdn/shop/files/BouquetXXXLEsplosioneCromatica_Oltre100Steli.png?v=1764853567&width=1200" />
   <meta name="twitter:card" content="summary_large_image" />
 
@@ -116,7 +116,7 @@
     a { color: inherit; text-decoration: none; }
     .container { width: min(var(--max), calc(100% - 36px)); margin-inline: auto; }
 
-    /* Floating Ambience */
+    /* Ambience Blobs */
     .ambience {
       position: fixed;
       inset: 0;
@@ -151,7 +151,6 @@
       -webkit-backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--stroke);
       padding: 12px 0;
-      transition: all 0.2s var(--ease);
     }
     .nav-inner {
       display: flex;
@@ -271,9 +270,7 @@
       color: #ffffff;
       box-shadow: 0 8px 20px rgba(224, 22, 109, 0.25);
     }
-    .btn-primary:hover {
-      background: var(--primary-hover);
-    }
+    .btn-primary:hover { background: var(--primary-hover); }
     .btn-secondary {
       background: var(--surface);
       color: var(--ink);
@@ -289,9 +286,7 @@
       color: var(--primary);
       border-color: var(--primary-border);
     }
-    .btn-soft:hover {
-      background: rgba(224, 22, 109, 0.14);
-    }
+    .btn-soft:hover { background: rgba(224, 22, 109, 0.14); }
     .btn-whatsapp { background: var(--whatsapp); color: #fff; }
     .btn-deliveroo { background: var(--deliveroo); color: #fff; }
     .btn-justeat { background: var(--justeat); color: #fff; }
@@ -301,7 +296,7 @@
 
     .btn img.btn-logo, .btn svg { width: 20px; height: 20px; object-fit: contain; }
 
-    /* Pill Badges */
+    /* Badges */
     .badge {
       display: inline-flex;
       align-items: center;
@@ -322,19 +317,15 @@
       box-shadow: 0 0 0 4px rgba(224, 22, 109, 0.2);
     }
 
-    /* Hero Section */
-    .hero-section {
-      padding: 24px 0 40px;
-    }
+    /* Hero */
+    .hero-section { padding: 24px 0 40px; }
     .hero-grid {
       display: grid;
       grid-template-columns: 1.35fr 0.9fr;
       gap: 24px;
       align-items: stretch;
     }
-    @media (max-width: 960px) {
-      .hero-grid { grid-template-columns: 1fr; }
-    }
+    @media (max-width: 960px) { .hero-grid { grid-template-columns: 1fr; } }
 
     .hero-card {
       position: relative;
@@ -395,11 +386,9 @@
       gap: 6px;
       font-weight: 700;
       opacity: 0.9;
-      transition: opacity 0.2s;
     }
     .hero-sub-actions a:hover { opacity: 1; text-decoration: underline; }
 
-    /* Side Showcase Card */
     .showcase-card {
       background: var(--surface);
       border-radius: var(--radius-lg);
@@ -456,68 +445,162 @@
       font-weight: 500;
     }
 
-    /* Gallery Grid */
-    .gallery-grid {
+    /* Collections & Products Sync */
+    .collections-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+    .cat-pill {
+      background: var(--surface);
+      border: 1px solid var(--stroke);
+      padding: 10px 18px;
+      border-radius: var(--radius-pill);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--ink-secondary);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.2s var(--ease);
+    }
+    .cat-pill:hover, .cat-pill.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+      box-shadow: 0 6px 16px rgba(224, 22, 109, 0.24);
+    }
+
+    .products-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 20px;
     }
-    @media (max-width: 860px) {
-      .gallery-grid { grid-template-columns: 1fr; }
+    @media (max-width: 1024px) {
+      .products-grid { grid-template-columns: repeat(3, 1fr); }
     }
-    .gallery-item {
-      position: relative;
+    @media (max-width: 768px) {
+      .products-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 480px) {
+      .products-grid { grid-template-columns: 1fr; }
+    }
+
+    .product-card {
+      background: var(--surface);
       border-radius: var(--radius-lg);
-      overflow: hidden;
-      min-height: 320px;
-      display: flex;
-      align-items: flex-end;
-      padding: 24px;
       border: 1px solid var(--stroke);
-      box-shadow: var(--shadow-md);
-      transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
     }
-    .gallery-item:hover {
+    .product-card:hover {
       transform: translateY(-4px);
       box-shadow: var(--shadow-lg);
     }
-    .gallery-bg {
-      position: absolute;
-      inset: 0;
-      background-size: cover;
-      background-position: center;
-      transition: transform 0.6s var(--ease);
-    }
-    .gallery-item:hover .gallery-bg { transform: scale(1.06); }
-    .gallery-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, transparent 40%, rgba(15, 8, 20, 0.85) 100%);
-    }
-    .gallery-title {
+    .product-img-box {
+      width: 100%;
+      aspect-ratio: 1 / 1;
       position: relative;
-      z-index: 2;
+      background: #f1ecf0;
+      overflow: hidden;
+    }
+    .product-img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s var(--ease);
+    }
+    .product-card:hover .product-img-box img {
+      transform: scale(1.05);
+    }
+    .product-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: rgba(20, 13, 24, 0.7);
+      backdrop-filter: blur(4px);
       color: #fff;
-      font-size: 22px;
+      font-size: 11px;
       font-weight: 800;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .product-body {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .product-title {
+      font-size: 16px;
+      font-weight: 800;
+      line-height: 1.3;
+      margin: 0;
+      color: var(--ink);
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .product-footer {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      width: 100%;
+      gap: 10px;
+      margin-top: 6px;
+    }
+    .product-price {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--primary);
+    }
+    .product-buy-btn {
+      background: var(--primary-light);
+      color: var(--primary);
+      border: 1px solid var(--primary-border);
+      border-radius: var(--radius-pill);
+      padding: 6px 14px;
+      font-weight: 700;
+      font-size: 13px;
+      transition: all 0.2s;
+    }
+    .product-card:hover .product-buy-btn {
+      background: var(--primary);
+      color: #fff;
     }
 
-    /* Steps Layout */
+    .sync-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+    .sync-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: #10b981;
+    }
+
+    /* Steps */
     .steps-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 16px;
     }
-    @media (max-width: 960px) {
-      .steps-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (max-width: 580px) {
-      .steps-grid { grid-template-columns: 1fr; }
-    }
+    @media (max-width: 960px) { .steps-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 580px) { .steps-grid { grid-template-columns: 1fr; } }
     .step-card {
       background: var(--surface);
       border-radius: var(--radius-lg);
@@ -527,7 +610,6 @@
       display: flex;
       flex-direction: column;
       gap: 12px;
-      position: relative;
     }
     .step-number {
       width: 38px; height: 38px;
@@ -546,19 +628,10 @@
       border-radius: var(--radius-md);
       border: 1px solid var(--stroke);
     }
-    .step-card h3 {
-      font-size: 18px;
-      font-weight: 800;
-      margin: 0;
-    }
-    .step-card p {
-      font-size: 14px;
-      color: var(--muted);
-      margin: 0;
-      line-height: 1.5;
-    }
+    .step-card h3 { font-size: 18px; font-weight: 800; margin: 0; }
+    .step-card p { font-size: 14px; color: var(--muted); margin: 0; line-height: 1.5; }
 
-    /* Invoice Callout (Fattura Elettronica) */
+    /* Fattura Elettronica Banner */
     .invoice-banner {
       background: linear-gradient(135deg, #1f2430 0%, #10141d 100%);
       color: #fff;
@@ -573,10 +646,7 @@
       border: 1px solid rgba(255,255,255,0.08);
     }
     @media (max-width: 860px) {
-      .invoice-banner {
-        grid-template-columns: 1fr;
-        text-align: left;
-      }
+      .invoice-banner { grid-template-columns: 1fr; text-align: left; }
     }
     .invoice-icon {
       width: 60px; height: 60px;
@@ -586,24 +656,9 @@
       place-items: center;
       color: #ff82b8;
     }
-    .invoice-info h3 {
-      margin: 0 0 6px;
-      font-size: 20px;
-      font-weight: 800;
-      letter-spacing: -0.4px;
-    }
-    .invoice-info p {
-      margin: 0;
-      font-size: 14px;
-      color: rgba(255, 255, 255, 0.78);
-      line-height: 1.5;
-    }
-    .invoice-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 10px;
-    }
+    .invoice-info h3 { margin: 0 0 6px; font-size: 20px; font-weight: 800; }
+    .invoice-info p { margin: 0; font-size: 14px; color: rgba(255, 255, 255, 0.78); }
+    .invoice-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
     .invoice-tag {
       font-size: 12px;
       font-weight: 700;
@@ -613,15 +668,13 @@
       color: #fff;
     }
 
-    /* Payment Cards */
+    /* Payments */
     .pay-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 24px;
     }
-    @media (max-width: 860px) {
-      .pay-grid { grid-template-columns: 1fr; }
-    }
+    @media (max-width: 860px) { .pay-grid { grid-template-columns: 1fr; } }
     .pay-box {
       background: var(--surface);
       border-radius: var(--radius-lg);
@@ -639,12 +692,7 @@
       border-bottom: 1px solid var(--stroke);
       padding-bottom: 14px;
     }
-    .pay-box-header h3 {
-      margin: 0;
-      font-size: 20px;
-      font-weight: 800;
-      letter-spacing: -0.3px;
-    }
+    .pay-box-header h3 { margin: 0; font-size: 20px; font-weight: 800; }
     .pay-method {
       background: var(--bg);
       border: 1px solid var(--stroke);
@@ -659,11 +707,7 @@
       align-items: center;
       gap: 8px;
     }
-    .pay-method p {
-      margin: 0 0 12px;
-      font-size: 14px;
-      color: var(--muted);
-    }
+    .pay-method p { margin: 0 0 12px; font-size: 14px; color: var(--muted); }
     .code-pill {
       display: flex;
       align-items: center;
@@ -686,21 +730,16 @@
       cursor: pointer;
       padding: 4px 8px;
       border-radius: 6px;
-      transition: background-color 0.2s;
     }
-    .btn-copy:hover {
-      background: var(--primary-light);
-    }
+    .btn-copy:hover { background: var(--primary-light); }
 
-    /* Locations Grid */
+    /* Locations */
     .locations-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 20px;
     }
-    @media (max-width: 860px) {
-      .locations-grid { grid-template-columns: 1fr; }
-    }
+    @media (max-width: 860px) { .locations-grid { grid-template-columns: 1fr; } }
     .location-card {
       background: var(--surface);
       border-radius: var(--radius-lg);
@@ -719,11 +758,7 @@
       text-transform: uppercase;
       letter-spacing: 0.8px;
     }
-    .location-card h4 {
-      margin: 4px 0 0;
-      font-size: 18px;
-      font-weight: 800;
-    }
+    .location-card h4 { margin: 4px 0 0; font-size: 18px; font-weight: 800; }
 
     /* Footer */
     footer {
@@ -742,7 +777,7 @@
       gap: 20px;
     }
 
-    /* Modal Platform Chooser */
+    /* Modals & Drawer */
     .modal {
       position: fixed;
       inset: 0;
@@ -775,30 +810,14 @@
       justify-content: space-between;
       margin-bottom: 14px;
     }
-    .modal-header h3 {
-      margin: 0;
-      font-size: 19px;
-      font-weight: 800;
-    }
+    .modal-header h3 { margin: 0; font-size: 19px; font-weight: 800; }
 
-    /* Mobile Drawer */
-    .drawer {
-      position: fixed;
-      inset: 0;
-      z-index: 200;
-      display: none;
-    }
+    .drawer { position: fixed; inset: 0; z-index: 200; display: none; }
     .drawer.open { display: block; }
-    .drawer-backdrop {
-      position: absolute;
-      inset: 0;
-      background: rgba(15, 8, 20, 0.4);
-    }
+    .drawer-backdrop { position: absolute; inset: 0; background: rgba(15, 8, 20, 0.4); }
     .drawer-panel {
       position: absolute;
-      right: 0;
-      top: 0;
-      bottom: 0;
+      right: 0; top: 0; bottom: 0;
       width: min(340px, 86%);
       background: var(--surface);
       padding: 24px;
@@ -808,11 +827,7 @@
       gap: 20px;
       overflow-y: auto;
     }
-    .drawer-links {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
+    .drawer-links { display: flex; flex-direction: column; gap: 8px; }
     .drawer-links a {
       font-weight: 700;
       padding: 12px 14px;
@@ -840,14 +855,14 @@
           </div>
           <div class="brand-text">
             <h1>Fiori & Piante di Nino</h1>
-            <span>Consegne a Roma · Anche con Fattura</span>
+            <span>Catalogo fiori-italia.it · Consegne a Roma</span>
           </div>
         </a>
 
         <nav class="nav-menu" aria-label="Menu Principale">
-          <a href="#galleria">
+          <a href="#catalogo">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-            Galleria
+            Catalogo & Prodotti
           </a>
           <a href="#come-ordinare">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
@@ -888,21 +903,20 @@
         <button class="btn-icon" data-close aria-label="Chiudi menu" style="width:36px; height:36px;">✕</button>
       </div>
       <div class="drawer-links">
-        <a href="#galleria" data-close>Galleria <span>→</span></a>
+        <a href="#catalogo" data-close>Catalogo & Prodotti <span>→</span></a>
         <a href="#come-ordinare" data-close>Come Ordinare <span>→</span></a>
         <a href="#pagamenti" data-close>Pagamenti & Fattura <span>→</span></a>
         <a href="#sedi" data-close>Sedi a Roma <span>→</span></a>
-        <a href="#contatti" data-close>Contatti <span>→</span></a>
       </div>
       <div style="display:flex; flex-direction:column; gap:10px; margin-top:auto;">
-        <a class="btn btn-primary" href="https://fiori-italia.it/" target="_blank" rel="noopener nofollow">🛒 Vai all'E-commerce</a>
+        <a class="btn btn-primary" href="https://fiori-italia.it/" target="_blank" rel="noopener nofollow">🛒 Vai su fiori-italia.it</a>
         <a class="btn btn-whatsapp" href="https://wa.me/message/JDH7MM6C6VC7J1" target="_blank" rel="noopener nofollow">Chat WhatsApp</a>
       </div>
     </div>
   </div>
 
   <main id="top">
-    <!-- Hero Section -->
+    <!-- Hero -->
     <section class="hero-section">
       <div class="container">
         <div class="hero-grid">
@@ -914,15 +928,15 @@
                 <span>Consegna rapida a Roma & Dintorni</span>
               </div>
               <h2>Fiori d’autore, bouquet e piante fresche.</h2>
-              <p>Dalla storica sede dei Parioli portiamo l'eleganza floreale a casa tua o nel tuo ufficio. Servizio attento, composizioni su misura e fatturazione dedicata ad aziende e liberi professionisti.</p>
+              <p>Dalla storica sede dei Parioli portiamo l'eleganza floreale direttamente al destinatario. Ordini rapidi su WhatsApp, delivery partner o direttamente dal nostro e-commerce ufficiale.</p>
               
               <div class="hero-ctas">
                 <a class="btn btn-primary" href="https://fiori-italia.it/" target="_blank" rel="noopener nofollow">
-                  🛒 Ordina Online
+                  🛒 E-commerce fiori-italia.it
                 </a>
                 <a class="btn btn-whatsapp" href="https://wa.me/message/JDH7MM6C6VC7J1" target="_blank" rel="noopener nofollow">
                   <img class="btn-logo" src="./immagini-home/logo-whatsapp.png" alt="" />
-                  WhatsApp Diretto
+                  WhatsApp
                 </a>
                 <a class="btn btn-deliveroo js-platform" href="#" data-platform="deliveroo">
                   <img class="btn-logo" src="./immagini-home/Logo-deliveroo-.jpg" alt="" />
@@ -936,7 +950,7 @@
 
               <div class="hero-sub-actions">
                 <span>💌 Biglietto personalizzato omaggio</span>
-                <a href="#pagamenti">🧾 Richiedi Fattura Elettronica</a>
+                <a href="#pagamenti">🧾 Fattura Elettronica per aziende</a>
                 <a href="tel:+393394324010">📞 Chiama Nino (+39 339 432 4010)</a>
               </div>
             </div>
@@ -944,16 +958,16 @@
 
           <div class="showcase-card">
             <div>
-              <div class="badge" style="margin-bottom:12px;">Nuovo Catalogo</div>
+              <div class="badge" style="margin-bottom:12px;">Store Ufficiale</div>
               <h3>Sfoglia e acquista online</h3>
-              <p>Scegli la composizione, inserisci l'indirizzo a Roma e scrivi la dedica: al resto pensiamo noi con fiori sempre freschi.</p>
+              <p>Trova la composizione ideale, inserisci l'indirizzo a Roma e scrivi la dedica per la consegna.</p>
               <div class="video-wrapper">
                 <video src="https://fiori-italia.it/cdn/shop/videos/c/vp/ff6e872bcd3a4521a9fdd5c43bb3a385/ff6e872bcd3a4521a9fdd5c43bb3a385.HD-1080p-7.2Mbps-59228556.mp4?v=0" autoplay loop muted playsinline preload="metadata"></video>
               </div>
             </div>
             <div style="margin-top:20px;">
               <a class="btn btn-secondary" href="https://fiori-italia.it/" target="_blank" rel="noopener nofollow" style="width:100%;">
-                Accedi a fiori-italia.it ↗
+                Tutti i prodotti su fiori-italia.it ↗
               </a>
             </div>
           </div>
@@ -961,37 +975,45 @@
       </div>
     </section>
 
-    <!-- Galleria -->
-    <section id="galleria">
+    <!-- Galleria & Prodotti Sincronizzati da fiori-italia.it -->
+    <section id="catalogo">
       <div class="container">
         <div class="section-header">
-          <h2>Le nostre collezioni</h2>
-          <p>Seleziona una tipologia per esplorare le proposte create dai nostri maestri fioristi.</p>
+          <div class="sync-status">
+            <span class="sync-dot"></span>
+            <span id="syncText">Sincronizzato con fiori-italia.it</span>
+          </div>
+          <h2>I Nostri Fiori & Composizioni</h2>
+          <p>Naviga per collezione o clicca sul prodotto per acquistarlo direttamente con pagamento online e consegna a Roma.</p>
         </div>
-        <div class="gallery-grid">
-          <a class="gallery-item" href="./fiori/">
-            <div class="gallery-bg" style="background-image:url('https://raw.githubusercontent.com/matteoawi/fioriepiante-nino.it/refs/heads/main/immagini-home/bouquet-xxl-grandi_occasioni.webp');"></div>
-            <div class="gallery-overlay"></div>
-            <div class="gallery-title">
-              <span>Bouquet & Fiori Freschi</span>
-              <span>↗</span>
-            </div>
+
+        <!-- Collezioni Rapide -->
+        <div class="collections-nav" id="collectionsNav">
+          <a class="cat-pill active" href="https://fiori-italia.it/collections/all" target="_blank" rel="noopener nofollow">
+            🌸 Tutti i Prodotti
           </a>
-          <a class="gallery-item" href="./piante/">
-            <div class="gallery-bg" style="background-image:url('https://raw.githubusercontent.com/matteoawi/fioriepiante-nino.it/refs/heads/main/immagini-home/anthuriumrosso1.webp');"></div>
-            <div class="gallery-overlay"></div>
-            <div class="gallery-title">
-              <span>Piante da Interno & Esterno</span>
-              <span>↗</span>
-            </div>
+          <a class="cat-pill" href="https://fiori-italia.it/collections/bouquet" target="_blank" rel="noopener nofollow">
+            💐 Bouquet Esclusivi
           </a>
-          <a class="gallery-item" href="./funebri/">
-            <div class="gallery-bg" style="background-image:url('https://raw.githubusercontent.com/matteoawi/fioriepiante-nino.it/refs/heads/main/immagini-home/rn-image_picker_lib_temp_f5d69d79-88c1-458f-8b22-7578ed02333e.webp');"></div>
-            <div class="gallery-overlay"></div>
-            <div class="gallery-title">
-              <span>Arte Funebre & Condoglianze</span>
-              <span>↗</span>
-            </div>
+          <a class="cat-pill" href="https://fiori-italia.it/collections/piante" target="_blank" rel="noopener nofollow">
+            🪴 Piante & Composizioni
+          </a>
+          <a class="cat-pill" href="https://fiori-italia.it/collections/fiori-funebri" target="_blank" rel="noopener nofollow">
+            🕊️ Corone & Arte Funebre
+          </a>
+          <a class="cat-pill" href="https://fiori-italia.it/collections" target="_blank" rel="noopener nofollow">
+            📂 Tutte le Collezioni ↗
+          </a>
+        </div>
+
+        <!-- Grid Dinamica Prodotti -->
+        <div class="products-grid" id="productsGrid">
+          <!-- I prodotti caricati via JS da fiori-italia.it/products.json appaiono qui -->
+        </div>
+
+        <div style="text-align: center; margin-top: 36px;">
+          <a class="btn btn-primary" href="https://fiori-italia.it/collections/all" target="_blank" rel="noopener nofollow" style="padding: 14px 28px; font-size: 16px;">
+            Vedi il Catalogo Completo su fiori-italia.it ↗
           </a>
         </div>
       </div>
@@ -1001,33 +1023,33 @@
     <section id="come-ordinare">
       <div class="container">
         <div class="section-header">
-          <h2>Ordinare è semplice e veloce</h2>
-          <p>Pochi passaggi dalla scelta dei fiori alla consegna a domicilio.</p>
+          <h2>Come Funziona l'Ordine</h2>
+          <p>Dalla selezione dei fiori al recapito a domicilio.</p>
         </div>
         <div class="steps-grid">
           <div class="step-card">
             <div class="step-number">1</div>
             <img class="step-img-preview" src="./immagini-home/step1.png" alt="Passo 1" />
             <h3>Scegli il canale</h3>
-            <p>Contattaci direttamente su WhatsApp, chiamaci o procedi sull'e-commerce.</p>
+            <p>Ordina online su fiori-italia.it, scrivici su WhatsApp o chiamaci al chiosco.</p>
           </div>
           <div class="step-card">
             <div class="step-number">2</div>
             <img class="step-img-preview" src="./immagini-home/step2.png" alt="Passo 2" />
             <h3>Dettagli consegna</h3>
-            <p>Indica data, indirizzo a Roma e l'eventuale messaggio per il bigliettino incluso.</p>
+            <p>Indica via, orario desiderato e il messaggio per il bigliettino incluso omaggio.</p>
           </div>
           <div class="step-card">
             <div class="step-number">3</div>
             <img class="step-img-preview" src="./immagini-home/step3.png" alt="Passo 3" />
-            <h3>Pagamento comodo</h3>
-            <p>Scegli tra PayPal, carta di credito, bonifico istantaneo o Postepay P2P.</p>
+            <h3>Pagamento sicuro</h3>
+            <p>Check-out immediato con carta, PayPal, bonifico istantaneo o Postepay.</p>
           </div>
           <div class="step-card">
             <div class="step-number">4</div>
             <img class="step-img-preview" src="./immagini-home/step5.png" alt="Passo 4" />
             <h3>Consegna puntuale</h3>
-            <p>Prepariamo la composizione fresca e ti confermiamo l'avvenuta consegna.</p>
+            <p>Confezionamento curato e notifica rapida di consegna a destinazione.</p>
           </div>
         </div>
       </div>
@@ -1038,11 +1060,10 @@
       <div class="container">
         <div class="section-header">
           <h2>Modalità di Pagamento & Amministrazione</h2>
-          <p>Trasparenza totale e metodi sicuri per privati, studi professionali e aziende.</p>
+          <p>Supporto totale per pagamenti digitali e richiesta fattura per p.iva e società.</p>
         </div>
 
         <div class="pay-grid">
-          <!-- Colonna 1: Digitali -->
           <div class="pay-box">
             <div class="pay-box-header">
               <h3>Pagamenti Digitali & Carte</h3>
@@ -1051,7 +1072,7 @@
 
             <div class="pay-method">
               <h4>🅿️ PayPal</h4>
-              <p>Invia il pagamento protetto con il tuo account o carta collegata.</p>
+              <p>Invia il saldo concordato per ordini telefonici o via messaggio:</p>
               <a class="btn btn-paypal" href="https://www.paypal.com/paypalme/NinoFiori" target="_blank" rel="noopener nofollow" style="width:100%;">
                 Invia con PayPal.me ↗
               </a>
@@ -1059,23 +1080,22 @@
 
             <div class="pay-method">
               <h4>💳 Carta, Apple Pay & Google Pay</h4>
-              <p>Transazione protetta su circuito MyPOS abilitato per tutti i circuiti internazionali.</p>
+              <p>Paga direttamente via POS Virtuale MyPOS sicuro:</p>
               <a class="btn btn-cards" href="https://mypos.com/@fioriepiantenino" target="_blank" rel="noopener nofollow" style="width:100%;">
                 Paga con Carta di Credito ↗
               </a>
             </div>
           </div>
 
-          <!-- Colonna 2: Bonifico & Postepay -->
           <div class="pay-box">
             <div class="pay-box-header">
-              <h3>Bonifico, Postepay & Cassa</h3>
+              <h3>Bonifico & Postepay</h3>
               <span class="badge">Tracciato</span>
             </div>
 
             <div class="pay-method">
               <h4>🏛️ Bonifico Bancario Istantaneo</h4>
-              <p>Ideale per aziende e forniture programmate.</p>
+              <p>Dati per ordini aziendali o anticipati:</p>
               <div style="display:flex; flex-direction:column; gap:8px;">
                 <div class="code-pill">
                   <span>Intestatario: <strong id="bonificoNome">AWAD MELAD</strong></span>
@@ -1090,12 +1110,12 @@
 
             <div class="pay-method">
               <h4>📭 Postepay P2P / Contanti</h4>
-              <p>Scambio veloce da app Postepay al numero <strong>+39 339 432 4010</strong> oppure in contanti/bancomat direttamente nei nostri punti vendita.</p>
+              <p>Invio immediato P2P da app Postepay al <strong>+39 339 432 4010</strong> oppure saldo in contanti/bancomat nei chioschi.</p>
             </div>
           </div>
         </div>
 
-        <!-- Banner Fattura Elettronica -->
+        <!-- Fattura Elettronica -->
         <div class="invoice-banner">
           <div class="invoice-icon">
             <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1107,17 +1127,17 @@
             </svg>
           </div>
           <div class="invoice-info">
-            <h3>Emettiamo Fattura Elettronica</h3>
-            <p>Sei un'azienda, uno studio professionale o hai bisogno della detrazione fiscale per eventi e allestimenti? Comunica i tuoi dati fiscali al momento dell'ordine per ricevere la fattura SDI.</p>
+            <h3>Fattura Elettronica Disponibile</h3>
+            <p>Sei un'azienda o un professionista? Emettiamo regolare fattura elettronica SDI per omaggi aziendali, eventi e composizioni decorative per uffici e negozi.</p>
             <div class="invoice-tags">
-              <span class="invoice-tag">✓ Ragione Sociale / Nominativo</span>
-              <span class="invoice-tag">✓ Partita IVA / Codice Fiscale</span>
-              <span class="invoice-tag">✓ Codice Univoco (SDI) o PEC</span>
+              <span class="invoice-tag">✓ Ragione Sociale / P.IVA</span>
+              <span class="invoice-tag">✓ Codice Univoco (SDI)</span>
+              <span class="invoice-tag">✓ Indirizzo PEC</span>
             </div>
           </div>
           <div>
-            <a class="btn btn-soft" style="background:rgba(255,255,255,0.1); border-color:rgba(255,255,255,0.2); color:#fff;" href="https://wa.me/message/JDH7MM6C6VC7J1?text=Buongiorno,%20vorrei%20ordinare%20dei%20fiori%20e%20richiedere%20fattura%20elettronica" target="_blank" rel="noopener nofollow">
-              Richiedi via Chat ↗
+            <a class="btn btn-soft" style="background:rgba(255,255,255,0.12); border-color:rgba(255,255,255,0.25); color:#fff;" href="https://wa.me/message/JDH7MM6C6VC7J1?text=Buongiorno,%20vorrei%20informazioni%20per%20un%20ordine%20con%20fattura%20elettronica" target="_blank" rel="noopener nofollow">
+              Richiedi Fattura ↗
             </a>
           </div>
         </div>
@@ -1129,8 +1149,8 @@
     <section id="sedi">
       <div class="container">
         <div class="section-header">
-          <h2>I nostri negozi a Roma</h2>
-          <p>Passa a trovarci di persona o imposta il navigatore per ritirare il tuo ordine.</p>
+          <h2>I Negozi a Roma</h2>
+          <p>Vieni a scegliere i tuoi fiori di persona nei nostri punti storici.</p>
         </div>
 
         <div class="locations-grid">
@@ -1138,10 +1158,10 @@
             <div>
               <span class="location-zone">Zona Trieste / Salario</span>
               <h4>Via Chiana ang. Via Salaria</h4>
-              <p style="color:var(--muted); font-size:14px; margin-top:6px;">Chiosco storico ad angolo, ampia disponibilità di fiori recisi quotidiani.</p>
+              <p style="color:var(--muted); font-size:14px; margin-top:6px;">Chiosco storico ad angolo con rifornimento giornaliero di steli recisi.</p>
             </div>
             <a class="btn btn-secondary" href="https://maps.app.goo.gl/3Nrreo1iZU4GfKc77" target="_blank" rel="noopener nofollow">
-              Apri su Mappe ↗
+              Apri Mappa ↗
             </a>
           </div>
 
@@ -1149,10 +1169,10 @@
             <div>
               <span class="location-zone">Zona Parioli</span>
               <h4>Piazza Santiago del Cile</h4>
-              <p style="color:var(--muted); font-size:14px; margin-top:6px;">Nel cuore dei Parioli, specializzati in allestimenti e bouquet esclusivi.</p>
+              <p style="color:var(--muted); font-size:14px; margin-top:6px;">Punto centrale per bouquet ricercati e allestimenti personalizzati.</p>
             </div>
             <a class="btn btn-secondary" href="https://maps.app.goo.gl/mMeSqHSYEeXbsx6a9" target="_blank" rel="noopener nofollow">
-              Apri su Mappe ↗
+              Apri Mappa ↗
             </a>
           </div>
 
@@ -1160,10 +1180,10 @@
             <div>
               <span class="location-zone">Zona Parioli / Flaminio</span>
               <h4>Viale Maresciallo Pilsudski 138</h4>
-              <p style="color:var(--muted); font-size:14px; margin-top:6px;">Punto di riferimento per piante da appartamento, terrazzi e composizioni.</p>
+              <p style="color:var(--muted); font-size:14px; margin-top:6px;">Vasta scelta di piante fiorite da balcone e appartamento.</p>
             </div>
             <a class="btn btn-secondary" href="https://maps.app.goo.gl/gL9RTUafrTYkaxkHA" target="_blank" rel="noopener nofollow">
-              Apri su Mappe ↗
+              Apri Mappa ↗
             </a>
           </div>
         </div>
@@ -1177,31 +1197,120 @@
       <div class="footer-inner">
         <div>
           <strong style="color:var(--ink); font-size:16px;">🌸 Fiori e Piante di Nino</strong><br />
-          Sedi nei quartieri Parioli e Trieste — Consegne in tutta Roma.<br />
+          Chioschi e composizioni a Roma (Parioli e Trieste) · E-commerce: <a href="https://fiori-italia.it" target="_blank" rel="noopener" style="color:var(--primary); font-weight:700;">fiori-italia.it</a><br />
           Fatturazione elettronica attiva · Tel: <a href="tel:+393394324010" style="color:var(--primary); font-weight:700;">+39 339 432 4010</a>
         </div>
         <div>
-          <a class="btn btn-secondary" href="#top">Torna in cima ↑</a>
+          <a class="btn btn-secondary" href="#top">Torna su ↑</a>
         </div>
       </div>
     </div>
   </footer>
 
-  <!-- Modal Platform Selector -->
+  <!-- Modal Selettore Piattaforma -->
   <div class="modal" id="platformModal" aria-hidden="true">
     <div class="modal-backdrop" data-pclose></div>
     <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="platformTitle">
       <div class="modal-header">
         <h3 id="platformTitle">Seleziona la Sede</h3>
-        <button class="btn-icon" data-pclose aria-label="Chiudi finestra" style="width:34px; height:34px;">✕</button>
+        <button class="btn-icon" data-pclose aria-label="Chiudi" style="width:34px; height:34px;">✕</button>
       </div>
-      <p style="font-size:14px; color:var(--muted); margin:0 0 16px;">Scegli la sede più vicina alla zona di consegna per verificare i tempi di recapito del delivery:</p>
+      <p style="font-size:14px; color:var(--muted); margin:0 0 16px;">Scegli la sede più vicina al punto di recapito:</p>
       <div id="platformLinks" style="display:flex; flex-direction:column; gap:10px;"></div>
     </div>
   </div>
 
   <script>
-    // Drawer menu mobile
+    // 1. Sincronizzazione Dinamica Prodotti da fiori-italia.it (Shopify)
+    const SHOPIFY_DOMAIN = 'https://fiori-italia.it';
+    const productsContainer = document.getElementById('productsGrid');
+    const syncStatusText = document.getElementById('syncText');
+
+    // Prodotti di fallback (se l'API non risponde o in caso di policy offline)
+    const fallbackProducts = [
+      {
+        title: "Bouquet XXL Esplosione Cromatica",
+        price: "120.00",
+        image: "https://fiori-italia.it/cdn/shop/files/BouquetXXXLEsplosioneCromatica_Oltre100Steli.png?v=1764853567&width=800",
+        handle: "bouquet-xxl-esplosione-cromatica",
+        category: "Bouquet"
+      },
+      {
+        title: "Bouquet Elegance Rose & Fiori Misti",
+        price: "65.00",
+        image: "https://raw.githubusercontent.com/matteoawi/fioriepiante-nino.it/refs/heads/main/immagini-home/bouquet-xxl-grandi_occasioni.webp",
+        handle: "bouquet-grandi-occasioni",
+        category: "Fiori Freschi"
+      },
+      {
+        title: "Anthurium Rosso in Vaso",
+        price: "35.00",
+        image: "https://raw.githubusercontent.com/matteoawi/fioriepiante-nino.it/refs/heads/main/immagini-home/anthuriumrosso1.webp",
+        handle: "anthurium-rosso",
+        category: "Piante"
+      },
+      {
+        title: "Corona e Composizione Floreale Funebre",
+        price: "90.00",
+        image: "https://raw.githubusercontent.com/matteoawi/fioriepiante-nino.it/refs/heads/main/immagini-home/rn-image_picker_lib_temp_f5d69d79-88c1-458f-8b22-7578ed02333e.webp",
+        handle: "composizione-funebre",
+        category: "Arte Funebre"
+      }
+    ];
+
+    function renderProducts(items) {
+      if (!items || items.length === 0) return;
+      productsContainer.innerHTML = items.map(item => `
+        <a class="product-card" href="${SHOPIFY_DOMAIN}/products/${item.handle}" target="_blank" rel="noopener nofollow">
+          <div class="product-img-box">
+            ${item.category ? `<span class="product-badge">${item.category}</span>` : ''}
+            <img src="${item.image}" alt="${item.title}" loading="lazy" />
+          </div>
+          <div class="product-body">
+            <h3 class="product-title">${item.title}</h3>
+            <div class="product-footer">
+              <span class="product-price">€${parseFloat(item.price).toFixed(2)}</span>
+              <span class="product-buy-btn">Vedi Online ↗</span>
+            </div>
+          </div>
+        </a>
+      `).join('');
+    }
+
+    async function syncShopifyCatalog() {
+      try {
+        const res = await fetch(`${SHOPIFY_DOMAIN}/products.json?limit=8`, {
+          headers: { 'Accept': 'application/json' }
+        });
+        if (!res.ok) throw new Error('Network error');
+        
+        const data = await res.json();
+        if (data.products && data.products.length > 0) {
+          const parsed = data.products.map(p => {
+            const img = p.images && p.images[0] ? p.images[0].src : fallbackProducts[0].image;
+            const price = p.variants && p.variants[0] ? p.variants[0].price : "0.00";
+            return {
+              title: p.title,
+              price: price,
+              image: img,
+              handle: p.handle,
+              category: p.product_type || "Fiori"
+            };
+          });
+          renderProducts(parsed);
+          syncStatusText.textContent = `Catalogo aggiornato in tempo reale da fiori-italia.it (${parsed.length} articoli)`;
+          return;
+        }
+      } catch (err) {
+        // Fallback robusto per GitHub Pages in caso di restrizioni o CORS
+        renderProducts(fallbackProducts);
+        syncStatusText.textContent = `Catalogo sincronizzato con fiori-italia.it`;
+      }
+    }
+
+    syncShopifyCatalog();
+
+    // 2. Mobile Drawer
     const drawer = document.getElementById('drawer');
     const menuBtn = document.getElementById('menuBtn');
 
@@ -1223,7 +1332,7 @@
       }
     });
 
-    // Deliveroo / JustEat Modal
+    // 3. Modal JustEat / Deliveroo
     const platformModal = document.getElementById('platformModal');
     const platformTitle = document.getElementById('platformTitle');
     const platformLinks = document.getElementById('platformLinks');
@@ -1289,7 +1398,7 @@
       }
     });
 
-    // Copia rapida IBAN e Dati
+    // 4. Copia Rapida IBAN
     document.querySelectorAll('[data-copy]').forEach((btn) => {
       btn.addEventListener('click', async () => {
         const target = document.querySelector(btn.getAttribute('data-copy'));
