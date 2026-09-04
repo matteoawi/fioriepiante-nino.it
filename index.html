@@ -630,13 +630,50 @@
       font-size: 17px;
     }
 
+    /* Catalogo: layout contenitore */
     .catalogoWrapper {
       background: rgba(255,255,255,.85);
       border: 1px solid var(--stroke);
       border-radius: var(--radius-xl);
-      padding: clamp(14px, 2.5vw, 28px);
+      padding: clamp(10px, 2vw, 24px);
       box-shadow: var(--shadow-card);
       min-height: 400px;
+    }
+
+    /* FORZATURA CSS A 2 COLONNE PER SHOPIFY BUY BUTTON (DOM ed eventuale shadow/component wrapper) */
+    #collection-component-1788531345167,
+    #collection-component-1788531345167 > div {
+      width: 100% !important;
+    }
+
+    .shopify-buy__collection,
+    .shopify-buy__product-set {
+      display: flex !important;
+      flex-wrap: wrap !important;
+      justify-content: space-between !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+
+    .shopify-buy__product,
+    .shopify-buy-frame--product {
+      width: calc(50% - 8px) !important;
+      max-width: calc(50% - 8px) !important;
+      min-width: calc(50% - 8px) !important;
+      flex: 0 0 calc(50% - 8px) !important;
+      margin: 0 0 20px 0 !important;
+      box-sizing: border-box !important;
+    }
+
+    @media (min-width: 601px) {
+      .shopify-buy__product,
+      .shopify-buy-frame--product {
+        width: calc(50% - 12px) !important;
+        max-width: calc(50% - 12px) !important;
+        min-width: calc(50% - 12px) !important;
+        flex: 0 0 calc(50% - 12px) !important;
+        margin-bottom: 28px !important;
+      }
     }
 
     .contactsGrid{
@@ -1170,7 +1207,7 @@
       </div>
     </section>
 
-    <!-- SEZIONE CATALOGO SHOPIFY (Layout 2 Colonne Compatto) -->
+    <!-- SEZIONE CATALOGO SHOPIFY (FORZATA A 2 COLONNE COMPATTE) -->
     <section id="catalogo">
       <div class="container">
         <div class="sectionTitle">
@@ -1213,138 +1250,142 @@
                   node: document.getElementById('collection-component-1788531345167'),
                   moneyFormat: '%E2%82%AC%7B%7Bamount_with_comma_separator%7D%7D',
                   options: {
-            "product": {
-              "styles": {
-                "product": {
-                  "width": "calc(50% - 16px)",
-                  "max-width": "calc(50% - 16px)",
-                  "margin-left": "8px",
-                  "margin-right": "8px",
-                  "margin-bottom": "30px",
-                  "@media (min-width: 601px)": {
-                    "max-width": "calc(50% - 20px)",
-                    "margin-left": "10px",
-                    "margin-right": "10px",
-                    "margin-bottom": "40px",
-                    "width": "calc(50% - 20px)"
-                  },
-                  "img": {
-                    "height": "calc(100% - 15px)",
-                    "position": "absolute",
-                    "left": "0",
-                    "right": "0",
-                    "top": "0"
-                  },
-                  "imgWrapper": {
-                    "padding-top": "calc(75% + 15px)",
-                    "position": "relative",
-                    "height": "0"
+                    "product": {
+                      "iframe": false,
+                      "styles": {
+                        "product": {
+                          "width": "calc(50% - 10px) !important",
+                          "max-width": "calc(50% - 10px) !important",
+                          "min-width": "calc(50% - 10px) !important",
+                          "margin-left": "5px !important",
+                          "margin-right": "5px !important",
+                          "margin-bottom": "30px !important",
+                          "@media (min-width: 601px)": {
+                            "width": "calc(50% - 16px) !important",
+                            "max-width": "calc(50% - 16px) !important",
+                            "min-width": "calc(50% - 16px) !important",
+                            "margin-left": "8px !important",
+                            "margin-right": "8px !important",
+                            "margin-bottom": "40px !important"
+                          },
+                          "img": {
+                            "height": "calc(100% - 15px)",
+                            "position": "absolute",
+                            "left": "0",
+                            "right": "0",
+                            "top": "0"
+                          },
+                          "imgWrapper": {
+                            "padding-top": "calc(75% + 15px)",
+                            "position": "relative",
+                            "height": "0"
+                          }
+                        },
+                        "button": {
+                          ":hover": {
+                            "background-color": "#cb00a3"
+                          },
+                          "background-color": "#e200b5",
+                          ":focus": {
+                            "background-color": "#cb00a3"
+                          },
+                          "border-radius": "25px"
+                        }
+                      },
+                      "buttonDestination": "modal",
+                      "contents": {
+                        "options": false
+                      },
+                      "text": {
+                        "button": "Vedi prodotto"
+                      }
+                    },
+                    "productSet": {
+                      "iframe": false,
+                      "styles": {
+                        "products": {
+                          "display": "flex !important",
+                          "flex-wrap": "wrap !important",
+                          "justify-content": "space-between !important",
+                          "margin-left": "0 !important",
+                          "margin-right": "0 !important",
+                          "@media (min-width: 601px)": {
+                            "margin-left": "0 !important",
+                            "margin-right": "0 !important"
+                          }
+                        }
+                      }
+                    },
+                    "modalProduct": {
+                      "contents": {
+                        "img": false,
+                        "imgWithCarousel": true,
+                        "button": false,
+                        "buttonWithQuantity": true
+                      },
+                      "styles": {
+                        "product": {
+                          "@media (min-width: 601px)": {
+                            "max-width": "100%",
+                            "margin-left": "0px",
+                            "margin-bottom": "0px"
+                          }
+                        },
+                        "button": {
+                          ":hover": {
+                            "background-color": "#cb00a3"
+                          },
+                          "background-color": "#e200b5",
+                          ":focus": {
+                            "background-color": "#cb00a3"
+                          },
+                          "border-radius": "25px"
+                        }
+                      },
+                      "text": {
+                        "button": "Aggiungi al carrello"
+                      }
+                    },
+                    "option": {},
+                    "cart": {
+                      "styles": {
+                        "button": {
+                          ":hover": {
+                            "background-color": "#cb00a3"
+                          },
+                          "background-color": "#e200b5",
+                          ":focus": {
+                            "background-color": "#cb00a3"
+                          },
+                          "border-radius": "25px"
+                        }
+                      },
+                      "text": {
+                        "title": "Carrello",
+                        "total": "Subtotale",
+                        "empty": "Il tuo carrello è vuoto.",
+                        "notice": "Le spese di spedizione e i codici sconto vengono aggiunti al momento del pagamento.",
+                        "button": "Checkout",
+                        "noteDescription": "Istruzioni speciali per il venditore"
+                      },
+                      "contents": {
+                        "note": true
+                      }
+                    },
+                    "toggle": {
+                      "styles": {
+                        "toggle": {
+                          "background-color": "#e200b5",
+                          ":hover": {
+                            "background-color": "#cb00a3"
+                          },
+                          ":focus": {
+                            "background-color": "#cb00a3"
+                          }
+                        }
+                      }
+                    }
                   }
-                },
-                "button": {
-                  ":hover": {
-                    "background-color": "#cb00a3"
-                  },
-                  "background-color": "#e200b5",
-                  ":focus": {
-                    "background-color": "#cb00a3"
-                  },
-                  "border-radius": "25px"
-                }
-              },
-              "buttonDestination": "modal",
-              "contents": {
-                "options": false
-              },
-              "text": {
-                "button": "Vedi prodotto"
-              }
-            },
-            "productSet": {
-              "styles": {
-                "products": {
-                  "display": "flex",
-                  "flex-wrap": "wrap",
-                  "justify-content": "center",
-                  "margin-left": "-8px",
-                  "margin-right": "-8px",
-                  "@media (min-width: 601px)": {
-                    "margin-left": "-10px",
-                    "margin-right": "-10px"
-                  }
-                }
-              }
-            },
-            "modalProduct": {
-              "contents": {
-                "img": false,
-                "imgWithCarousel": true,
-                "button": false,
-                "buttonWithQuantity": true
-              },
-              "styles": {
-                "product": {
-                  "@media (min-width: 601px)": {
-                    "max-width": "100%",
-                    "margin-left": "0px",
-                    "margin-bottom": "0px"
-                  }
-                },
-                "button": {
-                  ":hover": {
-                    "background-color": "#cb00a3"
-                  },
-                  "background-color": "#e200b5",
-                  ":focus": {
-                    "background-color": "#cb00a3"
-                  },
-                  "border-radius": "25px"
-                }
-              },
-              "text": {
-                "button": "Aggiungi al carrello"
-              }
-            },
-            "option": {},
-            "cart": {
-              "styles": {
-                "button": {
-                  ":hover": {
-                    "background-color": "#cb00a3"
-                  },
-                  "background-color": "#e200b5",
-                  ":focus": {
-                    "background-color": "#cb00a3"
-                  },
-                  "border-radius": "25px"
-                }
-              },
-              "text": {
-                "title": "Carrello",
-                "total": "Subtotale",
-                "empty": "Il tuo carrello è vuoto.",
-                "notice": "Le spese di spedizione e i codici sconto vengono aggiunti al momento del pagamento.",
-                "button": "Checkout",
-                "noteDescription": "Istruzioni speciali per il venditore"
-              },
-              "contents": {
-                "note": true
-              }
-            },
-            "toggle": {
-              "styles": {
-                "toggle": {
-                  "background-color": "#e200b5",
-                  ":hover": {
-                    "background-color": "#cb00a3"
-                  },
-                  ":focus": {
-                    "background-color": "#cb00a3"
-                  }
-                }
-              }
-            }
-          },
                 });
               });
             }
