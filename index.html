@@ -250,7 +250,7 @@
     }
     @media (max-width: 420px){ .brandText{ max-width: 52vw; } }
 
-    /* Drawer & Scroll Fix Mobile */
+    /* Drawer */
     .drawer{ 
       position: fixed; 
       inset: 0; 
@@ -468,7 +468,7 @@
     .sectionTitle p{ margin: 6px 0 0; color: var(--muted); max-width: 70ch; line-height:1.5; font-weight: 700; font-size: 17px; }
 
     /* ========================================================= */
-    /* GALLERIA A BENTO & VISTA PRODOTTI INTERNA                */
+    /* GALLERIA A BENTO GRID (COLLEZIONI SHOPPING CON LINK ESTERNO) */
     /* ========================================================= */
     .bentoGrid{
       display: grid;
@@ -547,125 +547,6 @@
       .bentoCard{ min-height: 220px; }
       .bentoCard .content{ padding: 18px; }
     }
-
-    /* Vista interna Prodotti */
-    .productsView{
-      display: none;
-      margin-top: 10px;
-    }
-    .productsView.active{
-      display: block;
-    }
-    .productsTopBar{
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 14px;
-      margin-bottom: 24px;
-      flex-wrap: wrap;
-    }
-    .backToCollectionsBtn{
-      cursor: pointer;
-      appearance: none;
-      border: 1px solid rgba(255,46,143,.20);
-      background: #fff;
-      color: var(--pink);
-      padding: 10px 18px;
-      border-radius: 999px;
-      font-weight: 800;
-      font-size: 14px;
-      box-shadow: var(--shadow-2);
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transition: all .2s var(--ease);
-    }
-    .backToCollectionsBtn:hover{
-      background: var(--pink);
-      color: #fff;
-    }
-
-    .productsGrid{
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 16px;
-    }
-    @media (max-width: 980px){ .productsGrid{ grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 520px){ .productsGrid{ grid-template-columns: 1fr; } }
-
-    .pcard{
-      background: #fff;
-      border: 1px solid rgba(255,46,143,.16);
-      border-radius: var(--radius-xl);
-      overflow: hidden;
-      box-shadow: var(--shadow-card);
-      display: flex;
-      flex-direction: column;
-      transition: transform .2s var(--ease);
-    }
-    .pcard:hover{ transform: translateY(-3px); }
-    .pcardImgBox{
-      position: relative;
-      aspect-ratio: 1/1;
-      width: 100%;
-      background: #fff2f8;
-      overflow: hidden;
-    }
-    .pcardImgBox img{ width: 100%; height: 100%; object-fit: cover; }
-    .pcardCategory{
-      position: absolute;
-      top: 10px; left: 10px;
-      background: rgba(0,0,0,0.65);
-      color: #fff;
-      font-size: 11px;
-      font-weight: 800;
-      padding: 4px 10px;
-      border-radius: 999px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    .pcardContent{
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-      justify-content: space-between;
-      gap: 12px;
-    }
-    .pcardTitle{
-      font-size: 16px;
-      font-weight: 800;
-      line-height: 1.25;
-      margin: 0;
-      color: var(--ink);
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-    .pcardFooter{
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-top: 1px dashed rgba(255,46,143,.18);
-      padding-top: 10px;
-    }
-    .pcardPrice{
-      font-size: 18px;
-      font-weight: 900;
-      color: var(--pink);
-    }
-    .pcardBtn{
-      font-size: 13px;
-      font-weight: 800;
-      padding: 6px 12px;
-      border-radius: 999px;
-      background: rgba(255,46,143,.08);
-      color: var(--pink);
-      border: 1px solid rgba(255,46,143,.20);
-      transition: all .2s;
-    }
-    .pcard:hover .pcardBtn{ background: var(--pink); color: #fff; }
 
     /* Steps */
     .stepsGrid{
@@ -963,6 +844,52 @@
     }
     .pmodal .closeBtn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.95); }
 
+    /* ========================================================= */
+    /* PULSANTE GALLEGGIANTE "TORNA SU"                         */
+    /* ========================================================= */
+    .scrollTopBtn {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--pink);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      box-shadow: 0 8px 24px rgba(255, 46, 143, 0.35);
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      z-index: 99;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(16px);
+      transition: opacity .3s var(--ease), visibility .3s var(--ease), transform .3s var(--ease), background .2s var(--ease);
+    }
+    .scrollTopBtn.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    .scrollTopBtn:hover {
+      background: var(--pink-2);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 28px rgba(255, 46, 143, 0.45);
+    }
+    .scrollTopBtn svg {
+      width: 22px;
+      height: 22px;
+    }
+    @media (max-width: 560px) {
+      .scrollTopBtn {
+        bottom: 20px;
+        right: 16px;
+        width: 44px;
+        height: 44px;
+      }
+    }
+
     @media (max-width: 560px){
       :root{ --shadow-card: var(--shadow-card-mobile); }
     }
@@ -1085,7 +1012,7 @@
   </div>
 
   <main id="top">
-    <!-- Hero Section (Full Width, pulita) -->
+    <!-- Hero Section -->
     <section class="hero">
       <div class="container">
         <div class="heroMain">
@@ -1141,42 +1068,20 @@
     </section>
 
     <!-- ========================================================= -->
-    <!-- GALLERIA COLLEZIONI BENTO (100% DINAMICA) + VISTA PRODOTTI-->
+    <!-- GALLERIA A BENTO GRID (COLLEZIONI SHOPPING CON LINK ESTERNO) -->
     <!-- ========================================================= -->
     <section id="galleria">
       <div class="container">
-        
-        <!-- VISTA 1: BENTO COLLEZIONI REALI -->
-        <div id="collectionsView">
-          <div class="sectionTitle">
-            <div>
-              <h2>Galleria & Collezioni</h2>
-              <p>Scegli una collezione per vederne i prodotti.</p>
-            </div>
-          </div>
-
-          <div class="bentoGrid" id="bentoCollections">
-            <!-- Popolato unicamente in modo dinamico da Shopify API -->
+        <div class="sectionTitle">
+          <div>
+            <h2>Galleria & Collezioni</h2>
+            <p>Sfoglia le nostre collezioni. Clicca su una categoria per scoprire le composizioni sul catalogo.</p>
           </div>
         </div>
 
-        <!-- VISTA 2: PRODOTTI DELLA COLLEZIONE (INTERNA AL SITO) -->
-        <div class="productsView" id="productsView">
-          <div class="productsTopBar">
-            <div>
-              <button class="backToCollectionsBtn" id="backBtn" type="button">
-                ← Torna a tutte le collezioni
-              </button>
-              <h2 style="margin:14px 0 4px; font-size:clamp(24px, 3vw, 32px);" id="currentColTitle">Collezione</h2>
-              <p style="margin:0; color:var(--muted); font-weight:700;" id="currentColCount">Caricamento prodotti...</p>
-            </div>
-          </div>
-
-          <div class="productsGrid" id="productsGrid">
-            <!-- I prodotti della collezione selezionata compaiono qui -->
-          </div>
+        <div class="bentoGrid" id="bentoCollections">
+          <!-- Popolato unicamente in modo dinamico da Shopify API -->
         </div>
-
       </div>
     </section>
 
@@ -1541,25 +1446,23 @@
     </footer>
   </main>
 
+  <!-- Pulsante Torna Su -->
+  <button class="scrollTopBtn" id="scrollTopBtn" type="button" aria-label="Torna su">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M18 15l-6-6-6 6"/>
+    </svg>
+  </button>
+
   <script>
     const SHOPIFY_HOST = 'https://fiori-italia.it';
-
-    const collectionsView = document.getElementById('collectionsView');
-    const productsView = document.getElementById('productsView');
     const bentoBox = document.getElementById('bentoCollections');
-    const productsGrid = document.getElementById('productsGrid');
-    const currentColTitle = document.getElementById('currentColTitle');
-    const currentColCount = document.getElementById('currentColCount');
-    const backBtn = document.getElementById('backBtn');
+    const scrollTopBtn = document.getElementById('scrollTopBtn');
 
-    let allProducts = [];
-    let allCollections = [];
-
-    // Renderizza unicamente le collezioni reali
+    // Renderizza unicamente le collezioni reali scaricate, con link a fiori-italia.it
     function renderBentoCollections(cols) {
       bentoBox.innerHTML = '';
       if (!cols || cols.length === 0) {
-        bentoBox.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--muted); font-weight: 700;">Nessuna collezione trovata.</p>';
+        bentoBox.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--muted); font-weight: 700; padding: 20px;">Nessuna collezione trovata.</p>';
         return;
       }
 
@@ -1567,79 +1470,26 @@
         let spanClass = '';
         if (idx % 3 === 0) spanClass = 'bentoWide';
 
-        const card = document.createElement('div');
+        const card = document.createElement('a');
         card.className = `bentoCard ${spanClass}`.trim();
-        card.setAttribute('data-handle', col.handle);
-        card.setAttribute('data-title', col.title);
+        card.href = `${SHOPIFY_HOST}/collections/${col.handle}`;
+        card.target = '_blank';
+        card.rel = 'noopener nofollow';
 
         card.innerHTML = `
           <div class="bg" style="background-image:url('${col.image}');"></div>
           <div class="overlay"></div>
           <div class="content">
             <h3 class="gtitle">${col.title}</h3>
-            <span class="gsublink">Vedi prodotti ➔</span>
+            <span class="gsublink">Vedi la collezione su fiori-italia.it ➔</span>
           </div>
         `;
-
-        card.addEventListener('click', () => {
-          openCollection(col.handle, col.title);
-        });
 
         bentoBox.appendChild(card);
       });
     }
 
-    // Navigazione interna alla collezione
-    function openCollection(handle, title) {
-      currentColTitle.textContent = title;
-      collectionsView.style.display = 'none';
-      productsView.classList.add('active');
-
-      const norm = (s) => (s || '').toLowerCase().replace(/[-_]/g, ' ').trim();
-      const target = norm(handle);
-
-      const filtered = allProducts.filter(p => {
-        const pType = norm(p.product_type);
-        const pTags = (p.tags || []).map(t => norm(t));
-        const pTitle = norm(p.title);
-
-        return pType.includes(target) ||
-               pTags.some(t => t.includes(target)) ||
-               pTitle.includes(target);
-      });
-
-      // Se non ci sono tag espliciti, mostra i prodotti dello store
-      const displayProducts = filtered.length > 0 ? filtered : allProducts;
-      currentColCount.textContent = `${displayProducts.length} creazioni disponibili`;
-
-      productsGrid.innerHTML = displayProducts.map(p => `
-        <div class="pcard">
-          <div class="pcardImgBox">
-            <span class="pcardCategory">${p.product_type || 'Fiori'}</span>
-            <img src="${p.image}" alt="${p.title}" loading="lazy" />
-          </div>
-          <div class="pcardContent">
-            <h4 class="pcardTitle">${p.title}</h4>
-            <div class="pcardFooter">
-              <span class="pcardPrice">€${parseFloat(p.price).toFixed(2)}</span>
-              <a class="pcardBtn" href="${SHOPIFY_HOST}/products/${p.handle}" target="_blank" rel="noopener nofollow">
-                Acquista su fiori-italia.it ↗
-              </a>
-            </div>
-          </div>
-        </div>
-      `).join('');
-
-      document.getElementById('galleria').scrollIntoView({ behavior: 'smooth' });
-    }
-
-    backBtn.addEventListener('click', () => {
-      productsView.classList.remove('active');
-      collectionsView.style.display = 'block';
-      document.getElementById('galleria').scrollIntoView({ behavior: 'smooth' });
-    });
-
-    // Scarica dinamicamente collezioni e prodotti
+    // Scarica dinamicamente collezioni e prodotti (per estrarre le copertine)
     async function syncData() {
       try {
         const [colRes, prodRes] = await Promise.all([
@@ -1652,19 +1502,18 @@
         const colData = await colRes.json();
         const prodData = await prodRes.json();
 
+        let allProducts = [];
         if (prodData.products && prodData.products.length > 0) {
           allProducts = prodData.products.map(p => ({
             title: p.title,
-            price: p.variants && p.variants[0] ? p.variants[0].price : "0.00",
             image: p.images && p.images[0] ? p.images[0].src : '',
-            handle: p.handle,
             product_type: p.product_type,
             tags: p.tags || []
           }));
         }
 
         if (colData.collections && colData.collections.length > 0) {
-          allCollections = colData.collections.map(c => {
+          const collections = colData.collections.map(c => {
             let img = c.image ? c.image.src : null;
 
             // Se la collezione non ha copertina, usa l'immagine del primo prodotto associato
@@ -1674,7 +1523,7 @@
                 const pType = (p.product_type || '').toLowerCase();
                 return pType === cTitle || (p.tags && p.tags.some(t => t.toLowerCase() === cTitle));
               });
-              img = rel ? rel.image : (allProducts[0] ? allProducts[0].image : '');
+              img = rel && rel.image ? rel.image : (allProducts[0] ? allProducts[0].image : '');
             }
 
             return {
@@ -1684,10 +1533,10 @@
             };
           });
 
-          renderBentoCollections(allCollections);
+          renderBentoCollections(collections);
         }
       } catch (e) {
-        bentoBox.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--muted); font-weight: 700;">Connessione al catalogo in corso...</p>';
+        bentoBox.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--muted); font-weight: 700; padding: 20px;">Caricamento collezioni in corso da fiori-italia.it...</p>';
       }
     }
     syncData();
@@ -1826,6 +1675,19 @@
         btn.textContent = ok ? '✅ Copiato!' : '❌ Non copiato';
         setTimeout(() => { btn.textContent = prev; }, 1200);
       });
+    });
+
+    // Controllo comparsa e click "Torna su"
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 320) {
+        scrollTopBtn.classList.add('visible');
+      } else {
+        scrollTopBtn.classList.remove('visible');
+      }
+    }, { passive: true });
+
+    scrollTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   </script>
 
