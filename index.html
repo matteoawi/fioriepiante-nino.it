@@ -68,19 +68,17 @@
       --pink-2: #ff67b2;
       --pink-3: #ffd1e6;
 
-      --bg: #fff7fb;
+      --bg: #fff8fc;
       --white: #ffffff;
 
       --ink: #1a1220;
       --ink-2: #3b2a43;
       --muted: #5a4764;
 
-      --stroke: rgba(255, 46, 143, 0.18);
-      --stroke-2: rgba(255, 46, 143, 0.28);
-      --shadow: 0 18px 60px rgba(26,18,32,.12);
-      --shadow-card: 0 14px 36px rgba(26,18,32,.14);
-      --shadow-card-mobile: 0 10px 26px rgba(26,18,32,.12);
-      --shadow-2: 0 10px 30px rgba(26,18,32,.10);
+      --stroke: rgba(255, 46, 143, 0.16);
+      --stroke-2: rgba(255, 46, 143, 0.25);
+      --shadow-card: 0 12px 32px rgba(26,18,32,.08);
+      --shadow-2: 0 8px 24px rgba(26,18,32,.06);
 
       --radius-xl: 28px;
       --radius-lg: 22px;
@@ -101,15 +99,14 @@
     *{ box-sizing:border-box; }
     html, body{ height:100%; width:100%; }
     html{ scroll-behavior:smooth; }
+    
+    /* Sfondo Unificato, Continuo e Pulito (Senza tagli o macchie staccate) */
     body{
       margin:0;
       font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
       color: var(--ink);
-      background:
-        radial-gradient(1200px 680px at 15% 10%, rgba(255,46,143,.18), transparent 60%),
-        radial-gradient(900px 520px at 85% 12%, rgba(255,103,178,.16), transparent 62%),
-        radial-gradient(900px 620px at 55% 90%, rgba(255,209,230,.55), transparent 62%),
-        linear-gradient(180deg, #fff2f8, var(--bg));
+      background: linear-gradient(180deg, #fff2f8 0%, #fff8fc 40%, #ffffff 100%);
+      background-attachment: fixed;
       overflow-x: hidden;
     }
 
@@ -121,35 +118,8 @@
     li { margin-bottom: 8px; line-height: 1.5; color: var(--ink-2); font-weight: 600; }
     .container{ width:min(var(--max), calc(100% - 40px)); margin-inline:auto; }
 
-    .blobs{
-      position:fixed; inset:0;
-      pointer-events:none; z-index:-1;
-      filter: blur(48px); opacity:.90;
-      overflow: hidden;
-    }
-    .blob{
-      position:absolute; width: 520px; height: 520px; border-radius: 999px;
-      background: radial-gradient(circle at 30% 30%, rgba(255,46,143,.40), rgba(255,103,178,.18) 55%, transparent 70%);
-      animation: float 16s var(--ease) infinite;
-    }
-    .blob.b2{
-      width: 620px; height: 620px; right:-240px; top:80px;
-      background: radial-gradient(circle at 30% 30%, rgba(255,103,178,.35), rgba(255,209,230,.55) 55%, transparent 70%);
-      animation-duration: 18s; animation-delay: -5s;
-    }
-    .blob.b3{
-      width: 700px; height: 700px; left:-260px; bottom:-320px;
-      background: radial-gradient(circle at 30% 30%, rgba(255,209,230,.70), rgba(255,46,143,.15) 55%, transparent 70%);
-      animation-duration: 20s; animation-delay: -9s;
-    }
-    @keyframes float{
-      0%{ transform: translate(-30px, -20px) scale(1); }
-      50%{ transform: translate(30px, 20px) scale(1.06); }
-      100%{ transform: translate(-30px, -20px) scale(1); }
-    }
-
     .card{
-      background: rgba(255,255,255,.74);
+      background: rgba(255,255,255,.85);
       border: 1px solid var(--stroke);
       border-radius: var(--radius-xl);
       box-shadow: var(--shadow-card);
@@ -163,8 +133,8 @@
       top: 0;
       z-index: 100;
       padding: 12px 0;
-      background: rgba(255,255,255,.72);
-      border-bottom: 1px solid rgba(255,46,143,.14);
+      background: rgba(255,255,255,.85);
+      border-bottom: 1px solid rgba(255,46,143,.12);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
     }
@@ -184,7 +154,7 @@
       width: 46px; height: 46px;
       border-radius: 16px;
       display:grid; place-items:center;
-      background: linear-gradient(135deg, rgba(255,46,143,.14), rgba(255,209,230,.70));
+      background: linear-gradient(135deg, rgba(255,46,143,.12), rgba(255,209,230,.60));
       border: 1px solid rgba(255,46,143,.14);
       box-shadow: var(--shadow-2);
       overflow:hidden;
@@ -208,8 +178,8 @@
       display:flex; align-items:center; gap: 8px;
       padding: 6px;
       border-radius: 999px;
-      border: 1px solid rgba(255,46,143,.16);
-      background: rgba(255,255,255,.60);
+      border: 1px solid rgba(255,46,143,.14);
+      background: rgba(255,255,255,.70);
       flex: 0 0 auto;
     }
     .navlinks a{
@@ -224,25 +194,25 @@
       gap: 8px;
     }
     .navlinks a:hover{
-      background: rgba(255,46,143,.10);
+      background: rgba(255,46,143,.08);
       transform: translateY(-1px);
     }
     .navlinks .menuIcon{ width: 16px; height: 16px; display:block; }
-    .navlinks a.active{ background: rgba(255,46,143,.14); }
+    .navlinks a.active{ background: rgba(255,46,143,.12); }
 
     .navactions{ display:flex; align-items:center; gap:10px; flex: 0 0 auto; }
     .iconbtn{
       width: 44px; height: 44px;
       border-radius: 16px;
-      border: 1px solid rgba(255,46,143,.16);
-      background: rgba(255,255,255,.65);
+      border: 1px solid rgba(255,46,143,.14);
+      background: rgba(255,255,255,.75);
       display:grid; place-items:center;
       box-shadow: var(--shadow-2);
       cursor:pointer;
       transition: transform .2s var(--ease), background .2s var(--ease);
       flex: 0 0 auto;
     }
-    .iconbtn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.88); }
+    .iconbtn:hover{ transform: translateY(-1px); background: #fff; }
     .hamburger{ display:none; }
     @media (max-width: 980px){
       .navlinks{ display:none; }
@@ -271,11 +241,9 @@
       top: 74px;
       width: min(420px, calc(100% - 28px));
       border-radius: var(--radius-xl);
-      background: rgba(255,255,255,.96);
+      background: #ffffff;
       border: 1px solid rgba(255,46,143,.18);
       box-shadow: var(--shadow-card);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
       max-height: calc(100dvh - 90px);
       display: flex;
       flex-direction: column;
@@ -296,7 +264,6 @@
         right: 10px;
         width: calc(100% - 20px);
         max-height: calc(100dvh - 80px);
-        border-radius: var(--radius-lg);
       }
     }
 
@@ -308,14 +275,14 @@
       border-radius: 16px;
       font-weight: 800;
       color: var(--ink);
-      background: rgba(255,46,143,.06);
-      border: 1px solid rgba(255,46,143,.14);
+      background: rgba(255,46,143,.05);
+      border: 1px solid rgba(255,46,143,.12);
       margin-top: 10px;
     }
     .drawer a.drawerLink .drawerLeft{ display:inline-flex; align-items:center; gap: 10px; }
     .drawer a.drawerLink .menuIcon{ width: 18px; height: 18px; }
     .drawer a.drawerLink span{ color: var(--muted); font-weight: 700; }
-    .drawerGroup{ margin-top: 14px; padding-top: 14px; border-top: 1px dashed rgba(255,46,143,.22); }
+    .drawerGroup{ margin-top: 14px; padding-top: 14px; border-top: 1px dashed rgba(255,46,143,.20); }
     .drawerTitle{ font-weight: 900; margin: 0 0 10px; color: var(--ink); }
 
     /* Buttons */
@@ -324,7 +291,7 @@
       padding: 12px 14px;
       border-radius: 16px;
       border: 1px solid rgba(255,46,143,.18);
-      background: rgba(255,255,255,.70);
+      background: #ffffff;
       color: var(--ink);
       font-weight: 800;
       box-shadow: var(--shadow-2);
@@ -332,17 +299,17 @@
       user-select:none;
       text-align: center;
     }
-    .btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.92); }
+    .btn:hover{ transform: translateY(-1px); background: #fff8fc; }
     .btn.primary{
       border: none;
       color: white;
       background: linear-gradient(135deg, var(--pink), var(--pink-2));
-      box-shadow: 0 18px 54px rgba(255,46,143,.22);
+      box-shadow: 0 12px 36px rgba(255,46,143,.20);
     }
-    .btn.primary:hover{ box-shadow: 0 22px 70px rgba(255,46,143,.26); }
+    .btn.primary:hover{ box-shadow: 0 16px 48px rgba(255,46,143,.25); }
     .btn.soft{
       background: rgba(255,46,143,.08);
-      border: 1px solid rgba(255,46,143,.20);
+      border: 1px solid rgba(255,46,143,.18);
     }
     .btn.brand{ border: none; color: #fff; }
     .btn.brand:hover{ filter: brightness(1.03); }
@@ -561,9 +528,7 @@
       border-radius: var(--radius-xl);
       border: 1px solid rgba(255,46,143,.16);
       box-shadow: var(--shadow-card);
-      background: rgba(255,255,255,.78);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+      background: #ffffff;
       overflow:hidden;
     }
 
@@ -574,7 +539,7 @@
       border-radius: 18px;
       object-fit: contain;
       border: 1px solid rgba(255,46,143,.14);
-      background: rgba(255,255,255,.92);
+      background: #fff;
       display:block;
     }
     @media (max-width: 980px){ .stepImg{ height: 320px; } }
@@ -599,7 +564,7 @@
       padding: 20px;
       border-radius: var(--radius-xl);
       border: 1px solid rgba(255,46,143,.18);
-      background: rgba(255,46,143,.08);
+      background: rgba(255,46,143,.06);
       box-shadow: var(--shadow-2);
       display:flex;
       align-items:center;
@@ -622,7 +587,7 @@
       padding: 24px;
       border-radius: var(--radius-xl);
       border: 1px solid rgba(255,46,143,.16);
-      background: rgba(255,255,255,.85);
+      background: #ffffff;
       box-shadow: var(--shadow-card);
     }
     .payCard h3{ margin:0 0 16px; font-size: 20px; font-weight: 900; color: var(--pink); }
@@ -657,7 +622,7 @@
     .copyBtn{
       appearance:none;
       border: 1px solid rgba(255,46,143,.18);
-      background: rgba(255,255,255,.78);
+      background: #fff;
       border-radius: 999px;
       padding: 10px 12px;
       font-weight: 800;
@@ -666,13 +631,13 @@
       transition: transform .2s var(--ease), background .2s var(--ease);
       user-select:none;
     }
-    .copyBtn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.95); }
+    .copyBtn:hover{ transform: translateY(-1px); background: #fff8fc; }
 
     .payCircuits{
       width: 100%;
       border-radius: 16px;
       border: 1px solid rgba(255,46,143,.14);
-      background: rgba(255,255,255,.92);
+      background: #fff;
       padding: 10px;
       margin-top: 10px;
       box-shadow: var(--shadow-2);
@@ -695,7 +660,7 @@
     .payCircuits .pill{
       padding: 10px 12px;
       border-radius: 999px;
-      background: rgba(255,255,255,.75);
+      background: #fff;
       border: 1px solid rgba(255,46,143,.14);
       font-weight: 900;
       color: var(--ink);
@@ -714,7 +679,7 @@
     /* Card Fattura Elettronica */
     .payCard.invoiceCard{
       grid-column: 1 / -1;
-      background: linear-gradient(180deg, #ffffff 0%, #fff7fb 100%);
+      background: linear-gradient(180deg, #ffffff 0%, #fff8fc 100%);
       border: 2px solid rgba(255,46,143,.26);
     }
     .invoiceList{
@@ -747,7 +712,7 @@
       padding: 22px;
       border-radius: var(--radius-xl);
       border: 1px solid rgba(255,46,143,.16);
-      background: rgba(255,255,255,.78);
+      background: #ffffff;
       box-shadow: var(--shadow-card);
       display:flex;
       flex-direction:column;
@@ -762,7 +727,7 @@
       border-radius: 16px;
       overflow:hidden;
       border: 1px solid rgba(255,46,143,.18);
-      background: rgba(255,255,255,.92);
+      background: #fff;
       box-shadow: var(--shadow-2);
       display:grid;
       place-items:center;
@@ -781,8 +746,7 @@
     footer{
       padding: 24px 0 42px;
       border-top: 1px solid rgba(255,46,143,.14);
-      background: rgba(255,255,255,.70);
-      backdrop-filter: blur(10px);
+      background: #ffffff;
     }
     footer .row{
       display:flex; justify-content:space-between; gap: 14px; flex-wrap:wrap;
@@ -801,10 +765,9 @@
       transform: translate(-50%, -50%);
       width: min(520px, calc(100% - 28px));
       border-radius: var(--radius-xl);
-      background: rgba(255,255,255,.94);
+      background: #ffffff;
       border: 1px solid rgba(255,46,143,.18);
       box-shadow: var(--shadow-card);
-      backdrop-filter: blur(14px);
       overflow:hidden;
     }
     .pmodal .inner{ padding: 18px; }
@@ -835,14 +798,14 @@
       width: 40px; height: 40px;
       border-radius: 14px;
       border: 1px solid rgba(255,46,143,.16);
-      background: rgba(255,255,255,.70);
+      background: #fff;
       display:grid; place-items:center;
       box-shadow: var(--shadow-2);
       cursor:pointer;
       transition: transform .2s var(--ease), background .2s var(--ease);
       flex: 0 0 auto;
     }
-    .pmodal .closeBtn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.95); }
+    .pmodal .closeBtn:hover{ transform: translateY(-1px); background: #fff8fc; }
 
     /* ========================================================= */
     /* PULSANTE GALLEGGIANTE "TORNA SU"                         */
@@ -888,15 +851,6 @@
         width: 44px;
         height: 44px;
       }
-    }
-
-    @media (max-width: 560px){
-      :root{ --shadow-card: var(--shadow-card-mobile); }
-    }
-    .step, .payCard, .loc{
-      background: #fff;
-      backdrop-filter: none;
-      -webkit-backdrop-filter: none;
     }
   </style>
 </head>
@@ -1067,9 +1021,7 @@
       </div>
     </section>
 
-    <!-- ========================================================= -->
-    <!-- GALLERIA A BENTO GRID (COLLEZIONI SHOPPING CON LINK ESTERNO) -->
-    <!-- ========================================================= -->
+    <!-- Galleria Collezioni (Bento Live da fiori-italia.it) -->
     <section id="galleria">
       <div class="container">
         <div class="sectionTitle">
@@ -1080,7 +1032,7 @@
         </div>
 
         <div class="bentoGrid" id="bentoCollections">
-          <!-- Popolato unicamente in modo dinamico da Shopify API -->
+          <!-- Popolato dinamicamente da Shopify API -->
         </div>
       </div>
     </section>
@@ -1217,7 +1169,7 @@
             </div>
           </div>
 
-          <!-- Colonna 2: Bonifico e Postepay -->
+          <!-- Colonna 2: Bonifico (IBAN tutto attaccato) e Postepay -->
           <div class="payCard">
             <h3>🏦 Bonifico, Postepay e Contanti</h3>
 
@@ -1231,8 +1183,8 @@
                 </div>
 
                 <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
-                  <span>IBAN: <span class="bigNumber" id="bonificoIban" style="display:inline-block; margin:0;">IT98 Y360 8105 1382 5123 3451 236</span></span>
-                  <button class="copyBtn" type="button" data-copy="#bonificoIban" data-copy-nospace>📋 Copia</button>
+                  <span>IBAN: <span class="bigNumber" id="bonificoIban" style="display:inline-block; margin:0;">IT98Y3608105138251233451236</span></span>
+                  <button class="copyBtn" type="button" data-copy="#bonificoIban">📋 Copia</button>
                 </div>
               </div>
             </div>
@@ -1266,7 +1218,7 @@
             </p>
           </div>
 
-          <!-- Card Fattura Elettronica Integrata -->
+          <!-- Card Fattura Elettronica -->
           <div class="payCard invoiceCard">
             <h3>🧾 Emissione Fattura Elettronica</h3>
             <p>
@@ -1458,7 +1410,7 @@
     const bentoBox = document.getElementById('bentoCollections');
     const scrollTopBtn = document.getElementById('scrollTopBtn');
 
-    // Renderizza unicamente le collezioni reali scaricate, con link a fiori-italia.it
+    // Renderizza le collezioni reali con link esterno a fiori-italia.it
     function renderBentoCollections(cols) {
       bentoBox.innerHTML = '';
       if (!cols || cols.length === 0) {
@@ -1489,7 +1441,7 @@
       });
     }
 
-    // Scarica dinamicamente collezioni e prodotti (per estrarre le copertine)
+    // Sincronizzazione dinamica collezioni Shopify
     async function syncData() {
       try {
         const [colRes, prodRes] = await Promise.all([
@@ -1516,7 +1468,6 @@
           const collections = colData.collections.map(c => {
             let img = c.image ? c.image.src : null;
 
-            // Se la collezione non ha copertina, usa l'immagine del primo prodotto associato
             if (!img && allProducts.length > 0) {
               const rel = allProducts.find(p => {
                 const cTitle = c.title.toLowerCase();
@@ -1639,7 +1590,7 @@
       if(e.key === 'Escape' && platformModal.classList.contains('open')) closePlatformModal();
     });
 
-    // Copia bonifico
+    // Copia testo
     async function copyText(text){
       try{
         await navigator.clipboard.writeText(text);
@@ -1668,7 +1619,6 @@
         if(!el) return;
 
         let text = (el.textContent || '').trim();
-        if(btn.hasAttribute('data-copy-nospace')) text = text.replace(/\s+/g, '');
         const ok = await copyText(text);
 
         const prev = btn.textContent;
@@ -1677,7 +1627,7 @@
       });
     });
 
-    // Controllo comparsa e click "Torna su"
+    // Pulsante "Torna su"
     window.addEventListener('scroll', () => {
       if (window.scrollY > 320) {
         scrollTopBtn.classList.add('visible');
