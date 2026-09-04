@@ -630,12 +630,11 @@
       font-size: 17px;
     }
 
-    /* Contenitore Buy Button catalogo */
     .catalogoWrapper {
       background: rgba(255,255,255,.85);
       border: 1px solid var(--stroke);
       border-radius: var(--radius-xl);
-      padding: clamp(16px, 3vw, 32px);
+      padding: clamp(14px, 2.5vw, 28px);
       box-shadow: var(--shadow-card);
       min-height: 400px;
     }
@@ -1147,7 +1146,6 @@
                   Puoi <b>acquistare direttamente online</b> con consegna a domicilio su Roma 💗
                 </p>
 
-                <!-- VIDEO (card interna) -->
                 <div class="innerCard">
                   <div class="videoBox">
                     <video
@@ -1172,7 +1170,7 @@
       </div>
     </section>
 
-    <!-- SEZIONE CATALOGO SHOPIFY (Sostituisce la vecchia Galleria) -->
+    <!-- SEZIONE CATALOGO SHOPIFY (Layout 2 Colonne Compatto) -->
     <section id="catalogo">
       <div class="container">
         <div class="sectionTitle">
@@ -1183,7 +1181,6 @@
         </div>
 
         <div class="catalogoWrapper">
-          <!-- WIDGET SHOPIFY BUY BUTTON -->
           <div id='collection-component-1788531345167'></div>
           <script type="text/javascript">
           /*<![CDATA[*/
@@ -1219,11 +1216,17 @@
             "product": {
               "styles": {
                 "product": {
+                  "width": "calc(50% - 16px)",
+                  "max-width": "calc(50% - 16px)",
+                  "margin-left": "8px",
+                  "margin-right": "8px",
+                  "margin-bottom": "30px",
                   "@media (min-width: 601px)": {
-                    "max-width": "calc(25% - 20px)",
-                    "margin-left": "20px",
-                    "margin-bottom": "50px",
-                    "width": "calc(25% - 20px)"
+                    "max-width": "calc(50% - 20px)",
+                    "margin-left": "10px",
+                    "margin-right": "10px",
+                    "margin-bottom": "40px",
+                    "width": "calc(50% - 20px)"
                   },
                   "img": {
                     "height": "calc(100% - 15px)",
@@ -1260,8 +1263,14 @@
             "productSet": {
               "styles": {
                 "products": {
+                  "display": "flex",
+                  "flex-wrap": "wrap",
+                  "justify-content": "center",
+                  "margin-left": "-8px",
+                  "margin-right": "-8px",
                   "@media (min-width: 601px)": {
-                    "margin-left": "-20px"
+                    "margin-left": "-10px",
+                    "margin-right": "-10px"
                   }
                 }
               }
@@ -1641,7 +1650,7 @@
                 Deliveroo
               </a>
               <a class="btn brand justeat js-platform" href="#" data-platform="justeat">
-                <img class="logo" src="./immagini-home/logo-justeat.png" alt="Logo JustEat" />
+                <img class="logo" src="./immagini-home/logo-justeat.png" alt="JustEat" />
                 JustEat
               </a>
             </div>
