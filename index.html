@@ -125,7 +125,7 @@
     li { margin-bottom: 8px; line-height: 1.5; color: var(--ink-2); font-weight: 600; }
     .container{ width:min(var(--max), calc(100% - 40px)); margin-inline:auto; }
 
-    /* Soft blobs */
+    /* Blobs */
     .blobs{
       position:fixed; inset:0;
       pointer-events:none; z-index:-1;
@@ -199,20 +199,9 @@
       overflow:hidden;
       flex: 0 0 auto;
     }
-    .brandLogo img{
-      width: 36px; height: 36px; object-fit: contain; display:block;
-    }
-    .brandText{
-      display:flex;
-      flex-direction: column;
-      justify-content:center;
-      min-width: 0;
-    }
-    .brandText .titleLine{
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
+    .brandLogo img{ width: 36px; height: 36px; object-fit: contain; display:block; }
+    .brandText{ display:flex; flex-direction: column; justify-content:center; min-width: 0; }
+    .brandText .titleLine{ white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .brand small{
       display:block;
       font-weight: 600;
@@ -263,15 +252,12 @@
       flex: 0 0 auto;
     }
     .iconbtn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.88); }
-
     .hamburger{ display:none; }
     @media (max-width: 980px){
       .navlinks{ display:none; }
       .hamburger{ display:grid; }
     }
-    @media (max-width: 420px){
-      .brandText{ max-width: 52vw; }
-    }
+    @media (max-width: 420px){ .brandText{ max-width: 52vw; } }
 
     /* Drawer */
     .drawer{ position: fixed; inset:0; z-index:200; display:none; }
@@ -290,18 +276,8 @@
       display:flex;
       flex-direction:column;
     }
-    .drawer .inner{
-      padding: 14px;
-      overflow:auto;
-      -webkit-overflow-scrolling: touch;
-    }
-    .drawerTop{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap: 10px;
-      padding: 2px 0 10px;
-    }
+    .drawer .inner{ padding: 14px; overflow:auto; -webkit-overflow-scrolling: touch; }
+    .drawerTop{ display:flex; align-items:center; justify-content:space-between; gap: 10px; padding: 2px 0 10px; }
     .drawerBrand{ font-weight: 950; letter-spacing: -.3px; color: var(--ink); }
     .drawer a.drawerLink{
       display:flex; align-items:center; justify-content:space-between;
@@ -316,11 +292,7 @@
     .drawer a.drawerLink .drawerLeft{ display:inline-flex; align-items:center; gap: 10px; }
     .drawer a.drawerLink .menuIcon{ width: 18px; height: 18px; }
     .drawer a.drawerLink span{ color: var(--muted); font-weight: 700; }
-    .drawerGroup{
-      margin-top: 14px;
-      padding-top: 14px;
-      border-top: 1px dashed rgba(255,46,143,.22);
-    }
+    .drawerGroup{ margin-top: 14px; padding-top: 14px; border-top: 1px dashed rgba(255,46,143,.22); }
     .drawerTitle{ font-weight: 900; margin: 0 0 10px; color: var(--ink); }
 
     /* Bottoni */
@@ -361,15 +333,8 @@
       color: var(--postepay-ink);
       border: 1px solid rgba(0,0,0,.06);
     }
-    .btn .logo{
-      width: 2rem; height: 2rem; object-fit: contain;
-      filter: drop-shadow(0 8px 14px rgba(26,18,32,.14));
-    }
-    .btn .svgLogo{
-      width: 20px; height: 20px;
-      display:block;
-      filter: drop-shadow(0 8px 14px rgba(26,18,32,.14));
-    }
+    .btn .logo{ width: 2rem; height: 2rem; object-fit: contain; }
+    .btn .svgLogo{ width: 20px; height: 20px; display:block; }
 
     /* Hero */
     .hero{ padding: 26px 0 10px; }
@@ -390,10 +355,7 @@
       border: 1px solid rgba(255,46,143,.16);
       background: url("https://fiori-italia.it/cdn/shop/files/BouquetXXXLEsplosioneCromatica_Oltre100Steli.png?v=1764853567&width=3840") center center/cover no-repeat;
     }
-    .heroOverlay{
-      position:absolute; inset:0;
-      background: linear-gradient(180deg, rgba(0,0,0,.18) 0%, rgba(0,0,0,.42) 70%);
-    }
+    .heroOverlay{ position:absolute; inset:0; background: linear-gradient(180deg, rgba(0,0,0,.18) 0%, rgba(0,0,0,.42) 70%); }
     .heroContent{
       position:relative;
       height:100%;
@@ -412,10 +374,7 @@
       display: block;
       filter: drop-shadow(0 10px 20px rgba(255,46,143,0.15));
     }
-    .heroLogoTop{
-      margin: 0 auto 12px;
-      filter: drop-shadow(0 18px 34px rgba(0,0,0,.28));
-    }
+    .heroLogoTop{ margin: 0 auto 12px; filter: drop-shadow(0 18px 34px rgba(0,0,0,.28)); }
     .heroPill{ margin: 14px auto 0; }
     .pill{
       display:inline-flex; align-items:center; gap:10px;
@@ -447,24 +406,10 @@
       font-weight: 700;
       line-height: 1.55;
     }
-    .heroMain h1, .heroMain .lead{
-      color: #fff;
-      text-shadow: 0 10px 26px rgba(0,0,0,.55);
-    }
-    .heroMain .pill{
-      color:#fff;
-      background: rgba(0,0,0,.22);
-      border: 1px solid rgba(255,255,255,.22);
-    }
-    .heroMain .btn.soft{
-      background: linear-gradient(135deg, var(--pink), var(--pink-2));
-      border: 1px solid rgba(255,255,255,.22);
-      color: #fff;
-    }
-    .heroMain .btn.soft:hover{
-      filter: brightness(1.04);
-      transform: translateY(-1px);
-    }
+    .heroMain h1, .heroMain .lead{ color: #fff; text-shadow: 0 10px 26px rgba(0,0,0,.55); }
+    .heroMain .pill{ color:#fff; background: rgba(0,0,0,.22); border: 1px solid rgba(255,255,255,.22); }
+    .heroMain .btn.soft{ background: linear-gradient(135deg, var(--pink), var(--pink-2)); border: 1px solid rgba(255,255,255,.22); color: #fff; }
+    .heroMain .btn.soft:hover{ filter: brightness(1.04); transform: translateY(-1px); }
     .ctaRow{ display:flex; gap: 12px; flex-wrap:wrap; margin-top: 24px; justify-content: center; }
 
     .miniRow{
@@ -477,10 +422,7 @@
       text-shadow: 0 10px 26px rgba(0,0,0,.55);
     }
     .miniRow a{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap: 10px;
+      display:inline-flex; align-items:center; justify-content:center; gap: 10px;
       padding: 10px 12px;
       border-radius: 999px;
       background: rgba(0,0,0,.22);
@@ -490,28 +432,13 @@
       transition: transform .2s var(--ease), background .2s var(--ease), box-shadow .2s var(--ease);
       text-shadow: 0 10px 26px rgba(0,0,0,.55);
     }
-    .miniRow a:hover{
-      background: rgba(0,0,0,.30);
-      transform: translateY(-1px);
-      box-shadow: 0 16px 34px rgba(0,0,0,.22);
-    }
+    .miniRow a:hover{ background: rgba(0,0,0,.30); transform: translateY(-1px); box-shadow: 0 16px 34px rgba(0,0,0,.22); }
     .miniRow a svg{ width: 18px; height: 18px; display:block; flex: 0 0 auto; }
     .miniRow a.miniBtn{ padding: 12px 14px; font-size: 15px; font-weight: 900; }
-    .miniRow.miniActions{
-      flex-direction: column;
-      align-items: center;
-      width: min(440px, 100%);
-      margin-inline: auto;
-    }
+    .miniRow.miniActions{ flex-direction: column; align-items: center; width: min(440px, 100%); margin-inline: auto; }
     .miniRow.miniActions a.miniBtn{ width: 100%; justify-content: center; }
-    .miniRow a.miniBtnCall{
-      background: rgb(211 187 37 / 94%);
-      border: 1px solid rgb(211 187 37 / 94%);
-    }
-    .miniRow a.miniBtnPay{
-      background: rgb(34 21 247 / 93%);
-      border: 1px solid rgb(34 21 247 / 93%);
-    }
+    .miniRow a.miniBtnCall{ background: rgb(211 187 37 / 94%); border: 1px solid rgb(211 187 37 / 94%); }
+    .miniRow a.miniBtnPay{ background: rgb(34 21 247 / 93%); border: 1px solid rgb(34 21 247 / 93%); }
 
     .side{ display:flex; flex-direction:column; gap: 16px; }
     .side .card{ padding: 24px; height: 100%; display: flex; flex-direction: column; justify-content: center; }
@@ -534,7 +461,7 @@
     }
     .videoBox iframe, .videoBox video{
       width: 100%;
-      height: min(340px, 42vh);
+      height: 300px;
       display:block;
       border: 0;
       object-fit: cover;
@@ -546,72 +473,20 @@
       display:flex; align-items:flex-end; justify-content:space-between;
       gap: 16px; margin-bottom: 24px;
     }
-    .sectionTitle h2{
-      margin:0;
-      font-size: clamp(26px, 2.5vw, 34px);
-      letter-spacing: -.6px;
-    }
-    .sectionTitle p{
-      margin: 6px 0 0;
-      color: var(--muted);
-      max-width: 70ch;
-      line-height:1.5;
-      font-weight: 700;
-      font-size: 17px;
-    }
+    .sectionTitle h2{ margin:0; font-size: clamp(26px, 2.5vw, 34px); letter-spacing: -.6px; }
+    .sectionTitle p{ margin: 6px 0 0; color: var(--muted); max-width: 70ch; line-height:1.5; font-weight: 700; font-size: 17px; }
 
-    /* Prodotti e Galleria Sincronizzata */
-    .syncBadge{
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 13px;
-      font-weight: 800;
-      color: var(--pink);
-      background: rgba(255,46,143,.08);
-      border: 1px solid rgba(255,46,143,.20);
-      padding: 6px 12px;
-      border-radius: 999px;
-      margin-bottom: 12px;
-    }
-    .syncBadge .dot{
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: var(--pink);
-    }
-    .collectionsRow{
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 24px;
-    }
-    .collectionsRow a{
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 16px;
-      border-radius: 999px;
-      background: #fff;
-      border: 1px solid rgba(255,46,143,.18);
-      font-weight: 800;
-      font-size: 14px;
-      color: var(--ink);
-      box-shadow: var(--shadow-2);
-      transition: all .2s var(--ease);
-    }
-    .collectionsRow a:hover, .collectionsRow a.active{
-      background: linear-gradient(135deg, var(--pink), var(--pink-2));
-      color: #fff;
-      border-color: transparent;
-      transform: translateY(-1px);
-    }
+    /* ========================================================= */
+    /* GALLERIA ORIGINALE + SYNC COLLEZIONI SHOPPING            */
+    /* ========================================================= */
     .galleryGrid{
       display:grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: clamp(10px, 2.6vw, 16px);
     }
-    @media (max-width: 1020px){ .galleryGrid{ grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 560px){ .galleryGrid{ grid-template-columns: 1fr; } }
+    @media (max-width: 800px){
+      .galleryGrid{ grid-template-columns: 1fr; gap: 14px; }
+    }
 
     .gcard{
       position:relative;
@@ -619,80 +494,161 @@
       overflow:hidden;
       border: 1px solid rgba(255,46,143,.16);
       box-shadow: var(--shadow-card);
+      min-height: 280px;
       background: #fff;
+      display: block;
+      min-width: 0;
+    }
+    .gcard .bg{
+      position:absolute; inset:0; background-size: cover; background-position:center;
+      transform: scale(1.04); transition: transform 0.4s var(--ease);
+    }
+    .gcard:hover .bg { transform: scale(1.1); }
+    .gcard .overlay{
+      position:absolute; inset:0;
+      background: linear-gradient(180deg, rgba(0,0,0,.15) 0%, rgba(0,0,0,.60) 80%);
+    }
+    .gcard .content{
+      position:absolute; inset:0;
+      padding: 24px;
+      display:flex; flex-direction:column; justify-content:flex-end;
+      gap: 10px;
+    }
+    .gtitle{
+      font-size: clamp(20px, 3.2vw, 26px);
+      font-weight: 900;
+      letter-spacing: -.5px;
+      line-height: 1.15;
+      color: #fff;
+      text-shadow: 0 10px 22px rgba(0,0,0,.65);
+    }
+    .gsublink{
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: rgba(255,255,255,0.9);
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    /* Tab Filtri Collezioni Live */
+    .syncCollectionsBar{
+      margin-top: 36px;
+      padding-top: 24px;
+      border-top: 1px dashed rgba(255,46,143,.25);
+    }
+    .syncHeaderRow{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .catTabs{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .catTabBtn{
+      border: 1px solid rgba(255,46,143,.20);
+      background: #fff;
+      color: var(--ink-2);
+      font-weight: 800;
+      font-size: 14px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all .2s var(--ease);
+      box-shadow: var(--shadow-2);
+    }
+    .catTabBtn.active, .catTabBtn:hover{
+      background: linear-gradient(135deg, var(--pink), var(--pink-2));
+      color: #fff;
+      border-color: transparent;
+    }
+
+    /* Griglia Prodotti Sincronizzati */
+    .liveProductsGrid{
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 16px;
+    }
+    @media (max-width: 980px){ .liveProductsGrid{ grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 520px){ .liveProductsGrid{ grid-template-columns: 1fr; } }
+
+    .pcard{
+      background: #fff;
+      border: 1px solid rgba(255,46,143,.16);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
       display: flex;
       flex-direction: column;
       transition: transform .2s var(--ease);
     }
-    .gcard:hover{ transform: translateY(-3px); }
-    .gcardImgBox{
+    .pcard:hover{ transform: translateY(-3px); }
+    .pcardImgBox{
       position: relative;
-      width: 100%;
       aspect-ratio: 1/1;
+      width: 100%;
+      background: #fff2f8;
       overflow: hidden;
-      background: #fdf2f7;
     }
-    .gcardImgBox img{
-      width: 100%; height: 100%; object-fit: cover;
-      transition: transform 0.4s var(--ease);
-    }
-    .gcard:hover .gcardImgBox img{ transform: scale(1.06); }
-    .gcardCategory{
+    .pcardImgBox img{ width: 100%; height: 100%; object-fit: cover; }
+    .pcardCategory{
       position: absolute;
-      top: 10px; left: 10px;
-      background: rgba(0,0,0,.65);
+      top: 8px; left: 8px;
+      background: rgba(0,0,0,0.65);
       color: #fff;
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 800;
-      padding: 4px 10px;
+      padding: 3px 8px;
       border-radius: 999px;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
     }
-    .gcardBody{
-      padding: 16px;
+    .pcardContent{
+      padding: 14px;
       display: flex;
       flex-direction: column;
       flex: 1;
       justify-content: space-between;
-      gap: 12px;
+      gap: 10px;
     }
-    .gcardTitle{
-      font-size: 16px;
-      font-weight: 900;
-      color: var(--ink);
-      margin: 0;
+    .pcardTitle{
+      font-size: 15px;
+      font-weight: 800;
       line-height: 1.25;
+      margin: 0;
+      color: var(--ink);
       display: -webkit-box;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
       overflow: hidden;
     }
-    .gcardFooter{
+    .pcardFooter{
       display: flex;
       align-items: center;
       justify-content: space-between;
-      border-top: 1px dashed rgba(255,46,143,.18);
-      padding-top: 10px;
+      border-top: 1px dashed rgba(255,46,143,.15);
+      padding-top: 8px;
     }
-    .gcardPrice{
-      font-size: 18px;
-      font-weight: 1000;
+    .pcardPrice{
+      font-size: 16px;
+      font-weight: 900;
       color: var(--pink);
     }
-    .gcardBtn{
-      padding: 6px 12px;
-      font-size: 13px;
-      border-radius: 999px;
+    .pcardBtn{
+      font-size: 12px;
       font-weight: 800;
+      padding: 6px 10px;
+      border-radius: 999px;
       background: rgba(255,46,143,.08);
       color: var(--pink);
       border: 1px solid rgba(255,46,143,.20);
     }
-    .gcard:hover .gcardBtn{
-      background: var(--pink);
-      color: #fff;
-    }
+    .pcard:hover .pcardBtn{ background: var(--pink); color: #fff; }
 
     /* Steps */
     .stepsGrid{
@@ -711,7 +667,7 @@
     }
     .stepImg{
       width: 100%;
-      height: 480px;
+      height: 380px;
       margin-top: 16px;
       border-radius: 18px;
       object-fit: contain;
@@ -719,7 +675,7 @@
       background: rgba(255,255,255,.92);
       display:block;
     }
-    @media (max-width: 980px){ .stepImg{ height: 380px; } }
+    @media (max-width: 560px){ .stepImg{ height: 260px; } }
     .step h4{
       margin: 16px 0 8px;
       font-size: 18px;
@@ -749,7 +705,7 @@
     .afterBox span{ color: var(--muted); font-weight: 700; }
 
     /* ========================================================= */
-    /* SEZIONE PAGAMENTI (LAYOUT ORIGINALE AL 100%)             */
+    /* SEZIONE PAGAMENTI (LAYOUT ORIGINALE 100%)                */
     /* ========================================================= */
     .payGrid{
       display:grid;
@@ -822,33 +778,29 @@
       min-height: 64px;
     }
 
-    /* CARD FATTURA ELETTRONICA (INTEGRATA IN STILE ORIGINALE) */
-    .payCard.invoiceSpan{
+    /* CARD FATTURA ELETTRONICA AGGIUNTA */
+    .payCard.invoiceCard{
       grid-column: 1 / -1;
-      background: linear-gradient(180deg, #fff, #fff2f8);
-      border: 2px solid rgba(255,46,143,.25);
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
+      background: linear-gradient(180deg, #ffffff 0%, #fff7fb 100%);
+      border: 2px solid rgba(255,46,143,.26);
     }
-    .invoiceList{
+    .invoicePillList{
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
-      margin: 10px 0;
+      gap: 8px;
+      margin: 10px 0 14px;
       padding: 0;
       list-style: none;
     }
-    .invoiceList li{
+    .invoicePillList li{
       background: #fff;
       border: 1px solid rgba(255,46,143,.20);
-      padding: 8px 14px;
+      padding: 6px 14px;
       border-radius: 999px;
       font-size: 13px;
       color: var(--ink);
       font-weight: 800;
       margin: 0;
-      box-shadow: var(--shadow-2);
     }
 
     /* Locations */
@@ -902,8 +854,7 @@
     .pmodal .backdrop{ position:absolute; inset:0; background: rgba(20,12,26,.35); }
     .pmodal .panel{
       position: absolute;
-      left: 50%;
-      top: 50%;
+      left: 50%; top: 50%;
       transform: translate(-50%, -50%);
       width: min(520px, calc(100% - 28px));
       border-radius: var(--radius-xl);
@@ -914,15 +865,7 @@
       overflow:hidden;
     }
     .pmodal .inner{ padding: 18px; }
-    .pmodal .title{
-      font-weight: 1000;
-      margin: 0 0 8px;
-      color: var(--ink);
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap: 10px;
-    }
+    .pmodal .title{ font-weight: 1000; margin: 0 0 8px; color: var(--ink); display:flex; align-items:center; justify-content:space-between; gap: 10px; }
     .pmodal .sub{ margin: 0 0 14px; color: var(--muted); font-weight: 700; }
     .pmodal .row{ display:flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
     .pmodal .row a.btn{
@@ -983,7 +926,6 @@
               <path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.8 19.8 0 0 1 3.11 5.18 2 2 0 0 1 5.1 3h3a2 2 0 0 1 2 1.72c.12.86.32 1.7.59 2.5a2 2 0 0 1-.45 2.11L9.09 10.91a16 16 0 0 0 4 4l1.58-1.15a2 2 0 0 1 2.11-.45c.8.27 1.64.47 2.5.59A2 2 0 0 1 22 16.92Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </a>
-
           <button class="iconbtn hamburger" id="menuBtn" type="button" aria-label="Apri menu">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -1015,21 +957,17 @@
 
         <div class="drawerGroup">
           <div class="drawerTitle">Ordina subito</div>
-
           <a class="btn primary" href="https://fiori-italia.it/" target="_blank" rel="noopener nofollow" style="width:100%; justify-content:center;">
             🛒 Vai all’e-commerce
           </a>
-
           <a class="btn brand whatsapp" href="https://wa.me/message/JDH7MM6C6VC7J1" target="_blank" rel="noopener nofollow" style="width:100%; justify-content:center; margin-top:10px;">
             <img class="logo" src="./immagini-home/logo-whatsapp.png" alt="WhatsApp" />
             WhatsApp
           </a>
-
           <a class="btn brand deliveroo js-platform" href="#" data-platform="deliveroo" style="width:100%; justify-content:center; margin-top:10px;">
             <img class="logo" src="./immagini-home/Logo-deliveroo-.jpg" alt="Deliveroo" />
             Deliveroo
           </a>
-
           <a class="btn brand justeat js-platform" href="#" data-platform="justeat" style="width:100%; justify-content:center; margin-top:10px;">
             <img class="logo" src="./immagini-home/logo-justeat.png" alt="JustEat" />
             JustEat
@@ -1039,7 +977,7 @@
     </div>
   </div>
 
-  <!-- Modal Platform -->
+  <!-- Modal Chooser -->
   <div class="pmodal" id="platformModal" aria-hidden="true">
     <div class="backdrop" data-pclose></div>
     <div class="panel" role="dialog" aria-label="Seleziona la sede">
@@ -1142,37 +1080,65 @@
       </div>
     </section>
 
-    <!-- Galleria Dinamica con Collezioni e Prodotti da fiori-italia.it -->
+    <!-- Galleria: Layout Originale con Link alle Collezioni e Prodotti Dinamici Sotto -->
     <section id="galleria">
       <div class="container">
         <div class="sectionTitle">
           <div>
-            <div class="syncBadge">
-              <span class="dot"></span>
-              <span id="syncText">Catalogo in tempo reale da fiori-italia.it</span>
-            </div>
             <h2>Galleria & Collezioni</h2>
-            <p>Esplora le nostre creazioni aggiornate: tocca un prodotto per ordinarlo subito sul nuovo store.</p>
+            <p>Scegli una categoria o esplora i prodotti sincronizzati da fiori-italia.it</p>
           </div>
         </div>
 
-        <div class="collectionsRow">
-          <a class="active" href="https://fiori-italia.it/collections/all" target="_blank" rel="noopener nofollow">🌸 Tutti i Prodotti</a>
-          <a href="https://fiori-italia.it/collections/bouquet" target="_blank" rel="noopener nofollow">💐 Bouquet</a>
-          <a href="https://fiori-italia.it/collections/piante" target="_blank" rel="noopener nofollow">🪴 Piante</a>
-          <a href="https://fiori-italia.it/collections/fiori-funebri" target="_blank" rel="noopener nofollow">🕊️ Arte Funebre</a>
-          <a href="https://fiori-italia.it/collections" target="_blank" rel="noopener nofollow">📂 Sfoglia Tutte ↗</a>
-        </div>
+        <!-- 3 Card Banner Originali -->
+        <div class="galleryGrid">
+          <a class="gcard" href="./fiori/" data-filter="bouquet">
+            <div class="bg" style="background-image:url('https://raw.githubusercontent.com/matteoawi/fioriepiante-nino.it/refs/heads/main/immagini-home/bouquet-xxl-grandi_occasioni.webp');"></div>
+            <div class="overlay"></div>
+            <div class="content">
+              <div class="gtitle">Fiori freschi</div>
+              <span class="gsublink">Apri collezione ↗</span>
+            </div>
+          </a>
 
-        <div class="galleryGrid" id="productsGrid">
-          <!-- Popolato dinamicamente da Shopify products.json -->
-        </div>
+          <a class="gcard" href="./piante/" data-filter="piante">
+            <div class="bg" style="background-image:url('https://raw.githubusercontent.com/matteoawi/fioriepiante-nino.it/refs/heads/main/immagini-home/anthuriumrosso1.webp');"></div>
+            <div class="overlay"></div>
+            <div class="content">
+              <div class="gtitle">Piante / Composizioni</div>
+              <span class="gsublink">Apri collezione ↗</span>
+            </div>
+          </a>
 
-        <div style="text-align:center; margin-top:26px;">
-          <a class="btn primary" href="https://fiori-italia.it/collections/all" target="_blank" rel="noopener nofollow">
-            Vedi tutto il catalogo su fiori-italia.it ↗
+          <a class="gcard" href="./funebri/" data-filter="funebri">
+            <div class="bg" style="background-image:url('https://raw.githubusercontent.com/matteoawi/fioriepiante-nino.it/refs/heads/main/immagini-home/rn-image_picker_lib_temp_f5d69d79-88c1-458f-8b22-7578ed02333e.webp');"></div>
+            <div class="overlay"></div>
+            <div class="content">
+              <div class="gtitle">Composizioni funebri</div>
+              <span class="gsublink">Apri collezione ↗</span>
+            </div>
           </a>
         </div>
+
+        <!-- Barra Filtri Collezioni Live -->
+        <div class="syncCollectionsBar">
+          <div class="syncHeaderRow">
+            <div style="font-weight:900; font-size:18px; color:var(--ink);">
+              🌸 Prodotti da fiori-italia.it
+            </div>
+            <div class="catTabs" id="catTabs">
+              <button class="catTabBtn active" data-cat="all">Tutti</button>
+              <button class="catTabBtn" data-cat="bouquet">Bouquet</button>
+              <button class="catTabBtn" data-cat="piante">Piante</button>
+              <button class="catTabBtn" data-cat="funebri">Arte Funebre</button>
+            </div>
+          </div>
+
+          <div class="liveProductsGrid" id="liveProductsGrid">
+            <!-- I prodotti scaricati da Shopify compaiono qui -->
+          </div>
+        </div>
+
       </div>
     </section>
 
@@ -1233,9 +1199,7 @@
       </div>
     </section>
 
-    <!-- ========================================================= -->
-    <!-- SEZIONE PAGAMENTI ORIGINALE + FATTURA ELETTRONICA         -->
-    <!-- ========================================================= -->
+    <!-- Sezione Pagamenti Originale + Box Fatture Integrato -->
     <section id="pagamenti">
       <div class="container">
         <div class="sectionTitle">
@@ -1246,7 +1210,6 @@
         </div>
 
         <div class="payGrid">
-          <!-- Colonna 1: Metodi digitali -->
           <div class="payCard">
             <h3>📱 Metodi Digitali Veloci</h3>
 
@@ -1295,7 +1258,6 @@
                 <li>Segui le istruzioni a schermo.</li>
               </ol>
 
-              <!-- Metodi di pagamento accettati -->
               <div class="payCircuits" aria-label="Circuiti carte accettati">
                 <img src="https://raw.githubusercontent.com/matteoawi/fioriepiante-nino.it/refs/heads/main/immagini-home/circuiti-pagamento.png" alt="Circuiti carte accettati" />
               </div>
@@ -1311,7 +1273,6 @@
             </div>
           </div>
 
-          <!-- Colonna 2: Bonifico e Postepay -->
           <div class="payCard">
             <h3>🏦 Bonifico, Postepay e Contanti</h3>
 
@@ -1360,22 +1321,23 @@
             </p>
           </div>
 
-          <!-- CARD FATTURA ELETTRONICA -->
-          <div class="payCard invoiceSpan">
-            <h3>🧾 Emissione Fattura Elettronica</h3>
+          <!-- Card Fattura Elettronica in Stile Originale -->
+          <div class="payCard invoiceCard">
+            <h3>🧾 Emettiamo Fattura Elettronica</h3>
             <p>
-              Sei un'azienda, uno studio professionale o un privato con partita IVA? <b>Emettiamo regolarmente fattura elettronica</b> per ordini floreali, omaggi aziendali e forniture continuative.
+              Sei una società, un libero professionista o necessiti di deducibilità fiscale? 
+              Emettiamo fattura elettronica SDI per omaggi aziendali, allestimenti ed eventi.
             </p>
             <div class="infoBox">
-              <strong>Cosa inviarci su WhatsApp o per email al momento dell'ordine:</strong>
-              <ul class="invoiceList">
-                <li>🏢 Ragione Sociale / Intestazione</li>
-                <li>🔢 Partita IVA e/o Codice Fiscale</li>
-                <li>📮 Codice SDI Univoco o Indirizzo PEC</li>
+              <strong>Dati fiscali da inviare via WhatsApp o e-mail:</strong>
+              <ul class="invoicePillList">
+                <li>Ragione Sociale / Intestatario</li>
+                <li>Partita IVA / Codice Fiscale</li>
+                <li>Codice SDI Univoco o PEC</li>
               </ul>
-              <a class="btn brand whatsapp" href="https://wa.me/message/JDH7MM6C6VC7J1?text=Buongiorno,%20vorrei%20effettuare%20un%20ordine%20richiedendo%20fattura%20elettronica" target="_blank" rel="noopener nofollow" style="margin-top:10px;">
+              <a class="btn brand whatsapp" href="https://wa.me/message/JDH7MM6C6VC7J1?text=Buongiorno,%20vorrei%20fare%20un%20ordine%20richiedendo%20fattura%20elettronica" target="_blank" rel="noopener nofollow">
                 <img class="logo" src="./immagini-home/logo-whatsapp.png" alt="WhatsApp" />
-                Richiedi fattura con l'ordine su WhatsApp →
+                Richiedi fattura su WhatsApp →
               </a>
             </div>
           </div>
@@ -1539,87 +1501,134 @@
     </footer>
   </main>
 
+  <!-- Script di Sincronizzazione Dinamica Prodotti & Collezioni -->
   <script>
-    // Sincronizzazione dinamica prodotti Shopify
-    const SHOPIFY_DOMAIN = 'https://fiori-italia.it';
-    const productsContainer = document.getElementById('productsGrid');
-    const syncStatusText = document.getElementById('syncText');
+    const SHOPIFY_HOST = 'https://fiori-italia.it';
+    const productsContainer = document.getElementById('liveProductsGrid');
+    const tabsContainer = document.getElementById('catTabs');
+    let allShopifyProducts = [];
 
-    const fallbackCatalog = [
+    // Fallback locale robusto
+    const fallbackProducts = [
       {
         title: "Bouquet XXL Esplosione Cromatica",
         price: "120.00",
         image: "https://fiori-italia.it/cdn/shop/files/BouquetXXXLEsplosioneCromatica_Oltre100Steli.png?v=1764853567&width=800",
         handle: "bouquet-xxl-esplosione-cromatica",
-        category: "Bouquet"
+        category: "bouquet"
       },
       {
         title: "Bouquet Grandi Occasioni",
         price: "65.00",
         image: "https://raw.githubusercontent.com/matteoawi/fioriepiante-nino.it/refs/heads/main/immagini-home/bouquet-xxl-grandi_occasioni.webp",
         handle: "bouquet-grandi-occasioni",
-        category: "Fiori Freschi"
+        category: "bouquet"
       },
       {
         title: "Anthurium Rosso in Vaso",
         price: "35.00",
         image: "https://raw.githubusercontent.com/matteoawi/fioriepiante-nino.it/refs/heads/main/immagini-home/anthuriumrosso1.webp",
         handle: "anthurium-rosso",
-        category: "Piante"
+        category: "piante"
       },
       {
         title: "Composizione Floreale Funebre",
         price: "90.00",
         image: "https://raw.githubusercontent.com/matteoawi/fioriepiante-nino.it/refs/heads/main/immagini-home/rn-image_picker_lib_temp_f5d69d79-88c1-458f-8b22-7578ed02333e.webp",
         handle: "composizione-funebre",
-        category: "Funebri"
+        category: "funebri"
       }
     ];
 
-    function renderCatalog(items){
-      if(!items || !items.length) return;
-      productsContainer.innerHTML = items.map(item => `
-        <a class="gcard" href="${SHOPIFY_DOMAIN}/products/${item.handle}" target="_blank" rel="noopener nofollow">
-          <div class="gcardImgBox">
-            ${item.category ? `<span class="gcardCategory">${item.category}</span>` : ''}
-            <img src="${item.image}" alt="${item.title}" loading="lazy" />
+    function classifyCategory(item) {
+      const text = `${item.title} ${item.product_type || ''} ${(item.tags || []).join(' ')}`.toLowerCase();
+      if (text.includes('funeb') || text.includes('condogl')) return 'funebri';
+      if (text.includes('piant') || text.includes('vaso') || text.includes('verde')) return 'piante';
+      return 'bouquet';
+    }
+
+    function renderCards(list) {
+      if (!list || !list.length) {
+        productsContainer.innerHTML = `<p style="grid-column:1/-1; color:var(--muted); font-weight:700;">Nessun prodotto trovato in questa collezione.</p>`;
+        return;
+      }
+      productsContainer.innerHTML = list.map(p => `
+        <a class="pcard" href="${SHOPIFY_HOST}/products/${p.handle}" target="_blank" rel="noopener nofollow">
+          <div class="pcardImgBox">
+            <span class="pcardCategory">${p.category}</span>
+            <img src="${p.image}" alt="${p.title}" loading="lazy" />
           </div>
-          <div class="gcardBody">
-            <h3 class="gcardTitle">${item.title}</h3>
-            <div class="gcardFooter">
-              <span class="gcardPrice">€${parseFloat(item.price).toFixed(2)}</span>
-              <span class="gcardBtn">Ordina online ↗</span>
+          <div class="pcardContent">
+            <h3 class="pcardTitle">${p.title}</h3>
+            <div class="pcardFooter">
+              <span class="pcardPrice">€${parseFloat(p.price).toFixed(2)}</span>
+              <span class="pcardBtn">Acquista ↗</span>
             </div>
           </div>
         </a>
       `).join('');
     }
 
-    async function fetchCatalog(){
-      try{
-        const res = await fetch(`${SHOPIFY_DOMAIN}/products.json?limit=8`);
-        if(!res.ok) throw new Error();
-        const data = await res.json();
-        if(data.products && data.products.length > 0){
-          const parsed = data.products.map(p => ({
-            title: p.title,
-            price: p.variants && p.variants[0] ? p.variants[0].price : "0.00",
-            image: p.images && p.images[0] ? p.images[0].src : fallbackCatalog[0].image,
-            handle: p.handle,
-            category: p.product_type || "Fiori"
-          }));
-          renderCatalog(parsed);
-          syncStatusText.textContent = `Catalogo sincronizzato in tempo reale (${parsed.length} prodotti)`;
-          return;
-        }
-      }catch(e){
-        renderCatalog(fallbackCatalog);
-        syncStatusText.textContent = `Catalogo fiori-italia.it attivo`;
+    function filterCategory(catKey) {
+      // Aggiorna stato tab
+      document.querySelectorAll('.catTabBtn').forEach(b => {
+        b.classList.toggle('active', b.getAttribute('data-cat') === catKey);
+      });
+
+      if (catKey === 'all') {
+        renderCards(allShopifyProducts);
+      } else {
+        const filtered = allShopifyProducts.filter(p => p.category === catKey);
+        renderCards(filtered);
       }
     }
-    fetchCatalog();
 
-    // Drawer mobile
+    async function loadCatalog() {
+      try {
+        const res = await fetch(`${SHOPIFY_HOST}/products.json?limit=16`);
+        if (!res.ok) throw new Error();
+        const data = await res.json();
+        if (data.products && data.products.length > 0) {
+          allShopifyProducts = data.products.map(p => ({
+            title: p.title,
+            price: p.variants && p.variants[0] ? p.variants[0].price : "0.00",
+            image: p.images && p.images[0] ? p.images[0].src : fallbackProducts[0].image,
+            handle: p.handle,
+            category: classifyCategory(p)
+          }));
+          renderCards(allShopifyProducts);
+          return;
+        }
+      } catch (err) {
+        allShopifyProducts = fallbackProducts;
+        renderCards(allShopifyProducts);
+      }
+    }
+
+    // Event listener click sui tab
+    tabsContainer?.addEventListener('click', (e) => {
+      const btn = e.target.closest('.catTabBtn');
+      if (!btn) return;
+      filterCategory(btn.getAttribute('data-cat'));
+    });
+
+    // Filtra automaticamente se si clicca sulle card grandi
+    document.querySelectorAll('.galleryGrid .gcard').forEach(card => {
+      card.addEventListener('click', (e) => {
+        const cat = card.getAttribute('data-filter');
+        if (cat) {
+          filterCategory(cat);
+          const scrollTarget = document.getElementById('liveProductsGrid');
+          if (scrollTarget) {
+            scrollTarget.scrollIntoView({ behavior: 'smooth' });
+          }
+        }
+      });
+    });
+
+    loadCatalog();
+
+    // Drawer Mobile
     const drawer = document.getElementById('drawer');
     const menuBtn = document.getElementById('menuBtn');
 
@@ -1643,7 +1652,7 @@
       if(e.key === 'Escape' && drawer.classList.contains('open')) closeDrawer();
     });
 
-    // Piattaforme JustEat / Deliveroo
+    // Piattaforme JustEat / Deliveroo Modal
     const platformModal = document.getElementById('platformModal');
     const platformTitle = document.getElementById('platformTitle');
     const platformSub = document.getElementById('platformSub');
