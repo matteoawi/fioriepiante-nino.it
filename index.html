@@ -12,6 +12,8 @@
 
     gtag('config', 'AW-11013620028');
 
+    // Helper function to delay opening a URL until a gtag event is sent.
+    // It is wired to WhatsApp and phone links because they are quote/contact requests.
     function gtagSendEvent(url, openedWindow) {
       var callbackCalled = false;
       var callback = function () {
@@ -60,11 +62,11 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      /* Palette originale */
+      /* Palette: Rosa + Bianco */
       --pink: #ff2e8f;
       --pink-2: #ff67b2;
       --pink-3: #ffd1e6;
@@ -97,8 +99,8 @@
       --deliveroo: #00CCBC;
       --justeat: #FF8000;
       --paypal: #003087;
-      --postepay: #FFCC00;
-      --postepay-ink: #0B3A75;
+      --postepay: #FFCC00;   /* base */
+      --postepay-ink: #0B3A75; /* testo */
       --cards: #111827;
     }
 
@@ -125,7 +127,7 @@
     li { margin-bottom: 8px; line-height: 1.5; color: var(--ink-2); font-weight: 600; }
     .container{ width:min(var(--max), calc(100% - 40px)); margin-inline:auto; }
 
-    /* Soft blobs */
+    /* Soft blobs (sfondo) */
     .blobs{
       position:fixed; inset:0;
       pointer-events:none; z-index:-1;
@@ -240,13 +242,17 @@
       color: var(--ink-2);
       transition: background .2s var(--ease), transform .2s var(--ease);
       white-space: nowrap;
-      display:inline-flex;
-      align-items:center;
-      gap: 8px;
     }
     .navlinks a:hover{
       background: rgba(255,46,143,.10);
       transform: translateY(-1px);
+    }
+
+    /* Menu icons + active */
+    .navlinks a{
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
     }
     .navlinks .menuIcon{
       width: 16px; height: 16px;
@@ -285,6 +291,23 @@
       flex: 0 0 auto;
     }
     .iconbtn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.88); }
+
+    /* brand icon buttons in top bar */
+    .brandIcon{
+      width: 44px; height: 44px;
+      border-radius: 16px;
+      display:grid; place-items:center;
+      border: none;
+      color: white;
+      box-shadow: var(--shadow-2);
+      transition: transform .2s var(--ease), filter .2s var(--ease);
+      flex: 0 0 auto;
+    }
+    .brandIcon:hover{ transform: translateY(-1px); filter: brightness(1.03); }
+    .brandIcon img{ width: 22px; height: 22px; object-fit: contain; display:block; }
+    .brandIcon.deliveroo{ background: var(--deliveroo); }
+    .brandIcon.justeat{ background: var(--justeat); }
+    .brandIcon.whatsapp{ background: var(--whatsapp); }
 
     .hamburger{ display:none; }
     @media (max-width: 980px){
@@ -382,7 +405,11 @@
       border: 1px solid rgba(255,46,143,.20);
     }
 
-    .btn.brand{ border: none; color: #fff; }
+    /* Brand buttons */
+    .btn.brand{
+      border: none;
+      color: #fff;
+    }
     .btn.brand:hover{ filter: brightness(1.03); }
     .btn.whatsapp{ background: var(--whatsapp); }
     .btn.deliveroo{ background: var(--deliveroo); }
@@ -394,6 +421,7 @@
       color: var(--postepay-ink);
       border: 1px solid rgba(0,0,0,.06);
     }
+
     .btn .logo{
       width: 2rem; height: 2rem; object-fit: contain;
       filter: drop-shadow(0 8px 14px rgba(26,18,32,.14));
@@ -421,7 +449,8 @@
       min-height: 580px;
       box-shadow: var(--shadow-card);
       border: 1px solid rgba(255,46,143,.16);
-      background: url("https://fiori-italia.it/cdn/shop/files/BouquetXXXLEsplosioneCromatica_Oltre100Steli.png?v=1764853567&width=3840") center center/cover no-repeat;
+      background:
+        url("https://fiori-italia.it/cdn/shop/files/BouquetXXXLEsplosioneCromatica_Oltre100Steli.png?v=1764853567&width=3840") center center/cover no-repeat;
     }
     .heroOverlay{
       position:absolute; inset:0;
@@ -449,7 +478,9 @@
       margin: 0 auto 12px;
       filter: drop-shadow(0 18px 34px rgba(0,0,0,.28));
     }
-    .heroPill{ margin: 14px auto 0; }
+    .heroPill{
+      margin: 14px auto 0;
+    }
 
     .pill{
       display:inline-flex; align-items:center; gap:10px;
@@ -483,7 +514,9 @@
       line-height: 1.55;
     }
 
-    .heroMain h1, .heroMain .lead{
+    /* Hero readability: overlay scuro leggero + testo bianco */
+    .heroMain h1,
+    .heroMain .lead{
       color: #fff;
       text-shadow: 0 10px 26px rgba(0,0,0,.55);
     }
@@ -492,6 +525,8 @@
       background: rgba(0,0,0,.22);
       border: 1px solid rgba(255,255,255,.22);
     }
+
+    /* Hero: btn soft leggibile su overlay scuro */
     .heroMain .btn.soft{
       background: linear-gradient(135deg, var(--pink), var(--pink-2));
       border: 1px solid rgba(255,255,255,.22);
@@ -536,14 +571,17 @@
       height: 18px;
       display:block;
       flex: 0 0 auto;
+      filter: drop-shadow(0 10px 18px rgba(0,0,0,.35));
     }
 
+    /* Hero: pulsanti mini (Come pagare / Chiama) più grandi */
     .miniRow a.miniBtn{
       padding: 12px 14px;
       font-size: 15px;
       font-weight: 900;
     }
 
+    /* Hero: i due mini-bottoni in colonna */
     .miniRow.miniActions{
       flex-direction: column;
       align-items: center;
@@ -559,17 +597,31 @@
       background: rgb(211 187 37 / 94%);
       border: 1px solid rgb(211 187 37 / 94%);
     }
+    .miniRow a.miniBtnCall:hover{
+      background: rgb(211 187 37 / 94%);
+    }
     .miniRow a.miniBtnPay{
       background: rgb(34 21 247 / 93%);
       border: 1px solid rgb(34 21 247 / 93%);
     }
+    .miniRow a.miniBtnPay:hover{
+      background: rgb(34 21 247 / 93%);
+    }
 
-    /* Side card */
+    @media (max-width: 560px){
+      .miniRow a.miniBtn{
+        width: 100%;
+        justify-content: center;
+      }
+    }
+
+    /* Side cards */
     .side{ display:flex; flex-direction:column; gap: 16px; }
     .side .card{ padding: 24px; height: 100%; display: flex; flex-direction: column; justify-content: center; }
     .side h3{ margin:0 0 12px; font-size: 20px; letter-spacing:-.2px; font-weight: 800; }
     .side p{ margin:0; color: var(--muted); font-weight: 700; line-height: 1.6; font-size: 16px; }
 
+    /* video inner card */
     .innerCard{
       margin-top: 14px;
       border-radius: 22px;
@@ -613,62 +665,98 @@
     }
 
     /* ========================================================= */
-    /* GALLERIA ORIGINALE A 3 CARD (COLLEZIONI)                 */
+    /* BENTO GRID ORIGINALE - COLLEZIONI DINAMICHE               */
     /* ========================================================= */
-    .galleryGrid{
-      display:grid;
+    .bentoGrid{
+      display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: clamp(10px, 2.6vw, 16px);
-    }
-    @media (max-width: 768px){
-      .galleryGrid{
-        grid-template-columns: 1fr;
-        gap: 14px;
-      }
+      grid-auto-rows: 260px;
+      grid-auto-flow: dense;
+      gap: clamp(10px, 2vw, 16px);
     }
 
-    .gcard{
-      position:relative;
+    .bentoCard{
+      position: relative;
       border-radius: var(--radius-xl);
-      overflow:hidden;
+      overflow: hidden;
       border: 1px solid rgba(255,46,143,.16);
       box-shadow: var(--shadow-card);
-      min-height: 280px;
       background: #fff;
       display: block;
       min-width: 0;
-      cursor: pointer;
     }
-    .gcard .bg{
-      position:absolute; inset:0; background-size: cover; background-position:center;
+    .bentoCard .bg{
+      position: absolute; inset: 0; background-size: cover; background-position: center;
       transform: scale(1.04); transition: transform 0.4s var(--ease);
     }
-    .gcard:hover .bg { transform: scale(1.1); }
-    .gcard .overlay{
-      position:absolute; inset:0;
-      background: linear-gradient(180deg, rgba(0,0,0,.15) 0%, rgba(0,0,0,.58) 78%);
+    .bentoCard:hover .bg{ transform: scale(1.1); }
+    .bentoCard .overlay{
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,.12) 0%, rgba(0,0,0,.60) 80%);
     }
-    .gcard .content{
-      position:absolute; inset:0;
+    .bentoCard .content{
+      position: absolute; inset: 0;
       padding: 22px;
-      display:flex; flex-direction:column; justify-content:flex-end;
-      gap: 6px;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      gap: 8px;
     }
-    .gtitle{
-      font-size: clamp(18px, 4.2vw, 24px);
+    .bentoCard .gtitle{
+      font-size: clamp(17px, 3.2vw, 24px);
       font-weight: 900;
       letter-spacing: -.5px;
       line-height: 1.15;
       color: #fff;
-      text-shadow: 0 10px 22px rgba(0,0,0,.55);
+      text-shadow: 0 10px 22px rgba(0,0,0,.60);
+      margin: 0;
     }
-    .gsubtitle{
-      font-size: 14px;
-      font-weight: 700;
-      color: rgba(255,255,255,.9);
+    .bentoCard .gsublink{
       display: inline-flex;
       align-items: center;
       gap: 6px;
+      color: rgba(255,255,255,0.92);
+      font-size: 13px;
+      font-weight: 800;
+      text-shadow: 0 6px 14px rgba(0,0,0,.5);
+    }
+
+    /* Classi Bento per ritmo visivo */
+    .bentoWide{ grid-column: span 2; }
+    .bentoTall{ grid-row: span 2; }
+
+    @media (max-width: 900px){
+      .bentoGrid{
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-auto-rows: 230px;
+      }
+      .bentoWide{ grid-column: span 2; }
+      .bentoTall{ grid-row: span 1; }
+    }
+
+    /* Mobile: 1 colonna pulita, zero sfasamenti */
+    @media (max-width: 560px){
+      .bentoGrid{
+        grid-template-columns: 1fr;
+        grid-auto-rows: auto;
+        gap: 12px;
+      }
+      .bentoWide, .bentoTall{
+        grid-column: span 1;
+        grid-row: span 1;
+      }
+      .bentoCard{
+        min-height: 220px;
+      }
+      .bentoCard .content{ padding: 16px; }
+    }
+
+    /* Contacts grid (mobile 1 colonna) */
+    .contactsGrid{
+      display:grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    @media (max-width: 900px){
+      .contactsGrid{ grid-template-columns: 1fr; }
     }
 
     /* Steps */
@@ -679,17 +767,23 @@
     }
     @media (max-width: 980px){ .stepsGrid{ grid-template-columns: 1fr; } }
 
+    .stepsGrid.two{ grid-template-columns: repeat(2, 1fr); }
+    @media (max-width: 980px){ .stepsGrid.two{ grid-template-columns: 1fr; } }
+
     .step{
       padding: 20px;
       border-radius: var(--radius-xl);
       border: 1px solid rgba(255,46,143,.16);
       box-shadow: var(--shadow-card);
-      background: #fff;
+      background: rgba(255,255,255,.78);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       overflow:hidden;
     }
+
     .stepImg{
       width: 100%;
-      height: 380px;
+      height: 480px;
       margin-top: 16px;
       border-radius: 18px;
       object-fit: contain;
@@ -697,21 +791,39 @@
       background: rgba(255,255,255,.92);
       display:block;
     }
-    @media (max-width: 980px){ .stepImg{ height: 280px; } }
+    @media (max-width: 980px){
+      .stepImg{ height: 320px; }
+    }
 
     .step h4{
       margin: 16px 0 8px;
       font-size: 18px;
+      letter-spacing: -.2px;
       color: var(--ink);
       font-weight: 900;
       display:flex;
       align-items:baseline;
       gap: 10px;
+      flex-wrap:wrap;
     }
-    .stepN{ font-weight: 1000; color: var(--pink); }
-    .step p{ margin:0; color: var(--ink-2); font-weight: 700; line-height: 1.55; }
-    .stepCtaRow{ margin-top: 10px; display:flex; gap: 10px; flex-wrap: wrap; }
+    .stepN{
+      font-weight: 1000;
+      color: var(--pink);
+    }
+    .step p{
+      margin:0;
+      color: var(--ink-2);
+      font-weight: 700;
+      line-height: 1.55;
+    }
+    .stepCtaRow{
+      margin-top: 10px;
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
 
+    /* “Cosa succede dopo?” divider */
     .afterBox{
       margin-top: 16px;
       padding: 20px;
@@ -725,12 +837,16 @@
       gap: 12px;
       flex-wrap:wrap;
     }
-    .afterBox b{ font-size: 18px; letter-spacing: -.2px; }
-    .afterBox span{ color: var(--muted); font-weight: 700; }
+    .afterBox b{
+      font-size: 18px;
+      letter-spacing: -.2px;
+    }
+    .afterBox span{
+      color: var(--muted);
+      font-weight: 700;
+    }
 
-    /* ========================================================= */
-    /* SEZIONE PAGAMENTI ORIGINALE + FATTURA ELETTRONICA         */
-    /* ========================================================= */
+    /* Payments */
     .payGrid{
       display:grid;
       grid-template-columns: 1fr 1fr;
@@ -742,7 +858,7 @@
       padding: 24px;
       border-radius: var(--radius-xl);
       border: 1px solid rgba(255,46,143,.16);
-      background: #fff;
+      background: rgba(255,255,255,.85);
       box-shadow: var(--shadow-card);
     }
     .payCard h3{ margin:0 0 16px; font-size: 20px; font-weight: 900; color: var(--pink); }
@@ -802,7 +918,36 @@
       min-height: 64px;
     }
 
-    /* CARD FATTURA ELETTRONICA AGGIUNTA */
+    .payCircuits .cardTypes{
+      list-style:none;
+      margin: 0;
+      padding: 0;
+      display:flex;
+      flex-wrap:wrap;
+      gap: 10px;
+      justify-content:center;
+      align-items:center;
+    }
+    .payCircuits .pill{
+      padding: 10px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.75);
+      border: 1px solid rgba(255,46,143,.14);
+      font-weight: 900;
+      color: var(--ink);
+      line-height:1;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap: 10px;
+    }
+    .payCircuits .pill svg{ display:block; }
+    @media (max-width: 560px){
+      .payCircuits .cardTypes{ gap: 8px; }
+      .payCircuits .pill{ padding: 9px 10px; font-size: 13px; }
+    }
+
+    /* Card Fattura Elettronica Integrata nello Stile Originale */
     .payCard.invoiceCard{
       grid-column: 1 / -1;
       background: linear-gradient(180deg, #ffffff 0%, #fff7fb 100%);
@@ -826,7 +971,7 @@
       font-weight: 800;
       margin: 0;
     }
-
+    
     /* Locations */
     .locGrid{
       display:grid;
@@ -838,7 +983,7 @@
       padding: 22px;
       border-radius: var(--radius-xl);
       border: 1px solid rgba(255,46,143,.16);
-      background: #fff;
+      background: rgba(255,255,255,.78);
       box-shadow: var(--shadow-card);
       display:flex;
       flex-direction:column;
@@ -859,7 +1004,10 @@
       place-items:center;
       flex: 0 0 auto;
     }
-    .locThumbLink svg{ width: 46px; height: 46px; display:block; }
+    .locThumbLink svg{
+      width: 46px; height: 46px;
+      display:block;
+    }
 
     footer{
       padding: 24px 0 42px;
@@ -873,13 +1021,14 @@
       font-weight: 700;
     }
 
-    /* Modal */
+    /* Platform modal */
     .pmodal{ position: fixed; inset:0; z-index: 300; display:none; }
     .pmodal.open{ display:block; }
     .pmodal .backdrop{ position:absolute; inset:0; background: rgba(20,12,26,.35); }
     .pmodal .panel{
       position: absolute;
-      left: 50%; top: 50%;
+      left: 50%;
+      top: 50%;
       transform: translate(-50%, -50%);
       width: min(520px, calc(100% - 28px));
       border-radius: var(--radius-xl);
@@ -889,7 +1038,9 @@
       backdrop-filter: blur(14px);
       overflow:hidden;
     }
-    .pmodal .inner{ padding: 18px; }
+    .pmodal .inner{
+      padding: 18px;
+    }
     .pmodal .title{
       font-weight: 1000;
       letter-spacing: -.2px;
@@ -900,8 +1051,19 @@
       justify-content:space-between;
       gap: 10px;
     }
-    .pmodal .sub{ margin: 0 0 14px; color: var(--muted); font-weight: 700; line-height: 1.5; }
-    .pmodal .row{ display:flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
+    .pmodal .sub{
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-weight: 700;
+      line-height: 1.5;
+    }
+    .pmodal .row{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
     .pmodal .row a.btn{
       flex: 1 1 220px;
       justify-content: center;
@@ -912,7 +1074,24 @@
       box-shadow: var(--shadow-2);
       gap: 10px;
     }
-    .pmodal .row a.btn.brand{ border: none; color: #fff; }
+    .pmodal .row a.btn.brand{
+      border: none;
+      color: #fff;
+    }
+    .pmodal .row a.btn:not(.brand){
+      color: var(--ink);
+      background: rgba(255,255,255,.92);
+      border: 1px solid rgba(255,46,143,.22);
+    }
+    .pmodal .row a.btn:hover{
+      transform: translateY(-1px);
+    }
+    .pmodal .row a.btn.brand:hover{
+      filter: brightness(1.04);
+    }
+    .pmodal .row a.btn:not(.brand):hover{
+      background: rgba(255,255,255,.98);
+    }
     .pmodal .closeBtn{
       width: 40px; height: 40px;
       border-radius: 14px;
@@ -921,7 +1100,20 @@
       display:grid; place-items:center;
       box-shadow: var(--shadow-2);
       cursor:pointer;
+      transition: transform .2s var(--ease), background .2s var(--ease);
       flex: 0 0 auto;
+    }
+    .pmodal .closeBtn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.95); }
+    
+    /* Mobile shadow fix */
+    @media (max-width: 560px){
+      :root{ --shadow-card: var(--shadow-card-mobile); }
+    }
+
+    .step, .payCard, .loc, .innerCard{
+      background: #fff;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
     }
   </style>
 </head>
@@ -971,7 +1163,6 @@
     </div>
   </header>
 
-  <!-- Mobile Drawer -->
   <div class="drawer" id="drawer" aria-hidden="true">
     <div class="backdrop" data-close></div>
     <div class="panel" role="dialog" aria-label="Menu">
@@ -993,22 +1184,27 @@
 
         <div class="drawerGroup">
           <div class="drawerTitle">Ordina subito</div>
+
           <a class="btn primary" href="https://fiori-italia.it/" target="_blank" rel="noopener nofollow" style="width:100%; justify-content:center;">
             🛒 Vai all’e-commerce
           </a>
+
           <a class="btn brand whatsapp" href="https://wa.me/message/JDH7MM6C6VC7J1" target="_blank" rel="noopener nofollow" style="width:100%; justify-content:center; margin-top:10px;">
             <img class="logo" src="./immagini-home/logo-whatsapp.png" alt="WhatsApp" />
             WhatsApp
           </a>
+
           <a class="btn brand deliveroo js-platform" href="#" data-platform="deliveroo" style="width:100%; justify-content:center; margin-top:10px;">
             <img class="logo" src="./immagini-home/Logo-deliveroo-.jpg" alt="Deliveroo" />
             Deliveroo
           </a>
+
           <a class="btn brand justeat js-platform" href="#" data-platform="justeat" style="width:100%; justify-content:center; margin-top:10px;">
             <img class="logo" src="./immagini-home/logo-justeat.png" alt="JustEat" />
             JustEat
           </a>
         </div>
+
       </div>
     </div>
   </div>
@@ -1033,7 +1229,6 @@
   </div>
 
   <main id="top">
-    <!-- Hero -->
     <section class="hero">
       <div class="container">
         <div class="heroGrid">
@@ -1097,11 +1292,16 @@
                   scegli il prodotto, inserisci indirizzo e note, paga in sicurezza e noi pensiamo alla consegna 💗
                 </p>
 
+                <!-- VIDEO (card interna) -->
                 <div class="innerCard">
                   <div class="videoBox">
                     <video
                       src="https://fiori-italia.it/cdn/shop/videos/c/vp/ff6e872bcd3a4521a9fdd5c43bb3a385/ff6e872bcd3a4521a9fdd5c43bb3a385.HD-1080p-7.2Mbps-59228556.mp4?v=0"
-                      autoplay loop muted playsinline preload="metadata"
+                      autoplay
+                      loop
+                      muted
+                      playsinline
+                      preload="metadata"
                     ></video>
                   </div>
                 </div>
@@ -1109,6 +1309,7 @@
                 <div style="margin-top:20px; display:flex; flex-direction: column; gap:10px;">
                   <a class="btn primary" href="https://fiori-italia.it/" target="_blank" rel="noopener nofollow" style="justify-content: center;">Vai su fiori-italia.it ↗</a>
                 </div>
+
               </div>
             </div>
           </aside>
@@ -1117,52 +1318,58 @@
     </section>
 
     <!-- ========================================================= -->
-    <!-- GALLERIA COME COLLEZIONI (DESIGN IDENTICO ORIGINALE)     -->
+    <!-- GALLERIA COME COLLEZIONI A BENTO GRID (SYNC SHOPPING)   -->
     <!-- ========================================================= -->
     <section id="galleria">
       <div class="container">
         <div class="sectionTitle">
           <div>
             <h2>Galleria & Collezioni</h2>
-            <p>Scegli una collezione per scoprire le creazioni disponibili sul nostro store.</p>
+            <p>Sfoglia le nostre collezioni. Clicca su una categoria per scoprire le composizioni disponibili.</p>
           </div>
         </div>
 
-        <div class="galleryGrid" id="collectionsGrid">
-          <!-- Card 1: Fiori / Bouquet -->
-          <a class="gcard" id="colLinkFiori" href="https://fiori-italia.it/collections/bouquet" target="_blank" rel="noopener nofollow">
-            <div class="bg" id="colBgFiori" style="background-image:url('https://raw.githubusercontent.com/matteoawi/fioriepiante-nino.it/refs/heads/main/immagini-home/bouquet-xxl-grandi_occasioni.webp');"></div>
+        <div class="bentoGrid" id="bentoCollections">
+          <!-- Collezioni base di partenza con layout Bento differenziato -->
+          <a class="bentoCard bentoWide" href="https://fiori-italia.it/collections/bouquet" data-handle="bouquet" target="_blank" rel="noopener nofollow">
+            <div class="bg" style="background-image:url('https://raw.githubusercontent.com/matteoawi/fioriepiante-nino.it/refs/heads/main/immagini-home/bouquet-xxl-grandi_occasioni.webp');"></div>
             <div class="overlay"></div>
             <div class="content">
               <div class="gtitle">Fiori freschi & Bouquet</div>
-              <span class="gsubtitle">Vedi la collezione online ↗</span>
+              <span class="gsublink">Apri collezione ↗</span>
             </div>
           </a>
 
-          <!-- Card 2: Piante -->
-          <a class="gcard" id="colLinkPiante" href="https://fiori-italia.it/collections/piante" target="_blank" rel="noopener nofollow">
-            <div class="bg" id="colBgPiante" style="background-image:url('https://raw.githubusercontent.com/matteoawi/fioriepiante-nino.it/refs/heads/main/immagini-home/anthuriumrosso1.webp');"></div>
+          <a class="bentoCard bentoTall" href="https://fiori-italia.it/collections/piante" data-handle="piante" target="_blank" rel="noopener nofollow">
+            <div class="bg" style="background-image:url('https://raw.githubusercontent.com/matteoawi/fioriepiante-nino.it/refs/heads/main/immagini-home/anthuriumrosso1.webp');"></div>
             <div class="overlay"></div>
             <div class="content">
-              <div class="gtitle">Piante & Composizioni</div>
-              <span class="gsubtitle">Vedi la collezione online ↗</span>
+              <div class="gtitle">Piante / Composizioni</div>
+              <span class="gsublink">Apri collezione ↗</span>
             </div>
           </a>
 
-          <!-- Card 3: Arte Funebre -->
-          <a class="gcard" id="colLinkFunebri" href="https://fiori-italia.it/collections/fiori-funebri" target="_blank" rel="noopener nofollow">
-            <div class="bg" id="colBgFunebri" style="background-image:url('https://raw.githubusercontent.com/matteoawi/fioriepiante-nino.it/refs/heads/main/immagini-home/rn-image_picker_lib_temp_f5d69d79-88c1-458f-8b22-7578ed02333e.webp');"></div>
+          <a class="bentoCard" href="https://fiori-italia.it/collections/fiori-funebri" data-handle="fiori-funebri" target="_blank" rel="noopener nofollow">
+            <div class="bg" style="background-image:url('https://raw.githubusercontent.com/matteoawi/fioriepiante-nino.it/refs/heads/main/immagini-home/rn-image_picker_lib_temp_f5d69d79-88c1-458f-8b22-7578ed02333e.webp');"></div>
             <div class="overlay"></div>
             <div class="content">
               <div class="gtitle">Composizioni funebri</div>
-              <span class="gsubtitle">Vedi la collezione online ↗</span>
+              <span class="gsublink">Apri collezione ↗</span>
+            </div>
+          </a>
+
+          <a class="bentoCard" href="https://fiori-italia.it/collections/all" data-handle="all" target="_blank" rel="noopener nofollow">
+            <div class="bg" style="background-image:url('https://fiori-italia.it/cdn/shop/files/BouquetXXXLEsplosioneCromatica_Oltre100Steli.png?v=1764853567&width=1200');"></div>
+            <div class="overlay"></div>
+            <div class="content">
+              <div class="gtitle">Tutti i Fiori & Piante</div>
+              <span class="gsublink">Vedi catalogo completo ↗</span>
             </div>
           </a>
         </div>
       </div>
     </section>
 
-    <!-- Come ordinare -->
     <section id="come-ordinare">
       <div class="container">
         <div class="sectionTitle">
@@ -1220,7 +1427,7 @@
     </section>
 
     <!-- ========================================================= -->
-    <!-- METODI DI PAGAMENTO ORIGINALE + BOX FATTURA ELETTRONICA   -->
+    <!-- SEZIONE PAGAMENTI ORIGINALE + FATTURA ELETTRONICA         -->
     <!-- ========================================================= -->
     <section id="pagamenti">
       <div class="container">
@@ -1232,7 +1439,6 @@
         </div>
 
         <div class="payGrid">
-          <!-- Colonna 1: Digitali -->
           <div class="payCard">
             <h3>📱 Metodi Digitali Veloci</h3>
 
@@ -1297,7 +1503,6 @@
             </div>
           </div>
 
-          <!-- Colonna 2: Bonifico e Postepay -->
           <div class="payCard">
             <h3>🏦 Bonifico, Postepay e Contanti</h3>
 
@@ -1346,19 +1551,18 @@
             </p>
           </div>
 
-          <!-- Card Fattura Elettronica in Stile Originale -->
+          <!-- Card Fattura Elettronica -->
           <div class="payCard invoiceCard">
-            <h3>🧾 Emettiamo Fattura Elettronica</h3>
+            <h3>🧾 Emissione Fattura Elettronica</h3>
             <p>
-              Sei una società, un libero professionista o necessiti di deducibilità fiscale? 
-              <b>Emettiamo regolarmente fattura elettronica</b> per omaggi aziendali, forniture e cerimonie.
+              Sei una società, un'attività o un libero professionista? <b>Emettiamo regolarmente fattura elettronica SDI</b> per omaggi aziendali, allestimenti ed eventi floreali.
             </p>
             <div class="infoBox">
-              <strong>Dati fiscali da comunicarci con l'ordine:</strong>
+              <strong>Dati fiscali da comunicarci al momento dell'ordine:</strong>
               <ul class="invoiceList">
-                <li>Ragione Sociale / Intestatario</li>
+                <li>Ragione Sociale / Nominativo</li>
                 <li>Partita IVA / Codice Fiscale</li>
-                <li>Codice SDI Univoco oppure PEC</li>
+                <li>Codice Univoco SDI oppure PEC</li>
               </ul>
               <a class="btn brand whatsapp" href="https://wa.me/message/JDH7MM6C6VC7J1?text=Buongiorno,%20vorrei%20effettuare%20un%20ordine%20richiedendo%20fattura%20elettronica" target="_blank" rel="noopener nofollow">
                 <img class="logo" src="./immagini-home/logo-whatsapp.png" alt="WhatsApp" />
@@ -1370,7 +1574,6 @@
       </div>
     </section>
 
-    <!-- Sedi -->
     <section id="sedi">
       <div class="container">
         <div class="sectionTitle">
@@ -1389,6 +1592,7 @@
               </div>
 
               <span class="locThumbLink" aria-hidden="true" title="Negozio di fiori">
+                <!-- SVG negozio di fiori -->
                 <svg viewBox="0 0 64 64" fill="none">
                   <path d="M10 26h44v28a6 6 0 0 1-6 6H16a6 6 0 0 1-6-6V26Z" stroke="rgba(255,46,143,.9)" stroke-width="2"/>
                   <path d="M14 26V16a6 6 0 0 1 6-6h24a6 6 0 0 1 6 6v10" stroke="rgba(255,46,143,.9)" stroke-width="2"/>
@@ -1454,7 +1658,6 @@
       </div>
     </section>
 
-    <!-- Contatti -->
     <section id="contatti">
       <div class="container">
         <div class="sectionTitle">
@@ -1464,7 +1667,7 @@
           </div>
         </div>
 
-        <div class="payGrid">
+        <div class="contactsGrid">
           <div class="card" style="padding:24px;">
             <h3 style="margin:0 0 8px;">📞 Telefono</h3>
             <p style="margin:0; color: var(--muted); font-weight:700;">Per info e ordini rapidi.</p>
@@ -1527,43 +1730,61 @@
     </footer>
   </main>
 
-  <!-- Script: Gestione Drawer, Modal e Sync dinamico copertine collezioni -->
   <script>
-    // 1. Sync copertine e link delle 3 Collezioni da fiori-italia.it
+    // 1. SYNC DINAMICO COLLEZIONI DA FIORI-ITALIA.IT (BENTO BUILDER)
     const SHOPIFY_HOST = 'https://fiori-italia.it';
+    const bentoBox = document.getElementById('bentoCollections');
 
-    async function syncCollectionCovers() {
+    // Immagini di fallback estetiche se la collezione creata su Shopify non ha copertina
+    const fallbackBgs = [
+      'https://raw.githubusercontent.com/matteoawi/fioriepiante-nino.it/refs/heads/main/immagini-home/bouquet-xxl-grandi_occasioni.webp',
+      'https://raw.githubusercontent.com/matteoawi/fioriepiante-nino.it/refs/heads/main/immagini-home/anthuriumrosso1.webp',
+      'https://raw.githubusercontent.com/matteoawi/fioriepiante-nino.it/refs/heads/main/immagini-home/rn-image_picker_lib_temp_f5d69d79-88c1-458f-8b22-7578ed02333e.webp',
+      'https://fiori-italia.it/cdn/shop/files/BouquetXXXLEsplosioneCromatica_Oltre100Steli.png?v=1764853567&width=1200'
+    ];
+
+    async function syncBentoCollections() {
       try {
-        const res = await fetch(`${SHOPIFY_HOST}/products.json?limit=24`);
+        const res = await fetch(`${SHOPIFY_HOST}/collections.json`);
         if (!res.ok) return;
         const data = await res.json();
-        if (!data.products) return;
+        const collections = data.collections || [];
+        if (!collections.length) return;
 
-        // Se trova un bouquet recente, aggiorna la copertina
-        const bouquet = data.products.find(p => (p.product_type || '').toLowerCase().includes('bouquet') || p.title.toLowerCase().includes('bouquet'));
-        if (bouquet && bouquet.images && bouquet.images[0]) {
-          const bg = document.getElementById('colBgFiori');
-          if (bg) bg.style.backgroundImage = `url('${bouquet.images[0].src}')`;
-        }
+        // Recupera le collezioni già codificate per evitare duplicati
+        const existingHandles = Array.from(document.querySelectorAll('#bentoCollections [data-handle]'))
+          .map(el => el.getAttribute('data-handle').toLowerCase());
 
-        // Se trova una pianta recente, aggiorna la copertina
-        const pianta = data.products.find(p => (p.product_type || '').toLowerCase().includes('piant') || p.title.toLowerCase().includes('pianta') || p.title.toLowerCase().includes('vaso'));
-        if (pianta && pianta.images && pianta.images[0]) {
-          const bg = document.getElementById('colBgPiante');
-          if (bg) bg.style.backgroundImage = `url('${pianta.images[0].src}')`;
-        }
+        // Identifica nuove collezioni create su fiori-italia.it non presenti
+        const newCols = collections.filter(c => !existingHandles.includes(c.handle.toLowerCase()));
 
-        // Se trova una composizione funebre, aggiorna la copertina
-        const funebre = data.products.find(p => (p.product_type || '').toLowerCase().includes('funeb') || p.title.toLowerCase().includes('funeb') || p.title.toLowerCase().includes('corona'));
-        if (funebre && funebre.images && funebre.images[0]) {
-          const bg = document.getElementById('colBgFunebri');
-          if (bg) bg.style.backgroundImage = `url('${funebre.images[0].src}')`;
-        }
+        newCols.forEach((col, idx) => {
+          const bgImg = col.image && col.image.src ? col.image.src : fallbackBgs[idx % fallbackBgs.length];
+          const isWide = (idx % 3 === 0) ? 'bentoWide' : '';
+
+          const card = document.createElement('a');
+          card.className = `bentoCard ${isWide}`.trim();
+          card.href = `${SHOPIFY_HOST}/collections/${col.handle}`;
+          card.setAttribute('data-handle', col.handle);
+          card.target = '_blank';
+          card.rel = 'noopener nofollow';
+
+          card.innerHTML = `
+            <div class="bg" style="background-image:url('${bgImg}');"></div>
+            <div class="overlay"></div>
+            <div class="content">
+              <div class="gtitle">${col.title}</div>
+              <span class="gsublink">Apri collezione ↗</span>
+            </div>
+          `;
+
+          bentoBox.appendChild(card);
+        });
       } catch (err) {
-        // Mantiene silenziosamente le foto di fallback originali
+        // Fallback silenzioso: la griglia bento statica di base rimane perfettamente attiva
       }
     }
-    syncCollectionCovers();
+    syncBentoCollections();
 
     // 2. Mobile drawer
     const drawer = document.getElementById('drawer');
@@ -1644,6 +1865,7 @@
         e.preventDefault();
         const platformKey = el.getAttribute('data-platform');
         openPlatformModal(platformKey);
+
         if(drawer?.classList.contains('open')) closeDrawer();
       });
     });
@@ -1659,7 +1881,7 @@
       if(e.key === 'Escape' && platformModal.classList.contains('open')) closePlatformModal();
     });
 
-    // 4. Copia dati bonifico
+    // 4. Copy buttons (bonifico)
     async function copyText(text){
       try{
         await navigator.clipboard.writeText(text);
@@ -1670,7 +1892,9 @@
           ta.value = text;
           ta.style.position = 'fixed';
           ta.style.left = '-9999px';
+          ta.style.top = '0';
           document.body.appendChild(ta);
+          ta.focus();
           ta.select();
           const ok = document.execCommand('copy');
           document.body.removeChild(ta);
@@ -1697,7 +1921,6 @@
       });
     });
   </script>
-
   <div class="gtranslate_wrapper" aria-label="Selettore lingua"></div>
   <script>
     window.gtranslateSettings = {
