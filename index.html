@@ -44,14 +44,14 @@
     });
   </script>
   <title>🌸 Fiori e Piante di Nino — Roma</title>
-  <meta name="description" content="Fiori per ogni occasione. Consegne a Roma! Ordina su WhatsApp, JustEat, Deliveroo oppure sul nuovo e-commerce." />
+  <meta name="description" content="Fiori per ogni occasione. Consegne a Roma! Ordina su WhatsApp, JustEat, Deliveroo oppure sul catalogo online." />
 
   <meta name="robots" content="index,follow" />
   <meta name="theme-color" content="#ff2e8f" />
   <meta property="og:locale" content="it_IT" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="🌸 Fiori e Piante di Nino — Roma" />
-  <meta property="og:description" content="Fiori per ogni occasione. Consegne a Roma! Ordina su WhatsApp, JustEat, Deliveroo oppure sul nuovo e-commerce." />
+  <meta property="og:description" content="Fiori per ogni occasione. Consegne a Roma! Ordina su WhatsApp, JustEat, Deliveroo oppure sul catalogo online." />
   <meta property="og:image" content="https://fiori-italia.it/cdn/shop/files/BouquetXXXLEsplosioneCromatica_Oltre100Steli.png?v=1764853567&width=1200" />
   <meta name="twitter:card" content="summary_large_image" />
 
@@ -250,24 +250,56 @@
     }
     @media (max-width: 420px){ .brandText{ max-width: 52vw; } }
 
-    /* Drawer */
-    .drawer{ position: fixed; inset:0; z-index:200; display:none; }
-    .drawer.open{ display:block; }
-    .drawer .backdrop{ position:absolute; inset:0; background: rgba(20,12,26,.25); }
+    /* Drawer & Scroll Fix Mobile */
+    .drawer{ 
+      position: fixed; 
+      inset: 0; 
+      z-index: 200; 
+      display: none; 
+    }
+    .drawer.open{ 
+      display: block; 
+    }
+    .drawer .backdrop{ 
+      position: absolute; 
+      inset: 0; 
+      background: rgba(20,12,26,.35); 
+    }
     .drawer .panel{
-      position:absolute; right: 14px; top: 74px;
+      position: absolute; 
+      right: 14px; 
+      top: 74px;
       width: min(420px, calc(100% - 28px));
       border-radius: var(--radius-xl);
-      overflow:hidden;
-      background: rgba(255,255,255,.92);
+      background: rgba(255,255,255,.96);
       border: 1px solid rgba(255,46,143,.18);
       box-shadow: var(--shadow-card);
       backdrop-filter: blur(14px);
-      max-height: calc(100vh - 88px);
-      display:flex;
-      flex-direction:column;
+      -webkit-backdrop-filter: blur(14px);
+      max-height: calc(100dvh - 90px);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
     }
-    .drawer .inner{ padding: 14px; overflow:auto; -webkit-overflow-scrolling: touch; }
+    .drawer .inner{ 
+      padding: 16px;
+      overflow-y: auto !important;
+      overscroll-behavior: contain;
+      -webkit-overflow-scrolling: touch;
+      flex: 1 1 auto;
+      min-height: 0;
+      touch-action: pan-y;
+    }
+    @media (max-width: 560px){
+      .drawer .panel{
+        top: 66px;
+        right: 10px;
+        width: calc(100% - 20px);
+        max-height: calc(100dvh - 80px);
+        border-radius: var(--radius-lg);
+      }
+    }
+
     .drawerTop{ display:flex; align-items:center; justify-content:space-between; gap: 10px; padding: 2px 0 10px; }
     .drawerBrand{ font-weight: 950; letter-spacing: -.3px; color: var(--ink); }
     .drawer a.drawerLink{
@@ -327,7 +359,7 @@
     .btn .logo{ width: 2rem; height: 2rem; object-fit: contain; }
     .btn .svgLogo{ width: 20px; height: 20px; display:block; }
 
-    /* Hero (Full Width senza card esterna) */
+    /* Hero */
     .hero{ padding: 26px 0 10px; }
     .heroMain{
       border-radius: var(--radius-xl);
@@ -516,7 +548,7 @@
       .bentoCard .content{ padding: 18px; }
     }
 
-    /* Vista interna Prodotti della Collezione (Zero 404) */
+    /* Vista interna Prodotti */
     .productsView{
       display: none;
       margin-top: 10px;
@@ -1109,12 +1141,12 @@
     </section>
 
     <!-- ========================================================= -->
-    <!-- GALLERIA COLLEZIONI BENTO + VISTA PRODOTTI INTERNA      -->
+    <!-- GALLERIA COLLEZIONI BENTO (100% DINAMICA) + VISTA PRODOTTI-->
     <!-- ========================================================= -->
     <section id="galleria">
       <div class="container">
         
-        <!-- VISTA 1: BENTO COLLEZIONI -->
+        <!-- VISTA 1: BENTO COLLEZIONI REALI -->
         <div id="collectionsView">
           <div class="sectionTitle">
             <div>
@@ -1124,7 +1156,7 @@
           </div>
 
           <div class="bentoGrid" id="bentoCollections">
-            <!-- Popolato e sincronizzato da JS -->
+            <!-- Popolato unicamente in modo dinamico da Shopify API -->
           </div>
         </div>
 
@@ -1509,7 +1541,6 @@
     </footer>
   </main>
 
-  <!-- Script di Sincronizzazione Dinamica & Navigazione Interna -->
   <script>
     const SHOPIFY_HOST = 'https://fiori-italia.it';
 
@@ -1524,74 +1555,24 @@
     let allProducts = [];
     let allCollections = [];
 
-    // Fallback sicuro se offline
-    const fallbackCollections = [
-      {
-        title: "Bouquet & Fiori Freschi",
-        handle: "bouquet",
-        image: "https://raw.githubusercontent.com/matteoawi/fioriepiante-nino.it/refs/heads/main/immagini-home/bouquet-xxl-grandi_occasioni.webp"
-      },
-      {
-        title: "Piante & Composizioni",
-        handle: "piante",
-        image: "https://raw.githubusercontent.com/matteoawi/fioriepiante-nino.it/refs/heads/main/immagini-home/anthuriumrosso1.webp"
-      },
-      {
-        title: "Arte Funebre & Corone",
-        handle: "fiori-funebri",
-        image: "https://raw.githubusercontent.com/matteoawi/fioriepiante-nino.it/refs/heads/main/immagini-home/rn-image_picker_lib_temp_f5d69d79-88c1-458f-8b22-7578ed02333e.webp"
-      },
-      {
-        title: "Tutti i Fiori & Piante",
-        handle: "all",
-        image: "https://fiori-italia.it/cdn/shop/files/BouquetXXXLEsplosioneCromatica_Oltre100Steli.png?v=1764853567&width=1200"
-      }
-    ];
-
-    const fallbackProducts = [
-      {
-        title: "Bouquet XXL Esplosione Cromatica",
-        price: "120.00",
-        image: "https://fiori-italia.it/cdn/shop/files/BouquetXXXLEsplosioneCromatica_Oltre100Steli.png?v=1764853567&width=800",
-        handle: "bouquet-xxl-esplosione-cromatica",
-        category: "bouquet"
-      },
-      {
-        title: "Bouquet Grandi Occasioni",
-        price: "65.00",
-        image: "https://raw.githubusercontent.com/matteoawi/fioriepiante-nino.it/refs/heads/main/immagini-home/bouquet-xxl-grandi_occasioni.webp",
-        handle: "bouquet-grandi-occasioni",
-        category: "bouquet"
-      },
-      {
-        title: "Anthurium Rosso in Vaso",
-        price: "35.00",
-        image: "https://raw.githubusercontent.com/matteoawi/fioriepiante-nino.it/refs/heads/main/immagini-home/anthuriumrosso1.webp",
-        handle: "anthurium-rosso",
-        category: "piante"
-      },
-      {
-        title: "Composizione Floreale Funebre",
-        price: "90.00",
-        image: "https://raw.githubusercontent.com/matteoawi/fioriepiante-nino.it/refs/heads/main/immagini-home/rn-image_picker_lib_temp_f5d69d79-88c1-458f-8b22-7578ed02333e.webp",
-        handle: "composizione-funebre",
-        category: "fiori-funebri"
-      }
-    ];
-
+    // Renderizza unicamente le collezioni reali
     function renderBentoCollections(cols) {
       bentoBox.innerHTML = '';
+      if (!cols || cols.length === 0) {
+        bentoBox.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--muted); font-weight: 700;">Nessuna collezione trovata.</p>';
+        return;
+      }
+
       cols.forEach((col, idx) => {
         let spanClass = '';
-        if (idx === 0) spanClass = 'bentoWide';
-        else if (idx === 1) spanClass = 'bentoTall';
+        if (idx % 3 === 0) spanClass = 'bentoWide';
 
-        const btn = document.createElement('div');
-        btn.className = `bentoCard ${spanClass}`.trim();
-        btn.setAttribute('data-handle', col.handle);
-        btn.setAttribute('data-title', col.title);
+        const card = document.createElement('div');
+        card.className = `bentoCard ${spanClass}`.trim();
+        card.setAttribute('data-handle', col.handle);
+        card.setAttribute('data-title', col.title);
 
-        btn.innerHTML = `
+        card.innerHTML = `
           <div class="bg" style="background-image:url('${col.image}');"></div>
           <div class="overlay"></div>
           <div class="content">
@@ -1600,41 +1581,41 @@
           </div>
         `;
 
-        btn.addEventListener('click', () => {
+        card.addEventListener('click', () => {
           openCollection(col.handle, col.title);
         });
 
-        bentoBox.appendChild(btn);
+        bentoBox.appendChild(card);
       });
     }
 
+    // Navigazione interna alla collezione
     function openCollection(handle, title) {
       currentColTitle.textContent = title;
       collectionsView.style.display = 'none';
       productsView.classList.add('active');
 
-      let filtered = [];
-      if (handle === 'all') {
-        filtered = allProducts;
-      } else {
-        filtered = allProducts.filter(p => {
-          const matchType = (p.product_type || '').toLowerCase().includes(handle.toLowerCase());
-          const matchTag = (p.tags || []).some(t => t.toLowerCase().includes(handle.toLowerCase()));
-          const matchHandle = (p.category || '').toLowerCase() === handle.toLowerCase();
-          const matchText = p.title.toLowerCase().includes(handle.replace('-', ' '));
-          return matchType || matchTag || matchHandle || matchText;
-        });
-      }
+      const norm = (s) => (s || '').toLowerCase().replace(/[-_]/g, ' ').trim();
+      const target = norm(handle);
 
-      // Se non trova corrispondenze, mostra tutti gli articoli disponibili
-      if (filtered.length === 0) filtered = allProducts;
+      const filtered = allProducts.filter(p => {
+        const pType = norm(p.product_type);
+        const pTags = (p.tags || []).map(t => norm(t));
+        const pTitle = norm(p.title);
 
-      currentColCount.textContent = `${filtered.length} composizioni disponibili`;
+        return pType.includes(target) ||
+               pTags.some(t => t.includes(target)) ||
+               pTitle.includes(target);
+      });
 
-      productsGrid.innerHTML = filtered.map(p => `
+      // Se non ci sono tag espliciti, mostra i prodotti dello store
+      const displayProducts = filtered.length > 0 ? filtered : allProducts;
+      currentColCount.textContent = `${displayProducts.length} creazioni disponibili`;
+
+      productsGrid.innerHTML = displayProducts.map(p => `
         <div class="pcard">
           <div class="pcardImgBox">
-            <span class="pcardCategory">${p.category || 'Fiori'}</span>
+            <span class="pcardCategory">${p.product_type || 'Fiori'}</span>
             <img src="${p.image}" alt="${p.title}" loading="lazy" />
           </div>
           <div class="pcardContent">
@@ -1658,11 +1639,12 @@
       document.getElementById('galleria').scrollIntoView({ behavior: 'smooth' });
     });
 
+    // Scarica dinamicamente collezioni e prodotti
     async function syncData() {
       try {
         const [colRes, prodRes] = await Promise.all([
           fetch(`${SHOPIFY_HOST}/collections.json`),
-          fetch(`${SHOPIFY_HOST}/products.json?limit=50`)
+          fetch(`${SHOPIFY_HOST}/products.json?limit=250`)
         ]);
 
         if (!colRes.ok || !prodRes.ok) throw new Error();
@@ -1670,29 +1652,31 @@
         const colData = await colRes.json();
         const prodData = await prodRes.json();
 
-        // Mappatura prodotti
         if (prodData.products && prodData.products.length > 0) {
           allProducts = prodData.products.map(p => ({
             title: p.title,
             price: p.variants && p.variants[0] ? p.variants[0].price : "0.00",
-            image: p.images && p.images[0] ? p.images[0].src : fallbackProducts[0].image,
+            image: p.images && p.images[0] ? p.images[0].src : '',
             handle: p.handle,
             product_type: p.product_type,
-            tags: p.tags,
-            category: p.product_type || "Fiori"
+            tags: p.tags || []
           }));
-        } else {
-          allProducts = fallbackProducts;
         }
 
-        // Mappatura collezioni reali sincronizzate
         if (colData.collections && colData.collections.length > 0) {
-          allCollections = colData.collections.map((c, i) => {
+          allCollections = colData.collections.map(c => {
             let img = c.image ? c.image.src : null;
-            if (!img) {
-              const rel = allProducts.find(p => (p.product_type || '').toLowerCase() === c.title.toLowerCase());
-              img = rel ? rel.image : fallbackCollections[i % fallbackCollections.length].image;
+
+            // Se la collezione non ha copertina, usa l'immagine del primo prodotto associato
+            if (!img && allProducts.length > 0) {
+              const rel = allProducts.find(p => {
+                const cTitle = c.title.toLowerCase();
+                const pType = (p.product_type || '').toLowerCase();
+                return pType === cTitle || (p.tags && p.tags.some(t => t.toLowerCase() === cTitle));
+              });
+              img = rel ? rel.image : (allProducts[0] ? allProducts[0].image : '');
             }
+
             return {
               title: c.title,
               handle: c.handle,
@@ -1700,29 +1684,15 @@
             };
           });
 
-          // Assicura la presenza della collezione generale
-          if (!allCollections.some(c => c.handle === 'all')) {
-            allCollections.push({
-              title: "Tutti i Fiori & Piante",
-              handle: "all",
-              image: allProducts[0] ? allProducts[0].image : fallbackCollections[3].image
-            });
-          }
-        } else {
-          allCollections = fallbackCollections;
+          renderBentoCollections(allCollections);
         }
-
-        renderBentoCollections(allCollections);
-
       } catch (e) {
-        allProducts = fallbackProducts;
-        allCollections = fallbackCollections;
-        renderBentoCollections(allCollections);
+        bentoBox.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--muted); font-weight: 700;">Connessione al catalogo in corso...</p>';
       }
     }
     syncData();
 
-    // Drawer Mobile
+    // Drawer Mobile Fix
     const drawer = document.getElementById('drawer');
     const menuBtn = document.getElementById('menuBtn');
 
@@ -1730,11 +1700,15 @@
       drawer.classList.add('open');
       drawer.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
+      document.body.style.touchAction = 'none';
+      const inner = drawer.querySelector('.inner');
+      if (inner) inner.style.touchAction = 'pan-y';
     }
     function closeDrawer(){
       drawer.classList.remove('open');
       drawer.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
+      document.body.style.touchAction = '';
     }
     menuBtn?.addEventListener('click', openDrawer);
     drawer?.addEventListener('click', (e) => {
