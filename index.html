@@ -12,8 +12,6 @@
 
     gtag('config', 'AW-11013620028');
 
-    // Helper function to delay opening a URL until a gtag event is sent.
-    // It is wired to WhatsApp and phone links because they are quote/contact requests.
     function gtagSendEvent(url, openedWindow) {
       var callbackCalled = false;
       var callback = function () {
@@ -46,18 +44,16 @@
     });
   </script>
   <title>🌸 Fiori e Piante di Nino — Roma</title>
-  <meta name="description" content="Fiori per ogni occasione. Consegne a Roma! Ordina su WhatsApp, JustEat, Deliveroo oppure sul nuovo e-commerce." />
-
+  <meta name="description" content="Fiori per ogni occasione. Consegne a Roma! Ordina online dal catalogo, su WhatsApp, JustEat o Deliveroo." />
 
   <meta name="robots" content="index,follow" />
   <meta name="theme-color" content="#ff2e8f" />
   <meta property="og:locale" content="it_IT" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="🌸 Fiori e Piante di Nino — Roma" />
-  <meta property="og:description" content="Fiori per ogni occasione. Consegne a Roma! Ordina su WhatsApp, JustEat, Deliveroo oppure sul nuovo e-commerce." />
+  <meta property="og:description" content="Fiori per ogni occasione. Consegne a Roma! Ordina online dal catalogo, su WhatsApp, JustEat o Deliveroo." />
   <meta property="og:image" content="https://fiori-italia.it/cdn/shop/files/BouquetXXXLEsplosioneCromatica_Oltre100Steli.png?v=1764853567&width=1200" />
   <meta name="twitter:card" content="summary_large_image" />
-
 
   <link rel="icon" type="image/png" href="./immagini-home/fiori%20e%20piante%20di%20nino%20logo%20nero.png">
   <link rel="apple-touch-icon" href="./immagini-home/fiori%20e%20piante%20di%20nino%20logo%20nero.png">
@@ -68,7 +64,6 @@
 
   <style>
     :root{
-      /* Palette: Rosa + Bianco */
       --pink: #ff2e8f;
       --pink-2: #ff67b2;
       --pink-3: #ffd1e6;
@@ -76,12 +71,10 @@
       --bg: #fff7fb;
       --white: #ffffff;
 
-      /* Testi */
       --ink: #1a1220;
       --ink-2: #3b2a43;
       --muted: #5a4764;
 
-      /* UI */
       --stroke: rgba(255, 46, 143, 0.18);
       --stroke-2: rgba(255, 46, 143, 0.28);
       --shadow: 0 18px 60px rgba(26,18,32,.12);
@@ -96,13 +89,12 @@
       --max: 1180px;
       --ease: cubic-bezier(.2,.9,.2,1);
 
-      /* Brand colors */
       --whatsapp: #25D366;
       --deliveroo: #00CCBC;
       --justeat: #FF8000;
       --paypal: #003087;
-      --postepay: #FFCC00;   /* base */
-      --postepay-ink: #0B3A75; /* testo */
+      --postepay: #FFCC00;
+      --postepay-ink: #0B3A75;
       --cards: #111827;
     }
 
@@ -118,10 +110,9 @@
         radial-gradient(900px 520px at 85% 12%, rgba(255,103,178,.16), transparent 62%),
         radial-gradient(900px 620px at 55% 90%, rgba(255,209,230,.55), transparent 62%),
         linear-gradient(180deg, #fff2f8, var(--bg));
-      overflow-x: hidden; /* FIX movimento asse X */
+      overflow-x: hidden;
     }
 
-    /* extra safety anti-x-scroll */
     .container, section, header, main, footer { max-width: 100%; overflow-x: clip; }
     img, video, iframe { max-width: 100%; }
 
@@ -130,12 +121,11 @@
     li { margin-bottom: 8px; line-height: 1.5; color: var(--ink-2); font-weight: 600; }
     .container{ width:min(var(--max), calc(100% - 40px)); margin-inline:auto; }
 
-    /* Soft blobs (sfondo) */
     .blobs{
       position:fixed; inset:0;
       pointer-events:none; z-index:-1;
       filter: blur(48px); opacity:.90;
-      overflow: hidden; /* evita che “sporga” su X */
+      overflow: hidden;
     }
     .blob{
       position:absolute; width: 520px; height: 520px; border-radius: 999px;
@@ -162,7 +152,6 @@
       html{ scroll-behavior:auto; }
     }
 
-    /* Glass card */
     .card{
       background: rgba(255,255,255,.74);
       border: 1px solid var(--stroke);
@@ -172,7 +161,6 @@
       -webkit-backdrop-filter: blur(10px);
     }
 
-    /* Nav */
     .nav{
       position: sticky;
       top: 0;
@@ -185,14 +173,14 @@
     }
     .nav .row{
       display:flex; align-items:center; justify-content:space-between; gap:14px;
-      min-width: 0; /* FIX overflow */
+      min-width: 0;
     }
 
     .brand{
       display:flex; align-items:center; gap:12px;
       font-weight: 800;
       letter-spacing: -.2px;
-      min-width: 0; /* FIX overflow */
+      min-width: 0;
       flex: 1 1 auto;
     }
     .brandLogo{
@@ -205,13 +193,11 @@
       overflow:hidden;
       flex: 0 0 auto;
     }
-    .brandLogo img{
-      width: 36px; height: 36px; object-fit: contain; display:block;
-    }
+    .brandLogo img{ width: 36px; height: 36px; object-fit: contain; display:block; }
     .brandText{
       display:flex;
       flex-direction: column;
-      justify-content:center; /* logo + testo più “centrati” */
+      justify-content:center;
       min-width: 0;
     }
     .brandText .titleLine{
@@ -245,25 +231,17 @@
       color: var(--ink-2);
       transition: background .2s var(--ease), transform .2s var(--ease);
       white-space: nowrap;
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
     }
     .navlinks a:hover{
       background: rgba(255,46,143,.10);
       transform: translateY(-1px);
     }
-
-
-    /* Menu icons + active */
-    .navlinks a{
-      display:inline-flex;
-      align-items:center;
-      gap: 8px;
-    }
     .navlinks .menuIcon{
       width: 16px; height: 16px;
       display:block;
-    }
-    .navlinks a.active{
-      background: rgba(255,46,143,.14);
     }
 
     .drawer a.drawerLink .drawerLeft{
@@ -276,10 +254,6 @@
       width: 18px; height: 18px;
       display:block;
       flex: 0 0 auto;
-    }
-    .drawer a.drawerLink.active{
-      background: rgba(255,46,143,.12);
-      border-color: rgba(255,46,143,.22);
     }
 
     .navactions{ display:flex; align-items:center; gap:10px; flex: 0 0 auto; }
@@ -296,7 +270,6 @@
     }
     .iconbtn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.88); }
 
-    /* brand icon buttons in top bar */
     .brandIcon{
       width: 44px; height: 44px;
       border-radius: 16px;
@@ -322,7 +295,6 @@
       .brandText{ max-width: 52vw; }
     }
 
-    /* Drawer */
     .drawer{ position: fixed; inset:0; z-index:200; display:none; }
     .drawer.open{ display:block; }
     .drawer .backdrop{ position:absolute; inset:0; background: rgba(20,12,26,.25); }
@@ -335,13 +307,13 @@
       border: 1px solid rgba(255,46,143,.18);
       box-shadow: var(--shadow-card);
       backdrop-filter: blur(14px);
-      max-height: calc(100vh - 88px); /* viewport-safe */
+      max-height: calc(100vh - 88px);
       display:flex;
       flex-direction:column;
     }
     .drawer .inner{
       padding: 14px;
-      overflow:auto; /* viewport-safe */
+      overflow:auto;
       -webkit-overflow-scrolling: touch;
     }
 
@@ -382,7 +354,6 @@
       color: var(--ink);
     }
 
-    /* Buttons */
     .btn{
       display:inline-flex; align-items:center; justify-content:center; gap:10px;
       padding: 12px 14px;
@@ -409,7 +380,6 @@
       border: 1px solid rgba(255,46,143,.20);
     }
 
-    /* Brand buttons */
     .btn.brand{
       border: none;
       color: #fff;
@@ -436,7 +406,6 @@
       filter: drop-shadow(0 8px 14px rgba(26,18,32,.14));
     }
 
-    /* Hero */
     .hero{ padding: 26px 0 10px; }
     .heroGrid{
       display:grid;
@@ -474,21 +443,19 @@
     .heroLogoBig {
       width: 160px;
       height: auto;
-      margin: 10px auto 18px; /* centrato meglio nella card */
+      margin: 10px auto 18px;
       display: block;
       filter: drop-shadow(0 10px 20px rgba(255,46,143,0.15));
     }
-    /* Logo bianco in alto nella hero card */
     .heroLogoTop{
       margin: 0 auto 12px;
       filter: drop-shadow(0 18px 34px rgba(0,0,0,.28));
     }
-    /* Pill sotto al titolo */
     .heroPill{
       margin: 14px auto 0;
     }
 
-.pill{
+    .pill{
       display:inline-flex; align-items:center; gap:10px;
       padding: 10px 14px;
       border-radius: 999px;
@@ -520,7 +487,6 @@
       line-height: 1.55;
     }
 
-    /* Hero readability: overlay scuro leggero + testo bianco */
     .heroMain h1,
     .heroMain .lead{
       color: #fff;
@@ -532,7 +498,6 @@
       border: 1px solid rgba(255,255,255,.22);
     }
 
-    /* Hero: btn soft leggibile su overlay scuro */
     .heroMain .btn.soft{
       background: linear-gradient(135deg, var(--pink), var(--pink-2));
       border: 1px solid rgba(255,255,255,.22);
@@ -580,14 +545,12 @@
       filter: drop-shadow(0 10px 18px rgba(0,0,0,.35));
     }
 
-    /* Hero: pulsanti mini (Come pagare / Chiama) più grandi */
     .miniRow a.miniBtn{
       padding: 12px 14px;
       font-size: 15px;
       font-weight: 900;
     }
 
-    /* Hero: i due mini-bottoni in colonna (Chiama sopra / Come pagare sotto) */
     .miniRow.miniActions{
       flex-direction: column;
       align-items: center;
@@ -599,7 +562,6 @@
       justify-content: center;
     }
 
-    /* 2 colori diversi, visibili ma non "sparati" (su overlay scuro) */
     .miniRow a.miniBtnCall{
       background: rgb(211 187 37 / 94%);
       border: 1px solid rgb(211 187 37 / 94%);
@@ -615,20 +577,18 @@
       background: rgb(34 21 247 / 93%);
     }
 
-@media (max-width: 560px){
-  .miniRow a.miniBtn{
-    width: 100%;
-    justify-content: center;
-  }
-}
+    @media (max-width: 560px){
+      .miniRow a.miniBtn{
+        width: 100%;
+        justify-content: center;
+      }
+    }
 
-/* Side cards */
     .side{ display:flex; flex-direction:column; gap: 16px; }
     .side .card{ padding: 24px; height: 100%; display: flex; flex-direction: column; justify-content: center; }
     .side h3{ margin:0 0 12px; font-size: 20px; letter-spacing:-.2px; font-weight: 800; }
     .side p{ margin:0; color: var(--muted); font-weight: 700; line-height: 1.6; font-size: 16px; }
 
-    /* video inner card */
     .innerCard{
       margin-top: 14px;
       border-radius: 22px;
@@ -651,7 +611,6 @@
       object-fit: cover;
     }
 
-    /* Sections */
     section{ padding: 40px 0; }
     .sectionTitle{
       display:flex; align-items:flex-end; justify-content:space-between;
@@ -671,64 +630,16 @@
       font-size: 17px;
     }
 
-    /* Gallery cards */
-    .galleryGrid{
-      display:grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: clamp(10px, 2.6vw, 16px);
-    }
-
-    /* Mobile: galleria "a bottoni" quadrati */
-    @media (max-width: 560px){
-      .galleryGrid{
-        grid-template-columns: 1fr;   /* 3 card in colonna */
-        gap: 12px;
-      }
-      .gcard{
-        aspect-ratio: auto;
-        min-height: 220px;
-        min-width: 0;
-      }
-      .gcard .content{ padding: 16px; }
-    }
-    /* (richiesto) 2x2 anche da mobile: niente 1 colonna */
-
-    .gcard{
-      position:relative;
+    /* Contenitore Buy Button catalogo */
+    .catalogoWrapper {
+      background: rgba(255,255,255,.85);
+      border: 1px solid var(--stroke);
       border-radius: var(--radius-xl);
-      overflow:hidden;
-      border: 1px solid rgba(255,46,143,.16);
+      padding: clamp(16px, 3vw, 32px);
       box-shadow: var(--shadow-card);
-      min-height: 260px;
-      background: #fff;
-      display: block;
-      min-width: 0;
-    }
-    .gcard .bg{ position:absolute; inset:0; background-size: cover; background-position:center; transform: scale(1.04); transition: transform 0.4s var(--ease); }
-    .gcard:hover .bg { transform: scale(1.1); }
-    .gcard .overlay{
-      position:absolute; inset:0;
-      background:
-        linear-gradient(180deg, rgba(0,0,0,.12) 0%, rgba(0,0,0,.45) 78%);
-    }
-    .gcard .content{
-      position:absolute; inset:0;
-      padding: 22px;
-      display:flex; flex-direction:column; justify-content:flex-end;
-      gap: 10px;
-    }
-        .gtitle{
-      font-size: clamp(16px, 4.6vw, 24px);
-      font-weight: 900;
-      letter-spacing: -.5px;
-      line-height: 1.1;
-      text-wrap: balance;
-      overflow-wrap: anywhere;
-      color: #fff;
-      text-shadow: 0 10px 22px rgba(0,0,0,.55);
+      min-height: 400px;
     }
 
-    /* Contacts grid (mobile 1 colonna) */
     .contactsGrid{
       display:grid;
       grid-template-columns: repeat(2, 1fr);
@@ -738,16 +649,12 @@
       .contactsGrid{ grid-template-columns: 1fr; }
     }
 
-    /* Steps */
     .stepsGrid{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 16px;
     }
     @media (max-width: 980px){ .stepsGrid{ grid-template-columns: 1fr; } }
-
-    .stepsGrid.two{ grid-template-columns: repeat(2, 1fr); }
-    @media (max-width: 980px){ .stepsGrid.two{ grid-template-columns: 1fr; } }
 
     .step{
       padding: 20px;
@@ -760,19 +667,18 @@
       overflow:hidden;
     }
 
-    /* Screenshot steps: altezza “intera” */
     .stepImg{
       width: 100%;
-      height: 80vh;           /* desktop */
+      height: 80vh;
       margin-top: 16px;
       border-radius: 18px;
-      object-fit: contain;    /* IMPORTANT: screenshot non “tagliato” */
+      object-fit: contain;
       border: 1px solid rgba(255,46,143,.14);
       background: rgba(255,255,255,.92);
       display:block;
     }
     @media (max-width: 980px){
-      .stepImg{ height: 60vh; } /* mobile */
+      .stepImg{ height: 60vh; }
     }
 
     .step h4{
@@ -803,7 +709,6 @@
       flex-wrap: wrap;
     }
 
-    /* “Cosa succede dopo?” divider */
     .afterBox{
       margin-top: 16px;
       padding: 20px;
@@ -826,7 +731,6 @@
       font-weight: 700;
     }
 
-    /* Payments */
     .payGrid{
       display:grid;
       grid-template-columns: 1fr 1fr;
@@ -927,7 +831,6 @@
       .payCircuits .pill{ padding: 9px 10px; font-size: 13px; }
     }
     
-    /* Locations */
     .locGrid{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
@@ -976,7 +879,6 @@
       font-weight: 700;
     }
 
-    /* Platform modal */
     .pmodal{ position: fixed; inset:0; z-index: 300; display:none; }
     .pmodal.open{ display:block; }
     .pmodal .backdrop{ position:absolute; inset:0; background: rgba(20,12,26,.35); }
@@ -1019,7 +921,6 @@
       margin-top: 10px;
     }
 
-    /* Modal sedi (JustEat/Deliveroo): bottoni brand + logo */
     .pmodal .row a.btn{
       flex: 1 1 220px;
       justify-content: center;
@@ -1060,20 +961,17 @@
       flex: 0 0 auto;
     }
     .pmodal .closeBtn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.95); }
-  
-    /* Mobile: ombre più leggere (evita l'effetto "ombra unica" tra le card) */
+    
     @media (max-width: 560px){
       :root{ --shadow-card: var(--shadow-card-mobile); }
     }
 
-    /* Fix ombre: ogni card deve avere la sua ombra (niente effetto "blob" unico) */
     .step, .payCard, .loc, .innerCard{
       background: #fff;
       backdrop-filter: none;
       -webkit-backdrop-filter: none;
     }
-
-</style>
+  </style>
 </head>
 
 <body>
@@ -1097,9 +995,9 @@
         </a>
 
         <nav class="navlinks" aria-label="Sezioni">
-          <a href="#galleria"><svg class="menuIcon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7a2 2 0 0 1 2-2h3l2 2h5a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>Galleria</a>
+          <a href="#catalogo"><svg class="menuIcon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="9" cy="21" r="1" stroke="currentColor" stroke-width="2"/><circle cx="20" cy="21" r="1" stroke="currentColor" stroke-width="2"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Catalogo</a>
           <a href="#come-ordinare"><svg class="menuIcon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M3 6h1M3 12h1M3 18h1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Come ordinare</a>
-          <a class="active" href="#pagamenti"><svg class="menuIcon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 7.5A2.5 2.5 0 0 1 5.5 5h13A2.5 2.5 0 0 1 21 7.5v9A2.5 2.5 0 0 1 18.5 19h-13A2.5 2.5 0 0 1 3 16.5v-9Z" stroke="currentColor" stroke-width="2"/><path d="M3 9h18" stroke="currentColor" stroke-width="2"/><path d="M7 15h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Pagamento</a>
+          <a href="#pagamenti"><svg class="menuIcon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 7.5A2.5 2.5 0 0 1 5.5 5h13A2.5 2.5 0 0 1 21 7.5v9A2.5 2.5 0 0 1 18.5 19h-13A2.5 2.5 0 0 1 3 16.5v-9Z" stroke="currentColor" stroke-width="2"/><path d="M3 9h18" stroke="currentColor" stroke-width="2"/><path d="M7 15h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Pagamento</a>
           <a href="#sedi"><svg class="menuIcon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 22s7-4.5 7-12a7 7 0 1 0-14 0c0 7.5 7 12 7 12Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 11.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" stroke="currentColor" stroke-width="2"/></svg>Sedi</a>
           <a href="#contatti"><svg class="menuIcon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.8 19.8 0 0 1 3.11 5.18 2 2 0 0 1 5.1 3h3a2 2 0 0 1 2 1.72c.12.86.32 1.7.59 2.5a2 2 0 0 1-.45 2.11L9.09 10.91a16 16 0 0 0 4 4l1.58-1.15a2 2 0 0 1 2.11-.45c.8.27 1.64.47 2.5.59A2 2 0 0 1 22 16.92Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Contatti</a>
         </nav>
@@ -1134,17 +1032,17 @@
           </button>
         </div>
 
-        <a class="drawerLink" href="#galleria" data-close><span class="drawerLeft"><svg class="menuIcon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7a2 2 0 0 1 2-2h3l2 2h5a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>Galleria</span> <span>→</span></a>
+        <a class="drawerLink" href="#catalogo" data-close><span class="drawerLeft"><svg class="menuIcon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="9" cy="21" r="1" stroke="currentColor" stroke-width="2"/><circle cx="20" cy="21" r="1" stroke="currentColor" stroke-width="2"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Catalogo Online</span> <span>→</span></a>
         <a class="drawerLink" href="#come-ordinare" data-close><span class="drawerLeft"><svg class="menuIcon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M3 6h1M3 12h1M3 18h1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Come ordinare</span> <span>→</span></a>
-        <a class="drawerLink active" href="#pagamenti" data-close><span class="drawerLeft"><svg class="menuIcon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 7.5A2.5 2.5 0 0 1 5.5 5h13A2.5 2.5 0 0 1 21 7.5v9A2.5 2.5 0 0 1 18.5 19h-13A2.5 2.5 0 0 1 3 16.5v-9Z" stroke="currentColor" stroke-width="2"/><path d="M3 9h18" stroke="currentColor" stroke-width="2"/><path d="M7 15h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Pagamento</span> <span>→</span></a>
+        <a class="drawerLink" href="#pagamenti" data-close><span class="drawerLeft"><svg class="menuIcon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 7.5A2.5 2.5 0 0 1 5.5 5h13A2.5 2.5 0 0 1 21 7.5v9A2.5 2.5 0 0 1 18.5 19h-13A2.5 2.5 0 0 1 3 16.5v-9Z" stroke="currentColor" stroke-width="2"/><path d="M3 9h18" stroke="currentColor" stroke-width="2"/><path d="M7 15h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Pagamento</span> <span>→</span></a>
         <a class="drawerLink" href="#sedi" data-close><span class="drawerLeft"><svg class="menuIcon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 22s7-4.5 7-12a7 7 0 1 0-14 0c0 7.5 7 12 7 12Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 11.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" stroke="currentColor" stroke-width="2"/></svg>Sedi</span> <span>→</span></a>
         <a class="drawerLink" href="#contatti" data-close><span class="drawerLeft"><svg class="menuIcon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.8 19.8 0 0 1 3.11 5.18 2 2 0 0 1 5.1 3h3a2 2 0 0 1 2 1.72c.12.86.32 1.7.59 2.5a2 2 0 0 1-.45 2.11L9.09 10.91a16 16 0 0 0 4 4l1.58-1.15a2 2 0 0 1 2.11-.45c.8.27 1.64.47 2.5.59A2 2 0 0 1 22 16.92Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Contatti</span> <span>→</span></a>
 
         <div class="drawerGroup">
           <div class="drawerTitle">Ordina subito</div>
 
-          <a class="btn primary" href="https://fiori-italia.it/" target="_blank" rel="noopener nofollow" style="width:100%; justify-content:center;">
-            🛒 Vai all’e-commerce
+          <a class="btn primary" href="#catalogo" data-close style="width:100%; justify-content:center;">
+            🛒 Catalogo online
           </a>
 
           <a class="btn brand whatsapp" href="https://wa.me/message/JDH7MM6C6VC7J1" target="_blank" rel="noopener nofollow" style="width:100%; justify-content:center; margin-top:10px;">
@@ -1208,8 +1106,8 @@
                 </p>
 
                 <div class="ctaRow">
-                  <a class="btn soft" href="https://fiori-italia.it/" target="_blank" rel="noopener nofollow">
-                    🛒 Vai all’e-commerce
+                  <a class="btn soft" href="#catalogo">
+                    🛒 Sfoglia il catalogo
                   </a>
 
                   <a class="btn brand whatsapp" href="https://wa.me/message/JDH7MM6C6VC7J1" target="_blank" rel="noopener nofollow">
@@ -1243,11 +1141,10 @@
           <aside class="side">
             <div class="card">
               <div>
-                <h3 style="margin:0 0 12px;">🛒 Nuovo sito e-commerce</h3>
+                <h3 style="margin:0 0 12px;">🛒 Nuovo catalogo e-commerce</h3>
                 <p>
-                  Vuoi vedere il catalogo completo con prezzi e foto?<br><br>
-                  Puoi <b>acquistare direttamente online</b>:
-                  scegli il prodotto, inserisci indirizzo e note, paga in sicurezza e noi pensiamo alla consegna 💗
+                  Scegli direttamente qui sotto il tuo bouquet o la tua pianta.<br><br>
+                  Puoi <b>acquistare direttamente online</b> con consegna a domicilio su Roma 💗
                 </p>
 
                 <!-- VIDEO (card interna) -->
@@ -1265,7 +1162,7 @@
                 </div>
 
                 <div style="margin-top:20px; display:flex; flex-direction: column; gap:10px;">
-                  <a class="btn primary" href="https://fiori-italia.it/" target="_blank" rel="noopener nofollow" style="justify-content: center;">Vai su fiori-italia.it ↗</a>
+                  <a class="btn primary" href="#catalogo" style="justify-content: center;">Vai al catalogo ↓</a>
                 </div>
 
               </div>
@@ -1275,40 +1172,176 @@
       </div>
     </section>
 
-    <section id="galleria">
+    <!-- SEZIONE CATALOGO SHOPIFY (Sostituisce la vecchia Galleria) -->
+    <section id="catalogo">
       <div class="container">
         <div class="sectionTitle">
           <div>
-            <h2>Galleria</h2>
-            <p>Scegli una categoria e apri la galleria.</p>
+            <h2>Il nostro Catalogo</h2>
+            <p>Scegli tra i nostri bouquet freschi, piante e composizioni pronti per la consegna.</p>
           </div>
         </div>
 
-        <div class="galleryGrid">
-          <a class="gcard" href="./fiori/">
-            <div class="bg" style="background-image:url('https://raw.githubusercontent.com/matteoawi/fioriepiante-nino.it/refs/heads/main/immagini-home/bouquet-xxl-grandi_occasioni.webp');"></div>
-            <div class="overlay"></div>
-            <div class="content">
-<div class="gtitle">Fiori freschi</div>
-            </div>
-          </a>
-
-          <a class="gcard" href="./piante/">
-            <div class="bg" style="background-image:url('https://raw.githubusercontent.com/matteoawi/fioriepiante-nino.it/refs/heads/main/immagini-home/anthuriumrosso1.webp');"></div>
-            <div class="overlay"></div>
-            <div class="content">
-<div class="gtitle">Piante / Composizioni</div>
-            </div>
-          </a>
-
-          <a class="gcard" href="./funebri/">
-            <div class="bg" style="background-image:url('https://raw.githubusercontent.com/matteoawi/fioriepiante-nino.it/refs/heads/main/immagini-home/rn-image_picker_lib_temp_f5d69d79-88c1-458f-8b22-7578ed02333e.webp');"></div>
-            <div class="overlay"></div>
-            <div class="content">
-<div class="gtitle">Composizioni funebri</div>
-            </div>
-          </a>
-
+        <div class="catalogoWrapper">
+          <!-- WIDGET SHOPIFY BUY BUTTON -->
+          <div id='collection-component-1788531345167'></div>
+          <script type="text/javascript">
+          /*<![CDATA[*/
+          (function () {
+            var scriptURL = 'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
+            if (window.ShopifyBuy) {
+              if (window.ShopifyBuy.UI) {
+                ShopifyBuyInit();
+              } else {
+                loadScript();
+              }
+            } else {
+              loadScript();
+            }
+            function loadScript() {
+              var script = document.createElement('script');
+              script.async = true;
+              script.src = scriptURL;
+              (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(script);
+              script.onload = ShopifyBuyInit;
+            }
+            function ShopifyBuyInit() {
+              var client = ShopifyBuy.buildClient({
+                domain: '7qs0fh-ef.myshopify.com',
+                storefrontAccessToken: '66b8f2d730ef24efd5becd9ee8d9c7ad',
+              });
+              ShopifyBuy.UI.onReady(client).then(function (ui) {
+                ui.createComponent('collection', {
+                  id: '734117364094',
+                  node: document.getElementById('collection-component-1788531345167'),
+                  moneyFormat: '%E2%82%AC%7B%7Bamount_with_comma_separator%7D%7D',
+                  options: {
+            "product": {
+              "styles": {
+                "product": {
+                  "@media (min-width: 601px)": {
+                    "max-width": "calc(25% - 20px)",
+                    "margin-left": "20px",
+                    "margin-bottom": "50px",
+                    "width": "calc(25% - 20px)"
+                  },
+                  "img": {
+                    "height": "calc(100% - 15px)",
+                    "position": "absolute",
+                    "left": "0",
+                    "right": "0",
+                    "top": "0"
+                  },
+                  "imgWrapper": {
+                    "padding-top": "calc(75% + 15px)",
+                    "position": "relative",
+                    "height": "0"
+                  }
+                },
+                "button": {
+                  ":hover": {
+                    "background-color": "#cb00a3"
+                  },
+                  "background-color": "#e200b5",
+                  ":focus": {
+                    "background-color": "#cb00a3"
+                  },
+                  "border-radius": "25px"
+                }
+              },
+              "buttonDestination": "modal",
+              "contents": {
+                "options": false
+              },
+              "text": {
+                "button": "Vedi prodotto"
+              }
+            },
+            "productSet": {
+              "styles": {
+                "products": {
+                  "@media (min-width: 601px)": {
+                    "margin-left": "-20px"
+                  }
+                }
+              }
+            },
+            "modalProduct": {
+              "contents": {
+                "img": false,
+                "imgWithCarousel": true,
+                "button": false,
+                "buttonWithQuantity": true
+              },
+              "styles": {
+                "product": {
+                  "@media (min-width: 601px)": {
+                    "max-width": "100%",
+                    "margin-left": "0px",
+                    "margin-bottom": "0px"
+                  }
+                },
+                "button": {
+                  ":hover": {
+                    "background-color": "#cb00a3"
+                  },
+                  "background-color": "#e200b5",
+                  ":focus": {
+                    "background-color": "#cb00a3"
+                  },
+                  "border-radius": "25px"
+                }
+              },
+              "text": {
+                "button": "Aggiungi al carrello"
+              }
+            },
+            "option": {},
+            "cart": {
+              "styles": {
+                "button": {
+                  ":hover": {
+                    "background-color": "#cb00a3"
+                  },
+                  "background-color": "#e200b5",
+                  ":focus": {
+                    "background-color": "#cb00a3"
+                  },
+                  "border-radius": "25px"
+                }
+              },
+              "text": {
+                "title": "Carrello",
+                "total": "Subtotale",
+                "empty": "Il tuo carrello è vuoto.",
+                "notice": "Le spese di spedizione e i codici sconto vengono aggiunti al momento del pagamento.",
+                "button": "Checkout",
+                "noteDescription": "Istruzioni speciali per il venditore"
+              },
+              "contents": {
+                "note": true
+              }
+            },
+            "toggle": {
+              "styles": {
+                "toggle": {
+                  "background-color": "#e200b5",
+                  ":hover": {
+                    "background-color": "#cb00a3"
+                  },
+                  ":focus": {
+                    "background-color": "#cb00a3"
+                  }
+                }
+              }
+            }
+          },
+                });
+              });
+            }
+          })();
+          /*]]>*/
+          </script>
         </div>
       </div>
     </section>
@@ -1331,7 +1364,7 @@
                 <img class="logo" src="./immagini-home/logo-whatsapp.png" alt="WhatsApp" /> WhatsApp
               </a>
             </div>
-            <p style="margin-top:10px;">Usa WhatsApp prendere contatto con noi.</p>
+            <p style="margin-top:10px;">Usa il catalogo qui sopra oppure scrivici direttamente su WhatsApp.</p>
           </div>
 
           <div class="step">
@@ -1346,7 +1379,7 @@
             <div class="stepCtaRow">
               <a class="btn soft" href="#pagamenti">💳 Metodi di pagamento</a>
             </div>
-            <p style="margin-top:10px;">Concordiamo il pagamento in chat e poi paghi con il metodo che preferisci.</p>
+            <p style="margin-top:10px;">Paga online direttamente col carrello oppure concordiamo il metodo che preferisci in chat.</p>
           </div>
         </div>
 
@@ -1359,13 +1392,6 @@
             <img class="logo" src="./immagini-home/logo-whatsapp.png" alt="WhatsApp" />
             WhatsApp
           </a>
-        </div>
-
-          <div class="step">
-            <img class="stepImg" src="./immagini-home/step5.png" alt="Step 5" />
-            <h4><span class="stepN">4.</span> Fatto!</h4>
-            <p style="margin-top:10px;">Ti avvisiamo quando i fiori sono arrivati a destinazione.</p>
-          </div>
         </div>
       </div>
     </section>
@@ -1428,7 +1454,6 @@
                 <li>Segui le istruzioni a schermo.</li>
               </ol>
 
-              <!-- Metodi di pagamento accettati -->
               <div class="payCircuits" aria-label="Circuiti carte accettati">
                 <img src="https://raw.githubusercontent.com/matteoawi/fioriepiante-nino.it/refs/heads/main/immagini-home/circuiti-pagamento.png" alt="Circuiti carte accettati" />
               </div>
@@ -1513,7 +1538,6 @@
               </div>
 
               <span class="locThumbLink" aria-hidden="true" title="Negozio di fiori">
-                <!-- SVG negozio di fiori -->
                 <svg viewBox="0 0 64 64" fill="none">
                   <path d="M10 26h44v28a6 6 0 0 1-6 6H16a6 6 0 0 1-6-6V26Z" stroke="rgba(255,46,143,.9)" stroke-width="2"/>
                   <path d="M14 26V16a6 6 0 0 1 6-6h24a6 6 0 0 1 6 6v10" stroke="rgba(255,46,143,.9)" stroke-width="2"/>
@@ -1652,7 +1676,6 @@
   </main>
 
   <script>
-    // Mobile drawer
     const drawer = document.getElementById('drawer');
     const menuBtn = document.getElementById('menuBtn');
 
@@ -1676,7 +1699,6 @@
       if(e.key === 'Escape' && drawer.classList.contains('open')) closeDrawer();
     });
 
-    // Platform chooser (JustEat / Deliveroo): scegli sede Parioli o Trieste
     const platformModal = document.getElementById('platformModal');
     const platformTitle = document.getElementById('platformTitle');
     const platformSub = document.getElementById('platformSub');
@@ -1717,7 +1739,7 @@
         </a>
       `;
 
-platformModal.classList.add('open');
+      platformModal.classList.add('open');
       platformModal.setAttribute('aria-hidden', 'false');
     }
 
@@ -1732,7 +1754,6 @@ platformModal.classList.add('open');
         const platformKey = el.getAttribute('data-platform');
         openPlatformModal(platformKey);
 
-        // se viene dal drawer, chiudo anche il drawer
         if(drawer?.classList.contains('open')) closeDrawer();
       });
     });
@@ -1748,7 +1769,6 @@ platformModal.classList.add('open');
       if(e.key === 'Escape' && platformModal.classList.contains('open')) closePlatformModal();
     });
 
-    // Copy buttons (bonifico)
     async function copyText(text){
       try{
         await navigator.clipboard.writeText(text);
@@ -1801,4 +1821,3 @@ platformModal.classList.add('open');
   <script src="https://cdn.gtranslate.net/widgets/latest/float.js" defer></script>
 </body>
 </html>
-
