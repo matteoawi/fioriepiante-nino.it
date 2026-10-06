@@ -1,0 +1,290 @@
+[
+  {
+    "index": 0,
+    "name": "12 Rose rosse gambo lungo con Mimosa",
+    "price": "89",
+    "category": "Amore",
+    "status": "created"
+  },
+  {
+    "index": 1,
+    "name": "3 Rose rosse gambo lungo con Mimosa",
+    "price": "29",
+    "category": "Amore",
+    "status": "created"
+  },
+  {
+    "index": 2,
+    "name": "5 Rose rosse gambo lungo con Mimosa",
+    "price": "45",
+    "category": "Amore",
+    "status": "created"
+  },
+  {
+    "index": 3,
+    "name": "7 Rose rosse gambo lungo con Mimosa",
+    "price": "59",
+    "category": "Amore",
+    "status": "created"
+  },
+  {
+    "index": 4,
+    "name": "Alberello Natalizio Naturale",
+    "price": "146",
+    "category": "Stagionale Natale",
+    "status": "created"
+  },
+  {
+    "index": 5,
+    "name": "Anthurium Elegance",
+    "price": "60",
+    "category": "Piante da interno",
+    "status": "created"
+  },
+  {
+    "index": 7,
+    "name": "Armonia Floreale",
+    "price": "66",
+    "category": "Bouquet e composizioni",
+    "status": "created"
+  },
+  {
+    "index": 8,
+    "name": "Armonia Natalizia Naturale",
+    "price": "48",
+    "category": "Stagionale Natale",
+    "status": "created"
+  },
+  {
+    "index": 9,
+    "name": "Bonsai Ficus Microcarpa Ginseng",
+    "price": "100",
+    "category": "Piante da interno",
+    "status": "created"
+  },
+  {
+    "index": 10,
+    "name": "Bouquet",
+    "price": "50",
+    "category": "Bouquet e composizioni",
+    "status": "created"
+  },
+  {
+    "index": 11,
+    "name": "Bouquet di 24 rose rosse gambo lungo",
+    "price": "168",
+    "category": "Amore",
+    "status": "created"
+  },
+  {
+    "index": 12,
+    "name": "Bouquet con Rose Rosse e Orsetto",
+    "price": "69",
+    "category": "Amore",
+    "status": "created"
+  },
+  {
+    "index": 13,
+    "name": "Bouquet di fiori bianchi",
+    "price": "67",
+    "category": "Bouquet e composizioni",
+    "status": "created"
+  },
+  {
+    "index": 15,
+    "name": "Bouquet di Rose Azzurre e Bianche",
+    "price": "54",
+    "category": "Bouquet e composizioni",
+    "status": "created"
+  },
+  {
+    "index": 16,
+    "name": "Bouquet di Rose Rosa",
+    "price": "59",
+    "category": "Amore",
+    "status": "created"
+  },
+  {
+    "index": 17,
+    "name": "Bouquet di Rose Rosa Tenerezza",
+    "price": "45",
+    "category": "Amore",
+    "status": "created"
+  },
+  {
+    "index": 18,
+    "name": "Bouquet di rose rosse",
+    "price": "75",
+    "category": "Amore",
+    "status": "created"
+  },
+  {
+    "index": 19,
+    "name": "Bouquet di Rose Rosse: Passione e Raffinatezza",
+    "price": "125",
+    "category": "Amore",
+    "status": "created"
+  },
+  {
+    "index": 20,
+    "name": "Bouquet di Roselline Rosa",
+    "price": "56",
+    "category": "Amore",
+    "status": "created"
+  },
+  {
+    "index": 21,
+    "name": "Bouquet di Tulipani Gialli",
+    "price": "60",
+    "category": "Bouquet e composizioni",
+    "status": "created"
+  },
+  {
+    "index": 22,
+    "name": "Bouquet Eleganza e Colore Intenso",
+    "price": "72",
+    "category": "Bouquet e composizioni",
+    "status": "created"
+  },
+  {
+    "index": 23,
+    "name": "Bouquet Gigante \"Passione Infinita\" – 150 Rose Rosse Medie",
+    "price": "500",
+    "category": "Effetto WOW",
+    "status": "created"
+  },
+  {
+    "index": 24,
+    "name": "Bouquet Girasoli e Fiori di Campo",
+    "price": "54",
+    "category": "GRAZIE",
+    "status": "created"
+  },
+  {
+    "index": 25,
+    "name": "Bouquet Girasoli e Rose Arancio",
+    "price": "57",
+    "category": "GRAZIE",
+    "status": "created"
+  },
+  {
+    "index": 26,
+    "name": "Bouquet misto",
+    "price": "49",
+    "category": "Bouquet e composizioni",
+    "status": "created"
+  },
+  {
+    "index": 27,
+    "name": "Bouquet Misto di Rose e Fiori di Campo",
+    "price": "58",
+    "category": "GRAZIE",
+    "status": "created"
+  },
+  {
+    "index": 28,
+    "name": "Bouquet Passione e Dolcezza",
+    "price": "99",
+    "category": "Amore",
+    "status": "created"
+  },
+  {
+    "index": 29,
+    "name": "Bouquet Raggio di Sole & Rose Rosse",
+    "price": "64",
+    "category": "Bouquet e composizioni",
+    "status": "created"
+  },
+  {
+    "index": 30,
+    "name": "Bouquet Romantico di Roselline",
+    "price": "49",
+    "category": "Amore",
+    "status": "created"
+  },
+  {
+    "index": 31,
+    "name": "Bouquet Rose Rosse e Tulipani",
+    "price": "99",
+    "category": "Amore",
+    "status": "created"
+  },
+  {
+    "index": 32,
+    "name": "Bouquet Tulipani Bianchi",
+    "price": "55",
+    "category": "Bouquet e composizioni",
+    "status": "created"
+  },
+  {
+    "index": 33,
+    "name": "Bouquet Tulipani Multicolore Classico",
+    "price": "55",
+    "category": "Bouquet e composizioni",
+    "status": "created"
+  },
+  {
+    "index": 34,
+    "name": "Bouquet Tulipani Rosa: Dolce Eleganza",
+    "price": "55",
+    "category": "Bouquet e composizioni",
+    "status": "created"
+  },
+  {
+    "index": 35,
+    "name": "Bouquet gigante \"Esplosione Cromatica\" – Oltre 100 Steli",
+    "price": "199",
+    "category": "Effetto WOW",
+    "status": "created",
+    "sourceName": "Bouquet XXXL \"Esplosione Cromatica\" – Oltre 100 Steli"
+  },
+  {
+    "index": 36,
+    "name": "Bouquet gigante \"Trionfo Rosa\" – Oltre 100 Steli",
+    "price": "199",
+    "category": "Effetto WOW",
+    "status": "created"
+  },
+  {
+    "index": 37,
+    "name": "Bouquet: L'Allegria Vibrante",
+    "price": "55",
+    "category": "Bouquet e composizioni",
+    "status": "created"
+  },
+  {
+    "index": 41,
+    "name": "Centrotavola di zucca naturale",
+    "price": "66",
+    "category": "Stagionale Autunno",
+    "status": "created"
+  },
+  {
+    "index": 45,
+    "name": "Centrotavola Invernale \"Natura Viva\"",
+    "price": "52",
+    "category": "Stagionale Natale",
+    "status": "created"
+  },
+  {
+    "index": 49,
+    "name": "Centrotavola Naturale",
+    "price": "56",
+    "category": "Stagionale Natale",
+    "status": "created"
+  },
+  {
+    "index": 51,
+    "name": "Coroncina di Alloro: Simbolo di Trionfo",
+    "price": "35",
+    "category": "Laurea",
+    "status": "created"
+  },
+  {
+    "index": 52,
+    "name": "Coroncina d'Alloro \"Triumphus\"",
+    "price": "45",
+    "category": "Laurea",
+    "status": "created"
+  }
+]
