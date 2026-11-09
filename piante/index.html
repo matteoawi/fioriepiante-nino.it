@@ -2,57 +2,28 @@
 <html lang="it">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11013620028"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="../assets/ads.js" defer></script>
+  <title>Piante da interno ed esterno a Roma | Nino</title>
+  <meta name="description" content="Guarda le piante di Fiori e Piante di Nino a Roma. Invia una foto su WhatsApp per chiedere disponibilità e scegliere la pianta adatta allo spazio.">
 
-    gtag('config', 'AW-11013620028');
-
-    // Helper function to delay opening a URL until a gtag event is sent.
-    // It is wired to WhatsApp and phone links because they are quote/contact requests.
-    function gtagSendEvent(url, openedWindow) {
-      var callbackCalled = false;
-      var callback = function () {
-        if (callbackCalled) return;
-        callbackCalled = true;
-        if (typeof url === 'string') {
-          if (openedWindow && !openedWindow.closed) {
-            openedWindow.location = url;
-          } else {
-            window.location = url;
-          }
-        }
-      };
-      setTimeout(callback, 2100);
-      gtag('event', 'ads_conversion_Richiesta_preventivo_1', {
-        'event_callback': callback,
-        'event_timeout': 2000
-      });
-      return false;
-    }
-
-    document.addEventListener('click', function(event) {
-      var link = event.target.closest && event.target.closest('a[href^="https://wa.me/"], a[href^="tel:"]');
-      if (!link || !link.href) return;
-
-      event.preventDefault();
-      var openedWindow = link.target === '_blank' ? window.open('', '_blank') : null;
-      if (openedWindow) openedWindow.opener = null;
-      gtagSendEvent(link.href, openedWindow);
-    });
-  </script>
-  <title>Galleria Piante — Fiori e Piante di Nino</title>
-  <meta name="description" content="Scegli le tue piante preferite e chiedi a Nino qualcosa di simile su WhatsApp." />
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
+  <link rel="canonical" href="https://fioriepiante-nino.it/piante/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Piante da interno e da esterno a Roma">
+  <meta property="og:description" content="Guarda le piante di Fiori e Piante di Nino a Roma. Invia una foto su WhatsApp per chiedere disponibilità e scegliere la pianta adatta allo spazio.">
+  <meta property="og:url" content="https://fioriepiante-nino.it/piante/">
+  <meta property="og:image" content="https://fioriepiante-nino.it/piante/piante-1.jpg">
+  <link rel="icon" type="image/png" href="../immagini-home/nino-favicon.png">
+  <link rel="preload" href="../assets/plus-jakarta-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
 
   <style>
+    @font-face {
+      font-family: "Plus Jakarta Sans";
+      src: url("../assets/plus-jakarta-sans-latin.woff2") format("woff2");
+      font-weight: 200 800;
+      font-display: swap;
+    }
+
     :root {
       --primary: #ff2e8f;
       --bg: #fff7fb;
@@ -130,27 +101,15 @@
     }
     .tile:active { transform: scale(0.98); }
 
-    /* Skeleton loading animation */
-    .tile.loading::before {
-      content: ""; position: absolute; inset: 0;
-      background: linear-gradient(90deg, #f0f0f0 25%, #f8f8f8 50%, #f0f0f0 75%);
-      background-size: 200% 100%;
-      animation: shimmer 1.5s infinite;
-    }
-    @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
-
     .tile img {
-      width: 100%; height: 100%; object-fit: cover;
-      display: block; opacity: 0; transition: opacity 0.3s;
+      width: 100%; height: 100%; object-fit: cover; display: block;
     }
-    .tile.loaded img { opacity: 1; }
-    .tile.loaded::before { display: none; }
+    .tile:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
 
     .tile::after {
       content: "🔍";
       position: absolute; bottom: 8px; right: 8px;
       background: rgba(255,255,255,0.85);
-      backdrop-filter: blur(4px);
       width: 32px; height: 32px; border-radius: 50%;
       display: grid; place-items: center; font-size: 14px;
       opacity: 0.9;
@@ -166,7 +125,7 @@
 
     /* --- LIGHTBOX FIX --- */
     .lb {
-      position: fixed; inset: 0; z-index: 2000;
+      position: fixed; inset: 0; width: 100%; height: 100%; max-width: none; max-height: none; margin: 0; border: 0;
       background: rgba(0,0,0,0.92);
       display: none;
       justify-content: center;
@@ -174,7 +133,7 @@
       padding: 20px;
       backdrop-filter: blur(5px);
     }
-    .lb.active { display: flex; }
+    .lb[open] { display: flex; }
 
     .lb-panel {
       background: #fff;
@@ -188,7 +147,7 @@
       flex-direction: column;
       animation: pop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
-    @keyframes pop { from {transform: scale(0.95); opacity: 0;} to {transform: scale(1); opacity: 1;} }
+    @keyframes pop { from {transform: scale(0.95); } to {transform: scale(1);} }
 
     .lb-close {
       position: absolute; top: 12px; right: 12px; z-index: 10;
@@ -224,7 +183,7 @@
     .btn-wa {
       display: flex; align-items: center; justify-content: center; gap: 12px;
       width: 100%; padding: 16px;
-      background: var(--wa-color); color: #fff;
+      background: var(--wa-color); color: #1a1220;
       border-radius: 16px; text-decoration: none;
       font-weight: 800; font-size: 16px;
       box-shadow: 0 8px 20px rgba(37, 211, 102, 0.25);
@@ -234,12 +193,12 @@
     .btn-wa img { width: 26px; height: 26px; object-fit: contain; }
 
     .lb-links { margin-top: 16px; }
-    .link-soft { font-size: 14px; color: #666; font-weight: 600; text-decoration: underline; }
+    .link-soft { font-size: 14px; color: #47263a; font-weight: 600; text-decoration: underline; }
 
     /* --- FLOATING CTA --- */
     .float-wa {
       position: fixed; bottom: 20px; right: 20px; z-index: 100;
-      background: var(--wa-color); color: #fff;
+      background: var(--wa-color); color: #1a1220;
       width: 56px; height: 56px; border-radius: 50%;
       display: grid; place-items: center;
       box-shadow: 0 4px 15px rgba(0,0,0,0.3);
@@ -247,175 +206,146 @@
     }
     .float-wa:hover { transform: scale(1.1); }
     .float-wa img { width: 32px; height: 32px; object-fit: contain; }
+    .galleryGuide{
+      max-width: 620px; margin: 32px auto 68px; text-align: left;
+      line-height: 1.6;
+    }
+    .languagePicker{
+      position:fixed; left:16px; bottom:16px; z-index:120; display:flex;
+      align-items:center; gap:6px; padding:4px 8px; border-radius:12px;
+      background:#fff; color:#1a1220; box-shadow:0 4px 16px #1a122025; font-size:14px;
+    }
+    .languagePicker select{ font:inherit; min-height:36px; color:inherit; }
+    .relatedGalleries { display:flex; flex-wrap:wrap; gap:8px; margin:0 auto 88px; }
+    .relatedGalleries a { display:inline-flex; align-items:center; min-height:44px; padding:0 12px; }
+    .skipGallery { position:fixed; top:8px; left:8px; z-index:2100; background:#fff; padding:12px; transform:translateY(-150%); }
+    .skipGallery:focus { transform:none; }
+    :focus-visible { outline:3px solid #842044; outline-offset:3px; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0s !important; transition-duration:0s !important; }
+    }
   </style>
 </head>
 
 <body>
+  <a class="skipGallery" href="#foto">Vai alle foto</a>
 
   <header class="header">
     <div class="container nav-row">
       <a href="../" class="brand">
-        <img src="../immagini-home/fiori%20e%20piante%20di%20nino%20logo%20nero.png" alt="Logo">
+        <img src="../immagini-home/nino-icon.webp" alt="Logo">
         Fiori e piante di Nino
       </a>
       <a href="../" class="btn-small">← Torna alla Home</a>
     </div>
   </header>
 
-  <main>
+  <main id="foto" tabindex="-1">
     <section class="hero">
       <div class="container">
-        <h1>Galleria Piante 🌿</h1>
+        <h1>Piante da interno e da esterno a Roma</h1>
         <p class="sub">Tocca una foto per ingrandirla e mandarla a Nino.</p>
 
-        <div id="grid" class="grid"></div>
+        <div id="grid" class="grid" data-prefix="piante" data-total="45" data-label="Pianta">
+          <a class="tile" href="./piante-1.jpg">
+            <img src="./thumbs/piante-1.webp" width="360" height="360" alt="Pianta 1" fetchpriority="high">
+          </a>
+          <a class="tile" href="./piante-2.jpg">
+            <img src="./thumbs/piante-2.webp" width="360" height="360" alt="Pianta 2">
+          </a>
+          <a class="tile" href="./piante-3.jpg">
+            <img src="./thumbs/piante-3.webp" width="360" height="360" alt="Pianta 3" loading="lazy" decoding="async">
+          </a>
+          <a class="tile" href="./piante-4.jpg">
+            <img src="./thumbs/piante-4.webp" width="360" height="360" alt="Pianta 4" loading="lazy" decoding="async">
+          </a>
+          <a class="tile" href="./piante-5.jpg">
+            <img src="./thumbs/piante-5.webp" width="360" height="360" alt="Pianta 5" loading="lazy" decoding="async">
+          </a>
+          <a class="tile" href="./piante-6.jpg">
+            <img src="./thumbs/piante-6.webp" width="360" height="360" alt="Pianta 6" loading="lazy" decoding="async">
+          </a>
+          <a class="tile" href="./piante-7.jpg">
+            <img src="./thumbs/piante-7.webp" width="360" height="360" alt="Pianta 7" loading="lazy" decoding="async">
+          </a>
+          <a class="tile" href="./piante-8.jpg">
+            <img src="./thumbs/piante-8.webp" width="360" height="360" alt="Pianta 8" loading="lazy" decoding="async">
+          </a>
+          <a class="tile" href="./piante-9.jpg">
+            <img src="./thumbs/piante-9.webp" width="360" height="360" alt="Pianta 9" loading="lazy" decoding="async">
+          </a>
+          <a class="tile" href="./piante-10.jpg">
+            <img src="./thumbs/piante-10.webp" width="360" height="360" alt="Pianta 10" loading="lazy" decoding="async">
+          </a>
+          <a class="tile" href="./piante-11.jpg">
+            <img src="./thumbs/piante-11.webp" width="360" height="360" alt="Pianta 11" loading="lazy" decoding="async">
+          </a>
+          <a class="tile" href="./piante-12.jpg">
+            <img src="./thumbs/piante-12.webp" width="360" height="360" alt="Pianta 12" loading="lazy" decoding="async">
+          </a>
+        </div>
 
         <div class="pager">
-          <button id="loadMore" class="btn-load">Vedi altre foto ↓</button>
+          <button id="loadMore" class="btn-load" aria-controls="grid" type="button" hidden>Vedi altre foto ↓</button>
         </div>
+        <section class="galleryGuide">
+          <h2>Trova una pianta adatta al tuo spazio</h2>
+          <p>Se stai scegliendo una pianta per casa, ufficio o balcone, indica dove vorresti tenerla. La quantità di luce, lo spazio per il vaso e il tempo che puoi dedicare alla cura aiutano a restringere la scelta.</p>
+          <p>Per un regalo, aggiungi il budget e la data in cui ti serve. Puoi inviare una foto dalla galleria via WhatsApp e chiedere a Nino quali piante simili sono disponibili e come prendersene cura. Se hai già un coprivaso, indicane il diametro per trovare una pianta adatta.</p>
+        </section>
       </div>
     </section>
   </main>
+  <nav class="container relatedGalleries" aria-label="Altre gallerie">
+    <a class="btn-small" href="../fiori/">Fiori</a>
+    <a class="btn-small" href="../addobbi/">Addobbi</a>
+    <a class="btn-small" href="../funebri/">Fiori funebri</a>
+  </nav>
 
-  <a href="https://wa.me/393394324010" class="float-wa" aria-label="Scrivici su WhatsApp">
-    <img src="https://raw.githubusercontent.com/matteoawi/fioriepiante-nino.it/main/immagini-home/logo-whatsapp.png" alt="WA">
-  </a>
+  <aside aria-label="Contatto rapido">
+    <a href="https://wa.me/393394324010" class="float-wa" aria-label="Scrivici su WhatsApp">
+      <img src="../immagini-home/whatsapp-icon.webp" width="32" height="32" alt="">
+    </a>
+  </aside>
 
-  <div id="lb" class="lb">
+  <dialog id="lb" class="lb" aria-labelledby="lbTitle">
     <div class="lb-panel">
-      <button class="lb-close" id="lbClose">×</button>
+      <button class="lb-close" id="lbClose" type="button" aria-label="Chiudi la foto" autofocus>×</button>
 
       <div class="lb-img-wrap">
-        <img id="lbImg" src="" alt="Dettaglio">
+        <img id="lbImg" alt="Dettaglio">
       </div>
 
       <div class="lb-body">
-        <h3 class="lb-title">Saresti interessato a qualcosa di simile?</h3>
+        <h2 class="lb-title" id="lbTitle">Saresti interessato a qualcosa di simile?</h2>
 
         <a id="lbBtn" href="#" class="btn-wa">
-          <img src="https://raw.githubusercontent.com/matteoawi/fioriepiante-nino.it/main/immagini-home/logo-whatsapp.png" alt="WhatsApp">
+          <img src="../immagini-home/whatsapp-icon.webp" alt="WhatsApp">
           Contatta Nino e mandagli questo esempio
         </a>
 
         <div class="lb-links">
-          <a id="lbOpen" href="#" target="_blank" class="link-soft">Apri foto intera ↗</a>
+          <a id="lbOpen" href="#" target="_blank" rel="noopener" class="link-soft">Apri foto intera ↗</a>
         </div>
 
-        <p style="font-size:13px; color:#888; margin-top:15px; line-height:1.4;">
+        <p style="font-size:13px; color:#47263a; margin-top:15px; line-height:1.4;">
           Premendo il tasto si aprirà WhatsApp con il <b>link della foto già inserito</b>.
         </p>
       </div>
     </div>
-  </div>
-
-  <script>
-    // --- CONFIGURAZIONE ---
-    const TOTAL = 45;          // piante-1.jpg ... piante-45.jpg
-    const PER_PAGE = 12;
-    const PHONE = "393394324010";
-    const PATH = "./";
-
-    let count = 0;
-    const grid = document.getElementById("grid");
-    const loadMoreBtn = document.getElementById("loadMore");
-
-    // Lightbox elements
-    const lb = document.getElementById("lb");
-    const lbImg = document.getElementById("lbImg");
-    const lbBtn = document.getElementById("lbBtn");
-    const lbOpen = document.getElementById("lbOpen");
-    const lbClose = document.getElementById("lbClose");
-
-    // Genera URL assoluto
-    const getAbsUrl = (filename) => {
-      return new URL(filename, window.location.href).href;
-    };
-
-    // --- CARICAMENTO FOTO ---
-    function loadNext() {
-      const nextBatch = Math.min(count + PER_PAGE, TOTAL);
-
-      if (count >= TOTAL) {
-        loadMoreBtn.style.display = "none";
-        return;
-      }
-
-      for (let i = count + 1; i <= nextBatch; i++) {
-        const file = `piante-${i}.jpg`;   // ✅ aggiornato
-
-        const div = document.createElement("div");
-        div.className = "tile loading";
-
-        const img = document.createElement("img");
-        img.dataset.src = PATH + file;
-        img.alt = "Pianta / Composizione";
-
-        // Lazy loading manuale
-        observer.observe(img);
-
-        div.addEventListener("click", () => openLb(file));
-
-        div.appendChild(img);
-        grid.appendChild(div);
-      }
-
-      count = nextBatch;
-      if (count >= TOTAL) loadMoreBtn.style.display = "none";
-    }
-
-    // --- LAZY LOADER ---
-    const observer = new IntersectionObserver((entries, obs) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const img = entry.target;
-          img.src = img.dataset.src;
-          img.onload = () => img.parentElement.classList.add("loaded");
-          obs.unobserve(img);
-        }
-      });
-    }, { rootMargin: "200px" });
-
-    // --- LIGHTBOX LOGIC ---
-    function openLb(filename) {
-      const absUrl = getAbsUrl(filename);
-      const msg =
-        `Ciao Nino! 👋\n\n` +
-        `Sarei interessato a qualcosa di simile a questa foto che ho visto sul sito:\n` +
-        `${absUrl}\n\n` +
-        `Mi fai sapere? Grazie!`;
-
-      lbImg.src = PATH + filename;
-      lbBtn.href = `https://wa.me/${PHONE}?text=${encodeURIComponent(msg)}`;
-      lbOpen.href = PATH + filename;
-
-      lb.classList.add("active");
-      document.body.style.overflow = "hidden";
-    }
-
-    function closeLb() {
-      lb.classList.remove("active");
-      document.body.style.overflow = "";
-      setTimeout(() => lbImg.src = "", 200);
-    }
-
-    lbClose.addEventListener("click", closeLb);
-    lb.addEventListener("click", (e) => { if (e.target === lb) closeLb(); });
-    document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeLb(); });
-
-    // Avvia
-    loadMoreBtn.addEventListener("click", loadNext);
-    loadNext();
-  </script>
-  <div class="gtranslate_wrapper" aria-label="Selettore lingua"></div>
-  <script>
-    window.gtranslateSettings = {
-      default_language: "it",
-      languages: ["it", "en", "fr", "de", "es"],
-      wrapper_selector: ".gtranslate_wrapper",
-      switcher_horizontal_position: "left",
-      switcher_vertical_position: "bottom"
-    };
-  </script>
-  <script src="https://cdn.gtranslate.net/widgets/latest/float.js" defer></script>
+  </dialog>
+  <script src="../assets/gallery.js" defer></script>
+  <aside class="languagePicker notranslate" aria-label="Selettore lingua">
+    <label for="siteLanguage">Lingua</label>
+    <select id="siteLanguage">
+      <option value="it" lang="it">Italiano</option>
+      <option value="en" lang="en">English</option>
+      <option value="fr" lang="fr">Français</option>
+      <option value="de" lang="de">Deutsch</option>
+      <option value="es" lang="es">Español</option>
+    </select>
+  </aside>
+  <div class="gtranslate_wrapper" hidden></div>
+  <script src="../assets/language.js" defer></script>
 </body>
 </html>

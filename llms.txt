@@ -1,0 +1,18 @@
+# Fiori e Piante di Nino
+
+> Fiorista con tre sedi a Roma. Il sito raccoglie gallerie di composizioni e piante, informazioni sui negozi e canali per ordinare con consegna a Roma.
+
+## Informazioni
+
+- [Come ordinare](https://fioriepiante-nino.it/#come-ordinare)
+- [Metodi di pagamento](https://fioriepiante-nino.it/#pagamenti)
+- [Sedi e indicazioni](https://fioriepiante-nino.it/#sedi)
+- [Contatti e piattaforme di consegna](https://fioriepiante-nino.it/#contatti)
+- [Catalogo online](https://fiori-italia.it/)
+
+## Gallerie
+
+- [Fiori](https://fioriepiante-nino.it/fiori/)
+- [Piante](https://fioriepiante-nino.it/piante/)
+- [Addobbi](https://fioriepiante-nino.it/addobbi/)
+- [Fiori funebri](https://fioriepiante-nino.it/funebri/)
