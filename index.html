@@ -741,8 +741,6 @@
     }
 
     /* Locations */
-    .locHeading{ flex-wrap: wrap; align-items: center; gap: 12px 20px; }
-    .locHeading .locHours{ min-height: 44px; padding: 9px 14px; font-size: 14px; }
     .locGrid{
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -793,7 +791,7 @@
     }
     .loc:hover{ border-color: var(--pink-2); }
     .loc:hover .locAction{ text-decoration: underline; text-underline-offset: 3px; }
-    .loc:focus-visible, .locHours:focus-visible{ outline: 2px solid #8a2354; outline-offset: 3px; }
+    .loc:focus-visible{ outline: 2px solid #8a2354; outline-offset: 3px; }
     @media (max-width: 820px){
       .locGrid{ grid-template-columns: 1fr; gap: 12px; }
       .loc{ display: grid; grid-template-columns: clamp(76px, 25vw, 192px) minmax(0, 1fr); }
@@ -1612,17 +1610,16 @@
 
     <section id="sedi" aria-labelledby="sedi-title">
       <div class="container">
-        <div class="sectionTitle locHeading">
+        <div class="sectionTitle">
           <div>
             <h2 id="sedi-title">Vieni a trovarci</h2>
             <p>Tre punti vendita a Roma, tra Trieste e Parioli.</p>
           </div>
-          <a class="btn locHours" href="https://wa.me/message/JDH7MM6C6VC7J1" target="_blank" rel="noopener nofollow">Chiedi gli orari su WhatsApp</a>
         </div>
 
         <div class="locGrid">
           <a class="loc" id="sede-chiana" href="https://maps.app.goo.gl/3Nrreo1iZU4GfKc77" target="_blank" rel="noopener nofollow" aria-labelledby="sede-chiana-title sede-chiana-action">
-            <div class="locMedia"><img src="./assets/sedi-chiana.webp" alt="" width="768" height="384" loading="lazy" decoding="async"></div>
+            <picture class="locMedia"><source media="(max-width: 820px)" srcset="./assets/sedi-chiana-mobile.webp" width="336" height="448"><img src="./assets/sedi-chiana.webp" alt="" width="720" height="313" loading="lazy" decoding="async"></picture>
             <div class="locBody">
               <span class="locDistrict">Trieste</span>
               <h3 id="sede-chiana-title">Via Chiana 4</h3>
@@ -1634,7 +1631,7 @@
             </div>
           </a>
           <a class="loc" id="sede-santiago" href="https://maps.app.goo.gl/mMeSqHSYEeXbsx6a9" target="_blank" rel="noopener nofollow" aria-labelledby="sede-santiago-title sede-santiago-action">
-            <div class="locMedia"><img src="./assets/sedi-santiago.webp" alt="" width="768" height="384" loading="lazy" decoding="async"></div>
+            <picture class="locMedia"><source media="(max-width: 820px)" srcset="./assets/sedi-santiago-mobile.webp" width="336" height="448"><img src="./assets/sedi-santiago.webp" alt="" width="720" height="313" loading="lazy" decoding="async"></picture>
             <div class="locBody">
               <span class="locDistrict">Parioli</span>
               <h3 id="sede-santiago-title">Piazza Santiago del Cile</h3>
@@ -1646,7 +1643,7 @@
             </div>
           </a>
           <a class="loc" id="sede-pilsudski" href="https://maps.app.goo.gl/gL9RTUafrTYkaxkHA" target="_blank" rel="noopener nofollow" aria-labelledby="sede-pilsudski-title sede-pilsudski-action">
-            <div class="locMedia"><img src="./assets/sedi-pilsudski.webp" alt="" width="768" height="384" loading="lazy" decoding="async"></div>
+            <picture class="locMedia"><source media="(max-width: 820px)" srcset="./assets/sedi-pilsudski-mobile.webp" width="336" height="448"><img src="./assets/sedi-pilsudski.webp" alt="" width="720" height="313" loading="lazy" decoding="async"></picture>
             <div class="locBody">
               <span class="locDistrict">Parioli</span>
               <h3 id="sede-pilsudski-title">Viale Maresciallo Pilsudski 138</h3>
