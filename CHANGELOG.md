@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.3.4 — 2026-11-18
+
+- Ripristinata la grafica originale del sito.
+- Aggiunta dopo i contatti la card TikTok con profilo e video, caricati all’ingresso nella schermata.
+
 ## 1.3.3 — 2026-11-18
 
 - Aggiunti il profilo TikTok nel menu e i video dopo i contatti, prima del footer.
