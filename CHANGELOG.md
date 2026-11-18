@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.3.5 — 2026-11-18
+
+- Spostata la sezione TikTok subito prima delle sedi.
+
+
 ## 1.3.4 — 2026-11-18
 
 - Ripristinata la grafica originale del sito.
