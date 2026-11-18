@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.3.6 — 2026-11-18
+
+- Rinnovata la sezione «Vieni a trovarci» con immagini del catalogo, indirizzi più chiari e indicazioni per le tre sedi.
+
+
 ## 1.3.5 — 2026-11-18
 
 - Spostata la sezione TikTok subito prima delle sedi.
