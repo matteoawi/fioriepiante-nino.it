@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.3.3 — 2026-11-18
+
+- Aggiunti il profilo TikTok nel menu e i video dopo i contatti, prima del footer.
+- Mostrando i video, il sito salva la preferenza. Alle visite successive il feed si carica vicino alla sezione.
+
 ## 1.3.2 — 2026-11-09
 
 - Aggiunte varianti responsive della foto di apertura, con download più leggero quando basta una risoluzione inferiore.

@@ -169,6 +169,13 @@
     }
     .navlinks .menuIcon{ width: 16px; height: 16px; display:block; }
     .navlinks a.active{ background: rgba(255,46,143,.14); }
+    .navlinks .tikTokMenu{
+      width:44px; min-height:44px; padding:0; justify-content:center;
+    }
+    .tikTokMenu img, .tikTokControls img{
+      display:block; width:22px; height:22px; flex:none; border-radius:5px;
+    }
+    .drawer .drawerTikTok{ min-height:44px; margin-top:10px; padding:7px 12px; font-size:.9rem; }
 
     .navactions{ display:flex; align-items:center; gap:10px; flex: 0 0 auto; }
     .iconbtn{
@@ -922,6 +929,22 @@
     #come-ordinare{ --section-height:380px; }
     #pagamenti{ --section-height:1450px; }
     #contatti{ --section-height:475px; }
+    #tiktok{ padding-block:6px 14px; --section-height:110px; }
+    .tikTokEmbed{ width:min(100%, 720px); margin-inline:auto; }
+    .tikTokFeed:empty{ display:none; }
+    .tikTokFeed[data-loading]{
+      display:block; min-height:clamp(370px, 190px + 50vw, 458px);
+    }
+    .tikTokFeed .tiktok-embed{ width:100%; max-width:720px; margin:0 auto; box-sizing:border-box; }
+    .tikTokFeed .tiktok-embed:not(:has(iframe)){ visibility:hidden; }
+    .tikTokFeed iframe{ display:block; width:100%; max-width:100%; border:0; }
+    .tikTokControls{ display:grid; justify-items:center; gap:5px; }
+    .tikTokFeed:not(:empty) + .tikTokControls{ margin-top:8px; }
+    .tikTokControls .btn{ min-height:44px; padding:7px 12px; gap:7px; font-size:.87rem; }
+    .tikTokControls [hidden], .tikTokStatus:empty{ display:none; }
+    .tikTokPrivacy, .tikTokStatus{ margin:0; color:var(--muted); font-size:.82rem; text-align:center; }
+    .tikTokPrivacy a{ text-decoration:underline; }
+    @media (max-width:360px){ #tiktok > .container{ width:calc(100% - 24px); } }
     .reviewsSection{ --section-height:80px; }
     main > footer{ --section-height:175px; }
     @media (max-width: 980px){
@@ -989,7 +1012,7 @@
 }
 </script>
 
-<meta name="site-version" content="1.3.2"></head>
+<meta name="site-version" content="1.3.3"></head>
 
 <body>
   <a class="skipLink" href="#top">Vai al contenuto</a>
@@ -1013,6 +1036,7 @@
           <a href="#pagamenti"><svg class="menuIcon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 7.5A2.5 2.5 0 0 1 5.5 5h13A2.5 2.5 0 0 1 21 7.5v9A2.5 2.5 0 0 1 18.5 19h-13A2.5 2.5 0 0 1 3 16.5v-9Z" stroke="currentColor" stroke-width="2"/><path d="M3 9h18" stroke="currentColor" stroke-width="2"/><path d="M7 15h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Pagamento</a>
           <a href="#sedi"><svg class="menuIcon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 22s7-4.5 7-12a7 7 0 1 0-14 0c0 7.5 7 12 7 12Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 11.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" stroke="currentColor" stroke-width="2"/></svg>Sedi</a>
           <a href="#contatti"><svg class="menuIcon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.8 19.8 0 0 1 3.11 5.18 2 2 0 0 1 5.1 3h3a2 2 0 0 1 2 1.72c.12.86.32 1.7.59 2.5a2 2 0 0 1-.45 2.11L9.09 10.91a16 16 0 0 0 4 4l1.58-1.15a2 2 0 0 1 2.11-.45c.8.27 1.64.47 2.5.59A2 2 0 0 1 22 16.92Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Contatti</a>
+          <a class="tikTokMenu" href="https://www.tiktok.com/@fiori.italia" target="_blank" rel="noopener" aria-label="Seguici su TikTok"><img src="./assets/tiktok-icon.png" width="22" height="22" alt="" decoding="async" fetchpriority="low"></a>
         </nav>
 
         <div class="navactions">
@@ -1050,6 +1074,10 @@
         <a class="drawerLink" href="#pagamenti" data-close><span class="drawerLeft"><svg class="menuIcon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 7.5A2.5 2.5 0 0 1 5.5 5h13A2.5 2.5 0 0 1 21 7.5v9A2.5 2.5 0 0 1 18.5 19h-13A2.5 2.5 0 0 1 3 16.5v-9Z" stroke="currentColor" stroke-width="2"/><path d="M3 9h18" stroke="currentColor" stroke-width="2"/><path d="M7 15h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Pagamento</span> <span>→</span></a>
         <a class="drawerLink" href="#sedi" data-close><span class="drawerLeft"><svg class="menuIcon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 22s7-4.5 7-12a7 7 0 1 0-14 0c0 7.5 7 12 7 12Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 11.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" stroke="currentColor" stroke-width="2"/></svg>Sedi</span> <span>→</span></a>
         <a class="drawerLink" href="#contatti" data-close><span class="drawerLeft"><svg class="menuIcon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.8 19.8 0 0 1 3.11 5.18 2 2 0 0 1 5.1 3h3a2 2 0 0 1 2 1.72c.12.86.32 1.7.59 2.5a2 2 0 0 1-.45 2.11L9.09 10.91a16 16 0 0 0 4 4l1.58-1.15a2 2 0 0 1 2.11-.45c.8.27 1.64.47 2.5.59A2 2 0 0 1 22 16.92Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Contatti</span> <span>→</span></a>
+
+        <a class="btn tikTokMenu drawerTikTok" href="https://www.tiktok.com/@fiori.italia" target="_blank" rel="noopener" data-close>
+          <img src="./assets/tiktok-icon.png" width="22" height="22" alt="" decoding="async" loading="lazy"> Seguici su TikTok
+        </a>
 
         <div class="drawerGroup">
           <div class="drawerTitle">Ordina subito</div>
@@ -1523,6 +1551,30 @@
       </div>
     </section>
 
+    <section id="tiktok" aria-label="TikTok di Fiori e Piante di Nino">
+      <div class="container">
+        <div class="tikTokEmbed">
+          <div id="tikTokFeed" class="tikTokFeed"></div>
+          <div class="tikTokControls">
+            <a class="btn" id="tikTokProfile" href="https://www.tiktok.com/@fiori.italia" target="_blank" rel="noopener">
+              <img src="./assets/tiktok-icon.png" width="22" height="22" alt="" decoding="async" loading="lazy"> Apri TikTok
+            </a>
+            <button class="btn" id="tikTokToggle" type="button" aria-controls="tikTokFeed" aria-expanded="false" aria-describedby="tikTokPrivacy" hidden>
+              <img src="./assets/tiktok-icon.png" width="22" height="22" alt="" decoding="async" loading="lazy">
+              <span>Mostra i video TikTok</span>
+            </button>
+            <p id="tikTokPrivacy" class="tikTokPrivacy" hidden>Attivando i video, consenti a TikTok di caricare i suoi contenuti e cookie. <a href="https://www.tiktok.com/legal/page/eea/privacy-policy/it" target="_blank" rel="noopener">Privacy TikTok</a></p>
+            <p id="tikTokStatus" class="tikTokStatus" role="status"></p>
+          </div>
+          <template id="tikTokTemplate">
+            <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@fiori.italia" data-unique-id="fiori.italia" data-embed-type="creator" data-embed-from="oembed">
+              <section><a href="https://www.tiktok.com/@fiori.italia">@fiori.italia</a></section>
+            </blockquote>
+          </template>
+        </div>
+      </div>
+    </section>
+
     <footer>
       <div class="container">
         <div class="row">
@@ -1536,8 +1588,8 @@
         </div>
 
         <details class="siteUpdates">
-          <summary>Versione 1.3.2 · Novità del sito</summary>
-          <p><strong>9 novembre 2026</strong> — Foto iniziale più leggera su schermi compatibili, contrasto migliorato e link diretti alle sedi e alle gallerie.</p>
+          <summary>Versione 1.3.3 · Novità del sito</summary>
+          <p><strong>18 novembre 2026</strong> — Video TikTok dopo i contatti e collegamento al profilo nel menu.</p>
           <a href="./CHANGELOG.md">Tutti gli aggiornamenti</a>
         </details>
 
@@ -1762,5 +1814,6 @@
 
   <div class="gtranslate_wrapper" hidden></div>
   <script src="./assets/language.js" defer></script>
+  <script src="./assets/tiktok.js" defer></script>
 </body>
 </html>
